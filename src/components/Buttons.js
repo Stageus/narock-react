@@ -1,0 +1,13 @@
+import React from 'react';
+import styled from "styled-components"
+import { Button } from "../styled/ProjectStyle";
+
+const Buttons = (props) => {
+    const { value, onClick, width, height, radius, padding} = props;
+    
+    return ( 
+        <Button type="button" value={value} onClick={onClick} width={width} height={height} borderRadius={radius} padding={padding}></Button>
+     );
+}
+
+export default Buttons;
