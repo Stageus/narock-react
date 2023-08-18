@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import PostList from "./PostList";
-const PostListBox = () => {
+import { useNavigate } from "react-router-dom";
+import Paging from "../Paging";
+import SearchBox from "../common/SearchBox";
+
+const PostListBox = (props) => {
+    const navigate = useNavigate();
+    const { bandname } = props;
     return ( 
         <Box>
             <SubjectBox>
@@ -11,23 +17,20 @@ const PostListBox = () => {
                 <Post>조회수</Post>
                 <Post>좋아요</Post>
             </SubjectBox>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
-            <PostList/>
+            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            {/* 주소 수정해야함 */}
+            <Paging/>
+            <SearchBox/>
         </Box>
      );
 }

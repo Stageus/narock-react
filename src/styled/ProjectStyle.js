@@ -7,7 +7,6 @@ const Button = styled.input`
         return`
             background-color:${props.backgroundColor ? props.backgroundColor: `${CommonStyle("mainColor")}`};
             padding:${props.padding ? props.padding :`${CommonStyle("btnPadding")}`};
-            margin-left:${props.marginLeft ? props.marginLeft : `${CommonStyle("btnMargin")}`};
             font-size:${props.fontSize ? props.fontSize : `${CommonStyle("btnFontSize")}`};
             border-radius: ${props.borderRadius ? props.borderRadius:`${CommonStyle("btnBorderRadius")}`};
             border: ${props.border ? props.border:"none"};

@@ -13,7 +13,7 @@ const IndividualBand = () => {
             <BandImg bandname={bandname}/>
             <Box>
                 <AllBandBoardList bandname={bandname}/>
-                <PostListBox/>
+                <PostListBox bandname={bandname}/>
             </Box>
         </div>
     );
