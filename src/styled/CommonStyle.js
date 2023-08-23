@@ -5,6 +5,7 @@ const CommonStyle = (value) => {
         "borderColor": "#ADBDFF",
         "fontColor": "#222A68",
         "white": "white",
+        "errorColor": "#FC3131",
     }
     
     const button = {
@@ -13,7 +14,8 @@ const CommonStyle = (value) => {
         "btnMargin": "10px",
         "btnBorderRadius":"2px",
         "btnFontSize": "13px",
-        "btnWidth": "80px",
+        "btnWidth": "fit-content",
+        "btnMarginLeft":"10px",
     }
 
     const input = {
@@ -48,6 +50,8 @@ const CommonStyle = (value) => {
         return colors.fontColor;
     }else if(value === "white"){
         return colors.white;
+    }else if(value === "errorColor"){
+        return colors.errorColor;
     }
 
     //btn
@@ -61,6 +65,10 @@ const CommonStyle = (value) => {
         return button.btnBorderRadius;
     }else if(value === "btnFontSize"){
         return button.btnFontSize;
+    }else if(value === "btnMarginLeft"){
+        return button.btnMarginLeft;
+    }else if(value === "btnWidth"){
+        return button.btnWidth;
     }
 
 

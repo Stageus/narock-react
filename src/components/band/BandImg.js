@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Align } from "../../styled/ProjectStyle";
 
 const BandImg = (props) => {
     const { bandname } = props;
@@ -10,9 +11,9 @@ const BandImg = (props) => {
 }
  
 
-const BandHeader = styled.div`
+const BandHeader = styled(Align)`
+    justify-content:center;
     font-size:60px;
-    text-align:center;
     border: 1px solid #000;
     height:191px;
 

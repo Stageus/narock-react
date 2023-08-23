@@ -10,7 +10,7 @@ const SearchBox = () => {
                 <option>제목</option>
             </select>
             <InputField height="fit-content" margin="0 10px"/>
-            <Buttons value="검색" height="fit-content" margin="0"/>
+            <Buttons value="검색" type="button" height="fit-content" margin="0" marginleft="0"/>
         </Box>
     )
 }

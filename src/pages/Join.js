@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import TermsAndCondition from "../components/auth/TermsAndCondition";
 import UserInfoField from "../components/auth/UserInfoField";
@@ -8,17 +8,62 @@ import Logo from "../components/Logo";
 import { Align } from "../styled/ProjectStyle";
 
 const Join = () => {
-    //인풋 값 확인
+
+    const [userData, setUserData] = useState({
+        id:"",
+        isId:"",
+        password:"",
+        isPassword:"",
+        nickname: "",
+        isNickname: "",        
+        name: "",
+        isName:"",
+        email: "",
+        isEmail:"",
+        verificationCode: "",
+        isTermsandcondition:""
+    });
+
+    const handleUserDataChange = (field, value) => {
+        setUserData((prevData) => ({
+            ...prevData,
+            [field]: value
+        }));
+    };
+
+    const handleJoinButtonClick = () => {
+        // if(!userData.id || !userData.password || !userData.nickname || !userData.name || !userData.email){
+        //     alert("모든 칸을 입력해 주세요.")
+        //     return;
+        // }
+        if(!userData.isId || !userData.isPassword || !userData.isNickname || !userData.isName || !userData.isEmail){
+            alert("모든 칸을 입력해 주세요.")
+            console.log("User Data:",userData)
+            return;
+        }
+
+        if(!userData.isTermsandcondition){
+            alert("이용 약관에 동의해 주세요.")
+            return;
+        }
+
+        console.log("User Data:", userData);
+        alert("가입을 축하합니다!");
+    };
+
+    
+
+
     return (
         <div>
             <Header/>
             <Logo/>
             <FieldBox>
-                <UserInfoField/>
-                <TermsAndCondition/>
+                <UserInfoField onDataChange={handleUserDataChange}/>
+                <TermsAndCondition onDataChange={handleUserDataChange}/>
             </FieldBox>
             <JoinBtn>           
-                <Buttons type="submit" value="회원가입" width="260px" height="34px" radius="5px"/>
+                <Buttons type="submit" value="회원가입" width="260px" height="34px" radius="5px" onClick={handleJoinButtonClick}/>
             </JoinBtn> 
         </div>
     );

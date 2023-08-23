@@ -5,10 +5,10 @@ import CommonStyle from "./CommonStyle";
 const Button = styled.input`
     ${props => {
         return`
-            background-color:${props.backgroundColor ? props.backgroundColor: `${CommonStyle("mainColor")}`};
+            background-color:${props.backgroundcolor ? props.backgroundcolor: `${CommonStyle("mainColor")}`};
             padding:${props.padding ? props.padding :`${CommonStyle("btnPadding")}`};
             font-size:${props.fontSize ? props.fontSize : `${CommonStyle("btnFontSize")}`};
-            border-radius: ${props.borderRadius ? props.borderRadius:`${CommonStyle("btnBorderRadius")}`};
+            border-radius: ${props.borderradius ? props.borderradius:`${CommonStyle("btnBorderRadius")}`};
             border: ${props.border ? props.border:"none"};
             cursor: ${props.cursor ? props.cursor : `${CommonStyle("btnCursor")}`};
             display:${props.display === "none" ? "none": "inline-block"};
@@ -16,19 +16,20 @@ const Button = styled.input`
             width:${props.width ? props.width : `${CommonStyle("btnWidth")}`};
             height:${props.height ? props.height : `${CommonStyle("btnHeight")}`};
             margin:${props.margin ? props.margin : `${CommonStyle("btnMargin")}`};
+            margin-left:${props.marginleft ? props.marginleft : `${CommonStyle("btnMarginLeft")}`};
         `
     }}
 `
 const Input = styled.input`
     ${props=>{
         return`
-            border-radius:${props.borderRadius ? props.borderRadius : `${CommonStyle("inputBorderRadius")}`};
+            border-radius:${props.borderradius ? props.borderradius : `${CommonStyle("inputBorderRadius")}`};
             border:${props.border? props.border : `1px solid ${CommonStyle("mainColor")}`};
             width:${props.width ? props.width : `${CommonStyle("inputWidth")}`};
             height:${props.height ? props.height : `${CommonStyle("inputHeight")}`};
             padding:${props.padding ? props.padding : `${CommonStyle("inputPadding")}`};
-            margin:${props.margin ? props.margin : `${CommonStyle("inputMargin")}`}
-             
+            margin:${props.margin ? props.margin : `${CommonStyle("inputMargin")}`};
+            margin-right:${props.marginright ? props.marginright : `${CommonStyle("inputMarginright")}`};
         `
     }}
 `
@@ -41,4 +42,18 @@ const Align = styled.div`
     }}
 `
 
-export { Button, Align, Input };
+const Error = styled.div`
+    ${props =>{
+        return`
+            color: ${props.color ? props.color: `${CommonStyle("errorColor")}`};
+        `
+    }}
+`
+const Success = styled.div`
+    ${props =>{
+        return`
+            color: ${props.color ? props.color: `${CommonStyle("mainColor")}`};
+        `
+    }}
+`
+export { Button, Align, Input, Error, Success };

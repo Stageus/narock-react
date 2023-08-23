@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-const PostList = () => {
-    
+const PostList = (props) => {
+    const navigate = useNavigate();
+    const { bandname } = props;
     return ( 
         <div>
-            <PostBox>
+            <PostBox onClick={()=>{navigate(`/allband/${bandname}/notice/1`)}}>
                 <Notice>공지</Notice>
                 <Title>공지사항입니다.</Title>
                 <Writer>관리자닉네임</Writer>

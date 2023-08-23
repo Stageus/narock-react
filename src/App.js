@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom"
 
 import Admin from "./pages/Admin"
 import AllBand from "./pages/AllBand";
-import IndividualBand from "./pages/IndividualBand";
+import AllBandBoard from "./pages/AllBandBoard";
 import BandPost from "./pages/BandPost";
 import BandPostSearch from "./pages/BandPostSearch";
 import Community from "./pages/Community";
@@ -30,19 +30,19 @@ const App = () => {
         <Route path="/" element={<Main />}/>
         <Route path="/admin" element={<Admin />}/>
         <Route path="/allband" element={<AllBand />}/>
-        <Route path="/allband/:bandname" element={<IndividualBand />}/>
-        <Route path="/allband/:bandname/notice" element={<IndividualBand />}/>
-        <Route path="/allBand/:bandname/concertInfo" element={<IndividualBand />}/>
-        <Route path="/allBand/:bandname/gallery" element={<IndividualBand />}/>
-        <Route path="/allBand/:bandname/community" element={<IndividualBand />}/>
-        <Route path="/allBand/:bandname/notice/{postnumber}" element={<BandPost />}/>
-        <Route path="/allBand/:bandname/concertInfo/{postnumber}" element={<BandPost />}/>
-        <Route path="/allBand/:bandname/gallery/{postnumber}" element={<BandPost />}/>
-        <Route path="/allBand/:bandname/community/{postnumber}" element={<BandPost />}/>
-        <Route path="/allBand/:bandname/notice/search?{keyword}" element={<BandPostSearch />}/>
-        <Route path="/allBand/:bandname/concertInfo/search?{keyword}" element={<BandPostSearch />}/>
-        <Route path="/allBand/:bandname/gallery/search?{keyword}" element={<BandPostSearch />}/>
-        <Route path="/allBand/:bandname/community/search?{keyword}" element={<BandPostSearch />}/>
+        <Route path="/allband/:bandname" element={<AllBandBoard />}/>
+        <Route path="/allband/:bandname/notice" element={<AllBandBoard />}/>
+        <Route path="/allband/:bandname/concertInfo" element={<AllBandBoard />}/>
+        <Route path="/allband/:bandname/gallery" element={<AllBandBoard />}/>
+        <Route path="/allband/:bandname/community" element={<AllBandBoard />}/>
+        <Route path="/allband/:bandname/notice/:postid" element={<BandPost />}/>
+        <Route path="/allband/:bandname/concertInfo/:postid" element={<BandPost />}/>
+        <Route path="/allband/:bandname/gallery/:postid" element={<BandPost />}/>
+        <Route path="/allband/:bandname/community/:postid" element={<BandPost />}/>
+        <Route path="/allband/:bandname/notice/search?:keyword" element={<BandPostSearch />}/>
+        <Route path="/allband/:bandname/concertInfo/search?:keyword" element={<BandPostSearch />}/>
+        <Route path="/allband/:bandname/gallery/search?:keyword" element={<BandPostSearch />}/>
+        <Route path="/allband/:bandname/community/search?:keyword" element={<BandPostSearch />}/>
         <Route path="/community" element={<Community />}/>
         <Route path="/news" element={<News />}/>
         <Route path="/notice" element={<Notice />}/>

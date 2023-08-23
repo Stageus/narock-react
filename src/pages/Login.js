@@ -33,9 +33,9 @@ const Login = () => {
                     <Div>
                         <div>
                             <InputField placeholder="아이디" maxlength="20" onChange={(e)=>setUid(e.target.value)}/>
-                            <InputField placeholder="비밀번호" type="password" maxlength="16" id="upw" onChange={(e)=>setUpw(e.target.value)}/>
+                            <InputField placeholder="비밀번호" type="password" maxlength="16" onChange={(e)=>setUpw(e.target.value)}/>
                         </div> 
-                        <Buttons value="로그인" onClick={()=>{loginClickEvent()}} width="80px" height="80px" radius="5px"/>
+                        <Buttons value="로그인" onClick={()=>{loginClickEvent()}} width="80px" height="80px" radius="5px" type="button" margin="0" marginleft="10px"/>
                     </Div>
                     <SubButtonBox>
                         <div onClick={()=>{navigate('/findAccount')}}>아이디 / 비밀번호 찾기</div>

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components"
 import { Input } from "../styled/ProjectStyle";
 const InputField = (props) => {
-    const {placeholder, value, type, maxlength, onChange, width, height, margin} = props;
+    const {placeholder, value, type, maxlength, onChange, width, height, margin, marginright} = props;
     return ( 
         <div>
             <Field 
@@ -13,6 +13,9 @@ const InputField = (props) => {
             width={width}
             height={height}
             margin={margin}
+            marginright={marginright}
+            value={value}
+
             />
         </div>
      )

@@ -17,17 +17,7 @@ const PostListBox = (props) => {
                 <Post>조회수</Post>
                 <Post>좋아요</Post>
             </SubjectBox>
-            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
-            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
-            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
-            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
-            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
-            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
-            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
-            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
-            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
-            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
-            <PostList onClick={()=>{navigate(`/allband/${bandname}/`)}}/> 
+            <PostList bandname={bandname}/> 
             {/* 주소 수정해야함 */}
             <Paging/>
             <SearchBox/>

@@ -1,20 +1,23 @@
 import React from 'react';
-import styled from "styled-components"
 import { Button } from "../styled/ProjectStyle";
 
 const Buttons = (props) => {
-    const { value, onClick, width, height, radius, padding, margin, type} = props;
+    const { value, onClick, width, height, radius, padding, margin, type, marginleft,backgroundcolor,color,border} = props;
     
     return ( 
         <Button 
-        type="button" 
+        type={type}
         value={value} 
         onClick={onClick} 
         width={width} 
         height={height} 
-        borderRadius={radius} 
+        borderradius={radius} 
         padding={padding}
         margin={margin}
+        marginleft={marginleft}
+        backgroundcolor={backgroundcolor}
+        color={color}
+        border={border}
         />
      );
 }
