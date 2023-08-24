@@ -17,6 +17,7 @@ const Button = styled.input`
             height:${props.height ? props.height : `${CommonStyle("btnHeight")}`};
             margin:${props.margin ? props.margin : `${CommonStyle("btnMargin")}`};
             margin-left:${props.marginleft ? props.marginleft : `${CommonStyle("btnMarginLeft")}`};
+            text-align:${props.textAlign ? props.textAlign : 'center'};
         `
     }}
 `
@@ -38,6 +39,7 @@ const Align = styled.div`
         return`
             display: ${props.display ? props.display: `${CommonStyle("display")}`};
             align-items: ${props.alignItems ? props.alignItems: `${CommonStyle("alignItems")}`};
+            position: ${props.position ? props.position: `${CommonStyle("position")}`};
         `
     }}
 `
@@ -46,6 +48,7 @@ const Error = styled.div`
     ${props =>{
         return`
             color: ${props.color ? props.color: `${CommonStyle("errorColor")}`};
+            right: ${props.right ? props.right: '-100px'};
         `
     }}
 `

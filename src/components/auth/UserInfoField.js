@@ -196,7 +196,7 @@ const UserInfoField = ({ onDataChange }) => {
                 <div>인증번호</div>
                 <Certification>
                     <InputField/>
-                    <Buttons value="인증코드 발송" width="83px" padding="0px 15px" radius="5px" height="32px"></Buttons>
+                    <Buttons value="인증코드 발송" width="72px" padding="0px 15px" radius="5px" height="32px"></Buttons>
                 </Certification>
             </div>
             {/* {password.length> 0 &&

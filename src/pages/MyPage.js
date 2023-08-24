@@ -22,7 +22,6 @@ const MyPage = () => {
         <div>
             <Header/>
             <MyPageInfo onDataChange={handleUserDataChange} userData={userData}/>
-
         </div>
     );
 };

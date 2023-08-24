@@ -36,7 +36,8 @@ const CommonStyle = (value) => {
         "margin": "10px",
         "display": "flex",
         "alignItems": "center",
-        "boxSizing": "border-box"
+        "boxSizing": "border-box",
+        "position": "relative"
     }
 
     //color
@@ -103,6 +104,8 @@ const CommonStyle = (value) => {
         return setting.alignItems;
     }else if (value === "boxSizing"){
         return setting.boxSizing;
+    }else if (value === "position"){
+        return setting.position;
     }
 }
 

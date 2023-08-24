@@ -138,18 +138,16 @@ const MyPageInfo = ({ onDataChange , userData}) => {
 
                         <div>현재 비밀번호</div>
                         <InputField margin="5px 0 15px 0" type="password"/>
-
-
                         <div>비밀번호 변경 (영문 대소문자/숫자/특수문자 조합, 8자~16자)</div>
-                        <Align>
+                        <Align position="relative">
                             <InputField onChange={onChangePw} type="password" maxlength="16" marginright="10px"/>
-                            {!isPassword && password.length > 0 && <Error>{passwordMsg}</Error>}
+                            {!isPassword && password.length > 0 && <ErrorMsg right="-270px">{passwordMsg}</ErrorMsg>}
                         </Align>
 
                         <div>비밀번호 확인</div>
                         <Align>
                             <InputField onChange={onChangePwConfirm} type="password" marginright="10px"/>
-                            {passwordConfirm.length > 0 && <Error> {passwordConfirmMsg}</Error>}
+                            {passwordConfirm.length > 0 && <ErrorMsg> {passwordConfirmMsg}</ErrorMsg>}
                         </Align>
                 </UserInfo>
                 <ButtonBox>
@@ -160,7 +158,9 @@ const MyPageInfo = ({ onDataChange , userData}) => {
         </div>
     );
 };
-
+const ErrorMsg = styled(Error)`
+    position:absolute;
+`
 const MyPageBox = styled(Align)`
     flex-direction:column;
     margin:30px 160px;
