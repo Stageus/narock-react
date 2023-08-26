@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import UserMenu from "./UserMenu"
-
-
+import UserManagement  from "../../pages/UserManagement"
+import BandRequest from "../../pages/BandRequest";
 const UserNavigation = () => {
     const menu = [
         ['유저 관리','userManagement'], 
         ['게시판 요청','BandRequest' ],
     ]
+
+    const [currentDomain, setCurrentDomain] = useState('userManagement');
+    useEffect(()=>{
+        console.log(currentDomain)
+    },[currentDomain])
     return ( 
         <MenuBox>
             {menu.map(v=>(
-                <UserMenu menu={v[0]} domain={v[1]}/>
+                <UserMenu key={v[1]} menu={v[0]} domain={v[1]} currentDomain={currentDomain} setCurrentDomain={setCurrentDomain}/>
             ))}
+            {/* {currentDomain === 'userManagement' && <UserManagement />}
+            {currentDomain === 'BandRequest' && <BandRequest />} */}
         </MenuBox>
      );
 }

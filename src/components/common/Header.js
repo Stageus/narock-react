@@ -36,7 +36,7 @@ const Header = () => {
                     </div>
                     <NavButton onClick={()=>{pageNavigate('/mypage')}}>마이페이지</NavButton>
                     <NavButton onClick={()=>{pageNavigate('/login')}}>로그인</NavButton>
-                    <NavButton onClick={()=>{pageNavigate('/admin')}}>관리자 페이지</NavButton>
+                    <NavButton onClick={()=>{pageNavigate('/admin/usermanagement')}}>관리자 페이지</NavButton>
                     
                 </FirstNav>
             </Div>

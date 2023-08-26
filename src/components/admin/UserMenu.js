@@ -1,14 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from "react-router-dom";
+
 
 const UserMenu = (props) => {
-    const navigate = useNavigate();
 
-    const { menu, domain } = props;
+    const { menu, domain, currentDomain, setCurrentDomain } = props;
+
+    const handleClick = () => {
+        setCurrentDomain(domain);
+        // console.log(currentDomain)
+    }
     return ( 
         <React.Fragment>
-            <Menu onClick={()=>{navigate(`/admin/${domain}`)}}>{menu}</Menu>
+            <Menu onClick={handleClick}>{menu}</Menu>
         </React.Fragment>
      );
 }

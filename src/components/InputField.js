@@ -14,7 +14,7 @@ const InputField = (props) => {
             height={height}
             margin={margin}
             marginright={marginright}
-            value={value}
+            defaultValue={value}
 
             />
         </div>

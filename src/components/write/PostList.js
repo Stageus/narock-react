@@ -6,7 +6,7 @@ const PostList = (props) => {
     const navigate = useNavigate();
     const { bandname } = props;
     return ( 
-        <div>
+        <Box>
             <PostBox onClick={()=>{navigate(`/allband/${bandname}/notice/1`)}}>
                 <Notice>공지</Notice>
                 <Title>공지사항입니다.</Title>
@@ -15,14 +15,16 @@ const PostList = (props) => {
                 <Post>511</Post>
                 <Post>20</Post>
             </PostBox>
-        </div>
+        </Box>
      );
 }
 
+const Box = styled.div`
+    width:100%;
+`
 
 const PostBox = styled.div`
     display:flex;
-    /* text-align:center; */
     border-bottom: 2px solid #e2e8ff;
     padding:5px 0;
     `

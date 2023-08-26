@@ -7,7 +7,7 @@ const Buttons = (props) => {
     return ( 
         <Button 
         type={type}
-        value={value} 
+        defaultValue={value} 
         onClick={onClick} 
         width={width} 
         height={height} 
@@ -18,6 +18,7 @@ const Buttons = (props) => {
         backgroundcolor={backgroundcolor}
         color={color}
         border={border}
+        readOnly
         />
      );
 }

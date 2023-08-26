@@ -20,7 +20,8 @@ const BandPost = () => {
 };
 
 const Box = styled.div`
-display:flex;
-margin-top:30px;
+    display:flex;
+    margin-top:30px;
+
 `
 export default BandPost;

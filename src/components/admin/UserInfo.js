@@ -2,15 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import Buttons from "../../components/Buttons";
 import InputField from "../../components/InputField";
+
 const UserInfo = () => {
     return(
         <UserBox>
             <UserList>
-                <div>
+                <UserSearch>
                     <div>유저 아이디 검색</div>
-                    <InputField/>
-                    <Buttons value="검색"/>
-                </div>
+                    <InputField height="fit-content" margin="0 5px"/>
+                    <Buttons value="검색" width="72px"/>
+                </UserSearch>
                 <Subject>
                     <FlexItem1>아이디</FlexItem1>
                     <FlexItem2>닉네임</FlexItem2>
@@ -48,6 +49,16 @@ const UserInfo = () => {
     )
 }
 
+const UserBox = styled.div`
+    width:100%;
+`
+
+const UserSearch = styled.div`
+    display:flex;
+    /* justify-content: end; */
+    align-items: center;
+`
+
 const FlexItem1 = styled.div`
     flex-basis:170px;
     text-align:center;
@@ -61,7 +72,7 @@ const FlexItem3 = styled.div`
     text-align:center;
 `
 const FlexItem4 = styled.div`
-    flex-basis:160px;
+    flex-basis:200px;
     display:flex;
     justify-content:center;
 `
@@ -71,10 +82,6 @@ const UserList = styled.div`
 const CheckBox = styled.input`
     position:absolute;
     left:0;
-`
-
-const UserBox = styled.div`
-    width:100%;
 `
 const Subject = styled.div`
     display:flex;

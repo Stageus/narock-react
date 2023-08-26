@@ -1,7 +1,8 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom"
 
-import Admin from "./pages/Admin"
+import UserManagement from "./pages/UserManagement"
+import BandRequest from "./pages/BandRequest"
 import AllBand from "./pages/AllBand";
 import AllBandBoard from "./pages/AllBandBoard";
 import BandPost from "./pages/BandPost";
@@ -28,10 +29,9 @@ const App = () => {
   return(
       <Routes>
         <Route path="/" element={<Main />}/>
-        <Route path="/admin" element={<Admin />}/>
-        <Route path="/admin/usermanagement" element={<Admin />}/>
-        <Route path="/admin/bandrequest" element={<Admin />}/>
-        <Route path="/admin" element={<Admin />}/>
+        <Route path="/admin/usermanagement" element={<UserManagement />}/>
+        <Route path="/admin/bandrequest" element={<BandRequest />}/>
+        {/* <Route path="/admin" element={<Admin />}/> */}
         <Route path="/allband" element={<AllBand />}/>
         <Route path="/allband/:bandname" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/notice" element={<AllBandBoard />}/>
