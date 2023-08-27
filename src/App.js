@@ -30,7 +30,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main />}/>
         <Route path="/admin/usermanagement" element={<UserManagement />}/>
-        <Route path="/admin/bandrequest" element={<BandRequest />}/>
+        <Route path="/admin/BandRequest" element={<BandRequest />}/>
         {/* <Route path="/admin" element={<Admin />}/> */}
         <Route path="/allband" element={<AllBand />}/>
         <Route path="/allband/:bandname" element={<AllBandBoard />}/>

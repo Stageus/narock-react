@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import { Align } from "../../styled/ProjectStyle";
-import Buttons from '../Buttons';
+import { Align,Button } from "../../styled/ProjectStyle";
+
 const Content = () => {
     const [like,setLike] = useState(0);
     const [isLiked,setIsLiked] = useState(false);
@@ -27,9 +27,9 @@ const Content = () => {
                     <FlexItem>댓글 갯수</FlexItem>
                 </Align>
                 <Align>
-                    <Buttons value="수정" width="38px" backgroundcolor="white" color="#3185FC" border="1px solid #3185FC"/>
-                    <Buttons value="삭제" width="38px" backgroundcolor="white" color="#3185FC" border="1px solid #3185FC"/>
-                    <Buttons value="목록" width="38px"/>
+                    <Button value="수정" width="38px" backgroundcolor="white" color="#3185FC" border="1px solid #3185FC"/>
+                    <Button value="삭제" width="38px" backgroundcolor="white" color="#3185FC" border="1px solid #3185FC"/>
+                    <Button value="목록" width="38px"/>
                 </Align>
             </AlignBox>
             <ContentBox>GINGER ROOT</ContentBox>

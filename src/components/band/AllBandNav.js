@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AllBandMenu from "./AllBandMenu"
 
 
-const AllBandNavigation = (props) => {
+const AllBandNav = (props) => {
     const { bandname } = props;
 
     const menu = [
@@ -35,4 +35,4 @@ const MenuBox = styled.div`
     cursor:pointer;
 `
 
-export default AllBandNavigation;
+export default AllBandNav;

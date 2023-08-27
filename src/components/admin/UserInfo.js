@@ -1,16 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import Buttons from "../../components/Buttons";
-import InputField from "../../components/InputField";
-
+import { Button,Input } from "../../styled/ProjectStyle";
 const UserInfo = () => {
     return(
         <UserBox>
             <UserList>
                 <UserSearch>
                     <div>유저 아이디 검색</div>
-                    <InputField height="fit-content" margin="0 5px"/>
-                    <Buttons value="검색" width="72px"/>
+                    <Input height="fit-content" margin="0 5px"/>
+                    <Button value="검색" width="72px"/>
                 </UserSearch>
                 <Subject>
                     <FlexItem1>아이디</FlexItem1>
@@ -28,7 +26,7 @@ const UserInfo = () => {
                         일반회원
                     </FlexItem4>
                     <FlexItem4>
-                        <Buttons value="권한 설정" margin="0"/>
+                        <Button value="권한 설정" margin="0"/>
                     </FlexItem4>
                 </List>
                 <List>
@@ -40,7 +38,7 @@ const UserInfo = () => {
                         일반회원
                     </FlexItem4>
                     <FlexItem4>
-                        <Buttons value="권한 설정" margin="0"/>
+                        <Button value="권한 설정" margin="0"/>
                     </FlexItem4>
                 </List>
             </UserList>

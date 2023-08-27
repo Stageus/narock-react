@@ -1,18 +1,19 @@
 import React from "react";
 import Header from "../components/common/Header";
-import BandImg from "../components/band/BandImg"
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import AllBandNavigation from "../components/band/AllBandNavigation";
+import AllBandNav from "../components/band/AllBandNav";
 import Content from "../components/write/Content";
+import { Align } from "../styled/ProjectStyle";
+
 const BandPost = () => {
     const { bandname } = useParams();
     return (
         <div>
             <Header/>
-            <BandImg bandname={bandname}/>
+            <BandHeader>{bandname} 게시판</BandHeader>
             <Box>
-                <AllBandNavigation/>
+                <AllBandNav/>
                 <Content/>
             </Box>
         </div>
@@ -22,6 +23,14 @@ const BandPost = () => {
 const Box = styled.div`
     display:flex;
     margin-top:30px;
+
+`
+
+const BandHeader = styled(Align)`
+    justify-content:center;
+    font-size:60px;
+    border: 1px solid #000;
+    height:191px;
 
 `
 export default BandPost;

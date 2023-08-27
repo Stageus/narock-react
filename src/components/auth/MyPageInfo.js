@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
-import InputField from "../InputField";
-import Buttons from "../Buttons";
+import { Input, Button } from "../../styled/ProjectStyle";
 import styled from "styled-components";
 import { Align,Error } from "../../styled/ProjectStyle";
 
@@ -103,7 +102,7 @@ const MyPageInfo = ({ onDataChange , userData}) => {
                         <Space>kjhwlgusdl</Space>
 
                         <div>닉네임</div>
-                        <InputField margin="5px 0 15px 0" placeholder="유저 닉네임" maxlength="16" onChange={onChangeNickname}/>
+                        <Input margin="5px 0 15px 0" placeholder="유저 닉네임" maxlength="16" onChange={onChangeNickname}/>
                         <div>
                             <RuleIcon  onMouseOver={()=>{setIsHover(true)}} onMouseOut={()=>{setIsHover(false)}}>?</RuleIcon>
                             {isHover &&
@@ -121,10 +120,10 @@ const MyPageInfo = ({ onDataChange , userData}) => {
                         <Avatar src={img} alt="profile"></Avatar>
                         <FileUploadInput type="file" id="file-upload" accept="image/jpg,image/png,image/jpeg,image/gif" onChange={HandleLoadFile}/>
                         <FileUploadLabel htmlFor="file-upload">업로드</FileUploadLabel>
-                        <Buttons 
+                        <Button
                         value="삭제" 
                         type="button" 
-                        radius="5px" 
+                        borderradius="5px" 
                         padding="5px" 
                         backgroundcolor="white" 
                         color="#3185FC" 
@@ -137,22 +136,22 @@ const MyPageInfo = ({ onDataChange , userData}) => {
                         <Space>kjhwlgusdl@gmail.com</Space>
 
                         <div>현재 비밀번호</div>
-                        <InputField margin="5px 0 15px 0" type="password"/>
+                        <Input margin="5px 0 15px 0" type="password"/>
                         <div>비밀번호 변경 (영문 대소문자/숫자/특수문자 조합, 8자~16자)</div>
                         <Align position="relative">
-                            <InputField onChange={onChangePw} type="password" maxlength="16" marginright="10px"/>
+                            <Input onChange={onChangePw} type="password" maxlength="16" marginright="10px"/>
                             {!isPassword && password.length > 0 && <ErrorMsg right="-270px">{passwordMsg}</ErrorMsg>}
                         </Align>
 
                         <div>비밀번호 확인</div>
                         <Align>
-                            <InputField onChange={onChangePwConfirm} type="password" marginright="10px"/>
+                            <Input onChange={onChangePwConfirm} type="password" marginright="10px"/>
                             {passwordConfirm.length > 0 && <ErrorMsg> {passwordConfirmMsg}</ErrorMsg>}
                         </Align>
                 </UserInfo>
                 <ButtonBox>
-                <Buttons value="정보 수정" type="button" radius="5px" padding="5px" onClick={handleJoinButtonClick}/>
-                <Buttons value="회원 탈퇴" type="button" radius="5px" padding="5px"/>
+                <Button value="정보 수정" type="button" borderradius="5px" padding="5px" onClick={handleJoinButtonClick}/>
+                <Button value="회원 탈퇴" type="button" borderradius="5px" padding="5px"/>
             </ButtonBox>
             </MyPageBox>
         </div>

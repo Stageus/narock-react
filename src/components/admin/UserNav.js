@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import UserMenu from "./UserMenu"
 import UserManagement  from "../../pages/UserManagement"
 import BandRequest from "../../pages/BandRequest";
-const UserNavigation = () => {
+const UserNav = () => {
     const menu = [
         ['유저 관리','userManagement'], 
         ['게시판 요청','BandRequest' ],
@@ -38,4 +38,4 @@ const MenuBox = styled.div`
     cursor:pointer;
 `
 
-export default UserNavigation;
+export default UserNav;

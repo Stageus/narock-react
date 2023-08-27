@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import Header from "../components/common/Header";
 import Logo from "../components/Logo";
-import InputField from "../components/InputField";
-import Buttons from "../components/Buttons";
+
 
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
-import { Align } from "../styled/ProjectStyle";
+import { Align, Input, Button } from "../styled/ProjectStyle";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -31,11 +30,11 @@ const Login = () => {
                 <ContainerBox>
                     <Logo/>
                     <Div>
-                        <div>
-                            <InputField placeholder="아이디" maxlength="20" onChange={(e)=>setUid(e.target.value)}/>
-                            <InputField placeholder="비밀번호" type="password" maxlength="16" onChange={(e)=>setUpw(e.target.value)}/>
-                        </div> 
-                        <Buttons value="로그인" onClick={()=>{loginClickEvent()}} width="80px" height="80px" radius="5px" type="button" margin="0" marginleft="10px"/>
+                        <InputBox>
+                            <Input placeholder="아이디" maxlength="20" margin="7px 0"onChange={(e)=>setUid(e.target.value)}/>
+                            <Input  placeholder="비밀번호" type="password" maxlength="16" margin="7px 0" onChange={(e)=>setUpw(e.target.value)}/>
+                        </InputBox> 
+                        <Button value="로그인" onClick={()=>{loginClickEvent()}} width="80px" height="80px" borderradius="5px" type="button" margin="0" marginleft="10px"/>
                     </Div>
                     <SubButtonBox>
                         <div onClick={()=>{navigate('/findAccount')}}>아이디 / 비밀번호 찾기</div>
@@ -55,6 +54,13 @@ const ContainerBox = styled(Align)`
     width:fit-content;
 `
 const Div = styled(Align)`
+    justify-content:center;
+`
+
+const InputBox = styled.div`
+    display:flex;
+    flex-direction:column;
+    align-items:center;
     justify-content:center;
 `
 const SubButtonBox = styled(Align)`

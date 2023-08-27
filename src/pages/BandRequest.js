@@ -1,24 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../components/common/Header";
-import { Align } from "../styled/ProjectStyle";
+import { Align,Button } from "../styled/ProjectStyle";
 import UserInfo from "../components/admin/UserInfo";
-import UserNavigation from "../components/admin/UserNavigation"
+import UserNav from "../components/admin/UserNav"
 import Paging from "../components/Paging"
 
-
-import Buttons from "../components/Buttons";
 const BandRequest = () => {
     return (
         <div>
             <Header/>
             <Align>
-                <UserNavigation/>
+                <UserNav/>
                 <Box>
                     <Title>게시판 요청</Title>
                     <UserInfo/>
                     <Paging/>
-                    <Buttons value="계정 삭제" backgroundcolor="#FC3131" width="127px" padding="7px" radius="5px"/>
+                    <Button value="계정 삭제" backgroundcolor="#FC3131" width="127px" padding="7px" borderradius="5px"/>
                 </Box>            
             </Align>
         </div>

@@ -2,17 +2,16 @@ import React from 'react'
 import  styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const BandList = (props) => {
+const BandName = (props) => {
     const {initial, name} = props;
     const navigate = useNavigate();
 
     return ( 
         <List>
             <NameTag>{initial}</NameTag>
-            {name.sort().map((v,i)=>(
-                <div key={i}>
-                    {/* <BandName onClick={()=>{navigate(`/allBand/${v}/notice`)}} bandName={v}>{v}</BandName> */}
-                    <Band onClick={()=>{navigate(`/allband/${v}`)}} bandname={v}>{v}</Band>
+            {name.sort().map((band,index)=>(
+                <div key={index}>
+                    <Band onClick={()=>{navigate(`/allband/${band}`)}} bandname={band}>{band}</Band>
                 </div>
             ))}
         </List>
@@ -51,4 +50,4 @@ const List = styled.div`
     border: 1px solid #E2E8FF;
     text-align:center;
 `
-export default BandList;
+export default BandName;

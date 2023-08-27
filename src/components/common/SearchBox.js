@@ -1,6 +1,5 @@
 import React from "react";
-import InputField from "../InputField"
-import Buttons from "../Buttons"
+import { Input, Button } from "../../styled/ProjectStyle";
 import { styled } from "styled-components";
 const SearchBox = () => {
     return(
@@ -9,8 +8,8 @@ const SearchBox = () => {
                 <option>작성자</option>
                 <option>제목</option>
             </select>
-            <InputField height="fit-content" margin="0 10px"/>
-            <Buttons value="검색" type="button" height="fit-content" margin="0" marginleft="0"/>
+            <Input height="fit-content" margin="0 10px"/>
+            <Button value="검색" type="button" height="fit-content" margin="0" marginleft="0"/>
         </Box>
     )
 }

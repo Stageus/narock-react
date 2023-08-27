@@ -1,10 +1,8 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { Align } from "../../styled/ProjectStyle";
-import Buttons from "../Buttons";
-import InputField from "../InputField";
+import { Align, Input, Button } from "../../styled/ProjectStyle";
 
-const UserInfoField = ({ onDataChange }) => {
+const JoinInfo = ({ onDataChange }) => {
     //인풋 값 확인
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -12,7 +10,6 @@ const UserInfoField = ({ onDataChange }) => {
     const [nickname, setNickname] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [verificationCode, setVerificationCode] = useState("");
 
     //오류메세지
     const [idMsg,setIdMsg] = useState("");
@@ -29,7 +26,8 @@ const UserInfoField = ({ onDataChange }) => {
     const [isNickname,setIsNickname] = useState(false);
     const [isName,setIsName] = useState(false);
     const [isEmail,setIsEmail] = useState(false);
-
+    const [isCertification,setIsCertification] = useState(false)
+    
     //닉네임룰 호버
     const [isHover,setIsHover] = useState(false);
 
@@ -139,14 +137,14 @@ const UserInfoField = ({ onDataChange }) => {
             <div>
                 <div>아이디 (영문소문자/숫자, 6~20자만 가능)</div>
                 <Align>
-                    <InputField onChange={onChangeId} maxlength="20" marginright="10px"/>
+                    <Input onChange={onChangeId} maxlength="20" marginright="10px"/>
                     {isId ? <Success>{idMsg}</Success> : id.length === 0 ? null : <Error>{idMsg}</Error>}
                 </Align>
             </div>
             <div>
                     <div>비밀번호 (영문 대소문자/숫자/특수문자 조합, 8자~16자만 가능)</div>
                 <Align>
-                    <InputField onChange={onChangePw} type="password" maxlength="16" marginright="10px"/>
+                    <Input onChange={onChangePw} type="password" maxlength="16" marginright="10px"/>
                     {!isPassword && password.length > 0 && <Error>{passwordMsg}</Error>}
                 </Align>
             </div>
@@ -156,7 +154,7 @@ const UserInfoField = ({ onDataChange }) => {
                     <div>비밀번호 확인</div>
                 </div>
                 <Align>
-                    <InputField onChange={onChangePwConfirm} type="password" marginright="10px"/>
+                    <Input onChange={onChangePwConfirm} type="password" marginright="10px"/>
                     {passwordConfirm.length> 0 && <Error>{passwordConfirmMsg}</Error>}
                 </Align>
             </div>
@@ -164,7 +162,7 @@ const UserInfoField = ({ onDataChange }) => {
             <div>
                 <div>닉네임</div>
                 <Align>
-                    <InputField onChange={onChangeNickname} maxlength="16" marginright="10px"/>
+                    <Input onChange={onChangeNickname} maxlength="16" marginright="10px"/>
                     {nickname.length> 0 &&<Error>{nicknameMsg}</Error>}
                 </Align>
                 <div>
@@ -181,22 +179,22 @@ const UserInfoField = ({ onDataChange }) => {
             <div>
                 <div>이름</div>
                 <Align>
-                    <InputField onChange={onChangeName} maxlength="20" marginright="10px"/>
+                    <Input onChange={onChangeName} maxlength="20" marginright="10px"/>
                     {name.length> 0 &&<Error>{nameMsg}</Error>}
                 </Align>
             </div>
             <div>
                 <div>이메일</div>
                 <Align>
-                    <InputField onChange={onChangeEmail} marginright="10px"/>
+                    <Input onChange={onChangeEmail} marginright="10px"/>
                     {email.length> 0 &&<Error>{emailMsg}</Error>}
                 </Align>
             </div>
             <div>
                 <div>인증번호</div>
                 <Certification>
-                    <InputField/>
-                    <Buttons value="인증코드 발송" width="72px" padding="0px 15px" radius="5px" height="32px"></Buttons>
+                    <Input/>
+                    <Button value="인증코드 발송" width="72px" padding="0px 15px" radius="5px" height="32px"></Button>
                 </Certification>
             </div>
             {/* {password.length> 0 &&
@@ -243,4 +241,4 @@ const Certification = styled.div`
     align-items:center;
 `
 
-export default UserInfoField;
+export default JoinInfo;

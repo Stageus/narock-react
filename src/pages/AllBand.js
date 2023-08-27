@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import BandList from "../components/band/BandList";
+import BandName from "../components/band/BandName";
 import Header from "../components/common/Header";
 
 import { Align } from "../styled/ProjectStyle";
@@ -194,11 +194,10 @@ const Allband = () => {
         <div>
             <Header/>
             <ListAlign>
-                {Object.keys(bandNames).map((v,i) =>{
-                    const bandName = bandNames[v]
+                {Object.keys(bandNames).map((initial,index) =>{
                     return(
-                        <div key={i}>
-                            <BandList initial={v} name={bandName} />
+                        <div key={index}>
+                            <BandName initial={initial} name={bandNames[initial]} />
                         </div>
                     )
                 })}

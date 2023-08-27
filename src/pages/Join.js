@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import TermsAndCondition from "../components/auth/TermsAndCondition";
-import UserInfoField from "../components/auth/UserInfoField";
-import Buttons from "../components/Buttons";
+import JoinInfo from "../components/auth/JoinInfo";
 import Header from "../components/common/Header";
 import Logo from "../components/Logo";
-import { Align } from "../styled/ProjectStyle";
+import { Align, Button } from "../styled/ProjectStyle";
 
 const Join = () => {
 
@@ -59,11 +58,11 @@ const Join = () => {
             <Header/>
             <Logo/>
             <FieldBox>
-                <UserInfoField onDataChange={handleUserDataChange}/>
+                <JoinInfo onDataChange={handleUserDataChange}/>
                 <TermsAndCondition onDataChange={handleUserDataChange}/>
             </FieldBox>
             <JoinBtn>           
-                <Buttons type="submit" value="회원가입" width="260px" height="34px" radius="5px" onClick={handleJoinButtonClick}/>
+                <Button type="submit" value="회원가입" width="260px" height="34px" borderradius="5px" onClick={handleJoinButtonClick}/>
             </JoinBtn> 
         </div>
     );
