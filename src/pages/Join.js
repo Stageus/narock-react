@@ -50,8 +50,6 @@ const Join = () => {
         alert("가입을 축하합니다!");
     };
 
-    
-
 
     return (
         <div>

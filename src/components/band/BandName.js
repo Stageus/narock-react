@@ -6,12 +6,13 @@ const BandName = (props) => {
     const {initial, name} = props;
     const navigate = useNavigate();
 
+    const sortedName = [...name].sort()
     return ( 
         <List>
             <NameTag>{initial}</NameTag>
-            {name.sort().map((band,index)=>(
+            {sortedName.map((band,index)=>(
                 <div key={index}>
-                    <Band onClick={()=>{navigate(`/allband/${band}`)}} bandname={band}>{band}</Band>
+                    <Band onClick={()=>{navigate(`/allband/${band}/notice`)}} bandname={band}>{band}</Band>
                 </div>
             ))}
         </List>

@@ -194,7 +194,7 @@ const JoinInfo = ({ onDataChange }) => {
                 <div>인증번호</div>
                 <Certification>
                     <Input/>
-                    <Button value="인증코드 발송" width="72px" padding="0px 15px" radius="5px" height="32px"></Button>
+                    <Button value="인증코드 발송" padding="0px 15px" radius="5px" height="32px"></Button>
                 </Certification>
             </div>
             {/* {password.length> 0 &&

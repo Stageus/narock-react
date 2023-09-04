@@ -8,7 +8,7 @@ const UserInfo = () => {
                 <UserSearch>
                     <div>유저 아이디 검색</div>
                     <Input height="fit-content" margin="0 5px"/>
-                    <Button value="검색" width="72px"/>
+                    <Button value="검색"/>
                 </UserSearch>
                 <Subject>
                     <FlexItem1>아이디</FlexItem1>

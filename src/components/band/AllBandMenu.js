@@ -7,6 +7,7 @@ const AllBandMenu = (props) => {
 
     const { menu, domain, bandname } = props;
     return ( 
+        
         <React.Fragment>
             <Menu onClick={()=>{navigate(`/allband/${bandname}/${domain}`)}}>{menu}</Menu>
         </React.Fragment>

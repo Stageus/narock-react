@@ -1,26 +1,31 @@
+
 import styled from "styled-components"
 import CommonStyle from "./CommonStyle";
 
 
-const Button = styled.input`
-    ${props => {
-        return`
-            background-color:${props.backgroundcolor ? props.backgroundcolor: `${CommonStyle("mainColor")}`};
-            padding:${props.padding ? props.padding :`${CommonStyle("btnPadding")}`};
-            font-size:${props.fontSize ? props.fontSize : `${CommonStyle("btnFontSize")}`};
-            border-radius: ${props.borderradius ? props.borderradius:`${CommonStyle("btnBorderRadius")}`};
-            border: ${props.border ? props.border:"none"};
-            cursor: ${props.cursor ? props.cursor : `${CommonStyle("btnCursor")}`};
-            display:${props.display === "none" ? "none": "inline-block"};
-            color:${props.color ? props.color : `${CommonStyle("white")}`};
-            width:${props.width ? props.width : `${CommonStyle("btnWidth")}`};
-            height:${props.height ? props.height : `${CommonStyle("btnHeight")}`};
-            margin:${props.margin ? props.margin : `${CommonStyle("btnMargin")}`};
-            margin-left:${props.marginleft ? props.marginleft : `${CommonStyle("btnMarginLeft")}`};
-            text-align:${props.textAlign ? props.textAlign : 'center'};
-        `
+const Button = styled.input.attrs((props) => ({
+    readOnly: props.readOnly,
+    type: "button",
+  }))`
+    ${(props) => {
+      return `
+        background-color:${props.backgroundcolor ? props.backgroundcolor : `${CommonStyle("mainColor")}`};
+        padding:${props.padding ? props.padding : `${CommonStyle("btnPadding")}`};
+        font-size:${props.fontSize ? props.fontSize : `${CommonStyle("btnFontSize")}`};
+        border-radius: ${props.borderradius ? props.borderradius : `${CommonStyle("btnBorderRadius")}`};
+        border: ${props.border ? props.border : "none"};
+        cursor: ${props.cursor ? props.cursor : `${CommonStyle("btnCursor")}`};
+        display:${props.display === "none" ? "none" : "inline-block"};
+        color:${props.color ? props.color : `${CommonStyle("white")}`};
+        width:${props.width ? props.width : `${CommonStyle("btnWidth")}`};
+        height:${props.height ? props.height : `${CommonStyle("btnHeight")}`};
+        margin:${props.margin ? props.margin : `${CommonStyle("btnMargin")}`};
+        margin-left:${props.marginleft ? props.marginleft : `${CommonStyle("btnMarginLeft")}`};
+        text-align:${props.textAlign ? props.textAlign : 'center'};
+      `;
     }}
-`
+  `;
+
 const Input = styled.input`
     ${props=>{
         return`
@@ -44,19 +49,41 @@ const Align = styled.div`
     }}
 `
 
-const Error = styled.div`
+const Error = styled.span`
     ${props =>{
         return`
             color: ${props.color ? props.color: `${CommonStyle("errorColor")}`};
             right: ${props.right ? props.right: '-100px'};
+            margin: ${props.margin ? props.margin : '5px'};
         `
     }}
 `
-const Success = styled.div`
+const Success = styled.span`
     ${props =>{
         return`
             color: ${props.color ? props.color: `${CommonStyle("mainColor")}`};
+            margin: ${props.margin ? props.margin : '5px'};
         `
     }}
 `
-export { Button, Align, Input, Error, Success };
+
+const Title = styled.div`
+    ${props => {
+        return`
+            background-color: ${props.backgroundcolor? props.backgroundcolor: `${CommonStyle("subColor")}`};
+            font-size: 32px;
+            color: ${props.color ? props.color: `${CommonStyle("mainColor")}`};
+            margin-bottom: 25px;
+            padding:10px 0;
+            width:100%;
+            `
+    }}
+`
+
+const MyPageBox = styled(Align)`
+    flex-direction:column;
+    margin:30px 160px;
+    border:1px solid #E2E8FF;
+`
+
+export { Button, Align, Input, Error, Success, Title, MyPageBox};

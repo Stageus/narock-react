@@ -3,7 +3,22 @@ import { Input, Button } from "../../styled/ProjectStyle";
 import styled from "styled-components";
 import { Align,Error } from "../../styled/ProjectStyle";
 
-const MyPageInfo = ({ onDataChange , userData}) => {
+const MyPageInfo = () => {
+
+    const [userData, setUserData] = useState({
+        nickname: "",
+        profileimg:"",
+        password:"",
+        isPasswordConfirm:"",
+    });
+
+    const handleUserDataChange = useCallback((field, value) => {
+        setUserData((prevData) => ({
+            ...prevData,
+            [field]: value
+        }));
+    },[]);
+    
     const [img, setImg] = useState('img/avatar.png');
     const [isHover,setIsHover] = useState(false);
 
@@ -22,10 +37,10 @@ const MyPageInfo = ({ onDataChange , userData}) => {
     const HandleLoadFile = (e) => {
         if(e.target.files[0]){
             setImg(e.target.files[0])
-            onDataChange("profileimg",e.target.files[0]);
+            handleUserDataChange("profileimg",e.target.files[0]);
         }else{
             setImg('img/avatar.png');
-            onDataChange("profileimg","");
+            handleUserDataChange("profileimg","");
             return
         }
 
@@ -41,7 +56,7 @@ const MyPageInfo = ({ onDataChange , userData}) => {
 
     const HandleDeleteFile = () => {
         setImg('img/avatar.png')
-        onDataChange("profileimg","");
+        handleUserDataChange("profileimg","");
     }
 
 
@@ -55,8 +70,8 @@ const MyPageInfo = ({ onDataChange , userData}) => {
         // }else if(중복닉네임){
         //     setNicknameMsg("닉네임은 16자");
         // }
-        onDataChange("nickname", nickNameValue);
-    },[onDataChange])
+        handleUserDataChange("nickname", nickNameValue);
+    },[handleUserDataChange])
 
     //비밀번호 유효성 검사
     const onChangePw = useCallback((e)=>{
@@ -83,8 +98,8 @@ const MyPageInfo = ({ onDataChange , userData}) => {
             setPasswordConfirmMsg("비밀번호가 일치하지 않습니다.");
             setIsPasswordConfirm(false)
         }
-        onDataChange("password", passwordConfirmValue);
-    },[password, onDataChange])
+        handleUserDataChange("password", passwordConfirmValue);
+    },[password, handleUserDataChange])
 
 
 
@@ -94,8 +109,7 @@ const MyPageInfo = ({ onDataChange , userData}) => {
 
     return (
         <div>
-            <MyPageBox>
-                <Title>마이 페이지</Title>
+
                 <UserInfo>
 
                         <div>아이디</div>
@@ -153,28 +167,19 @@ const MyPageInfo = ({ onDataChange , userData}) => {
                 <Button value="정보 수정" type="button" borderradius="5px" padding="5px" onClick={handleJoinButtonClick}/>
                 <Button value="회원 탈퇴" type="button" borderradius="5px" padding="5px"/>
             </ButtonBox>
-            </MyPageBox>
+
         </div>
     );
 };
 const ErrorMsg = styled(Error)`
     position:absolute;
+    margin:0;
 `
-const MyPageBox = styled(Align)`
-    flex-direction:column;
-    margin:30px 160px;
-    border:1px solid #E2E8FF;
-`
+
 const UserInfo = styled.div`
     margin:30px 0 0 0;
 `
-const Title = styled.div`
-    background-color: #E0E6FF;
-    width:100%;
-    font-size:32px;
-    padding:10px 0;
-    color:#3185FC;
-`
+
 const Space = styled.div`
     margin-bottom:15px;
 `

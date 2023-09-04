@@ -1,27 +1,23 @@
 import React from 'react'
 import  styled from "styled-components";
 import { Align } from "../../styled/ProjectStyle";
-import PopularContent from "./PopularContent"
+import Posts from "./Posts"
+
+import { useRecoilValue } from 'recoil';
+import { postState } from '../../recoil/Recoil';
 
 const PopularList = () => {
+
+  const post = useRecoilValue(postState);
   return (
     <Box>
       <Title>인기 게시글</Title>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
-        <PopularContent/>
+      {post.map((v,i)=>(
+        <Posts key={i} number={v.number} postTitle={v.postTitle} boardName={v.boardName} like={v.like}/>
+      )
+      
+      )
+      }
     </Box>
   )
 }

@@ -1,52 +1,43 @@
 import React from "react";
-import styled from "styled-components";
-import PostList from "./PostList";
-import { useNavigate } from "react-router-dom";
 import Paging from "../Paging";
 import SearchBox from "../common/SearchBox";
+import Posts from "../main/Posts"
+import {useRecoilValue} from 'recoil';
+import { postState } from '../../recoil/Recoil';
+import styled from "styled-components";
 
 const PostListBox = (props) => {
-    const navigate = useNavigate();
     const { bandname } = props;
+    const post = useRecoilValue(postState);
+    const posts = post.filter(p=>p.boardName === bandname);
+
+    const sortedPost = [...posts].sort((a,b)=>b.postId - a.postId)
+    
     return ( 
-        <Box>
-            <SubjectBox>
-                <Title>제목</Title>
-                <Writer>작성자</Writer>
-                <Post>작성날짜</Post>
-                <Post>조회수</Post>
-                <Post>좋아요</Post>
-            </SubjectBox>
-            <PostList bandname={bandname}/> 
-            {/* 주소 수정해야함 */}
+        <div>
+            { sortedPost && sortedPost.length > 0 ?
+              sortedPost.map((v,i)=>(
+                <Posts 
+                bandname={bandname} 
+                key={i}
+                postId={v.postId}
+                postTitle={v.postTitle} 
+                writer={v.writer}
+                like={v.like}
+                view={v.view}
+                date={v.date}
+                content={v.content}
+                /> 
+            )) : 
+            <Text>작성 된 게시물이 없습니다.</Text>}
             <Paging/>
             <SearchBox/>
-        </Box>
+        </div>
      );
 }
 
-
-const Box = styled.div`
-    margin:0 80px;
-    width:100%;
-`
-
-const SubjectBox = styled.div`
-    display:flex;
-    border-top:2px solid #3185FC;
-    border-bottom:2px solid #3185FC;
-`
-
-const Post = styled.div`
-    flex-grow:1;
-    /* width:10px; */
-`
-const Title = styled(Post)`
-    width:43%;
+const Text = styled.div`
     text-align:center;
-`
-
-const Writer = styled(Post)`
-    width:20%
+    margin:10px 0px;
 `
 export default PostListBox;

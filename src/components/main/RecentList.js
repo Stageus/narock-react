@@ -1,26 +1,31 @@
 import React from 'react';
 import styled from "styled-components";
 import { Align } from "../../styled/ProjectStyle";
-import RecentContent from "./RecentContent"
+import Posts from "./Posts"
+
+import {useRecoilValue} from 'recoil';
+import { popularPostState } from '../../recoil/Recoil';
+
 const RecentList = () => {
+
+  const popularPost= useRecoilValue(popularPostState);
   return (
     <Box>
-      <Title>새소식</Title>
-      <ContentAlign>
-        <RecentContent/>
-        <RecentContent/>
-        <RecentContent/>
-        <RecentContent/>
-      </ContentAlign>
+      <Title>인기 게시글</Title>
+      {popularPost.map((v,i)=>(
+        <Posts key={i} postTitle={v.postTitle} date={v.date}/>
+      )
+      
+      )
+      }
     </Box>
   )
 }
 
 const Box = styled.div`
-    width: 511px;
+    width: 595px;
     height:fit-content;
     border: 1px solid #ADBDFF;
-    margin: 20px;
     color: #222A68;
 `
 const Title = styled(Align)`
@@ -30,11 +35,6 @@ const Title = styled(Align)`
     height:55px;
     margin:0;
     justify-content:center;
-`
-
-const ContentAlign = styled(Align)`
-  display:flex;
-  flex-direction:column;
 `
 
 export default RecentList
