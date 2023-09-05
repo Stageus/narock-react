@@ -1,20 +1,18 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Button, Error, Input, Success } from "../../styled/ProjectStyle";
+import { useRecoilState } from "recoil";
+import { bandExistState, inputValueState, requestValueState, userDataState } from "../../recoil/FrontRecoil";
 
 const BandRequestDialog = (props) => {
-    const { bandnames, dialog, setDialog } = props;
-    const [inputValue, setInputValue] = useState("");
-    const [requestValue, setRequestValue] = useState("");
-    const [bandExist, setBandExist] = useState(false);
+    const { bandnames, setDialog } = props;
+    const [inputValue, setInputValue] = useRecoilState(inputValueState)
+    const [requestValue, setRequestValue] = useRecoilState(requestValueState);
+    const [bandExist, setBandExist] = useRecoilState(bandExistState);
 
     const bandnameMap = Object.values(bandnames).flat();
 
-    const [userData, setUserData] = useState({
-        boardName:"",
-        boardRequest:"",
-        bandExist:""
-    });
+    const [userData, setUserData] = useRecoilState(userDataState);
 
     const NameOnChangeEvent = (e) =>{
         const value = e.target.value;
@@ -23,10 +21,16 @@ const BandRequestDialog = (props) => {
     }
 
 
+    // const RequestOnChangeEvent = (e) => {
+    //     const value = e.target.value;
+    //     setRequestValue(value);
+    //     handleUserDataChange("boardRequest", value);
+    // };
     const RequestOnChangeEvent = (e) => {
         const value = e.target.value;
         setRequestValue(value);
-        handleUserDataChange("boardRequest", value);
+        setUserData("boardRequest", value);
+        console.log(userData)
     };
 
     //밴드 이름 중복 체크

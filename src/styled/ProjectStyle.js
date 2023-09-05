@@ -80,6 +80,21 @@ const Title = styled.div`
     }}
 `
 
+const Div = styled.div`
+    ${props => {
+        return`
+        background-color: ${props.backgroundcolor? props.backgroundcolor: `${CommonStyle("subColor")}`};
+        display: ${props.display ? props.display: `${CommonStyle("display")}`};
+        align-items: ${props.alignItems ? props.alignItems: `${CommonStyle("alignItems")}`};
+        position: ${props.position ? props.position: `${CommonStyle("position")}`};
+        color: ${props.color ? props.color: `${CommonStyle("mainColor")}`};
+        margin: ${props.margin ? props.margin: `${CommonStyle("margin")}`};
+        margin: ${props.margin ? props.margin: `${CommonStyle("margin")}`};
+
+        `
+    }}
+`
+
 const MyPageBox = styled(Align)`
     flex-direction:column;
     margin:30px 160px;

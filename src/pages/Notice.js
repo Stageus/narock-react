@@ -9,7 +9,7 @@ import Paging from "../components/Paging"
 import SearchBox from "../components/common/SearchBox";
 
 import {useRecoilValue} from 'recoil';
-import { noticePostState } from '../recoil/Recoil';
+import { noticePostState } from '../recoil/BackRecoil';
 
 const Notice = () => {
     const post = useRecoilValue(noticePostState);

@@ -4,7 +4,7 @@ import { Align } from "../../styled/ProjectStyle";
 import Posts from "./Posts"
 
 import { useRecoilValue } from 'recoil';
-import { postState } from '../../recoil/Recoil';
+import { postState } from '../../recoil/BackRecoil';
 
 const PopularList = () => {
 

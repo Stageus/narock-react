@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from 'recoil';
-import { bandnameState } from "../recoil/Recoil";
+import { bandnameState } from "../recoil/BackRecoil";
 import BandName from "../components/band/BandName";
 import Header from "../components/common/Header";
 

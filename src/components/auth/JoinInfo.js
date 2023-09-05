@@ -17,7 +17,7 @@ const JoinInfo = ({ onDataChange }) => {
     const [passwordConfirmMsg,setPasswordConfirmMsg] = useState("");
     const [nicknameMsg,setNicknameMsg] = useState("");
     const [nameMsg,setNamelMsg] = useState("");
-    const [emailMsg,setEmailMsg] = useState("");
+    const [emailMsg,setEmailMsg] = useState(""); //묶어서 json으로 만들기
 
     //유효성 검사
     const [isId,setIsId] = useState(false);
@@ -133,18 +133,18 @@ const JoinInfo = ({ onDataChange }) => {
 
 
     return (
-        <div>
+        <div> 
             <div>
                 <div>아이디 (영문소문자/숫자, 6~20자만 가능)</div>
                 <Align>
-                    <Input onChange={onChangeId} maxlength="20" marginright="10px"/>
+                    <Input id="uid" onChange={onChangeId} maxlength="20" marginright="10px"/>
                     {isId ? <Success>{idMsg}</Success> : id.length === 0 ? null : <Error>{idMsg}</Error>}
                 </Align>
             </div>
             <div>
                     <div>비밀번호 (영문 대소문자/숫자/특수문자 조합, 8자~16자만 가능)</div>
                 <Align>
-                    <Input onChange={onChangePw} type="password" maxlength="16" marginright="10px"/>
+                    <Input id="upw" onChange={onChangePw} type="password" maxlength="16" marginright="10px"/>
                     {!isPassword && password.length > 0 && <Error>{passwordMsg}</Error>}
                 </Align>
             </div>

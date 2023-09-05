@@ -9,7 +9,7 @@ import Paging from "../components/Paging"
 import SearchBox from "../components/common/SearchBox";
 
 import {useRecoilValue} from 'recoil';
-import { newsPostState } from '../recoil/Recoil';
+import { newsPostState } from '../recoil/BackRecoil';
 
 const News = () => {
     const post = useRecoilValue(newsPostState);

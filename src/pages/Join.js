@@ -60,7 +60,8 @@ const Join = () => {
                 <TermsAndCondition onDataChange={handleUserDataChange}/>
             </FieldBox>
             <JoinBtn>           
-                <Button type="submit" value="회원가입" width="260px" height="34px" borderradius="5px" onClick={handleJoinButtonClick}/>
+                <Button type="submit" value="회원가입" width="260px" height="34px" borderradius="5px" onClick={handleJoinButtonClick}/> 
+                {/* recoil로 값 가져오기 */}
             </JoinBtn> 
         </div>
     );

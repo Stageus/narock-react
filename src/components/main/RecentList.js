@@ -4,7 +4,7 @@ import { Align } from "../../styled/ProjectStyle";
 import Posts from "./Posts"
 
 import {useRecoilValue} from 'recoil';
-import { popularPostState } from '../../recoil/Recoil';
+import { popularPostState } from '../../recoil/BackRecoil';
 
 const RecentList = () => {
 

@@ -9,7 +9,7 @@ import Paging from "../components/Paging"
 import SearchBox from "../components/common/SearchBox";
 
 import {useRecoilValue} from 'recoil';
-import { communityPostState } from '../recoil/Recoil';
+import { communityPostState } from '../recoil/BackRecoil';
 
 const Community = () => {
     const post = useRecoilValue(communityPostState);

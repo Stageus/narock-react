@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Align,Button } from "../../styled/ProjectStyle";
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { postState } from '../../recoil/Recoil';
+import { postState } from '../../recoil/BackRecoil';
 import { useNavigate } from "react-router-dom";
 
 const PostDetail = () => {

@@ -3,7 +3,7 @@ import Paging from "../Paging";
 import SearchBox from "../common/SearchBox";
 import Posts from "../main/Posts"
 import {useRecoilValue} from 'recoil';
-import { postState } from '../../recoil/Recoil';
+import { postState } from '../../recoil/BackRecoil';
 import styled from "styled-components";
 
 const PostListBox = (props) => {

@@ -187,7 +187,6 @@ export const bandnameState = atom({
     }
 })
 
-
 export const popularPostState = atom(
     {
         "key":"popularPost",
@@ -351,6 +350,7 @@ export const noticePostState = atom(
         ]
     }
 )
+
 export const newsPostState = atom(
     {
         "key":"newsPost",
@@ -408,6 +408,7 @@ export const newsPostState = atom(
         ]
     }
 )
+
 export const communityPostState = atom(
     {
         "key":"communityPost",
