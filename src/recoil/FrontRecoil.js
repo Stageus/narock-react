@@ -1,11 +1,14 @@
 import { atom } from "recoil";
 
-export const menuState = atom([
+export const menuState = atom({
+    key: 'menuState',
+    default:[
     ['밴드 공지사항','notice'], 
     ['공연 정보','concertinfo' ],
     ['갤러리','gallery'], 
     ['자유 게시판','community']
-])
+ ]
+})
 
 
 export const inputValueState = atom({
