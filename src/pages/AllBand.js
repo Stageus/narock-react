@@ -6,7 +6,7 @@ import BandName from "../components/band/BandName";
 import Header from "../components/common/Header";
 
 import { Align, Button } from "../styled/ProjectStyle";
-import BandRequestDialog from "../components/band/BandRequestDialog";
+import BandRequestDialogBox from "../components/band/BandRequestDialogBox";
 
 const Allband = () => {
     const bandnames = useRecoilValue(bandnameState);
@@ -33,7 +33,7 @@ const Allband = () => {
             </ListAlign>
             <RequestButton value="게시판 생성 요청" onClick={openDialog}/>
             {dialog &&
-                <BandRequestDialog bandnames={bandnames} dialog={dialog} setDialog={closeDialog}/>
+                <BandRequestDialogBox bandnames={bandnames} dialog={dialog} setDialog={closeDialog}/>
             }
         </div>
     );
