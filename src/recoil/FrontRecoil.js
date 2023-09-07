@@ -1,12 +1,14 @@
 import { atom } from "recoil";
 
-export const menuState = atom([
-    ['밴드 공지사항','notice'], 
-    ['공연 정보','concertinfo' ],
-    ['갤러리','gallery'], 
-    ['자유 게시판','community']
-])
-
+export const menuState = atom({
+    key: 'menuState',
+    default: [
+      { label: '밴드 공지사항', id: 'notice' },
+      { label: '공연 정보', id: 'concertinfo' },
+      { label: '갤러리', id: 'gallery' },
+      { label: '자유 게시판', id: 'community' }
+    ]
+  });
 
 export const inputValueState = atom({
     key: 'inputValueState',
@@ -30,4 +32,14 @@ export const userDataState = atom({
         boardRequest:'',
         bandExist: '',
     }
+})
+
+export const likedState = atom({
+    key: 'likedState',
+    default:0,
+})
+
+export const isLikedState = atom({
+    key: 'isLikedState',
+    default:false,
 })

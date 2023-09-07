@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Posts = (props) => {
 
     const {bandname,postTitle,boardName,like,date,view,writer,postId} = props;
-
+    console.log(postId)
     const navigate = useNavigate();
     return(
         <Box>

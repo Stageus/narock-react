@@ -3,8 +3,8 @@ import Header from "../components/common/Header";
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import AllBandNav from "../components/band/AllBandNav";
-import PostDetail from "../components/write/PostDetail";
 import { Align } from "../styled/ProjectStyle";
+import PostDetailBox from "../components/write/PostDetailBox";
 
 
 const BandPost = () => {
@@ -15,7 +15,7 @@ const BandPost = () => {
             <BandHeader>{bandname} 게시판</BandHeader>
             <Box>
                 <AllBandNav bandname={bandname}/>
-                <PostDetail/>  
+                <PostDetailBox/>  
             </Box>
         </div>
     );
