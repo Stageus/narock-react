@@ -16,10 +16,10 @@ const PostListBox = (props) => {
     return ( 
         <div>
             { sortedPost && sortedPost.length > 0 ?
-              sortedPost.map((v,i)=>(
+              sortedPost.map((v)=>(
                 <Posts 
+                key={v}
                 bandname={bandname} 
-                key={i}
                 postId={v.postId}
                 postTitle={v.postTitle} 
                 writer={v.writer}

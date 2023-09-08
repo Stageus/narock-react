@@ -15,7 +15,7 @@ const BandPost = () => {
             <BandHeader>{bandname} 게시판</BandHeader>
             <Box>
                 <AllBandNav bandname={bandname}/>
-                <PostDetailBox/>  
+                <PostDetailBox bandname={bandname}/>  
             </Box>
         </div>
     );

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Button } from "../styled/ProjectStyle";
 import { useRecoilValue } from 'recoil';
 import { bandnameState } from "../recoil/BackRecoil";
-import BandName from "../components/band/BandName";
-import Header from "../components/common/Header";
 
-import { Align, Button } from "../styled/ProjectStyle";
+import Header from "../components/common/Header";
+import BandName from "../components/band/BandName";
 import BandRequestDialogBox from "../components/band/BandRequestDialogBox";
 
 const Allband = () => {
-    const bandnames = useRecoilValue(bandnameState);
+    const bandname = useRecoilValue(bandnameState);
     const [dialog,setDialog] = useState(false);
 
     const openDialog = () => {
@@ -22,29 +22,14 @@ const Allband = () => {
     return (
         <div>
             <Header/>
-            <ListAlign>
-                {Object.keys(bandnames).map((initial,index) =>{
-                    return(
-                        <div key={index}>
-                            <BandName initial={initial} name={bandnames[initial]} />
-                        </div>
-                    )
-                })}
-            </ListAlign>
+            <BandName bandname={bandname}/>
             <RequestButton value="게시판 생성 요청" onClick={openDialog}/>
             {dialog &&
-                <BandRequestDialogBox bandnames={bandnames} dialog={dialog} setDialog={closeDialog}/>
+                <BandRequestDialogBox bandname={bandname} dialog={dialog} setDialog={closeDialog}/>
             }
         </div>
     );
 };
-
-const ListAlign = styled(Align)`
-    margin:0 160px;
-    display:grid;
-    grid-template-columns: repeat(10,1fr)
-`
-
 const RequestButton = styled(Button)`
     position:fixed;
     bottom:0;

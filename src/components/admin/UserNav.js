@@ -3,23 +3,17 @@ import styled from 'styled-components';
 import UserMenu from "./UserMenu"
 import UserManagement  from "../../pages/UserManagement"
 import BandRequest from "../../pages/BandRequest";
-const UserNav = () => {
-    const menu = [
-        ['유저 관리','userManagement'], 
-        ['게시판 요청','BandRequest' ],
-    ]
 
-    const [currentDomain, setCurrentDomain] = useState('userManagement');
-    useEffect(()=>{
-        console.log(currentDomain)
-    },[currentDomain])
+import { useRecoilValue } from "recoil";
+import { adminmenuState } from "../../recoil/FrontRecoil";
+const UserNav = () => {
+    const adminMenu = useRecoilValue(adminmenuState);
+
     return ( 
         <MenuBox>
-            {menu.map(v=>(
-                <UserMenu key={v[1]} menu={v[0]} domain={v[1]} currentDomain={currentDomain} setCurrentDomain={setCurrentDomain}/>
+            {adminMenu.map(v=>(
+                <UserMenu key={v[1]} menu={v.label} domain={v.id}/>
             ))}
-            {/* {currentDomain === 'userManagement' && <UserManagement />}
-            {currentDomain === 'BandRequest' && <BandRequest />} */}
         </MenuBox>
      );
 }

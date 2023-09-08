@@ -4,15 +4,10 @@ import styled from 'styled-components';
 
 const UserMenu = (props) => {
 
-    const { menu, domain, currentDomain, setCurrentDomain } = props;
-
-    const handleClick = () => {
-        setCurrentDomain(domain);
-        // console.log(currentDomain)
-    }
+    const { menu, domain } = props;
     return ( 
         <React.Fragment>
-            <Menu onClick={handleClick}>{menu}</Menu>
+            <Menu>{menu}</Menu>
         </React.Fragment>
      );
 }

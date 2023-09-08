@@ -4,7 +4,7 @@ import { Align,Button } from "../../styled/ProjectStyle";
 import { useNavigate } from "react-router-dom";
 
 const PostDetail = (props) => {
-    const { post, bandname } = props;
+    const { key, post, bandname } = props;
     console.log(post)
     const navigate = useNavigate();
     return(

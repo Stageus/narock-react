@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import {Align, Input} from "../../styled/ProjectStyle";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 const Header = () => {
     const navigate = useNavigate();
 
@@ -27,24 +27,24 @@ const Header = () => {
     return ( 
         <nav>
             <Div>
-                <H1 onClick={()=>{pageNavigate('/')}}><Img src={`${process.env.PUBLIC_URL}/img/Header_logo.png`} alt="logo"></Img>락·밴·드·커·뮤·니·티</H1>
+                <Link to="/"><H1><Img src={`${process.env.PUBLIC_URL}/img/Header_logo.png`} alt="logo"></Img>락·밴·드·커·뮤·니·티</H1></Link>
                 <FirstNav>
                     <div>
                         <img src={`${process.env.PUBLIC_URL}/img/search_icon.png`} alt="검색"></img>
                         <NavButton onClick={searchInputEvent}>통합 검색</NavButton>
                         {inputVisible && <ClickInput type="text" placeholder="검색" onChange={(e)=>{setKeyword(e.target.value)}} onKeyDown={searchEnterEvent}></ClickInput>}
                     </div>
-                    <NavButton onClick={()=>{pageNavigate('/mypage')}}>마이페이지</NavButton>
+                    <NavButton>마이페이지</NavButton>
                     <NavButton onClick={()=>{pageNavigate('/login')}}>로그인</NavButton>
                     <NavButton onClick={()=>{pageNavigate('/admin/usermanagement')}}>관리자 페이지</NavButton>
                     
                 </FirstNav>
             </Div>
             <SecondNav>
-                <NavButton2 onClick={()=>{pageNavigate('/allband')}}>밴드 검색</NavButton2>
-                <NavButton2 onClick={()=>{pageNavigate('/notice')}}>공지사항</NavButton2>
-                <NavButton2 onClick={()=>{pageNavigate('/news')}}>새소식</NavButton2>
-                <NavButton2 onClick={()=>{pageNavigate('/community')}}>커뮤니티</NavButton2>
+                <Link to="/allband"><NavButton2>밴드 검색</NavButton2></Link>
+                <Link to="/notice"><NavButton2>공지사항</NavButton2></Link>
+                <Link to="/news"><NavButton2>새소식</NavButton2></Link>
+                <Link to="/community"><NavButton2>커뮤니티</NavButton2></Link>
             </SecondNav>
         </nav>
      );

@@ -2,20 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import AllBandMenu from "./AllBandMenu"
 
-
+import { useRecoilValue } from "recoil";
+import { bandmenuState } from "../../recoil/FrontRecoil";
 const AllBandNav = (props) => {
     const { bandname } = props;
-
-    const menu = [
-        ['밴드 공지사항','notice'], 
-        ['공연 정보','concertinfo' ],
-        ['갤러리','gallery'], 
-        ['자유 게시판','community']
-    ]
+    const bandmenu = useRecoilValue(bandmenuState)
     return ( 
         <MenuBox>
-            {menu.map(v=>(
-                <AllBandMenu menu={v[0]} domain={v[1]} bandname={bandname}/>
+            {bandmenu.map(v=>(
+                <AllBandMenu menu={v.label} domain={v.id} bandname={bandname}/>
             ))}
         </MenuBox>
      );

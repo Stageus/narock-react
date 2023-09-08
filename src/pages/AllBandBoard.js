@@ -14,10 +14,10 @@ const AllBandBoard = () => {
             <Header/>
             <BandHeader>{bandname} 게시판</BandHeader>
             <Box>
-                <AllBandNav bandname={bandname}/>
+                <AllBandNav bandname={bandname}/> {/* 내비게이션 메뉴 */}
                 <Width>
-                    <PostRow/>
-                    <PostListBox bandname={bandname}/>
+                    <PostRow/> {/* 제목, 작성자, 작성날짜, 조회수, 좋아요 줄 */}
+                    <PostListBox bandname={bandname}/> {/* 게시물 목록 출력 */}
                 </Width>
             </Box>
         </div>

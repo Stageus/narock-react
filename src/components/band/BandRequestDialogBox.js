@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { bandExistState, inputValueState, requestValueState, userDataState } from "../../recoil/FrontRecoil";
 import BandRequestDialog from "./BandRequestDialog";
-import axios from "axios";
+// import axios from "axios";
 
 const BandRequestDialogBox = (props) => {
     const { bandnames, setDialog } = props;

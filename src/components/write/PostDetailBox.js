@@ -7,12 +7,13 @@ import { postState } from '../../recoil/BackRecoil';
 import { isLikedState, likedState } from "../../recoil/FrontRecoil";
 import PostDetail from "./PostDetail";
 
-const PostDetailBox = () => {
-    const { bandname } = useParams();
-
+const PostDetailBox = (props) => {
+    // const { bandname } = useParams();
+    const { bandname } = props;
     const posts = useRecoilValue(postState); // postState 셀렉터로 데이터 가져옴
-    const post = posts.find(p => p.boardName === bandname);
+    const post = posts.filter(p => p.boardName === bandname); //post의 게시판이름과 bandname이 같은 것만 필터링
 
+    console.log(posts)
     const [liked,setLiked] = useRecoilState(likedState);
     const [isLiked,setIsLiked] = useRecoilState(isLikedState);
 
@@ -28,7 +29,9 @@ const PostDetailBox = () => {
 
     return (
         <Box>
-            <PostDetail post={post} bandname={bandname}/>
+            {Object.keys(post).map((postId)=>(
+                <PostDetail key={postId} post={post[postId]} bandname={bandname}/>
+            ))}
             <Align>
                 {isLiked ? <Icon src={`${process.env.PUBLIC_URL}/img/like_active.png`} alt="좋아요" onClick={ClickEvent}/> : <Icon src={`${process.env.PUBLIC_URL}/img/like.png`} alt="좋아요" onClick={ClickEvent}/>}
                 {<Like>{liked}</Like>}
