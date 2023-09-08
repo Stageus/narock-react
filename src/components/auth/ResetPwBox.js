@@ -1,8 +1,11 @@
 import React from "react";
+import { Title } from "../../styled/ProjectStyle";
 
 const ResetPwBox = () => {
     return(
-        <div>비밀번호 초기화 컨테이너</div>
+        <div>
+            <Title>비밀번호재설정</Title>
+        </div>
     )
 }
 

@@ -288,7 +288,17 @@ export const postState = atom(
               "date": "2023.08.14",
               "view":623,
               "writer": '지짱'
-            }
+            },
+            {
+                "postId": 6,
+                "postTitle": "제목 뭐하지?!!!!!!!",
+                "content": "이것은 더미데이터 글고 6번째임",
+                "boardName": "쏜애플",
+                "like": 120,
+                "date": "2023.08.14",
+                "view":623,
+                "writer": '지짱'
+              }
         ]
     }
 )
@@ -404,7 +414,8 @@ export const newsPostState = atom(
               "date": "2023.08.14",
               "view":623,
               "writer": '지짱'
-            }
+            },
+
         ]
     }
 )
