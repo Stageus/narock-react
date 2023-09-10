@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import UserMenu from "./UserMenu"
 import UserManagement  from "../../pages/UserManagement"
 import BandRequest from "../../pages/BandRequest";
 
@@ -11,8 +10,8 @@ const UserNav = () => {
 
     return ( 
         <MenuBox>
-            {adminMenu.map(v=>(
-                <UserMenu key={v[1]} menu={v.label} domain={v.id}/>
+            {adminMenu.map((menu,i)=>(
+                <Menu>{menu.label}</Menu>
             ))}
         </MenuBox>
      );
@@ -31,5 +30,7 @@ const MenuBox = styled.div`
     align-items:center;
     cursor:pointer;
 `
-
+const Menu = styled.div`
+    margin:10px 0;
+`
 export default UserNav;

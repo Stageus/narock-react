@@ -38,7 +38,6 @@ export const userDataState = atom({
     default:{
         boardName:'',
         boardRequest:'',
-        bandExist: '',
     }
 })
 

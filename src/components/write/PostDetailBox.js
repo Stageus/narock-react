@@ -1,20 +1,22 @@
 import React from "react";
 import styled from 'styled-components';
-import { Align } from "../../styled/ProjectStyle";
+import { Align,Button } from "../../styled/ProjectStyle";
+
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { postState } from '../../recoil/BackRecoil';
+
 import { isLikedState, likedState } from "../../recoil/FrontRecoil";
-import PostDetail from "./PostDetail";
-import { useParams } from "react-router-dom";
+import Comment from "./Comment";
+import { useNavigate , useParams } from "react-router-dom";
 
 const PostDetailBox = (props) => {
     const { postid } = useParams();
     const { bandname } = props;
     const posts = useRecoilValue(postState); // postState 셀렉터로 데이터 가져옴
-    const post = posts.filter(p => p.boardName === bandname); //post의 게시판이름과 bandname이 같은 것만 필터링
+    const post = posts.filter(p => p.boardName === bandname ); //post의 게시판이름과 bandname이 같은 것만 필터링
     const [liked,setLiked] = useRecoilState(likedState);
     const [isLiked,setIsLiked] = useRecoilState(isLikedState);
-
+    const navigate = useNavigate();
     const ClickEvent = () =>{
         if(isLiked){
             setLiked(liked - 1);
@@ -27,8 +29,27 @@ const PostDetailBox = (props) => {
 
     return (
         <Box>
-            {post.map(()=>(
-                <PostDetail post={post} bandname={bandname}/>
+            {post.map((value,idx)=>(
+                <div key={idx}>
+                    <div>{value.boardName}</div>
+                    <div>{value.postTitle}</div>
+                    <AlignBox>
+                        <Align>
+                            <FlexItem>프로필사진</FlexItem>
+                            <FlexItem>{value.writer}</FlexItem>
+                            <FlexItem>{value.view}</FlexItem>
+                            <FlexItem>{value.date}</FlexItem>
+                            <FlexItem>댓글갯수</FlexItem>
+                        </Align>
+                        <Align>
+                            <Button value="수정" backgroundcolor="white" color="#3185FC" border="1px solid #3185FC"/>
+                            <Button value="삭제"backgroundcolor="white" color="#3185FC" border="1px solid #3185FC"/>
+                            <Button value="목록" type="button" onClick={()=>{navigate(`/allband/${bandname}/notice`)}}/>
+                        </Align>
+                    </AlignBox>
+                    <ContentBox>{value.content}</ContentBox>
+                    <Comment/>
+                </div>
             ))}
             <Align>
                 {isLiked ? <Icon src={`${process.env.PUBLIC_URL}/img/like_active.png`} alt="좋아요" onClick={ClickEvent}/> : <Icon src={`${process.env.PUBLIC_URL}/img/like.png`} alt="좋아요" onClick={ClickEvent}/>}
@@ -48,6 +69,17 @@ const Box = styled.div`
 `
 
 
+const AlignBox = styled(Align)`
+    justify-content:space-between;
+    border-bottom: 1px solid #E2E8FF;
+`
+const FlexItem = styled.div`
+    margin-right:10px;
+`
+
+const ContentBox = styled.div`
+    margin: 20px 0;
+`
 
 const Icon = styled.img`
     width:18px;

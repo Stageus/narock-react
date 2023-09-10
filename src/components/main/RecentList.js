@@ -14,10 +14,7 @@ const RecentList = () => {
       <Title>인기 게시글</Title>
       {popularPost.map((v,i)=>(
         <Posts key={i} postTitle={v.postTitle} date={v.date}/>
-      )
-      
-      )
-      }
+      ))}
     </Box>
   )
 }

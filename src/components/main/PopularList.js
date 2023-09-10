@@ -14,10 +14,7 @@ const PopularList = () => {
       <Title>인기 게시글</Title>
       {post.map((v,i)=>(
         <Posts key={i} number={v.number} postTitle={v.postTitle} boardName={v.boardName} like={v.like}/>
-      )
-      
-      )
-      }
+      ))}
     </Box>
   )
 }

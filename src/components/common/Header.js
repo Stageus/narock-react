@@ -27,7 +27,7 @@ const Header = () => {
     return ( 
         <nav>
             <Div>
-                <Link to="/"><H1><Img src={`${process.env.PUBLIC_URL}/img/Header_logo.png`} alt="logo"></Img>락·밴·드·커·뮤·니·티</H1></Link>
+                <H1><Img src={`${process.env.PUBLIC_URL}/img/Header_logo.png`} alt="logo"onClick={()=>{pageNavigate('/')}}></Img>락·밴·드·커·뮤·니·티</H1>
                 <FirstNav>
                     <div>
                         <img src={`${process.env.PUBLIC_URL}/img/search_icon.png`} alt="검색"></img>
