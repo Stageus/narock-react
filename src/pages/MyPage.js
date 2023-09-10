@@ -1,8 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import Header from "../components/common/Header";
 import MyPageInfo from "../components/auth/MyPageInfo"
-import styled from "styled-components";
-import { Align, MyPageBox, Title } from "../styled/ProjectStyle";
+import { MyPageBox, Title } from "../styled/ProjectStyle";
 
 const MyPage = () => {
     return (

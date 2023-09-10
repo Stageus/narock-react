@@ -27,7 +27,6 @@ const Login = () => {
         <React.Fragment>
             <Header/>
             <Div> 
-                {/* 이벤트 델리게이션 사용하기 */}
                 <ContainerBox>
                     <Logo/>
                     <Div>

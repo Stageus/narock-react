@@ -2,10 +2,10 @@ import React from "react";
 import { styled } from "styled-components";
 import { Align,Button } from "../../styled/ProjectStyle";
 import { useNavigate } from "react-router-dom";
+import Comment from "./Comment";
 
 const PostDetail = (props) => {
-    const { key, post, bandname } = props;
-    console.log(post)
+    const { post, bandname } = props;
     const navigate = useNavigate();
     return(
         <React.Fragment>
@@ -26,6 +26,7 @@ const PostDetail = (props) => {
                 </Align>
             </AlignBox>
             <ContentBox>{post.content}</ContentBox>
+            <Comment/>
         </React.Fragment>
     )
 }

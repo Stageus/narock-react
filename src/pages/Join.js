@@ -5,9 +5,13 @@ import JoinInfo from "../components/auth/JoinInfo";
 import Header from "../components/common/Header";
 import Logo from "../components/Logo";
 import { Align, Button } from "../styled/ProjectStyle";
+import { useRecoilValue } from 'recoil';
+import { idState } from "../recoil/UserStates";
 
 const Join = () => {
+    const uid = useRecoilValue(idState)
 
+    console.log(uid)
     const [userData, setUserData] = useState({
         id:"",
         isId:"",
@@ -56,8 +60,8 @@ const Join = () => {
             <Header/>
             <Logo/>
             <FieldBox>
-                <JoinInfo onDataChange={handleUserDataChange}/>
-                <TermsAndCondition onDataChange={handleUserDataChange}/>
+                <JoinInfo/>
+                <TermsAndCondition/>
             </FieldBox>
             <JoinBtn>           
                 <Button type="submit" value="회원가입" width="260px" height="34px" borderradius="5px" onClick={handleJoinButtonClick}/> 
