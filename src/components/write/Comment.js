@@ -8,7 +8,7 @@ const Comment = () => {
             <div>댓글</div>
             <AlignBox>
                 <Div>
-                    <img src="/img/avatar.png" width="40px"/>
+                    <img src="/img/avatar.png" width="40px" alt="프로필사진"/>
                     <CommentAlign>
                         <div>닉네임</div>
                         <div>댓글 내용</div>
@@ -16,19 +16,19 @@ const Comment = () => {
                     </CommentAlign>
                 </Div>
                 <Div>
-                    <div>답글</div>
-                    <div>수정</div>
-                    <div>삭제</div>
+                    <Button value="답글" backgroundcolor="transparent" color="mainColor"></Button>
+                    <Button value="수정" backgroundcolor="transparent" color="mainColor"></Button>
+                    <Button value="삭제" backgroundcolor="transparent" color="mainColor"></Button>
                 </Div>
             </AlignBox>
-                <div>
-                    <textarea/>
-                        <Button value="등록"/>
-                </div>
-                <div>
-                    <textarea/>
-                        <Button value="등록"/>
-                </div>
+                <Div position="relative">
+                    <TextArea/>
+                    <SubmitButton value="등록"/>
+                </Div>
+                <Div>
+                    <TextArea />
+                    <SubmitButton value="등록"/>
+                </Div>
         </React.Fragment>
     )
 }
@@ -42,5 +42,17 @@ const AlignBox = styled(Align)`
 const CommentAlign = styled(Align)`
     flex-direction:column;
 `
+const TextArea = styled.textarea`
+    width:1005px;
+    height:81px;
+    resize:none;
+    border: 1px solid #ADBDFF;
+`
 
+const SubmitButton = styled(Button)`
+    position:absolute;
+    right:0;
+    bottom:0;
+
+`
 export default Comment;
