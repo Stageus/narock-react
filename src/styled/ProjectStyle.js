@@ -83,13 +83,21 @@ const Title = styled.div`
 const Div = styled.div`
     ${props => {
         return`
-        background-color: ${props.backgroundcolor? props.backgroundcolor: `${CommonStyle("subColor")}`};
+        background-color: ${props.backgroundcolor? props.backgroundcolor: `${CommonStyle("white")}`};
         display: ${props.display ? props.display: `${CommonStyle("display")}`};
         align-items: ${props.alignItems ? props.alignItems: `${CommonStyle("alignItems")}`};
+        justify-content: ${props.justifyContent ? props.justifyContent: `${CommonStyle("justifyContent")}`};
         position: ${props.position ? props.position: `${CommonStyle("position")}`};
-        color: ${props.color ? props.color: `${CommonStyle("mainColor")}`};
+        color: ${props.color ? props.color: `${CommonStyle("fontColor")}`};
         margin: ${props.margin ? props.margin: `${CommonStyle("margin")}`};
-        margin: ${props.margin ? props.margin: `${CommonStyle("margin")}`};
+        padding: ${props.padding ? props.padding: `${CommonStyle("padding")}`};
+        flex-direction: ${props.flexDirection ? props.flexDirection: `${CommonStyle("flexDirection")}`};
+        border: ${props.border ? props.border: `${CommonStyle("border")}`};
+        width: ${props.width ? props.width: `${CommonStyle("width")}`};
+        height: ${props.height ? props.height: `${CommonStyle("height")}`};
+        background-color: ${props.backgroundcolor ? props.backgroundcolor: `${CommonStyle("backgroundcolor")}`};
+        font-size: ${props.fontSize ? props.fontSize: `${CommonStyle("defaultSize")}`};
+        position: ${props.backgroundcolor ? props.backgroundcolor: `${CommonStyle("position")}`};
 
         `
     }}
@@ -101,4 +109,4 @@ const MyPageBox = styled(Align)`
     border:1px solid #E2E8FF;
 `
 
-export { Button, Align, Input, Error, Success, Title, MyPageBox};
+export { Button, Align, Input, Error, Success, Title, MyPageBox,Div};

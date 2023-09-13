@@ -160,7 +160,7 @@ const JoinInfo = () => {
         const nickNameRegex = /^[a-zA-Z0-9가-힣!@#$%^&*()_+{}|:"<>?~-]{2,16}$/;
         setNickname(nickNameValue)
         if(!nickNameRegex.test(nickNameValue)){
-            setNicknameMsg("사용할 수 없는 닉네입니다.");
+            setNicknameMsg("");
             setIsNickname(false)
         }else{
             setNicknameMsg("");

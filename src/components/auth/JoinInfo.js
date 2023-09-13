@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Align, Input, Button } from "../../styled/ProjectStyle";
 import { useRecoilState,  } from 'recoil';
@@ -14,70 +14,105 @@ const JoinInfo = () => {
     const [isHover, setIsHover] = useRecoilState(isHoverState);
     const [regist, setRegist] = useRecoilState(registState);
     const [error, setError] = useRecoilState(errorState);
+
     const handleChange = (e) => {
-        const { id, value } = e.target;
+        const { name, value } = e.target;
+        e.preventDefault();
         setRegist({
           ...regist,
-          [id]: value,
+          [name]: value,
         });
-        validate(id,value);
         console.log(value)
       };
 
-      const handleSubmit = (e) => {
-        e.preventDefault();
-      };
+        useEffect(()=>{
+            const idRegex = /^[a-z0-9]{6,20}$/
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/
+            const nameRegex =  /^[가-힣a-zA-Z]{1,20}$/;
+            const nickNameRegex = /^[a-zA-Z0-9가-힣!@#$%^&*()_+{}|:"<>?~-]{2,16}$/;
+            const emailRegex =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-      const validate = () => {
-        const idRegex = /^[a-z0-9]{6,20}$/
-        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/
-        const nickNameRegex = /^[a-zA-Z0-9가-힣!@#$%^&*()_+{}|:"<>?~-]{2,16}$/;
-        const emailRegex =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-        if(!idRegex.test(regist.id)){
-            setError((error)=>({
-                ...error,
-                uid:"6글자 이상 20글자 미만으로 입력해 주세요."
-            }))
-        }else{
-            setError((error)=>({
-                ...error,
-                uid:"사용 가능한 아이디입니다."
-            }))
-        }
-      }
+            if(!idRegex.test(regist.id)){
+                setError((error)=>({
+                    ...error,
+                    id:"6글자 이상 20글자 미만으로 입력해 주세요."
+                }))
+            }else{
+                setError((error)=>({
+                    ...error,
+                    id:"사용 가능한 아이디입니다."
+                }))
+            }
+            if(!passwordRegex.test(regist.password)){ //패스워드 정규식에 맞지 않을 때
+                setError((error)=>({
+                    ...error,
+                    password:"영문 대소문자/숫자/특수문자 조합 8자~16자로 입력해 주세요."
+                }))
+            }
+            if(regist.password === regist.confirmPassword){ //패스워드 불일치
+                setError((error)=>({
+                    ...error,
+                    confirmPassword:""
+                }))
+            }else{
+                setError((error)=>({
+                    ...error,
+                    confirmPassword:"비밀번호가 일치하지 않습니다."
+                }))
+            }
+            if(!nickNameRegex.test(regist.nickname)){ //닉네임 정규식
+                setError((error)=>({
+                    ...error,
+                    nickname:"사용할 수 없는 닉네임입니다."
+                }))
+            }
+            if(!emailRegex.test(regist.email)){ //이메일 정규식
+                setError((error)=>({
+                    ...error,
+                    email:"유효한 이메일을 작성해 주세요."
+                }))
+            }
+            if(!nameRegex.test(regist.name)){ //이름 정규식
+                setError((error)=>({
+                    ...error,
+                    name:"한글 영문 대/소문자를 사용해 주세요."
+                }))
+            }
+        },[regist.id]);
     return (
-        <div onChange={handleChange}> 
+        <form onChange={handleChange}> 
             <div>
-                <div>아이디 (영문소문자/숫자, 6~20자만 가능)</div>
+                <label htmlFor="id">아이디 (영문소문자/숫자, 6~20자만 가능)</label>
                 <Align>
-                    <Input id="id" maxLength="20" marginright="10px"/>
+                    <Input name="id" maxLength="20" marginright="10px" />
                    {error.id ? <Success>{error.id}</Success> : regist.id.length === 0 ? null : <Error>{error.id}</Error>}
                 </Align>
             </div>
             <div>
-                    <div>비밀번호 (영문 대소문자/숫자/특수문자 조합, 8자~16자만 가능)</div>
+                    <label htmlFor="password">비밀번호 (영문 대소문자/숫자/특수문자 조합, 8자~16자만 가능)</label>
                 <Align>
-                    <Input id="password" type="password" maxLength="16" marginright="10px"/>
-                    {/* {!isPassword && password.length > 0 && <Error>{passwordMsg}</Error>} */}
+                    <Input name="password" type="password" maxLength="16" marginright="10px"/>
+                    {error.password && error.password.length > 0 && <Error>{error.password}</Error>}
                 </Align>
             </div>
 
             <div>
                 <div>
-                    <div>비밀번호 확인</div>
+                    <label htmlFor="confirmPassword">비밀번호 확인</label>
                 </div>
                 <Align>
-                    <Input id="confirmPassword" type="password" marginright="10px"/>
+                    <Input name="confirmPassword" type="password" marginright="10px"/>
                     {/* {passwordConfirm.length> 0 && <Error>{passwordConfirmMsg}</Error>} */}
+                    {error.confirmPassword ? <Success>{error.confirmPassword}</Success> : regist.confirmPassword.length === 0 ? null : <Error>{error.confirmPassword}</Error>}
                 </Align>
             </div>
                 
             <div>
-                <div>닉네임</div>
+                <label htmlFor="nickname">닉네임</label>
                 <Align>
-                    <Input id="nickname" maxLength="16" marginright="10px"/>
+                    <Input name="nickname" maxLength="16" marginright="10px"/>
                     {/* {nickname.length> 0 &&<Error>{nicknameMsg}</Error>} */}
+                    {error.nickname ? <Error>{error.nickname}</Error> : regist.nickname.length === 0 ? null : <Error>{error.nickname}</Error>}
                 </Align>
                 <div>
                     <RuleIcon onMouseOver={()=>{setIsHover(true)}} onMouseOut={()=>{setIsHover(false)}}>?</RuleIcon>
@@ -91,38 +126,36 @@ const JoinInfo = () => {
             </div>
 
             <div>
-                <div>이름</div>
+                <label htmlFor="name">이름</label>
                 <Align>
-                    <Input id="name" maxLength="20" marginright="10px"/>
+                    <Input name="name" maxLength="20" marginright="10px"/>
                     {/* {name.length> 0 &&<Error>{nameMsg}</Error>} */}
+                    {error.name ? <Success>{error.name}</Success> : regist.length === 0 ? null : <Error>{error.name}</Error>}
                 </Align>
             </div>
             <div>
-                <div>이메일</div>
+                <label htmlFor="email">이메일</label>
                 <Align>
-                    <Input id="email" marginright="10px"/>
+                    <Input name="email" marginright="10px" maxLength="50"/>
                     {/* {email.length> 0 &&<Error>{emailMsg}</Error>} */}
+                    {error.email ? <Success>{error.email}</Success> : regist.length === 0 ? null : <Error>{error.email}</Error>}
                 </Align>
             </div>
             <div>
-                <div>인증번호</div>
+                <label htmlFor="certification">인증번호</label>
                 <Certification>
-                    <Input id="certification"/>
+                    <Input name="certification"/>
                     <Button value="인증코드 발송" padding="0px 15px" radius="5px" height="32px"></Button>
                 </Certification>
             </div>
             {/* {password.length> 0 &&
             <div>{passwordMsg}</div>
             }        */}
-            <JoinBtn>           
-                <Button type="submit" value="회원가입" width="260px" height="34px" borderradius="5px" onClick={handleSubmit}/> 
-                {/* recoil로 값 가져오기 */}
-            </JoinBtn> 
-        </div>
+        </form>
     );
 };
 const JoinBtn = styled(Align)`
-justify-content:center;
+    justify-content:center;
 `
 const Success = styled.span`
     color:#3185FC;
@@ -154,8 +187,6 @@ const Rule = styled.div`
     left:427px;
     color:#222A68;
 `
-
-
 const Certification = styled.div`
     display:flex;
     align-items:center;

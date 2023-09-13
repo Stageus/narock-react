@@ -6,51 +6,47 @@ import Header from "../components/common/Header";
 import Logo from "../components/Logo";
 import { Align, Button } from "../styled/ProjectStyle";
 import { useRecoilValue } from 'recoil';
-import { idState } from "../recoil/UserStates";
+import { idState, registState } from "../recoil/UserStates";
 
 const Join = () => {
     const uid = useRecoilValue(idState)
+    const regist = useRecoilValue(registState)
+    // console.log(uid)
+    // const [userData, setUserData] = useState({
+    //     id:"",
+    //     isId:"",
+    //     password:"",
+    //     isPassword:"",
+    //     nickname: "",
+    //     isNickname: "",        
+    //     name: "",
+    //     isName:"",
+    //     email: "",
+    //     isEmail:"",
+    //     verificationCode: "",
+    //     isTermsandcondition:""
+    // });
 
-    console.log(uid)
-    const [userData, setUserData] = useState({
-        id:"",
-        isId:"",
-        password:"",
-        isPassword:"",
-        nickname: "",
-        isNickname: "",        
-        name: "",
-        isName:"",
-        email: "",
-        isEmail:"",
-        verificationCode: "",
-        isTermsandcondition:""
-    });
-
-    const handleUserDataChange = (field, value) => {
-        setUserData((prevData) => ({
-            ...prevData,
-            [field]: value
-        }));
-    };
+    // const handleUserDataChange = (field, value) => {
+    //     setUserData((prevData) => ({
+    //         ...prevData,
+    //         [field]: value
+    //     }));
+    // };
 
     const handleJoinButtonClick = () => {
-        // if(!userData.id || !userData.password || !userData.nickname || !userData.name || !userData.email){
-        //     alert("모든 칸을 입력해 주세요.")
+        if(regist.length === 0){
+            alert("모든 칸을 입력해 주세요.")
+            // console.log("User Data:",userData)
+            return;
+        }
+
+        // if(!userData.isTermsandcondition){
+        //     alert("이용 약관에 동의해 주세요.")
         //     return;
         // }
-        if(!userData.isId || !userData.isPassword || !userData.isNickname || !userData.isName || !userData.isEmail){
-            alert("모든 칸을 입력해 주세요.")
-            console.log("User Data:",userData)
-            return;
-        }
 
-        if(!userData.isTermsandcondition){
-            alert("이용 약관에 동의해 주세요.")
-            return;
-        }
-
-        console.log("User Data:", userData);
+        console.log("User Data:", regist);
         alert("가입을 축하합니다!");
     };
 
