@@ -140,8 +140,8 @@ const MyPageInfo = () => {
                         borderradius="5px" 
                         padding="5px" 
                         backgroundcolor="white" 
-                        color="#3185FC" 
-                        border="1px solid #3185FC"
+                        color="mainColor" 
+                        border="1px solid mainColor"
                         onClick={HandleDeleteFile}
                         />
                         </ProfileBox>

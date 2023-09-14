@@ -42,8 +42,8 @@ const PostDetailBox = (props) => {
                             <FlexItem>댓글갯수</FlexItem>
                         </Align>
                         <Align>
-                            <Button value="수정" backgroundcolor="white" color="#3185FC" border="1px solid #3185FC"/>
-                            <Button value="삭제"backgroundcolor="white" color="#3185FC" border="1px solid #3185FC"/>
+                            <Button value="수정" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
+                            <Button value="삭제"backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
                             <Button value="목록" type="button" onClick={()=>{navigate(`/allband/${bandname}/notice`)}}/>
                         </Align>
                     </AlignBox>

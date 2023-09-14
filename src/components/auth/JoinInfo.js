@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Align, Input, Button } from "../../styled/ProjectStyle";
+import { Align, Input, Button, Div, Success, Error } from "../../styled/ProjectStyle";
 import { useRecoilState,  } from 'recoil';
 import {
     errorState,
@@ -83,39 +83,52 @@ const JoinInfo = () => {
         <form onChange={handleChange}> 
             <div>
                 <label htmlFor="id">아이디 (영문소문자/숫자, 6~20자만 가능)</label>
-                <Align>
+                <Div margin="0">
                     <Input name="id" maxLength="20" marginright="10px" />
                    {error.id ? <Success>{error.id}</Success> : regist.id.length === 0 ? null : <Error>{error.id}</Error>}
-                </Align>
+                </Div>
             </div>
             <div>
                     <label htmlFor="password">비밀번호 (영문 대소문자/숫자/특수문자 조합, 8자~16자만 가능)</label>
-                <Align>
+                <Div margin="0">
                     <Input name="password" type="password" maxLength="16" marginright="10px"/>
                     {error.password && error.password.length > 0 && <Error>{error.password}</Error>}
-                </Align>
+                </Div>
             </div>
 
             <div>
                 <div>
                     <label htmlFor="confirmPassword">비밀번호 확인</label>
                 </div>
-                <Align>
+                <Div margin="0">
                     <Input name="confirmPassword" type="password" marginright="10px"/>
                     {/* {passwordConfirm.length> 0 && <Error>{passwordConfirmMsg}</Error>} */}
                     {error.confirmPassword ? <Success>{error.confirmPassword}</Success> : regist.confirmPassword.length === 0 ? null : <Error>{error.confirmPassword}</Error>}
-                </Align>
+                </Div>
             </div>
                 
             <div>
                 <label htmlFor="nickname">닉네임</label>
-                <Align>
+                <Div margin="0">
                     <Input name="nickname" maxLength="16" marginright="10px"/>
                     {/* {nickname.length> 0 &&<Error>{nicknameMsg}</Error>} */}
                     {error.nickname ? <Error>{error.nickname}</Error> : regist.nickname.length === 0 ? null : <Error>{error.nickname}</Error>}
-                </Align>
+                </Div>
                 <div>
-                    <RuleIcon onMouseOver={()=>{setIsHover(true)}} onMouseOut={()=>{setIsHover(false)}}>?</RuleIcon>
+                    <Div 
+                    onMouseOver={()=>{setIsHover(true)}} 
+                    onMouseOut={()=>{setIsHover(false)}}
+                    borderRadius="20px"
+                    backgroundColor="#3185FC"
+                    color="white"
+                    width="14px"
+                    height="14px"
+                    alignItems="center"
+                    justifyContent="center"
+                    display="flex"
+                    left="190px"
+                    position="absolute"
+                    >?</Div>
                     {isHover &&
                     <Rule>16자까지, 허용공백 문자 & 보안상 문제되는 특수문자는 발견시 제외처리 <br/>
                     어법에 맞지 않는 한글(쐥,뛩.. 등등) 사용 <br/>
@@ -127,26 +140,26 @@ const JoinInfo = () => {
 
             <div>
                 <label htmlFor="name">이름</label>
-                <Align>
+                <Div margin="0">
                     <Input name="name" maxLength="20" marginright="10px"/>
                     {/* {name.length> 0 &&<Error>{nameMsg}</Error>} */}
                     {error.name ? <Success>{error.name}</Success> : regist.length === 0 ? null : <Error>{error.name}</Error>}
-                </Align>
+                </Div>
             </div>
             <div>
                 <label htmlFor="email">이메일</label>
-                <Align>
+                <Div margin="0">
                     <Input name="email" marginright="10px" maxLength="50"/>
                     {/* {email.length> 0 &&<Error>{emailMsg}</Error>} */}
                     {error.email ? <Success>{error.email}</Success> : regist.length === 0 ? null : <Error>{error.email}</Error>}
-                </Align>
+                </Div>
             </div>
             <div>
                 <label htmlFor="certification">인증번호</label>
-                <Certification>
+                <Div margin="0">
                     <Input name="certification"/>
                     <Button value="인증코드 발송" padding="0px 15px" radius="5px" height="32px"></Button>
-                </Certification>
+                </Div>
             </div>
             {/* {password.length> 0 &&
             <div>{passwordMsg}</div>
@@ -154,27 +167,7 @@ const JoinInfo = () => {
         </form>
     );
 };
-const JoinBtn = styled(Align)`
-    justify-content:center;
-`
-const Success = styled.span`
-    color:#3185FC;
-`
-const Error = styled.span`
-    color:#FC3131;
-`
-const RuleIcon = styled(Align)`
-    border-radius:20px;
-    background-color: #3185FC;
-    color:#fff;
-    width:14px;
-    height:14px;
-    justify-content:center;
-    position:relative;
-    top: -38px;
-    left:240px;
-    cursor:help;
-`
+
 
 const Rule = styled.div`
     width:313px;
@@ -186,10 +179,6 @@ const Rule = styled.div`
     top: 461px;
     left:427px;
     color:#222A68;
-`
-const Certification = styled.div`
-    display:flex;
-    align-items:center;
 `
 
 export default JoinInfo;

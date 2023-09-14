@@ -95,10 +95,12 @@ const Div = styled.div`
         border: ${props.border ? props.border: `${CommonStyle("border")}`};
         width: ${props.width ? props.width: `${CommonStyle("width")}`};
         height: ${props.height ? props.height: `${CommonStyle("height")}`};
-        background-color: ${props.backgroundcolor ? props.backgroundcolor: `${CommonStyle("backgroundcolor")}`};
+        background-color: ${props.backgroundColor ? props.backgroundColor: `${CommonStyle("backgroundColor")}`};
         font-size: ${props.fontSize ? props.fontSize: `${CommonStyle("defaultSize")}`};
         position: ${props.backgroundcolor ? props.backgroundcolor: `${CommonStyle("position")}`};
-
+        border-radius: ${props.borderRadius ? props.borderRadius: `${CommonStyle("borderRadius")}`};
+        top: ${props.top ? props.top: `${CommonStyle("top")}`};
+        left: ${props.left ? props.left: `${CommonStyle("left")}`};
         `
     }}
 `
