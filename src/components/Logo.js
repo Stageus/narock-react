@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from "styled-components"
-import { Align, Div } from "../styled/ProjectStyle";
+import { Div } from "../styled/ProjectStyle";
 
 const Logo = () => {
     return(

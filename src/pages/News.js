@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
+
 import styled from "styled-components";
-import { Title } from "../styled/ProjectStyle";
+import { Button, Title } from "../styled/ProjectStyle";
 
 import Header from "../components/common/Header";
 import PostRow from "../components/write/PostRow";
@@ -14,6 +16,7 @@ import { newsPostState } from '../recoil/BackRecoil';
 const News = () => {
     const post = useRecoilValue(newsPostState);
     const sortedPost = [...post].sort((a,b)=>b.postId - a.postId)
+    const navigate = useNavigate();
 
     return (
         <div>
@@ -23,6 +26,7 @@ const News = () => {
                 <PostRow/>
                 <AllPost sortedPost={sortedPost}/>
                 <Paging/>
+                <Button value="글쓰기" onClick={()=>{navigate('/write')}}/>
                 <SearchBox/>
             </Box>  
         </div>

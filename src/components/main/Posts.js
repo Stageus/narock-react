@@ -9,8 +9,8 @@ const Posts = (props) => {
     const navigate = useNavigate();
     return(
         <Box>
-            <Content onClick={() => { navigate(bandname ? `/allband/${bandname}/notice/${postId}` : '#') }}>
-                {postId && <FlexItem>{postId}</FlexItem>}
+            <Content >
+                {/* {postId && <FlexItem>{postId}</FlexItem>} */}
                 {postTitle && <FlexItem2>{postTitle}</FlexItem2>}
                 {boardName && <FlexItem3>{boardName}</FlexItem3>}
                 {writer && <FlexItem>{writer}</FlexItem>}

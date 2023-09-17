@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import UserManagement  from "../../pages/UserManagement"
-import BandRequest from "../../pages/BandRequest";
+import { Link, useLocation  } from 'react-router-dom';
 
 import { useRecoilValue } from "recoil";
 import { adminmenuState } from "../../recoil/FrontRecoil";
 const UserNav = () => {
     const adminMenu = useRecoilValue(adminmenuState);
-
+    const location = useLocation();
     return ( 
         <MenuBox>
             {adminMenu.map((menu,i)=>(
-                <Menu>{menu.label}</Menu>
+                <Menu key={menu.id} to={`/admin/${menu.id}`}
+                isActive={location.pathname === `/admin/${menu.id}`}
+                    >{menu.label}
+                    </Menu>
             ))}
         </MenuBox>
      );
@@ -30,7 +32,10 @@ const MenuBox = styled.div`
     align-items:center;
     cursor:pointer;
 `
-const Menu = styled.div`
+
+const Menu = styled(Link)`
+    text-decoration: none;
     margin:10px 0;
+    font-weight: ${({ isActive }) => (isActive ? 'bold' : 'normal')};
 `
 export default UserNav;

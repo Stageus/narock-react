@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../components/common/Header";
-import { Align,Button } from "../styled/ProjectStyle";
+import { Align,Button, Div, Input } from "../styled/ProjectStyle";
 import UserInfo from "../components/admin/UserInfo";
 import UserNav from "../components/admin/UserNav"
 import Paging from "../components/Paging"
+import { userState } from "../recoil/BackRecoil";
+import { useRecoilValue } from "recoil";
 
 const BandRequest = () => {
+    const user = useRecoilValue(userState);
+    console.log(user)
     return (
         <div>
             <Header/>
@@ -14,7 +18,14 @@ const BandRequest = () => {
                 <UserNav/>
                 <Box>
                     <Title>게시판 요청</Title>
-                    <UserInfo/>
+                    <Div alginItems="flex-start">
+                        <div>유저 아이디 검색</div>
+                        <Input height="fit-content" margin="0 5px"/>
+                        <Button value="검색"/>
+                    </Div>
+                    {user.map((v)=>(
+                        <UserInfo userId={v.userid} nickname={v.nickname} joinDate={v.joinDate} role={v.role}/>
+                    ))}
                     <Paging/>
                     <Button value="계정 삭제" backgroundcolor="#FC3131" width="127px" padding="7px" borderradius="5px"/>
                 </Box>            

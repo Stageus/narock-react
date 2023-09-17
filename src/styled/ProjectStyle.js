@@ -22,6 +22,7 @@ const Button = styled.input.attrs((props) => ({
         margin:${props.margin ? props.margin : `${CommonStyle("btnMargin")}`};
         margin-left:${props.marginleft ? props.marginleft : `${CommonStyle("btnMarginLeft")}`};
         text-align:${props.textAlign ? props.textAlign : 'center'};
+        
       `;
     }}
   `;
@@ -36,6 +37,8 @@ const Input = styled.input`
             padding:${props.padding ? props.padding : `${CommonStyle("inputPadding")}`};
             margin:${props.margin ? props.margin : `${CommonStyle("inputMargin")}`};
             margin-right:${props.marginright ? props.marginright : `${CommonStyle("inputMarginright")}`};
+            font-size:${props.fontSize ? props.fontSize : `${CommonStyle("inputFontSize")}`};
+            
         `
     }}
 `
@@ -93,6 +96,7 @@ const Div = styled.div`
         padding: ${props.padding ? props.padding: `${CommonStyle("padding")}`};
         flex-direction: ${props.flexDirection ? props.flexDirection: `${CommonStyle("flexDirection")}`};
         border: ${props.border ? props.border: `${CommonStyle("border")}`};
+        border-bottom: ${props.borderBottom ? props.borderBottom: `${CommonStyle("borderBottom")}`};
         width: ${props.width ? props.width: `${CommonStyle("width")}`};
         height: ${props.height ? props.height: `${CommonStyle("height")}`};
         background-color: ${props.backgroundColor ? props.backgroundColor: `${CommonStyle("backgroundColor")}`};
@@ -105,10 +109,11 @@ const Div = styled.div`
     }}
 `
 
+
 const MyPageBox = styled(Align)`
     flex-direction:column;
     margin:30px 160px;
     border:1px solid #E2E8FF;
 `
 
-export { Button, Align, Input, Error, Success, Title, MyPageBox,Div};
+export { Button, Align, Input, Error, Success, Title, MyPageBox, Div };

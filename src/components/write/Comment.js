@@ -1,58 +1,60 @@
 import React from "react";
 import styled from "styled-components";
-import { Align, Button, Div } from "../../styled/ProjectStyle";
+import { Button, Div } from "../../styled/ProjectStyle";
 
 const Comment = () => {
     return(
-        <React.Fragment>
+        <Div padding="20px" margin="0" border="1px solid #e2e8ff" display="block">
             <div>댓글</div>
-            <AlignBox>
+            <Div justifyContent="space-between" borderBottom="1px solid #e2e8ff" margin="0">
                 <Div>
                     <img src="/img/avatar.png" width="40px" alt="프로필사진"/>
-                    <CommentAlign>
-                        <div>닉네임</div>
-                        <div>댓글 내용</div>
-                        <div>날짜</div>
-                    </CommentAlign>
+                    <Div flexDirection="column" alignItems="flex-start">
+                        <div>지짱</div>
+                        <div>가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이</div>
+                        <Date>2023.09.14 18:35</Date>
+                    </Div>
                 </Div>
                 <Div>
                     <Button value="답글" backgroundcolor="transparent" color="mainColor"></Button>
                     <Button value="수정" backgroundcolor="transparent" color="mainColor"></Button>
                     <Button value="삭제" backgroundcolor="transparent" color="mainColor"></Button>
                 </Div>
-            </AlignBox>
-                <Div position="relative">
-                    <TextArea/>
+            </Div>
+                <Div>
+                    <MainComment/>
                     <SubmitButton value="등록"/>
                 </Div>
                 <Div>
-                    <TextArea />
+                    <SubComment />
                     <SubmitButton value="등록"/>
                 </Div>
-        </React.Fragment>
+        </Div>
     )
 }
 
-
-const AlignBox = styled(Align)`
-    justify-content:space-between;
-    border-bottom: 1px solid #E2E8FF;
+const Date = styled.div`
+    color:#838383;
+    font-size:11px;
 `
 
-const CommentAlign = styled(Align)`
-    flex-direction:column;
-`
-const TextArea = styled.textarea`
-    width:1005px;
-    height:81px;
+const MainComment = styled.textarea`
+    width:95%;
+    margin-left:7%;
+    height:80px;
     resize:none;
     border: 1px solid #ADBDFF;
+    padding:5px;
 `
-
+const SubComment = styled(MainComment)`
+    width:100%;
+    margin:0;
+`
 const SubmitButton = styled(Button)`
     position:absolute;
     right:0;
     bottom:0;
 
 `
+
 export default Comment;

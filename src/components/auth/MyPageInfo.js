@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { Input, Button } from "../../styled/ProjectStyle";
 import styled from "styled-components";
-import { Align,Error } from "../../styled/ProjectStyle";
+import { Align,Error,Div } from "../../styled/ProjectStyle";
 
 const MyPageInfo = () => {
 
@@ -109,65 +109,63 @@ const MyPageInfo = () => {
 
     return (
         <div>
+            <UserInfo>
+                <div>아이디</div>
+                <Space>kjhwlgusdl</Space>
 
-                <UserInfo>
+                <div>닉네임</div>
+                <Input margin="5px 0 15px 0" placeholder="유저 닉네임" maxlength="16" onChange={onChangeNickname}/>
+                <Div>
+                    <RuleIcon  onMouseOver={()=>{setIsHover(true)}} onMouseOut={()=>{setIsHover(false)}}>?</RuleIcon>
+                    {isHover &&
+                    <Rule >16자까지, 닉네임 앞뒤로 공백 불가, 단어 사이 공백 1회 <br/>
+                    허용공백 문자 & 보안상 문제되는 특수문자는 발견시 제외처리 <br/>
+                    (이미 등록한 공백 문자는 다른 문자로 강제전환) <br/>
+                    어법에 맞지 않는 한글(쐥,뛩.. 등등) 사용 <br/>
+                    금지불량 닉네임(욕설, 불건전 닉네임)은 임의 삭제 혹은 계정 징계 조치 <br/>
+                    </Rule>
+                    }
+                </Div>
 
-                        <div>아이디</div>
-                        <Space>kjhwlgusdl</Space>
+                <Space>프로필 사진 (jpg,jpeg,gif,png 2MB 이하)</Space>
+                <ProfileBox>
+                <Avatar src={img} alt="profile"></Avatar>
+                <FileUploadInput type="file" id="file-upload" accept="image/jpg,image/png,image/jpeg,image/gif" onChange={HandleLoadFile}/>
+                <FileUploadLabel htmlFor="file-upload">업로드</FileUploadLabel>
+                <Button
+                value="삭제" 
+                type="button" 
+                borderradius="5px" 
+                padding="5px" 
+                backgroundcolor="white" 
+                color="mainColor" 
+                border="1px solid mainColor"
+                onClick={HandleDeleteFile}
+                />
+                </ProfileBox>
 
-                        <div>닉네임</div>
-                        <Input margin="5px 0 15px 0" placeholder="유저 닉네임" maxlength="16" onChange={onChangeNickname}/>
-                        <div>
-                            <RuleIcon  onMouseOver={()=>{setIsHover(true)}} onMouseOut={()=>{setIsHover(false)}}>?</RuleIcon>
-                            {isHover &&
-                            <Rule >16자까지, 닉네임 앞뒤로 공백 불가, 단어 사이 공백 1회 <br/>
-                            허용공백 문자 & 보안상 문제되는 특수문자는 발견시 제외처리 <br/>
-                            (이미 등록한 공백 문자는 다른 문자로 강제전환) <br/>
-                            어법에 맞지 않는 한글(쐥,뛩.. 등등) 사용 <br/>
-                            금지불량 닉네임(욕설, 불건전 닉네임)은 임의 삭제 혹은 계정 징계 조치 <br/>
-                            </Rule>
-                            }
-                        </div>
+                <div>이메일</div>
+                <Space>kjhwlgusdl@gmail.com</Space>
 
-                        <Space>프로필 사진 (jpg,jpeg,gif,png 2MB 이하)</Space>
-                        <ProfileBox>
-                        <Avatar src={img} alt="profile"></Avatar>
-                        <FileUploadInput type="file" id="file-upload" accept="image/jpg,image/png,image/jpeg,image/gif" onChange={HandleLoadFile}/>
-                        <FileUploadLabel htmlFor="file-upload">업로드</FileUploadLabel>
-                        <Button
-                        value="삭제" 
-                        type="button" 
-                        borderradius="5px" 
-                        padding="5px" 
-                        backgroundcolor="white" 
-                        color="mainColor" 
-                        border="1px solid mainColor"
-                        onClick={HandleDeleteFile}
-                        />
-                        </ProfileBox>
+                <div>현재 비밀번호</div>
+                <Input margin="5px 0 15px 0" type="password"/>
+                <div>비밀번호 변경 (영문 대소문자/숫자/특수문자 조합, 8자~16자)</div>
+                <Align position="relative">
+                    <Input onChange={onChangePw} type="password" maxlength="16" marginright="10px"/>
+                    {!isPassword && password.length > 0 && <ErrorMsg right="-270px">{passwordMsg}</ErrorMsg>}
+                </Align>
 
-                        <div>이메일</div>
-                        <Space>kjhwlgusdl@gmail.com</Space>
-
-                        <div>현재 비밀번호</div>
-                        <Input margin="5px 0 15px 0" type="password"/>
-                        <div>비밀번호 변경 (영문 대소문자/숫자/특수문자 조합, 8자~16자)</div>
-                        <Align position="relative">
-                            <Input onChange={onChangePw} type="password" maxlength="16" marginright="10px"/>
-                            {!isPassword && password.length > 0 && <ErrorMsg right="-270px">{passwordMsg}</ErrorMsg>}
-                        </Align>
-
-                        <div>비밀번호 확인</div>
-                        <Align>
-                            <Input onChange={onChangePwConfirm} type="password" marginright="10px"/>
-                            {passwordConfirm.length > 0 && <ErrorMsg> {passwordConfirmMsg}</ErrorMsg>}
-                        </Align>
-                </UserInfo>
-                <ButtonBox>
+                <div>비밀번호 확인</div>
+                <Align>
+                    <Input onChange={onChangePwConfirm} type="password" marginright="10px"/>
+                    {passwordConfirm.length > 0 && <ErrorMsg> {passwordConfirmMsg}</ErrorMsg>}
+                </Align>
+            </UserInfo>
+            
+            <ButtonBox>
                 <Button value="정보 수정" type="button" borderradius="5px" padding="5px" onClick={handleJoinButtonClick}/>
                 <Button value="회원 탈퇴" type="button" borderradius="5px" padding="5px"/>
             </ButtonBox>
-
         </div>
     );
 };
@@ -214,6 +212,7 @@ const FileUploadLabel = styled.label`
 `
 
 const RuleIcon = styled(Align)`
+    position:absolute;
     border-radius:20px;
     background-color: #3185FC;
     color:#fff;
@@ -221,20 +220,20 @@ const RuleIcon = styled(Align)`
     height:14px;
     justify-content:center;
     position:relative;
-    top: -38px;
-    left:240px;
+    top: -48px;
+    left:226px;
     cursor:help;
 `
 
 const Rule = styled.div`
+    position:absolute;
     width:313px;
     padding:15px 10px;
     border: 1px solid #3185FC;
     font-size:10px;
-    position:absolute;
     background-color:#fff;
-    top: 295px;
-    right:515px;
+    top: 0;
+    right:0;
     color:#222A68;
 `
 

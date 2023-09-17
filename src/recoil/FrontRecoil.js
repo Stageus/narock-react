@@ -13,8 +13,8 @@ export const bandmenuState = atom({
 export const adminmenuState = atom({
     key: 'adminmenuState',
     default: [
-      { label: '유저 관리', id: 'userManagement' },
-      { label: '게시판 요청', id: 'BandRequest' },
+      { label: '유저 관리', id: 'usermanagement' },
+      { label: '게시판 요청', id: 'bandrequest' },
     ]
   });
 

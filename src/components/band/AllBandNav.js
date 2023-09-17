@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { Link, useLocation  } from 'react-router-dom';
 import { useRecoilValue } from "recoil";
 import { bandmenuState } from "../../recoil/FrontRecoil";
-import { useNavigate } from 'react-router-dom';
+
 const AllBandNav = (props) => {
     const { bandname } = props;
     const bandmenu = useRecoilValue(bandmenuState)
-    const navigate = useNavigate();
+    const location = useLocation();
     return ( 
         <MenuBox>
             {bandmenu.map(menu=>(
-                <Menu onClick={()=>{navigate(`/allband/${bandname}/${menu.id}`)}}>{menu.label}</Menu>
+                    <Menu to={`/allband/${encodeURIComponent(bandname)}/${encodeURIComponent(menu.id)}`}
+                    isActive={location.pathname === `/allband/${encodeURIComponent(bandname)}/${encodeURIComponent(menu.id)}`}>
+                        {menu.label}
+                    </Menu>
             ))}
         </MenuBox>
      );
@@ -30,7 +33,10 @@ const MenuBox = styled.div`
     align-items:center;
     cursor:pointer;
 `
-const Menu = styled.div`
+const Menu = styled(Link)`
     margin:10px 0;
+    text-decoration: none;
+    font-weight: ${({ isActive }) => (isActive ? 'bold' : 'normal')};
+    color:#222A68;
 `
 export default AllBandNav;

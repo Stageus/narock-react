@@ -17,6 +17,7 @@ const SubjectBox = styled.div`
     display:flex;
     border-top:2px solid #3185FC;
     border-bottom:2px solid #3185FC;
+    width:100%;
 `
 const Post = styled.div`
     flex-grow:1;

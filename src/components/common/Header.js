@@ -34,7 +34,7 @@ const Header = () => {
                         <NavButton onClick={searchInputEvent}>통합 검색</NavButton>
                         {inputVisible && <ClickInput type="text" placeholder="검색" onChange={(e)=>{setKeyword(e.target.value)}} onKeyDown={searchEnterEvent}></ClickInput>}
                     </div>
-                    <NavButton>마이페이지</NavButton>
+                    <NavButton onClick={()=>{pageNavigate('/mypage')}}>마이페이지</NavButton>
                     <NavButton onClick={()=>{pageNavigate('/login')}}>로그인</NavButton>
                     <NavButton onClick={()=>{pageNavigate('/admin/usermanagement')}}>관리자 페이지</NavButton>
                     

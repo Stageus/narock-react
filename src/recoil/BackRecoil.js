@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
 export const bandnameState = atom({
     "key": "bandname",
@@ -253,7 +253,7 @@ export const postState = atom(
               "postId": 2,
               "postTitle": "두번째 게시물",
               "content": "두번째 게시물입니다.",
-              "boardName": "ELLE GARDEN",
+              "boardName": "새소년",
               "like": 120,
               "date": "2023.08.11",
               "view":623,
@@ -477,3 +477,58 @@ export const communityPostState = atom(
         ]
     }
 )
+
+export const userDataState = atom({
+    "key":"userDataState",
+    nickname: "",
+    profileimg:"",
+    password:"",
+    isPasswordConfirm:"",
+});
+
+export const bannerImgState = atom({
+    key: 'bannerImgState',
+    default:[],
+})
+
+export const combinedPostState = selector({
+    key:"combinedPostState",
+    get:({get}) => {
+        const bandPost = get(postState);
+        const noticePost = get(noticePostState);
+        const newsPost = get(newsPostState);
+        const communityPost = get(communityPostState);
+
+        const combinedPost = [...bandPost, ...noticePost, ...newsPost, ...communityPost]
+        
+        return combinedPost;
+    }
+})
+
+export const userState = atom({
+    key: "userState",
+    default:[
+        {
+            id:1,
+            userid:"kjhwlgusdl",
+            nickname:"지짱",
+            joinDate:"2023-09-17",
+            role:"일반 회원",
+        },
+        {
+            id:2,
+            userid:"60231",
+            nickname:"관리자",
+            joinDate:"2023-09-17",
+            role:"관리자",
+        },
+        {
+            id:3,
+            userid:"daiso",
+            nickname:"다이소",
+            joinDate:"2023-09-17",
+            role:"일반 회원",
+        }
+    ]
+    
+})
