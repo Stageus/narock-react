@@ -31,18 +31,11 @@ const WriteBox = () => {
                 <Input border="none" placeholder="제목을 입력해 주세요." width="90%" fontSize="20px"/>
                 <input type="checkbox"/> 공지글 설정
             </Div>
-            <Div border="1px solid #E0E6FF" margin="10px 0">파일첨부</Div>
+            {/* <Div border="1px solid #E0E6FF" margin="10px 0">파일첨부</Div> */}
             <ReactQuill modules={modules} onChange={reactQuillOnChange}/>
-            <div dangerouslySetInnerHTML={{ __html : contents  }} />
-            {/* <TextArea></TextArea> */}
+            {/* <div dangerouslySetInnerHTML={{ __html : contents  }} /> */}
             <Button value="등록" position="absolute" right="0"/>
         </Div>
     )
 }
-
-const TextArea = styled.textarea`
-    border:1px solid #E0E6FF;
-    resize:none;
-    height:50vh;
-`
 export default WriteBox;

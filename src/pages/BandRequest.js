@@ -18,16 +18,10 @@ const BandRequest = () => {
                 <UserNav/>
                 <Box>
                     <Title>게시판 요청</Title>
-                    <Div alginItems="flex-start">
-                        <div>유저 아이디 검색</div>
-                        <Input height="fit-content" margin="0 5px"/>
-                        <Button value="검색"/>
-                    </Div>
-                    {user.map((v)=>(
-                        <UserInfo userId={v.userid} nickname={v.nickname} joinDate={v.joinDate} role={v.role}/>
-                    ))}
+                    <UserInfo/>
                     <Paging/>
-                    <Button value="계정 삭제" backgroundcolor="#FC3131" width="127px" padding="7px" borderradius="5px"/>
+                    <Button value="요청 삭제" backgroundcolor="#FC3131" width="127px" padding="7px" borderradius="5px"/>
+                    <Button value="요청 수락" backgroundcolor="#3185FC" width="127px" padding="7px" borderradius="5px"/>
                 </Box>            
             </Align>
         </div>

@@ -51,4 +51,17 @@ export const isLikedState = atom({
     default:false,
 })
 
-
+export const postRowState = atom({
+  key: 'postRowState',
+  default: [
+    { label: '제목', id: 'title' },
+    { label: '작성자', id: 'writer' },
+    { label: '작성 날짜', id: 'createDate' },
+    { label: '조회수', id: 'view' },
+    { label: '좋아요', id: 'like' },
+    { label: '아이디', id: 'userId' },
+    { label: '닉네임', id: 'nickname' },
+    { label: '가입 날짜', id: 'joinDate' },
+    { label: '권한', id: 'role' },
+  ]
+});

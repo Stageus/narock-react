@@ -1,38 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
+import PostRow from "../write/PostRow"
 import styled from "styled-components";
 import { Button,Input } from "../../styled/ProjectStyle";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../recoil/BackRecoil";
 const UserInfo = (props) => {
-    const {userId, nickname, joinDate, role} = props;
+    // const [userId, nickname, joinDate, role, requestBoard, requestDate, requestContent] = props;
     const user = useRecoilValue(userState);
+    const [idSearch,setIdSearch] = useState('');
+    const [searchList,setSearchList] = useState('');
+    const onChangeEvent = (e) => {
+        setIdSearch(e.target.value);
+    }
+    
+    const searchButtonEvent = () => {
+        const searchResult = user.filter(info => info.userid.includes(idSearch));
+        setSearchList(searchResult)
+    }
     return(
         <UserBox>
             <UserList>
-                {/* <UserSearch>
+                <UserSearch>
                     <div>유저 아이디 검색</div>
-                    <Input height="fit-content" margin="0 5px"/>
-                    <Button value="검색"/>
-                </UserSearch> */}
-                {/* <Subject>
-                    <FlexItem1>아이디</FlexItem1>
+                    <Input height="fit-content" margin="0 5px" onChange={(e)=>{onChangeEvent(e)}}/>
+                    <Button value="검색" onClick={searchButtonEvent}/>
+                </UserSearch>
+                <Subject>
+                    {/* <FlexItem1>아이디</FlexItem1>
                     <FlexItem2>닉네임</FlexItem2>
                     <FlexItem3>가입날짜</FlexItem3>
                     <FlexItem4>권한</FlexItem4>
-                    <FlexItem4></FlexItem4>
-                </Subject> */}
-                <List>
-                    <CheckBox type="checkbox"></CheckBox>
-                    <FlexItem1>{userId}</FlexItem1>
-                    <FlexItem2>{nickname}</FlexItem2>
-                    <FlexItem3>{joinDate}</FlexItem3>
-                    <FlexItem3>
-                        {role}
-                    </FlexItem3>
-                    <FlexItem4>
-                        <Button value="권한 설정" margin="0"/>
-                    </FlexItem4>
-                </List>
+                    <FlexItem4></FlexItem4> */}
+                    <PostRow/>
+                </Subject>
+                <div>
+                    {searchList.length > 0 ? (
+                        <div>
+                        {searchList.map((v, i) => (
+                            <List key={v[i]}>
+                            <CheckBox type="checkbox"></CheckBox>
+                            <FlexItem1>{v.userid}</FlexItem1>
+                            <FlexItem2>{v.nickname}</FlexItem2>
+                            <FlexItem3>{v.joinDate}</FlexItem3>
+                            <FlexItem3>{v.role}</FlexItem3>
+                            <FlexItem4>
+                                <Button value="권한 설정" margin="0" />
+                            </FlexItem4>
+                            </List>
+                        ))}
+                        </div>
+                    ) : (
+                        <div>
+                        {user.map((v, i) => (
+                            <List key={v[i]}>
+                            <CheckBox type="checkbox"></CheckBox>
+                            <FlexItem1>{v.userid}</FlexItem1>
+                            <FlexItem2>{v.nickname}</FlexItem2>
+                            <FlexItem3>{v.joinDate}</FlexItem3>
+                            <FlexItem3>{v.role}</FlexItem3>
+                            <FlexItem4>
+                                <Button value="권한 설정" margin="0" />
+                            </FlexItem4>
+                            </List>
+                        ))}
+                        </div>
+                    )}
+                </div>
                 {/* <List>
                     <CheckBox type="checkbox"></CheckBox>
                     <FlexItem1>zzzzzzzzzzzzzzzzzzzz</FlexItem1>

@@ -1,6 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-const PostRow = () => {
+const PostRow = (props) => {
+    const [title, 
+        writer, 
+        createDate, 
+        view, 
+        like,
+        userId,
+        nickname,
+        JoinDate,
+        role,
+    ] = props;
     return (
         <SubjectBox>
             <Title>제목</Title>
