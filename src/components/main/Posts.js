@@ -1,23 +1,26 @@
 import React from 'react'
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Div } from '../../styled/ProjectStyle';
 
 const Posts = (props) => {
 
-    const {bandname,postTitle,boardName,like,date,view,writer,postId} = props;
+    const {bandname,postTitle,boardName,like,date,view,writer,postId,domain} = props;
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     return(
         <Box>
-            <Content >
-                {/* {postId && <FlexItem>{postId}</FlexItem>} */}
-                {postTitle && <FlexItem2>{postTitle}</FlexItem2>}
-                {boardName && <FlexItem3>{boardName}</FlexItem3>}
-                {writer && <FlexItem>{writer}</FlexItem>}
-                {date && <FlexItem>{date}</FlexItem>}
-                {view && <FlexItem>{view}</FlexItem>}
-                {like && <FlexItem>{like}</FlexItem>}
-            </Content>
+            {/* <Link to={`${domain}/${postId}`}> */}
+                <Div borderBottom="2px solid #e2e8ff" margin="0">
+                    {postId && <Div>{postId}</Div>}
+                    {postTitle && <OverflowDiv>{postTitle}</OverflowDiv>}
+                    {boardName && <OverflowDiv>{boardName}</OverflowDiv>}
+                    {writer && <SmallDiv>{writer}</SmallDiv>}
+                    {date && <SmallDiv>{date}</SmallDiv>}
+                    {view && <SmallDiv>{view}</SmallDiv>}
+                    {like && <SmallDiv>{like}</SmallDiv>}
+                </Div>
+            {/* </Link> */}
         </Box>
     )
 }
@@ -26,31 +29,26 @@ const Box = styled.div`
     width:100%;
 `
 
-const Content = styled.div`
-    display:flex;
-    border-bottom: 2px solid #e2e8ff;
-    margin:10px 0;
-    align-items:center;
-    width:100%;
+const OverflowDiv = styled(Div)`
+    width:20%;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    margin:0;
+    margin-left:5%;
+    padding:0;
+    text-align:center;
 `
 
-const FlexItem = styled.div`
-    width:20%;
-    margin-left:5px;
-`
-const FlexItem2 = styled.div`
-    width:45%;
+const SmallDiv = styled(Div)`
+    width:7%;
     white-space:nowrap;
     overflow:hidden;
     text-overflow: ellipsis;
+    margin:0 auto;
+    padding:0;
+    text-align:center;
 `
-const FlexItem3 = styled.div`
-    flex-grow:1;
-    flex-basis:100px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow: ellipsis;
-    margin-left:5px;
-`
+
 
 export default Posts

@@ -520,7 +520,8 @@ export const userState = atom({
             userid:"60231",
             nickname:"관리자",
             joinDate:"2023-09-17",
-            role:"관리자",
+            role:"게시판 지기",
+            
         },
         {
             id:3,

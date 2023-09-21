@@ -11,7 +11,7 @@ const RecentList = () => {
   const popularPost= useRecoilValue(popularPostState);
   return (
     <Box>
-      <Title>인기 게시글</Title>
+      <Title>공지 사항</Title>
       {popularPost.map((v,i)=>(
         <Posts key={i} postTitle={v.postTitle} date={v.date}/>
       ))}

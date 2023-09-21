@@ -20,7 +20,7 @@ const PostListBox = (props) => {
         <div>
             { sortedPost && sortedPost.length > 0 ?
               sortedPost.map((v)=>(
-                <Posts 
+                <Posts
                 key={v}
                 bandname={bandname} 
                 postId={v.postId}

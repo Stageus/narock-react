@@ -11,7 +11,8 @@ import { useNavigate , useParams } from "react-router-dom";
 
 const PostDetailBox = (props) => {
     const { postid } = useParams();
-    const { bandname } = props;
+    const { bandname,sortedPost,domain } = props;
+    console.log(sortedPost)
     const posts = useRecoilValue(postState); // postState 셀렉터로 데이터 가져옴
     const post = posts.filter(p => p.boardName === bandname ); //post의 게시판이름과 bandname이 같은 것만 필터링
     const [liked,setLiked] = useRecoilState(likedState);

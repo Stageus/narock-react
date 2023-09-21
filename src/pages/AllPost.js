@@ -1,7 +1,10 @@
 import React from "react";
 import Posts from "../components/main/Posts";
+import { useParams } from 'react-router-dom';
 const AllPost = ( props ) => {
-    const {sortedPost} = props;
+    const {sortedPost, domain} = props;
+    const { postid } = useParams();
+    console.log(postid)
     return (
         <div>
             {sortedPost.map((v,i)=>(
@@ -14,6 +17,7 @@ const AllPost = ( props ) => {
                 like={v.like}
                 view={v.view}
                 date={v.date}
+                domain={domain}
                 /> 
             ))}   
         </div>
@@ -21,3 +25,4 @@ const AllPost = ( props ) => {
 };
 
 export default AllPost;
+

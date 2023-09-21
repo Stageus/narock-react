@@ -1,23 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import Pagination from "react-js-pagination";
 import { styled } from "styled-components";
-const Paging= () => {
-    const [page,setPage] = useState(1);
-    const handlePageChange = (page) => {
+const Paging= (props) => {
+    const {page,setPage,itemsCountPerPage,totalItemsCount } = props;
+    const handlePageChange = ( page ) => {
         setPage(page);
-      };
-
+        console.log(page)
+    };
     return(
         <PaginationStyle>
             <Pagination 
             activeClass="active"            
-            activePage={page}
-            itemsCountPerPage={20}
-            totalItemsCount={450}
-            pageRangeDisplayed={9}
+            activePage={page} //현재 페이지
+            itemsCountPerPage={itemsCountPerPage} // 한 페이지당 보여줄 리스트 아이템의 개수
+            totalItemsCount={totalItemsCount} //총 아이템의 개수
+            onChange={handlePageChange}
+            pageRangeDisplayed={9} // 한 페이지에 표시할 게시글의 수
             prevPageText={"◀"}
-            nextPageText={"▶"}
-            onChange={handlePageChange}>
+            nextPageText={"▶"}>
             </Pagination>
         </PaginationStyle>
     )

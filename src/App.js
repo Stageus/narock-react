@@ -47,9 +47,9 @@ const App = () => {
         <Route path="/community" element={<Community />}/>
         <Route path="/news" element={<News />}/>
         <Route path="/notice" element={<Notice />}/>
-        <Route path="/community/:postnumber" element={<AllPost />}/>
-        <Route path="/news/:postnumber" element={<AllPost />}/>
-        <Route path="/notice/:postnumber" element={<AllPost />}/>
+        <Route path="/community/:postid" element={<AllPost />}/>
+        <Route path="/news/:postid" element={<AllPost />}/>
+        <Route path="/notice/:postid" element={<AllPost />}/>
         <Route path="/edit" element={<Edit />}/>
         <Route path="/join" element={<Join />}/>
         <Route path="/login" element={<Login />}/>

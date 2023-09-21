@@ -32,7 +32,6 @@ const Community = () => {
                 like={postRow[4].label}/>
                 <AllPost sortedPost={sortedPost}
                 />
-                <AllPost sortedPost={sortedPost}/>
                 <Paging/>
                 <Button value="글쓰기" onClick={()=>{navigate('/write')}}/>
                 <SearchBox/>
