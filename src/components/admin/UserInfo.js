@@ -4,11 +4,13 @@ import styled from "styled-components";
 import { Button,Input } from "../../styled/ProjectStyle";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../recoil/BackRecoil";
+import { postRowState } from '../../recoil/FrontRecoil'
 const UserInfo = (props) => {
     // const [userId, nickname, joinDate, role, requestBoard, requestDate, requestContent] = props;
     const user = useRecoilValue(userState);
     const [idSearch,setIdSearch] = useState('');
     const [searchList,setSearchList] = useState('');
+    const postRow = useRecoilValue(postRowState)
     const onChangeEvent = (e) => {
         setIdSearch(e.target.value);
     }
@@ -26,12 +28,12 @@ const UserInfo = (props) => {
                     <Button value="검색" onClick={searchButtonEvent}/>
                 </UserSearch>
                 <Subject>
-                    {/* <FlexItem1>아이디</FlexItem1>
-                    <FlexItem2>닉네임</FlexItem2>
-                    <FlexItem3>가입날짜</FlexItem3>
-                    <FlexItem4>권한</FlexItem4>
-                    <FlexItem4></FlexItem4> */}
-                    <PostRow/>
+                    <PostRow
+                        userId={postRow[5].label}
+                        nickname={postRow[6].label}
+                        joinDate={postRow[7].label}
+                        role={postRow[8].label}     
+                    />
                 </Subject>
                 <div>
                     {searchList.length > 0 ? (

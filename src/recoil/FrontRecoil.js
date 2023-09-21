@@ -63,5 +63,7 @@ export const postRowState = atom({
     { label: '닉네임', id: 'nickname' },
     { label: '가입 날짜', id: 'joinDate' },
     { label: '권한', id: 'role' },
+    { label: '글번호', id: 'id' },
+    { label: '내용', id: 'contents' },
   ]
 });

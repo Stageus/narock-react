@@ -13,18 +13,25 @@ import SearchBox from "../components/common/SearchBox";
 
 import {useRecoilValue} from 'recoil';
 import { communityPostState } from '../recoil/BackRecoil';
-
+import { postRowState } from '../recoil/FrontRecoil'
 const Community = () => {
     const post = useRecoilValue(communityPostState);
     const sortedPost = [...post].sort((a,b)=>b.postId - a.postId)
     const navigate = useNavigate();
-
+    const postRow = useRecoilValue(postRowState)
     return (
         <div>
             <Header/>
             <Box>
             <Title>커뮤니티</Title>
-                <PostRow/>
+                <PostRow                
+                title={postRow[0].label}
+                writer={postRow[1].label}
+                createDate={postRow[2].label}
+                view={postRow[3].label}
+                like={postRow[4].label}/>
+                <AllPost sortedPost={sortedPost}
+                />
                 <AllPost sortedPost={sortedPost}/>
                 <Paging/>
                 <Button value="글쓰기" onClick={()=>{navigate('/write')}}/>

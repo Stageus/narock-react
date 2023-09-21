@@ -6,6 +6,7 @@ import PostRow from "../write/PostRow";
 
 import { useRecoilValue } from 'recoil';
 import { combinedPostState } from '../../recoil/BackRecoil'
+import { postRowState } from '../../recoil/FrontRecoil'
 import Paging from "../Paging";
 import SearchBox from "./SearchBox";
 
@@ -13,7 +14,7 @@ import SearchBox from "./SearchBox";
 const SearchResult = (props) => {
     const { searchParams } = props;
     const combinedPost = useRecoilValue(combinedPostState)
-    console.log(searchParams)
+    const postRow = useRecoilValue(postRowState)
 
     const searchResult = combinedPost.filter(
         post => post.postTitle.includes(searchParams.get('query'))||
@@ -25,7 +26,15 @@ const SearchResult = (props) => {
         <div>
             <Result>"{searchParams.get('query')}"의 검색 결과입니다.</Result>
             <Div width="100%" display="block">
-                <PostRow/>
+                <PostRow 
+                title={postRow[0].label}
+                writer={postRow[1].label}
+                createDate={postRow[2].label}
+                view={postRow[3].label}
+                like={postRow[4].label}
+                // content={postRow[1].label}
+                // writer={postRow[1].label}
+                />
                 {searchResult.map((v)=>(
                     <Posts 
                     postId={v.postId}
