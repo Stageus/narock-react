@@ -73,7 +73,7 @@ const UserManagement = () => {
             <Header/>
             <Div>
                 <UserNav/>
-                <Div flexDirection="column" border="1px solid #e2e8ff" margin="30px 80px" width="100%">
+                <Div flexdirection="column" border="1px solid #e2e8ff" margin="30px 80px" width="100%">
                     <Title>유저 관리</Title>
                     <Div width="100%" display="block">
                         <Div margin="0 70px" display="block">
@@ -82,7 +82,7 @@ const UserManagement = () => {
                                 <Input height="fit-content" margin="0 5px" onChange={(e)=>{userOnChangeEvent(e)}}/>
                                 <Button value="검색" onClick={userSearchButtonEvent}/>
                             </Div>
-                            <Div justifyContent="center" margin="0">
+                            <Div justifycontent="center" margin="0">
                                 <PostRow
                                     userId={postRow[5].label}
                                     nickname={postRow[6].label}
@@ -95,8 +95,8 @@ const UserManagement = () => {
                                     <div>
                                     {userSearchList.map((v, i) => (
                                         <Div key={v[i]}
-                                        borderBottom="2px solid #e2e8ff"
-                                        justifyContent="center"
+                                        borderbottom="2px solid #e2e8ff"
+                                        justifycontent="center"
                                         >
                                             <CheckBox type="checkbox"></CheckBox>
                                             <List>{v.userid}</List>
@@ -113,8 +113,8 @@ const UserManagement = () => {
                                     <div>
                                     {user.map((v, i) => (
                                         <Div key={v[i]}
-                                        borderBottom="2px solid #e2e8ff"
-                                        justifyContent="center"
+                                        borderbottom="2px solid #e2e8ff"
+                                        justifycontent="center"
                                         >
                                             <CheckBox type="checkbox"></CheckBox>
                                             <List>{v.userid}</List>

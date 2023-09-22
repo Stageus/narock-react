@@ -25,7 +25,7 @@ const WriteBox = () => {
         }
     }
     return(
-        <Div margin="55px 80px" padding="23px" border="1px solid #3185FC" flexDirection="column" alignItems="unset">
+        <Div margin="55px 80px" padding="23px" border="1px solid #3185FC" flexdirection="column" alignitems="unset">
             <div>게시판 이름</div>
             <Div fontSize="20px" color="#3185FC" margin="0">
                 <Input border="none" placeholder="제목을 입력해 주세요." width="90%" fontSize="20px"/>

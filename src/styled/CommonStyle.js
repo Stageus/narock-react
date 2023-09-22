@@ -35,7 +35,7 @@ const CommonStyle = (value) => {
     const setting = {
         "margin": "10px",
         "display": "flex",
-        "alignItems": "center",
+        "alignitems": "center",
         "boxSizing": "border-box",
         "position": "relative"
     }
@@ -100,8 +100,8 @@ const CommonStyle = (value) => {
         return setting.margin;
     }else if (value === "display"){
         return setting.display;
-    }else if (value === "alignItems"){
-        return setting.alignItems;
+    }else if (value === "alignitems"){
+        return setting.alignitems;
     }else if (value === "boxSizing"){
         return setting.boxSizing;
     }else if (value === "position"){

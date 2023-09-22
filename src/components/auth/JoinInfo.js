@@ -124,7 +124,7 @@ const JoinInfo = () => {
                     width="14px"
                     height="14px"
                     alignItems="center"
-                    justifyContent="center"
+                    justifycontent="center"
                     display="flex"
                     left="190px"
                     position="absolute"

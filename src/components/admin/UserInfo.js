@@ -44,7 +44,7 @@ const UserInfo = (props) => {
                         <Input height="fit-content" margin="0 5px" onChange={(e)=>{onChangeEvent(e)}}/>
                         <Button value="검색" onClick={searchButtonEvent}/>
                     </UserSearch>
-                    <Div justifyContent="center" margin="0">
+                    <Div justifycontent="center" margin="0">
                         <PostRow
                             userId={postRow[5].label}
                             nickname={postRow[6].label}

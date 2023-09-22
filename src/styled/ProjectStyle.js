@@ -46,7 +46,7 @@ const Align = styled.div`
     ${props =>{
         return`
             display: ${props.display ? props.display: `${CommonStyle("display")}`};
-            align-items: ${props.alignItems ? props.alignItems: `${CommonStyle("alignItems")}`};
+            align-items: ${props.alignitems ? props.alignitems: `${CommonStyle("alignItems")}`};
             position: ${props.position ? props.position: `${CommonStyle("position")}`};
         `
     }}
@@ -88,15 +88,15 @@ const Div = styled.div`
         return`
         background-color: ${props.backgroundcolor? props.backgroundcolor: `${CommonStyle("white")}`};
         display: ${props.display ? props.display: `${CommonStyle("display")}`};
-        align-items: ${props.alignItems ? props.alignItems: `${CommonStyle("alignItems")}`};
-        justify-content: ${props.justifyContent ? props.justifyContent: `${CommonStyle("justifyContent")}`};
+        align-items: ${props.alignitems ? props.alignitems: `${CommonStyle("alignitems")}`};
+        justify-content: ${props.justifycontent ? props.justifycontent: `${CommonStyle("justifyContent")}`};
         position: ${props.position ? props.position: `${CommonStyle("position")}`};
         color: ${props.color ? props.color: `${CommonStyle("fontColor")}`};
         margin: ${props.margin ? props.margin: `${CommonStyle("margin")}`};
         padding: ${props.padding ? props.padding: `${CommonStyle("padding")}`};
-        flex-direction: ${props.flexDirection ? props.flexDirection: `${CommonStyle("flexDirection")}`};
+        flex-direction: ${props.flexdirection ? props.flexdirection: `${CommonStyle("flexDirection")}`};
         border: ${props.border ? props.border: `${CommonStyle("border")}`};
-        border-bottom: ${props.borderBottom ? props.borderBottom: `${CommonStyle("borderBottom")}`};
+        border-bottom: ${props.borderbottom ? props.borderbottom: `${CommonStyle("borderBottom")}`};
         width: ${props.width ? props.width: `${CommonStyle("width")}`};
         height: ${props.height ? props.height: `${CommonStyle("height")}`};
         background-color: ${props.backgroundColor ? props.backgroundColor: `${CommonStyle("backgroundColor")}`};

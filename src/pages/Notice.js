@@ -38,15 +38,15 @@ const Notice = () => {
                     title={postRow[0].label}
                     writer={postRow[1].label}
                     createDate={postRow[2].label}
-                    view={postRow[3].label} 
+                    view={postRow[3].label}
                     like={postRow[4].label}
                 />
-                <AllPost sortedPost={sortedPost} domain={location}/>
+                <AllPost sortedPost={displayedPosts} domain={location}/>
                 <Paging 
                 activePage={page}
                 setPage={setPage}
                 itemsCountPerPage={itemsCountPerPage}
-                totalItemsCount={post.length}
+                totalItemsCount={displayedPosts.length}
                 />
                 <Button value="글쓰기" onClick={()=>{navigate('/write')}}/>
                 <SearchBox/>

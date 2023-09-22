@@ -7,19 +7,21 @@ const AllPost = ( props ) => {
     console.log(postid)
     return (
         <div>
-            {sortedPost.map((v,i)=>(
-                <Posts 
-                // bandname={bandname}
-                key={i}
-                postId={v.postId}
-                postTitle={v.postTitle} 
-                writer={v.writer}
-                like={v.like}
-                view={v.view}
-                date={v.date}
-                domain={domain}
+            {sortedPost && sortedPost.map((v,i)=>{
+                return(
+                    <Posts 
+                    // bandname={bandname}
+                    key={i}
+                    postId={v.postId}
+                    postTitle={v.postTitle} 
+                    writer={v.writer}
+                    like={v.like}
+                    view={v.view}
+                    date={v.date}
+                    domain={domain}
                 /> 
-            ))}   
+                )
+            })}   
         </div>
     );
 };

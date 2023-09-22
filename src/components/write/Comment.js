@@ -6,10 +6,10 @@ const Comment = () => {
     return(
         <Div padding="20px" margin="0" border="1px solid #e2e8ff" display="block">
             <div>댓글</div>
-            <Div justifyContent="space-between" borderBottom="1px solid #e2e8ff" margin="0">
+            <Div justifycontent="space-between" borderbottom="1px solid #e2e8ff" margin="0">
                 <Div>
                     <img src="/img/avatar.png" width="40px" alt="프로필사진"/>
-                    <Div flexDirection="column" alignItems="flex-start">
+                    <Div flexdirection="column" alignitems="flex-start">
                         <div>지짱</div>
                         <div>가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이가나다라마바사아자차카타파하아야어여오요우유으이</div>
                         <Date>2023.09.14 18:35</Date>

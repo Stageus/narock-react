@@ -1,6 +1,5 @@
 import React from 'react'
 import { styled } from "styled-components";
-import { Link } from "react-router-dom";
 import { Div } from '../../styled/ProjectStyle';
 
 const Posts = (props) => {
@@ -11,7 +10,7 @@ const Posts = (props) => {
     return(
         <Box>
             {/* <Link to={`${domain}/${postId}`}> */}
-                <Div borderBottom="2px solid #e2e8ff" margin="0">
+                <Div borderbottom="2px solid #e2e8ff" margin="0">
                     {postId && <Div>{postId}</Div>}
                     {postTitle && <OverflowDiv>{postTitle}</OverflowDiv>}
                     {boardName && <OverflowDiv>{boardName}</OverflowDiv>}
