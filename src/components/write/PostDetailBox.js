@@ -14,9 +14,7 @@ const PostDetailBox = (props) => {
     console.log(postid)
     const { bandname,sortedPost,domain } = props;
     const posts = useRecoilValue(postState); // postState 셀렉터로 데이터 가져옴
-    // const post = posts.filter(p => p.boardName === bandname);
-    const post = posts.filter(p => p.boardName === bandname);
-    console.log(post) //fetch를 새로 받아오는거라서 posts로 불러오지 않음.
+    const post = posts.filter(p => p.boardName === bandname && p.postId === parseInt(postid));
     const [liked,setLiked] = useRecoilState(likedState);
     const [isLiked,setIsLiked] = useRecoilState(isLikedState);
     const navigate = useNavigate();
