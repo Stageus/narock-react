@@ -1,9 +1,9 @@
 import React from "react";
 import styled from 'styled-components';
-import { Align,Button, Div } from "../../styled/ProjectStyle";
+import { Button, Div } from "../../styled/ProjectStyle";
 
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { postState } from '../../recoil/BackRecoil';
+import { commentState, postState } from '../../recoil/BackRecoil';
 
 import { isLikedState, likedState } from "../../recoil/FrontRecoil";
 import Comment from "./Comment";
@@ -11,10 +11,11 @@ import { useNavigate , useParams } from "react-router-dom";
 
 const PostDetailBox = (props) => {
     const { postid } = useParams();
-    console.log(postid)
     const { bandname,sortedPost,domain } = props;
     const posts = useRecoilValue(postState); // postState 셀렉터로 데이터 가져옴
+    const comments = useRecoilValue(commentState); // postState 셀렉터로 데이터 가져옴
     const post = posts.filter(p => p.boardName === bandname && p.postId === parseInt(postid));
+    const comment = comments.filter(p => p.boardName === bandname && p.postId === parseInt(postid));
     const [liked,setLiked] = useRecoilState(likedState);
     const [isLiked,setIsLiked] = useRecoilState(isLikedState);
     const navigate = useNavigate();
@@ -46,7 +47,7 @@ const PostDetailBox = (props) => {
                             </Div>
                             <Div display="flex" alignitems="center">
                                 <Button value="수정" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
-                                <Button value="삭제"backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
+                                <Button value="삭제" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
                                 <Button value="목록" type="button" onClick={()=>{navigate(`/allband/${bandname}/notice`)}}/>
                             </Div>
                         </Div>
@@ -56,7 +57,7 @@ const PostDetailBox = (props) => {
                             {<Like>{liked}</Like>}
                         </Div>
                     </Div>
-                    <Comment/>
+                    <Comment comment={comment} bandname={bandname} postid={postid}/>
                 </div>
                 )
                 })}

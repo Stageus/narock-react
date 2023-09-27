@@ -298,6 +298,16 @@ export const postState = atom(
                 "date": "2023.08.14",
                 "view":623,
                 "writer": '지짱'
+              },
+            {
+                "postId": 6,
+                "postTitle": "제목 뭐하지?!!!!!!!",
+                "content": "이것은 더미데이터 글고 6번째임",
+                "boardName": "92914",
+                "like": 120,
+                "date": "2023.08.14",
+                "view":623,
+                "writer": '지짱'
               }
         ]
     }
@@ -410,6 +420,16 @@ export const newsPostState = atom(
               "postTitle": "새소식 제목 뭐하지?",
               "content": "이것은 더미데이터",
               "boardName": "쏜애플",
+              "like": 120,
+              "date": "2023.08.14",
+              "view":623,
+              "writer": '지짱'
+            },
+            {
+              "postId": 5,
+              "postTitle": "새소식 제목 뭐하지?",
+              "content": "이것은 더미데이터",
+              "boardName": "92914",
               "like": 120,
               "date": "2023.08.14",
               "view":623,
@@ -532,4 +552,25 @@ export const userState = atom({
         }
     ]
     
+})
+
+export const commentState = atom({
+    key: "userState",
+    default:[
+        {
+            "postId": 5,
+            "boardName": "쏜애플",
+            "content": "댓글이다제~",
+            "date": "2023.09.15 15:00",
+            "writer": '지짱'
+        },
+        {
+            "postId": 5,
+            "boardName": "쏜애플",
+            "content": "댓글 또있음ㅋ",
+            "date": "2023.09.15 15:30",
+            "writer": '댓글봇'
+        },
+    
+    ]
 })
