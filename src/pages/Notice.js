@@ -6,28 +6,25 @@ import { Button, Title } from "../styled/ProjectStyle";
 
 import Header from "../components/common/Header";
 import PostRow from "../components/write/PostRow";
-import AllPost from "./AllPost";
-import Paging from "../components/Paging"
-import SearchBox from "../components/common/SearchBox";
-
 
 import {useRecoilValue} from 'recoil';
 import { noticePostState } from '../recoil/BackRecoil';
 import { postRowState } from '../recoil/FrontRecoil'
+import PostListBox from "../components/write/PostListBox";
 const Notice = () => {
-    const post = useRecoilValue(noticePostState);
     const postRow = useRecoilValue(postRowState)
-    const sortedPost = [...post].sort((a,b)=>b.postId - a.postId)
+    const posts = useRecoilValue(noticePostState);
+
     const navigate = useNavigate();
     const location = useLocation().pathname;
 
-    const itemsCountPerPage = 3; // 한 페이지에 표시할 게시물 수
-    const [limit, setLimit]= useState(10); 
-    const [page, setPage] = useState(1);
-    const offset = (page-1)*limit; // 한 페이지에 들어갈 갯수
-    const displayedPosts = post.slice(
-        offset, offset + limit
-    );
+    // const itemsCountPerPage = 3; // 한 페이지에 표시할 게시물 수
+    // const [limit, setLimit]= useState(10); 
+    // const [page, setPage] = useState(1);
+    // const offset = (page-1)*limit; // 한 페이지에 들어갈 갯수
+    // const displayedPosts = post.slice(
+    //     offset, offset + limit
+    // );
 
     return (
         <div>
@@ -41,15 +38,7 @@ const Notice = () => {
                     view={postRow[3].label}
                     like={postRow[4].label}
                 />
-                <AllPost sortedPost={displayedPosts} domain={location}/>
-                <Paging 
-                activePage={page}
-                setPage={setPage}
-                itemsCountPerPage={itemsCountPerPage}
-                totalItemsCount={displayedPosts.length}
-                />
-                <Button value="글쓰기" onClick={()=>{navigate('/write')}}/>
-                <SearchBox/>
+            <PostListBox posts={posts}/>
             </Box>  
         </div>
     );

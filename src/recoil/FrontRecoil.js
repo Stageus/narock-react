@@ -65,5 +65,7 @@ export const postRowState = atom({
     { label: '권한', id: 'role' },
     { label: '글번호', id: 'id' },
     { label: '내용', id: 'contents' },
+    { label: '요청게시판', id: 'requestBoard' },
+    { label: '요청 날짜', id: 'requestDate' },
   ]
 });

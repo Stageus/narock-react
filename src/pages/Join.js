@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import styled from "styled-components";
 import TermsAndCondition from "../components/auth/TermsAndCondition";
 import JoinInfo from "../components/auth/JoinInfo";
@@ -6,48 +7,72 @@ import Header from "../components/common/Header";
 import Logo from "../components/Logo";
 import { Align, Button } from "../styled/ProjectStyle";
 import { useRecoilValue } from 'recoil';
-import { idState, registState } from "../recoil/UserStates";
+import { registState,errorState } from "../recoil/UserStates";
 
 const Join = () => {
-    const uid = useRecoilValue(idState)
     const regist = useRecoilValue(registState)
-    // console.log(uid)
-    // const [userData, setUserData] = useState({
-    //     id:"",
-    //     isId:"",
-    //     password:"",
-    //     isPassword:"",
-    //     nickname: "",
-    //     isNickname: "",        
-    //     name: "",
-    //     isName:"",
-    //     email: "",
-    //     isEmail:"",
-    //     verificationCode: "",
-    //     isTermsandcondition:""
-    // });
+    const isError = useRecoilValue(errorState)
 
-    // const handleUserDataChange = (field, value) => {
-    //     setUserData((prevData) => ({
-    //         ...prevData,
-    //         [field]: value
-    //     }));
-    // };
 
     const handleJoinButtonClick = () => {
-        if(regist.length === 0){
+        if(regist.id.length * regist.password.length * regist.confirmPassword.length * regist.nickname.length * regist.name.length * regist.email.length * regist.certification.length === 0){
             alert("모든 칸을 입력해 주세요.")
             // console.log("User Data:",userData)
             return;
         }
+        if(!isError.isId){
+            alert("아이디를 체크해 주세요.")
+            return;
+        }
+        if(!isError.isPassword){
+            alert("비밀번호를 체크 해 주세요.")
+            return;
+        }
+        if(!isError.isConfirmPassword){
+            alert("비밀번호가 맞지 않습니다.")
+            return;
+        }
+        if(!isError.isNickname){
+            alert("닉네임을 체크해 주세요.")
+            return;
+        }
+        if(!isError.isName){
+            alert("이름을 체크해 주세요.")
+            return;
+        }
 
-        // if(!userData.isTermsandcondition){
-        //     alert("이용 약관에 동의해 주세요.")
-        //     return;
-        // }
+
+        if(!regist.isTermsandcondition){
+            alert("이용 약관에 동의해 주세요.")
+            return;
+        }
 
         console.log("User Data:", regist);
         alert("가입을 축하합니다!");
+
+    const apiUrl = '3.35.171.221';
+
+    const requestData = {
+      idValue: regist.id,
+      pwValue: regist.password,
+      nicknameValue: regist.nickname,
+      nameValue: regist.name,
+      emailValue: regist.email
+    };
+
+    axios.post(apiUrl, requestData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => {
+      // 요청 성공
+      console.log('API 응답:', response.data);
+    })
+    .catch((error) => {
+      // 요청 실패
+      console.error('API 요청 실패:', error);
+    });
     };
 
 
@@ -71,6 +96,7 @@ const FieldBox = styled.form`
     margin: 0 160px;
     display:flex;
     justify-content:space-between;
+    align-items:center;
 `
 
 const JoinBtn = styled(Align)`

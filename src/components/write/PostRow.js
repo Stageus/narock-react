@@ -10,6 +10,10 @@ const PostRow = (props) => {
         nickname,
         joinDate,
         role,
+        id,
+        contents,
+        requestBoard,
+        requestDate
      } = props;
     return (
         <SubjectBox>
@@ -22,6 +26,10 @@ const PostRow = (props) => {
             {nickname && <Post>{nickname}</Post>}
             {joinDate && <Post>{joinDate}</Post>}
             {role && <Post>{role}</Post>}
+            {id && <Post>{id}</Post>}
+            {contents && <Post>{contents}</Post>}
+            {requestBoard && <Post>{requestBoard}</Post>}
+            {requestDate && <Post>{requestDate}</Post>}
         </SubjectBox>            
     );
 };

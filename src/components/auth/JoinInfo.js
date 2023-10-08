@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Align, Input, Button, Div, Success, Error } from "../../styled/ProjectStyle";
-import { useRecoilState,  } from 'recoil';
+import { useRecoilState } from 'recoil';
 import {
     errorState,
   isHoverState,registState
@@ -12,6 +12,8 @@ const JoinInfo = () => {
   
     //닉네임룰 호버
     const [isHover, setIsHover] = useRecoilState(isHoverState);
+    // const [isCertificate,setIsCertificate] = useState(false);
+    // console.log(isHover)
     const [regist, setRegist] = useRecoilState(registState);
     const [error, setError] = useRecoilState(errorState);
 
@@ -22,7 +24,7 @@ const JoinInfo = () => {
           ...regist,
           [name]: value,
         });
-        console.log(value)
+        // console.log(value)
       };
 
         useEffect(()=>{
@@ -30,55 +32,155 @@ const JoinInfo = () => {
             const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/
             const nameRegex =  /^[가-힣a-zA-Z]{1,20}$/;
             const nickNameRegex = /^[a-zA-Z0-9가-힣!@#$%^&*()_+{}|:"<>?~-]{2,16}$/;
-            const emailRegex =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-            if(!idRegex.test(regist.id)){
+            //아이디
+            if(regist.id===""){
                 setError((error)=>({
                     ...error,
-                    id:"6글자 이상 20글자 미만으로 입력해 주세요."
+                    id:null,
+                    isId:false,
+                }))
+            }
+            else if(idRegex.test(regist.id)){
+                setError((error)=>({
+                    ...error,
+                    id:"사용 가능한 아이디입니다.",
+                    isId:true
+                }))
+            }
+            else{
+                setError((error)=>({
+                    ...error,
+                    id:"6글자 이상 20글자 미만으로 입력해 주세요.",
+                    isId:false,
+                }))
+            }
+            
+
+            //패스워드
+            if(regist.password === ''){ //패스워드 빈값
+                setError((error)=>({
+                    ...error,
+                    password:"",
+                    isPassword:false,
+                }))
+            }
+            else if(passwordRegex.test(regist.password)){
+                setError((error)=>({
+                    ...error,
+                    password:"",
+                    isPassword:true,
+                }))
+            }
+            else{ //패스워드 정규식에 맞지 않을 때
+                setError((error)=>({
+                    ...error,
+                    password:"영문 대소문자/숫자/특수문자 조합 8자~16자로 입력해 주세요.",
+                    isPassword:false,
+                }))
+            }
+
+
+            //패스워드 확인
+            if(regist.confirmPassword === '' ){
+                setError((error)=>({
+                    ...error,
+                    confirmPassword:"",
+                    isConfirmPassword:false,
+                }))
+            }
+            else if(regist.password === regist.confirmPassword){
+                setError((error)=>({
+                    ...error,
+                    confirmPassword:"",
+                    isConfirmPassword:true,
+                }))
+            }
+            else{
+                setError((error)=>({
+                    ...error,
+                    confirmPassword:"비밀번호가 일치하지 않습니다.",
+                    isConfirmPassword:false,
+                }))
+            }
+
+
+            //닉네임
+            if(regist.nickname === ''){
+                setError((error)=>({
+                    ...error,
+                    nickname:null,
+                    isNickname:false
+                }))
+            }else if(nickNameRegex.test(regist.nickname)){ //닉네임 정규식
+                setError((error)=>({
+                    ...error,
+                    nickname:"사용 가능한 닉네임입니다.",
+                    isNickname:true
                 }))
             }else{
                 setError((error)=>({
                     ...error,
-                    id:"사용 가능한 아이디입니다."
+                    nickname:"사용 불가한 닉네임입니다.",
+                    isNickname:false
                 }))
             }
-            if(!passwordRegex.test(regist.password)){ //패스워드 정규식에 맞지 않을 때
+            
+
+            //이름
+            if(regist.name === ''){
                 setError((error)=>({
                     ...error,
-                    password:"영문 대소문자/숫자/특수문자 조합 8자~16자로 입력해 주세요."
+                    name:null,
+                    isName:false,
                 }))
             }
-            if(regist.password === regist.confirmPassword){ //패스워드 불일치
+            else if(nameRegex.test(regist.name)){
                 setError((error)=>({
                     ...error,
-                    confirmPassword:""
-                }))
-            }else{
-                setError((error)=>({
-                    ...error,
-                    confirmPassword:"비밀번호가 일치하지 않습니다."
+                    name:"",
+                    isName:true,
                 }))
             }
-            if(!nickNameRegex.test(regist.nickname)){ //닉네임 정규식
+            else{ 
                 setError((error)=>({
                     ...error,
-                    nickname:"사용할 수 없는 닉네임입니다."
+                    name:"한글, 영문 대/소문자를 사용해 주세요.",
+                    isName:false,
                 }))
             }
-            if(!emailRegex.test(regist.email)){ //이메일 정규식
+
+
+        },[regist.id,regist.password,regist.confirmPassword,regist.name,regist.nickname,setError]);
+
+        const certificationEvent = () =>{
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if(regist.email === ''){
                 setError((error)=>({
                     ...error,
-                    email:"유효한 이메일을 작성해 주세요."
+                    email:null,
+                    isEmail:false,
                 }))
-            }
-            if(!nameRegex.test(regist.name)){ //이름 정규식
+                alert('유효한 이메일을 작성해 주세요.')
+            }else if(emailRegex.test(regist.email)){
                 setError((error)=>({
                     ...error,
-                    name:"한글 영문 대/소문자를 사용해 주세요."
+                    email:null,
+                    isEmail:true,
+                    isCertification:true,
                 }))
+                // setIsCertificate(true);
+
+                alert("인증코드가 발송 되었습니다.")
             }
-        },[regist.id]);
+            else if(!emailRegex.test(regist.email)) {
+                alert("유효한 이메일을 작성해 주세요.")
+                return;
+            } 
+        }
+
+
     return (
         <form onChange={handleChange}> 
             <div>
@@ -102,68 +204,54 @@ const JoinInfo = () => {
                 </div>
                 <Div margin="0">
                     <Input name="confirmPassword" type="password" marginright="10px"/>
-                    {/* {passwordConfirm.length> 0 && <Error>{passwordConfirmMsg}</Error>} */}
                     {error.confirmPassword ? <Success>{error.confirmPassword}</Success> : regist.confirmPassword.length === 0 ? null : <Error>{error.confirmPassword}</Error>}
                 </Div>
             </div>
                 
-            <div>
+            <Div display="block" margin="0">
                 <label htmlFor="nickname">닉네임</label>
                 <Div margin="0">
                     <Input name="nickname" maxLength="16" marginright="10px"/>
-                    {/* {nickname.length> 0 &&<Error>{nicknameMsg}</Error>} */}
-                    {error.nickname ? <Error>{error.nickname}</Error> : regist.nickname.length === 0 ? null : <Error>{error.nickname}</Error>}
+                    {error.nickname ? <Success>{error.nickname}</Success> : <Error>{error.nickname}</Error>}
                 </Div>
                 <div>
-                    <Div 
-                    onMouseOver={()=>{setIsHover(true)}} 
-                    onMouseOut={()=>{setIsHover(false)}}
-                    borderRadius="20px"
-                    backgroundColor="#3185FC"
-                    color="white"
-                    width="14px"
-                    height="14px"
-                    alignItems="center"
-                    justifycontent="center"
-                    display="flex"
-                    left="190px"
-                    position="absolute"
-                    >?</Div>
+                    <RuleHoverBtn
+                         onMouseOver={()=>{setIsHover(true)}} 
+                         onMouseOut={()=>{setIsHover(false)}}
+                    >?</RuleHoverBtn>
                     {isHover &&
-                    <Rule>16자까지, 허용공백 문자 & 보안상 문제되는 특수문자는 발견시 제외처리 <br/>
-                    어법에 맞지 않는 한글(쐥,뛩.. 등등) 사용 <br/>
-                    금지불량 닉네임(욕설, 불건전 닉네임)은 임의 삭제 혹은 계정 징계 조치 <br/>
-                    </Rule>
+                        <Rule>16자까지, 허용공백 문자 & 보안상 문제되는 특수문자는 발견시 제외처리 <br/>
+                        어법에 맞지 않는 한글(쐥,뛩.. 등등) 사용 <br/>
+                        금지불량 닉네임(욕설, 불건전 닉네임)은 임의 삭제 혹은 계정 징계 조치 <br/>
+                        </Rule>
                     }
                 </div>
-            </div>
+            </Div>
 
             <div>
                 <label htmlFor="name">이름</label>
                 <Div margin="0">
                     <Input name="name" maxLength="20" marginright="10px"/>
-                    {/* {name.length> 0 &&<Error>{nameMsg}</Error>} */}
                     {error.name ? <Success>{error.name}</Success> : regist.length === 0 ? null : <Error>{error.name}</Error>}
                 </Div>
             </div>
             <div>
                 <label htmlFor="email">이메일</label>
-                <Div margin="0">
-                    <Input name="email" marginright="10px" maxLength="50"/>
-                    {/* {email.length> 0 &&<Error>{emailMsg}</Error>} */}
-                    {error.email ? <Success>{error.email}</Success> : regist.length === 0 ? null : <Error>{error.email}</Error>}
-                </Div>
+                <div>
+                    <Input name="email" maxLength="50"/>
+                    {error.email && <Success>{error.email}</Success>}
+                    {!error.isCertification ? <Button value="인증코드 발송" padding="0px 15px" radius="5px" height="32px" onClick={certificationEvent}></Button>:
+                    <Button value="인증코드 발송됨" padding="0px 15px" radius="5px" height="32px" disabled ></Button>
+                    }
+                </div>
             </div>
             <div>
                 <label htmlFor="certification">인증번호</label>
-                <Div margin="0">
+                <div margin="0">
                     <Input name="certification"/>
-                    <Button value="인증코드 발송" padding="0px 15px" radius="5px" height="32px"></Button>
-                </Div>
+                    <Button value="확인" padding="0px 15px" radius="5px" height="32px" disabled ></Button>
+                </div>
             </div>
-            {/* {password.length> 0 &&
-            <div>{passwordMsg}</div>
-            }        */}
         </form>
     );
 };
@@ -176,9 +264,24 @@ const Rule = styled.div`
     font-size:10px;
     position:absolute;
     background-color:#fff;
-    top: 461px;
-    left:427px;
+    bottom:10px;
+    left:275px;
     color:#222A68;
+    z-index:10;
+`
+
+const RuleHoverBtn = styled.div`
+    position:absolute;
+    border-radius:20px;
+    background-color:#3185FC;
+    color:white;
+    width:14px;
+    height:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    left:238px;
+    bottom:25px;
 `
 
 export default JoinInfo;

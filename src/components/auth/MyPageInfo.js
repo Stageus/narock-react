@@ -112,7 +112,6 @@ const MyPageInfo = () => {
             <UserInfo>
                 <div>아이디</div>
                 <Space>kjhwlgusdl</Space>
-
                 <div>닉네임</div>
                 <Input margin="5px 0 15px 0" placeholder="유저 닉네임" maxlength="16" onChange={onChangeNickname}/>
                 <Div>
@@ -129,19 +128,21 @@ const MyPageInfo = () => {
 
                 <Space>프로필 사진 (jpg,jpeg,gif,png 2MB 이하)</Space>
                 <ProfileBox>
-                <Avatar src={img} alt="profile"></Avatar>
-                <FileUploadInput type="file" id="file-upload" accept="image/jpg,image/png,image/jpeg,image/gif" onChange={HandleLoadFile}/>
-                <FileUploadLabel htmlFor="file-upload">업로드</FileUploadLabel>
-                <Button
-                value="삭제" 
-                type="button" 
-                borderradius="5px" 
-                padding="5px" 
-                backgroundcolor="white" 
-                color="mainColor" 
-                border="1px solid mainColor"
-                onClick={HandleDeleteFile}
-                />
+                    <Avatar src={img} alt="profile"></Avatar>
+                    <Div>
+                        <FileUploadInput type="file" id="file-upload" accept="image/jpg,image/png,image/jpeg,image/gif" onChange={HandleLoadFile}/>
+                        <FileUploadLabel htmlFor="file-upload">업로드</FileUploadLabel>
+                        <Button
+                        value="삭제" 
+                        type="button" 
+                        borderradius="5px" 
+                        padding="5px" 
+                        backgroundcolor="white" 
+                        color="#3185FC" 
+                        border="1px solid #3185FC"
+                        onClick={HandleDeleteFile}
+                        />
+                </Div>
                 </ProfileBox>
 
                 <div>이메일</div>
@@ -175,14 +176,19 @@ const ErrorMsg = styled(Error)`
 `
 
 const UserInfo = styled.div`
-    margin:30px 0 0 0;
+    /* margin:30px 0 0 0; */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 `
 
 const Space = styled.div`
     margin-bottom:15px;
 `
-const ProfileBox = styled(Align)`
+const ProfileBox = styled.div`
+    display:flex;
     margin:10px 0;
+    align-items:center;
 `
 const Avatar = styled.img`
     border-radius: 30px;
@@ -211,7 +217,8 @@ const FileUploadLabel = styled.label`
     cursor:pointer;
 `
 
-const RuleIcon = styled(Align)`
+const RuleIcon = styled.div`
+    display:flex;
     position:absolute;
     border-radius:20px;
     background-color: #3185FC;
@@ -219,9 +226,9 @@ const RuleIcon = styled(Align)`
     width:14px;
     height:14px;
     justify-content:center;
-    position:relative;
+    align-items:center;
     top: -48px;
-    left:226px;
+    left:110px;
     cursor:help;
 `
 
@@ -232,9 +239,11 @@ const Rule = styled.div`
     border: 1px solid #3185FC;
     font-size:10px;
     background-color:#fff;
-    top: 0;
-    right:0;
+    top: -57px;
     color:#222A68;
+    z-index:10;
+    left:140px;
+
 `
 
 const ButtonBox = styled(Align)`

@@ -1,27 +1,25 @@
 import React from "react";
-import Posts from "../components/main/Posts";
-import { useParams } from 'react-router-dom';
-const AllPost = ( props ) => {
-    const {sortedPost, domain} = props;
-    const { postid } = useParams();
-    console.log(postid)
+import Header from "../components/common/Header";
+import PostDetailBox from "../components/write/PostDetailBox";
+import {useRecoilValue} from 'recoil';
+import { newsPostState,commentState, noticePostState, communityPostState } from '../recoil/BackRecoil';
+
+import { Div } from "../styled/ProjectStyle";
+const AllPost = ( ) => {
+    const newsPost = useRecoilValue(newsPostState);
+    const noticePost = useRecoilValue(noticePostState);
+    const communityPost = useRecoilValue(communityPostState);
+    const comment = useRecoilValue(commentState);
     return (
         <div>
-            {sortedPost && sortedPost.map((v,i)=>{
-                return(
-                    <Posts 
-                    // bandname={bandname}
-                    key={i}
-                    postId={v.postId}
-                    postTitle={v.postTitle} 
-                    writer={v.writer}
-                    like={v.like}
-                    view={v.view}
-                    date={v.date}
-                    domain={domain}
-                /> 
-                )
-            })}   
+            <Header/>
+            <Div>
+                <PostDetailBox 
+                newsPost={newsPost} 
+                noticePost={noticePost} 
+                communityPost={communityPost} 
+                Allcomment={comment}/>
+            </Div>
         </div>
     );
 };

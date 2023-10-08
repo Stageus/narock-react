@@ -1,20 +1,21 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Align } from "../../styled/ProjectStyle";
+import { useRecoilState } from 'recoil';
+import { registState } from '../../recoil/UserStates';
 
-const TermsAndCondition = ({ onDataChange }) => {
-    const [isChecked, setIsChecked] = useState(false);
+const TermsAndCondition = () => {
+    const [regist, setRegist] = useRecoilState(registState);
 
-    const check =  useCallback((e)=>{
-        const checkValue = e.target.checked;
-        if(!checkValue){
-            setIsChecked(checkValue)
-        }else{
-            setIsChecked(true)
-        }
-        console.log(isChecked)
-        onDataChange("termsandcondition", checkValue);
-    },[onDataChange,isChecked])
+    const handleCheckboxChange = (e) => {
+        const checkValue = e.target.checked; // 체크값
+        setRegist({
+            ...regist,
+            isTermsandcondition:checkValue,
+        })
+        console.log(checkValue)
+    };
+
 
     return (
         <Align>
@@ -291,7 +292,7 @@ const TermsAndCondition = ({ onDataChange }) => {
                 예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭)
                 "/>
                 <EssentialBox>
-                <input type="checkbox" onClick={(e)=>check(e)} /> <Essential>[필수]</Essential> 이용 약관에 동의합니다.
+                <input type="checkbox" onClick={(e)=>handleCheckboxChange(e)} /> <Essential>[필수]</Essential> 이용 약관에 동의합니다.
                 </EssentialBox>
             </TermsAndConditionAlign>
         </Align>

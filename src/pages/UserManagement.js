@@ -8,12 +8,13 @@ import PostRow from "../components/write/PostRow";
 import Paging from "../components/Paging"
 
 import { useRecoilValue } from "recoil";
-import { userState } from "../recoil/BackRecoil";
+import { userState,bandnameState } from "../recoil/BackRecoil";
 import { postRowState } from '../recoil/FrontRecoil'
-import { bandnameState } from "../recoil/BackRecoil";
+
 
 const UserManagement = () => {
     const user = useRecoilValue(userState); //유저 데이터
+    console.log(user)
     const bandname = useRecoilValue(bandnameState);
     // const bandnameMap = Object.values(bandname).flat().map((item)=>(item.split(',')));
     const bandnameMap = Object.values(bandname).flat();
@@ -117,7 +118,7 @@ const UserManagement = () => {
                                         justifycontent="center"
                                         >
                                             <CheckBox type="checkbox"></CheckBox>
-                                            <List>{v.userid}</List>
+                                            <List>{v.userId}</List>
                                             <List>{v.nickname}</List>
                                             <List>{v.joinDate}</List>
                                             <List>{v.role}</List>
@@ -141,12 +142,12 @@ const UserManagement = () => {
                         <Background>
                             <Modal>
                                 <Div margin="0">
-                                    <p>아이디 <span>{selectedUser.userid}</span></p>
-                                    <p>닉네임 <span>{selectedUser.nickname}</span></p>
+                                    <UserInfo>아이디</UserInfo> <span>{selectedUser.userid}</span>
+                                    <UserInfo>닉네임</UserInfo> <span> {selectedUser.nickname}</span>
                                 </Div>
                                 <div>
                                         <input type="radio" /> 일반 회원
-                                        <input type="radio"/> 게시판 지기
+                                        <input type="radio" /> 게시판 지기
                                 </div>
                                 <div>
                                     <span>게시판 이름</span>
@@ -207,5 +208,10 @@ const Modal = styled.div`
     top:30%;
     padding:40px;
     width:650px;
+`
+
+const UserInfo = styled.p`
+    margin:5px;
+    color:#3185FC
 `
 export default UserManagement;

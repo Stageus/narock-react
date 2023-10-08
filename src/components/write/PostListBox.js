@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Paging from "../Paging";
 import SearchBox from "../common/SearchBox";
 import Posts from "../main/Posts"
@@ -9,11 +9,17 @@ import { Button } from "../../styled/ProjectStyle";
 import { useNavigate } from 'react-router-dom';
 
 const PostListBox = (props) => {
-    const { bandname } = props;
-    const post = useRecoilValue(postState);
-    const posts = post.filter(p=>p.boardName === bandname);
+    const { bandname, posts } = props;
     const sortedPost = [...posts].sort((a,b)=>b.postId - a.postId)
-    
+
+    const itemsCountPerPage = 3; // 한 페이지에 표시할 게시물 수
+    const [limit, setLimit]= useState(10); 
+    const [page, setPage] = useState(1);
+    const offset = (page-1)*limit; // 한 페이지에 들어갈 갯수
+    const displayedPosts = posts.slice(
+        offset, offset + limit
+    );
+
     const navigate = useNavigate();
 
     return ( 
@@ -23,17 +29,23 @@ const PostListBox = (props) => {
                 <Posts
                 key={v}
                 bandname={bandname} 
-                postId={v.postId}
+                postId={v.postIndex}
                 postTitle={v.postTitle} 
-                writer={v.writer}
+                writer={v.postWriter}
                 like={v.like}
-                view={v.view}
-                date={v.date}
-                content={v.content}
+                view={v.postViews}
+                date={v.postTimestamp}
+                content={v.postContent}
+
                 /> 
             )) : 
             <Text>작성 된 게시물이 없습니다.</Text>}
-            <Paging/>
+            <Paging
+            activePage={page}
+            setPage={setPage}
+            itemsCountPerPage={itemsCountPerPage}
+            totalItemsCount={displayedPosts.length}
+            />
             <Button value="글쓰기" onClick={()=>{navigate('/write')}}/>
             <SearchBox/>
         </div>

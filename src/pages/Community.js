@@ -1,40 +1,32 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import styled from "styled-components";
-import { Button, Title } from "../styled/ProjectStyle";
+import { Title } from "../styled/ProjectStyle";
 
 import Header from "../components/common/Header";
 import PostRow from "../components/write/PostRow";
-import AllPost from "./AllPost";
-import Paging from "../components/Paging"
-import SearchBox from "../components/common/SearchBox";
+import PostListBox from "../components/write/PostListBox";
 
-
-import {useRecoilValue} from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { communityPostState } from '../recoil/BackRecoil';
 import { postRowState } from '../recoil/FrontRecoil'
 const Community = () => {
-    const post = useRecoilValue(communityPostState);
-    const sortedPost = [...post].sort((a,b)=>b.postId - a.postId)
-    const navigate = useNavigate();
+    const posts = useRecoilValue(communityPostState);
     const postRow = useRecoilValue(postRowState)
+
     return (
         <div>
             <Header/>
             <Box>
-            <Title>커뮤니티</Title>
+                <Title>커뮤니티</Title>
                 <PostRow                
                 title={postRow[0].label}
                 writer={postRow[1].label}
                 createDate={postRow[2].label}
                 view={postRow[3].label}
                 like={postRow[4].label}/>
-                <AllPost sortedPost={sortedPost}
-                />
-                <Paging/>
-                <Button value="글쓰기" onClick={()=>{navigate('/write')}}/>
-                <SearchBox/>
+                <PostListBox posts={posts}/>
             </Box>  
         </div>
     );

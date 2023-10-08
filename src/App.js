@@ -29,7 +29,6 @@ const App = () => {
         <Route path="/" element={<Main />}/>
         <Route path="/admin/usermanagement" element={<UserManagement />}/>
         <Route path="/admin/BandRequest" element={<BandRequest />}/>
-        {/* <Route path="/admin" element={<Admin />}/> */}
         <Route path="/allband" element={<AllBand />}/>
         {/* <Route path="/allband/:bandname" element={<AllBandBoard />}/> */}
         <Route path="/allband/:bandname/notice" element={<AllBandBoard />}/>
