@@ -38,7 +38,7 @@ const UserManagement = () => {
     }
     
     const userSearchButtonEvent = () => {
-        const searchResult = user.filter(info => info.userid.includes(userSearch));
+        const searchResult = user.filter(info => info.userId.includes(userSearch));
         setUserSearchList(searchResult)
     }
 
@@ -100,9 +100,9 @@ const UserManagement = () => {
                                         justifycontent="center"
                                         >
                                             <CheckBox type="checkbox"></CheckBox>
-                                            <List>{v.userid}</List>
+                                            <List>{v.userId}</List>
                                             <List>{v.nickname}</List>
-                                            <List>{v.joinDate}</List>
+                                            <List>{v.joinpostTimestamp}</List>
                                             <List>{v.role}</List>
                                             <List>
                                                 <Button value="권한 설정" margin="0" onClick={(e)=>{roleSettingDialog(e,v)}}/>
@@ -120,7 +120,7 @@ const UserManagement = () => {
                                             <CheckBox type="checkbox"></CheckBox>
                                             <List>{v.userId}</List>
                                             <List>{v.nickname}</List>
-                                            <List>{v.joinDate}</List>
+                                            <List>{v.joinpostTimestamp}</List>
                                             <List>{v.role}</List>
                                             <List>
                                                 <Button value="권한 설정" margin="0" onClick={(e)=>{roleSettingDialog(e,v)}}/>
@@ -142,7 +142,7 @@ const UserManagement = () => {
                         <Background>
                             <Modal>
                                 <Div margin="0">
-                                    <UserInfo>아이디</UserInfo> <span>{selectedUser.userid}</span>
+                                    <UserInfo>아이디</UserInfo> <span>{selectedUser.userId}</span>
                                     <UserInfo>닉네임</UserInfo> <span> {selectedUser.nickname}</span>
                                 </Div>
                                 <div>

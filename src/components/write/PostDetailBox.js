@@ -6,27 +6,24 @@ import { useRecoilState } from 'recoil';
 
 import { isLikedState, likedState } from "../../recoil/FrontRecoil";
 import Comment from "./Comment";
-import { useNavigate , useParams } from "react-router-dom";
+import { useNavigate , useParams, useLocation } from "react-router-dom";
 
 const PostDetailBox = (props) => {
     const { postid } = useParams();
+    const location = useLocation();
+    // console.log(location.pathname)
     const { 
         bandname,
-        sortedPost,
-        domain, 
-        bandposts, 
-        bandcomments,
-        newsPost,
-        noticePost,
-        communityPost,
+        post
         // comment
     } = props;
-    const post = bandposts.filter(p => p.boardName === bandname && p.postIndex === parseInt(postid));
+    // const post = bandposts.filter(p => p.boardName === bandname && p.postIndex === parseInt(postid));
     // const comment = bandcomments.filter(p => p.boardName === bandname && p.postId === parseInt(postid));
     // console.log(post)
     
-    const community = communityPost.filter(p => p.postIndex === parseInt(postid));
+    const posts = post.filter(p => p.postIndex === parseInt(postid));
 
+    // console.log(community)
     const [liked,setLiked] = useRecoilState(likedState);
     const [isLiked,setIsLiked] = useRecoilState(isLikedState);
     const navigate = useNavigate();
@@ -43,7 +40,7 @@ const PostDetailBox = (props) => {
     return (
         <Div width="100%" margin="0 80px" padding="20px" flexdirection="column">
             {/* {
-            post && post.length > 0 && post.map((value,idx)=>{
+             post.length > 0 && post.map((value,idx)=>{
                 return(
                 <Div key={idx} width="100%" display="block">
                     <Div padding="20px" border="1px solid #E2E8FF" display="block" margin="0 0 20px 0">
@@ -73,7 +70,7 @@ const PostDetailBox = (props) => {
                 </Div>
                 )
                 })} */}
-            {community && community.length > 0 &&  community.map((value,idx)=>{
+            {posts.length > 0 &&  posts.map((value,idx)=>{
                 return(
                 <Div key={idx} width="100%" display="block">
                     <Div padding="20px" border="1px solid #E2E8FF" display="block" margin="0 0 20px 0">
@@ -99,7 +96,7 @@ const PostDetailBox = (props) => {
                             {<Like>{liked}</Like>}
                         </Div>
                     </Div>
-                    <Comment comment={value.comment} bandname={bandname} postId={value.postIndex} reply={value.reply} post={community}/>
+                    <Comment comment={value.comment} bandname={bandname} postId={value.postIndex} reply={value.reply} post={posts}/>
                 </Div>
                 )
                 })}

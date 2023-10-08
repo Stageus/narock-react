@@ -13,10 +13,30 @@ const Login = () => {
     const [uid, setUid] = useState("");
     const [upw, setUpw] = useState("");
 
-    const loginClickEvent = () => {
+    const loginClickEvent = async () => {
+
+        const response = await fetch("https://www.narock.site/account/login",{
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json",
+        },
+        "credentials": "include",
+        "body":JSON.stringify({
+            "idValue": uid,
+		    "pwValue": upw
+        })
+    })
+        const result = await response.json()
+        if(result.success){
+            alert("로그인 되었습니다.")
+            navigate('/')
+        }
         if(uid === "" || upw === ""){
             alert('아이디 또는 비밀번호를 확인해 주세요.')
         }
+        // else{
+        //     alert("로그인 정보가 일치하지 않습니다.")
+        // }
         // if(정보 없거나 비밀번호 일치하지 않을 시){
         //     alert("가입 된 정보가 없거나 비밀번호가 일치하지 않습니다.")
         // }

@@ -9,10 +9,11 @@ import PostRow from "../components/write/PostRow";
 import PostListBox from "../components/write/PostListBox";
 
 import { useRecoilValue } from 'recoil';
-import { communityPostState } from '../recoil/BackRecoil';
+// import { communityPostState } from '../recoil/BackRecoil';
+import { postState } from '../recoil/BackRecoil';
 import { postRowState } from '../recoil/FrontRecoil'
 const Community = () => {
-    const posts = useRecoilValue(communityPostState);
+    const posts = useRecoilValue(postState);
     const postRow = useRecoilValue(postRowState)
 
     return (

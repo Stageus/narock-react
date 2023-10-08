@@ -6,11 +6,17 @@ import {useRecoilValue} from 'recoil';
 import { postState } from '../../recoil/BackRecoil';
 import styled from "styled-components";
 import { Button } from "../../styled/ProjectStyle";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation,useParams } from 'react-router-dom';
 
 const PostListBox = (props) => {
     const { bandname, posts } = props;
+    const location = useLocation();
+    const bandnameEncoded = decodeURI(window.location.pathname); 
+    const bandnames = bandnameEncoded.indexOf(bandname)
+    console.log(bandnames)
     const sortedPost = [...posts].sort((a,b)=>b.postId - a.postId)
+    const post = sortedPost.filter(p => `/${p.boardName}` === location.pathname);
+    console.log(bandnameEncoded)
 
     const itemsCountPerPage = 3; // 한 페이지에 표시할 게시물 수
     const [limit, setLimit]= useState(10); 
@@ -24,8 +30,8 @@ const PostListBox = (props) => {
 
     return ( 
         <div>
-            { sortedPost && sortedPost.length > 0 ?
-              sortedPost.map((v)=>(
+            { post && post.length > 0 ?
+              post.map((v)=>(
                 <Posts
                 key={v}
                 bandname={bandname} 

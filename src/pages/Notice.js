@@ -2,21 +2,19 @@ import React, { useState } from "react";
 import { useNavigate, useLocation, Link} from 'react-router-dom';
 
 import styled from "styled-components";
-import { Button, Title } from "../styled/ProjectStyle";
+import { Title } from "../styled/ProjectStyle";
 
 import Header from "../components/common/Header";
 import PostRow from "../components/write/PostRow";
 
 import {useRecoilValue} from 'recoil';
-import { noticePostState } from '../recoil/BackRecoil';
+import { postState } from '../recoil/BackRecoil';
 import { postRowState } from '../recoil/FrontRecoil'
 import PostListBox from "../components/write/PostListBox";
+
 const Notice = () => {
     const postRow = useRecoilValue(postRowState)
-    const posts = useRecoilValue(noticePostState);
-
-    const navigate = useNavigate();
-    const location = useLocation().pathname;
+    const posts = useRecoilValue(postState);
 
     // const itemsCountPerPage = 3; // 한 페이지에 표시할 게시물 수
     // const [limit, setLimit]= useState(10); 

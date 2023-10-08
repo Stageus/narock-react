@@ -9,13 +9,13 @@ import PostRow from "../components/write/PostRow";
 
 import {useRecoilValue} from 'recoil';
 import { postRowState } from '../recoil/FrontRecoil'
-import { newsPostState } from "../recoil/BackRecoil";
+import { postState } from "../recoil/BackRecoil";
 import PostListBox from "../components/write/PostListBox";
 const News = () => {
 
     const navigate = useNavigate();
     const postRow = useRecoilValue(postRowState)
-    const posts = useRecoilValue(newsPostState); // postState 셀렉터로 데이터 가져옴
+    const posts = useRecoilValue(postState); // postState 셀렉터로 데이터 가져옴
     // const comments = useRecoilValue(commentState);
 
     return (

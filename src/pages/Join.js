@@ -14,7 +14,7 @@ const Join = () => {
     const isError = useRecoilValue(errorState)
 
 
-    const handleJoinButtonClick = () => {
+    const handleJoinButtonClick = async () => {
         if(regist.id.length * regist.password.length * regist.confirmPassword.length * regist.nickname.length * regist.name.length * regist.email.length * regist.certification.length === 0){
             alert("모든 칸을 입력해 주세요.")
             // console.log("User Data:",userData)
@@ -48,33 +48,31 @@ const Join = () => {
         }
 
         console.log("User Data:", regist);
-        alert("가입을 축하합니다!");
+        // alert("가입을 축하합니다!");
 
-    const apiUrl = '3.35.171.221';
 
-    const requestData = {
-      idValue: regist.id,
-      pwValue: regist.password,
-      nicknameValue: regist.nickname,
-      nameValue: regist.name,
-      emailValue: regist.email
-    };
+        const response = await fetch("https://www.narock.site/account",{
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json" //보내줄 데이터가 json 타입이라고 선언
+            },
+            "body":JSON.stringify({
+                "idValue": regist.id,
+                "pwValue": regist.password,
+                "nicknameValue": regist.nickname,
+                "nameValue": regist.name,
+                "emailValue": regist.email
+            })
+        })
+        const result = await response.json()
 
-    axios.post(apiUrl, requestData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then((response) => {
-      // 요청 성공
-      console.log('API 응답:', response.data);
-    })
-    .catch((error) => {
-      // 요청 실패
-      console.error('API 요청 실패:', error);
-    });
-    };
-
+        if(result.success){
+            alert("회원가입 되었습니다.")
+            // navigate('/')    
+        }else{
+            alert(result.message)
+        }
+    }
 
     return (
         <div>
