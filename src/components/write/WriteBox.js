@@ -25,28 +25,28 @@ const WriteBox = () => {
         }
     }
 
-    const p = async () => {
-        const orderData = {
-            "id": idQuery,
-            "order_list": orderList,
-            "total_price": sumPrice.reduce((a,b) => a+b, 0)
-        };
+    // const p = async () => {
+    //     const orderData = {
+    //         "id": idQuery,
+    //         "order_list": orderList,
+    //         "total_price": sumPrice.reduce((a,b) => a+b, 0)
+    //     };
 
-        const response = await fetch("http://3.39.66.6:4000/order", {
-            "method": "POST",
-            "headers": {
-            "Content-Type": "application/json" // 보내줄 데이터가 json 타입이라고 선언
-            },
-            "body": JSON.stringify(orderData)
-        });
+    //     const response = await fetch("http://3.39.66.6:4000/order", {
+    //         "method": "POST",
+    //         "headers": {
+    //         "Content-Type": "application/json" // 보내줄 데이터가 json 타입이라고 선언
+    //         },
+    //         "body": JSON.stringify(orderData)
+    //     });
     
-        const result = await response.json();
-        if (result.success) {
-            alert("주문목록에 추가 되었습니다.");
-        } else {
-            alert(result.message);
-        }
-    };
+    //     const result = await response.json();
+    //     if (result.success) {
+    //         alert("주문목록에 추가 되었습니다.");
+    //     } else {
+    //         alert(result.message);
+    //     }
+    // };
     return(
         <Div margin="55px 80px" padding="23px" border="1px solid #3185FC" flexdirection="column" alignitems="unset">
             <div>게시판 이름</div>

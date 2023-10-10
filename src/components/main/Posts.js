@@ -5,22 +5,21 @@ import { useNavigate,useLocation } from 'react-router-dom';
 
 const Posts = (props) => {
 
-    const {bandname,postTitle,boardName,like,date,view,writer,postId,domain} = props;
+    const {bandname,postTitle,boardName,like,date,view,writer,postId} = props;
     const postIdx = parseInt(postId)
     const navigate = useNavigate();
     const location = useLocation();
     useEffect(() => {
-        console.log(location);
+        // console.log(location);
       }, [ location ])
     const handlePostClick = () => {
+        const domain = location.pathname;
         // 클릭한 PostRow의 postId를 사용하여 해당 게시물 페이지로 이동
-        navigate(`${location.pathname}/${postIdx}`);
-        console.log("dd")
+        navigate(`${domain}/${postIdx}`);
     };
     return(
         <Box>
-            {/* <Link to={`${domain}/${postId}`}> */}
-                <Div borderbottom="2px solid #e2e8ff" margin="0"
+                <List borderbottom="2px solid #e2e8ff" margin="0"
                     onClick={handlePostClick}
                 >
                     {postId && <Div>{postId}</Div>}
@@ -30,7 +29,7 @@ const Posts = (props) => {
                     {date && <SmallDiv>{date}</SmallDiv>}
                     {view && <SmallDiv>{view}</SmallDiv>}
                     {like && <SmallDiv>{like}</SmallDiv>}
-                </Div>
+                </List>
             {/* </Link> */}
         </Box>
     )
@@ -61,5 +60,8 @@ const SmallDiv = styled(Div)`
     text-align:center;
 `
 
+const List = styled(Div)`
+    cursor:pointer;
+`
 
 export default Posts

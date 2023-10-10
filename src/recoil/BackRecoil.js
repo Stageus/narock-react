@@ -235,348 +235,6 @@ export const popularPostState = atom(
     }
 )
 
-// export const postState = atom(
-//     {
-//         "key":"postState",
-//         "default": [
-//             {
-//                 "postIndex": 1,
-//                 "postTitle": "첫번째 게시물",
-//                 "postContent": "첫번째 게시물입니다.",
-//                 "boardName": "실리카겔",
-//                 "like": 9999,
-//                 "postTimestamp": "2023.08.10",
-//                 "postViews":623,
-//                 "postWriter": '지짱',
-//                 "postImgUrl": "/img/avatar.png",
-//                 "comment": [{
-//                     "commentIndex": 1,
-//                     "commentTimestamp": "2023.08.12",
-//                     "commentContent": "코멘트 테스트~~~~",
-//                     "postIndex": 2,
-//                     "userIndex": 1,
-//                     "commentWriter":"유원석"
-//                     }],
-//                     "reply": [{
-//                         "replyIndex": 1,
-//                         "replyTimestamp": "2023.08.12",
-//                         "replyContent": "리플 테스트1",
-//                         "commentIndex": 1,
-//                         "userIndex": 1,
-//                         "replyWriter":"지짱",
-//                         "replyImgUrl":"/img/avatar.png",
-//                     }]
-//             },
-//             {
-//                 "postIndex": 2,
-//                 "postTitle": "두번째 게시물",
-//                 "postContent": "두번째 게시물입니다.",
-//                 "boardName": "새소년",
-//                 "like": 120,
-//                 "postTimestamp": "2023.08.11",
-//                 "postViews":623,
-//                 "postWriter": '지짱',
-//                 "postImgUrl": "/img/avatar.png",
-//                 "comment": [{
-//                     "commentIndex": 1,
-//                     "commentTimestamp": "2023.08.12",
-//                     "commentContent": "코멘트 테스트~~~~",
-//                     "postIndex": 2,
-//                     "userIndex": 1,
-//                     "commentWriter":"유원석"
-//                     }],
-//                     "reply": [{
-//                         "replyIndex": 1,
-//                         "replyTimestamp": "2023.08.12",
-//                         "replyContent": "리플 테스트1",
-//                         "commentIndex": 1,
-//                         "userIndex": 1,
-//                         "replyWriter":"지짱",
-//                         "replyImgUrl":"/img/avatar.png",
-//                     }]
-//             },
-//             {
-//                 "postIndex": 3,
-//                 "postTitle": "세번째 게시물임 ㅋㅋ",
-//                 "postContent": "세번째 게시물입니다.",
-//                 "boardName": "실리카겔",
-//                 "like": 120,
-//                 "postTimestamp": "2023.08.12",
-//                 "postViews":623,
-//                 "postWriter": '지짱',
-//                 "postImgUrl": "/img/avatar.png",
-//                 "comment": [{
-//                     "commentIndex": 1,
-//                     "commentTimestamp": "2023.08.12",
-//                     "commentContent": "코멘트 테스트~~~~",
-//                     "postIndex": 2,
-//                     "userIndex": 1,
-//                     "commentWriter":"유원석"
-//                     }],
-//                     "reply": [{
-//                         "replyIndex": 1,
-//                         "replyTimestamp": "2023.08.12",
-//                         "replyContent": "리플 테스트1",
-//                         "commentIndex": 1,
-//                         "userIndex": 1,
-//                         "replyWriter":"지짱",
-//                         "replyImgUrl":"/img/avatar.png",
-//                     }]
-//             },
-//             {
-//                 "postIndex": 4,
-//                 "postTitle": "10번째 게시물임",
-//                 "postContent": "구라임 4번째임 ㅋㅋ",
-//                 "boardName": "AC/DC",
-//                 "like": 120,
-//                 "postTimestamp": "2023.08.13",
-//                 "postViews":623,
-//                 "postWriter": '지짱',
-//                 "postImgUrl": "/img/avatar.png",
-//                 "comment": [{
-//                     "commentIndex": 1,
-//                     "commentTimestamp": "2023.08.12",
-//                     "commentContent": "코멘트 테스트~~~~",
-//                     "postIndex": 2,
-//                     "userIndex": 1,
-//                     "commentWriter":"유원석"
-//                     }],
-//                     "reply": [{
-//                         "replyIndex": 1,
-//                         "replyTimestamp": "2023.08.12",
-//                         "replyContent": "리플 테스트1",
-//                         "commentIndex": 1,
-//                         "userIndex": 1,
-//                         "replyWriter":"지짱",
-//                         "replyImgUrl":"/img/avatar.png",
-//                     }]
-//             },
-//             {
-//                 "postIndex": 5,
-//                 "postTitle": "제목 뭐하지?",
-//                 "postContent": "이것은 더미데이터",
-//                 "boardName": "쏜애플",
-//                 "like": 120,
-//                 "postTimestamp": "2023.08.14",
-//                 "postViews":623,
-//                 "postWriter": '지짱',
-//                 "postImgUrl": "/img/avatar.png",
-//                 "comment": [{
-//                     "commentIndex": 1,
-//                     "commentTimestamp": "2023.08.12",
-//                     "commentContent": "코멘트 테스트~~~~",
-//                     "postIndex": 2,
-//                     "userIndex": 1,
-//                     "commentWriter":"유원석"
-//                     }],
-//                     "reply": [{
-//                         "replyIndex": 1,
-//                         "replyTimestamp": "2023.08.12",
-//                         "replyContent": "리플 테스트1",
-//                         "commentIndex": 1,
-//                         "userIndex": 1,
-//                         "replyWriter":"지짱",
-//                         "replyImgUrl":"/img/avatar.png",
-//                     }]
-//             },
-//             {
-//                 "postIndex": 6,
-//                 "postTitle": "제목 뭐하지?!!!!!!!",
-//                 "postContent": "이것은 더미데이터 글고 6번째임",
-//                 "boardName": "쏜애플",
-//                 "like": 120,
-//                 "postTimestamp": "2023.08.14",
-//                 "postViews":623,
-//                 "postWriter": '지짱',
-//                 "postImgUrl": "/img/avatar.png",
-//                 "comment": [{
-//                     "commentIndex": 1,
-//                     "commentTimestamp": "2023.08.12",
-//                     "commentContent": "코멘트 테스트~~~~",
-//                     "postIndex": 2,
-//                     "userIndex": 1,
-//                     "commentWriter":"유원석"
-//                     }],
-//                     "reply": [{
-//                         "replyIndex": 1,
-//                         "replyTimestamp": "2023.08.12",
-//                         "replyContent": "리플 테스트1",
-//                         "commentIndex": 1,
-//                         "userIndex": 1,
-//                         "replyWriter":"지짱",
-//                         "replyImgUrl":"/img/avatar.png",
-//                     }]
-//             },
-//             {
-//                 "postIndex": 7,
-//                 "postTitle": "제목 뭐하지?!!!!!!!",
-//                 "postContent": "이것은 더미데이터 글고 6번째임",
-//                 "boardName": "92914",
-//                 "like": 120,
-//                 "postTimestamp": "2023.08.14",
-//                 "postViews":623,
-//                 "postWriter": '지짱',
-//                 "postImgUrl": "/img/avatar.png",
-//                 "comment": [{
-//                     "commentIndex": 1,
-//                     "commentTimestamp": "2023.08.12",
-//                     "commentContent": "코멘트 테스트~~~~",
-//                     "postIndex": 2,
-//                     "userIndex": 1,
-//                     "commentWriter":"유원석"
-//                     }],
-//                     "reply": [{
-//                         "replyIndex": 1,
-//                         "replyTimestamp": "2023.08.12",
-//                         "replyContent": "리플 테스트1",
-//                         "commentIndex": 1,
-//                         "userIndex": 1,
-//                         "replyWriter":"지짱",
-//                         "replyImgUrl":"/img/avatar.png",
-//                     }]
-//             }
-//         ]
-//     }
-// )
-
-// export const noticePostState = atom(
-//     {
-//         "key":"noticePost",
-//         "default": [
-//             {
-//               "postIndex": 1,
-//               "postTitle": "공지사항 첫번째 게시물",
-//               "postContent": "첫번째 게시물입니다.",
-//               "boardName": "실리카겔",
-//               "like": 9999,
-//               "postTimestamp": "2023.08.10",
-//               "postViews":623,
-//               "postWriter": '지짱',
-//               "postImgUrl": null,
-//             },
-//             {
-//               "postIndex": 2,
-//               "postTitle": "공지사항 두번째 게시물",
-//               "postContent": "두번째 게시물입니다.",
-//               "boardName": "ELLE GARDEN",
-//               "like": 120,
-//               "postTimestamp": "2023.08.11",
-//               "postViews":623,
-//               "postWriter": '지짱',
-//               "postImgUrl": null,
-//             },
-//             {
-//               "postIndex": 3,
-//               "postTitle": "공지사항 세번째 게시물임 ㅋㅋ",
-//               "postContent": "세번째 게시물입니다.",
-//               "boardName": "신해경",
-//               "like": 120,
-//               "postTimestamp": "2023.08.12",
-//               "postViews":623,
-//               "postWriter": '지짱',
-//               "postImgUrl": null,
-//             },
-//             {
-//               "postIndex": 4,
-//               "postTitle": "공지사항 10번째 게시물임",
-//               "postContent": "구라임 4번째임 ㅋㅋ",
-//               "boardName": "AC/DC",
-//               "like": 120,
-//               "postTimestamp": "2023.08.13",
-//               "postViews":623,
-//               "postWriter": '지짱',
-//               "postImgUrl": null,
-//             },
-//             {
-//               "postIndex": 5,
-//               "postTitle": "공지사항 제목 뭐하지?",
-//               "postContent": "이것은 더미데이터",
-//               "boardName": "쏜애플",
-//               "like": 120,
-//               "postTimestamp": "2023.08.14",
-//               "postViews":623,
-//               "postWriter": '지짱',
-//               "postImgUrl": null,
-//             }
-//         ]
-//     }
-// )
-
-// export const newsPostState = atom(
-//     {
-//         "key":"newsPost",
-//         "default": [
-//             {
-//               "postIndex": 1,
-//               "postTitle": "새소식 첫번째 게시물",
-//               "postContent": "첫번째 게시물입니다.",
-//               "boardName": "실리카겔",
-//               "like": 9999,
-//               "postTimestamp": "2023.08.10",
-//               "postViews":623,
-//               "postWriter": '지짱',
-//               "postImgUrl": null,
-//             },
-//             {
-//               "postIndex": 2,
-//               "postTitle": "새소식 두번째 게시물",
-//               "postContent": "두번째 게시물입니다.",
-//               "boardName": "ELLE GARDEN",
-//               "like": 120,
-//               "postTimestamp": "2023.08.11",
-//               "postViews":623,
-//               "postWriter": '지짱',
-//               "postImgUrl": null,
-//             },
-//             {
-//               "postIndex": 3,
-//               "postTitle": "새소식 세번째 게시물임 ㅋㅋ",
-//               "postContent": "세번째 게시물입니다.",
-//               "boardName": "신해경",
-//               "like": 120,
-//               "postTimestamp": "2023.08.12",
-//               "postViews":623,
-//               "postWriter": '지짱',
-//               "postImgUrl": null,
-//             },
-//             {
-//               "postIndex": 4,
-//               "postTitle": "새소식 10번째 게시물임",
-//               "postContent": "구라임 4번째임 ㅋㅋ",
-//               "boardName": "AC/DC",
-//               "like": 120,
-//               "postTimestamp": "2023.08.13",
-//               "postViews":623,
-//               "postWriter": '지짱',
-//               "postImgUrl": null,
-//             },
-//             {
-//               "postIndex": 5,
-//               "postTitle": "새소식 제목 뭐하지?",
-//               "postContent": "이것은 더미데이터",
-//               "boardName": "쏜애플",
-//               "like": 120,
-//               "postTimestamp": "2023.08.14",
-//               "postViews":623,
-//               "postWriter": '지짱',
-//               "postImgUrl": null,
-//             },
-//             {
-//               "postIndex": 6,
-//               "postTitle": "새소식 제목 뭐하지?",
-//               "postContent": "이것은 더미데이터",
-//               "boardName": "92914",
-//               "like": 120,
-//               "postTimestamp": "2023.08.14",
-//               "postViews":623,
-//               "postWriter": '지짱',
-//               "postImgUrl": null,
-//             },
-
-//         ]
-//     }
-// )
-
 export const postState = atom(
     {
         "key":"postState",
@@ -585,8 +243,8 @@ export const postState = atom(
               "postIndex": 1,
               "postTitle": "실리카겔1",
               "postContent": "첫번째 게시물입니다.",
-              "bandName": "실리카겔",
-              "boardName": "notice",
+              "postCategory": "notice",
+              "bandName":"실리카겔",
               "like": 9999,
               "postTimestamp": "2023.08.10",
               "postViews":623,
@@ -598,7 +256,7 @@ export const postState = atom(
                 "commentContent": "코멘트 테스트 커뮤니티",
                 "postIndex": 1,
                 "userIndex": 1,
-                "commentWriter":"유원석"
+                "commentWriter":"김지현"
                 }],
                 "reply": [{
                     "replyIndex": 1,
@@ -614,7 +272,8 @@ export const postState = atom(
               "postIndex": 2,
               "postTitle": "커뮤니티 두번째 게시물",
               "postContent": "두번째 게시물입니다.",
-              "boardName": "community",
+              "postCategory": "concertinfo",
+              "bandName":"92914",
               "like": 120,
               "postTimestamp": "2023.08.11",
               "postViews":623,
@@ -642,7 +301,8 @@ export const postState = atom(
               "postIndex": 3,
               "postTitle": "공지사항 게시물",
               "postContent": "세번째 게시물입니다.",
-              "boardName": "notice",
+              "postCategory": "notice",
+              "bandName":"",
               "like": 120,
               "postTimestamp": "2023.08.12",
               "postViews":623,
@@ -678,18 +338,19 @@ export const postState = atom(
             },
             {
               "postIndex": 4,
-              "postTitle": "AC/DC 10번째 게시물임",
-              "postContent": "구라임 4번째임 ㅋㅋ",
-              "boardName": "AC/DC",
+              "postTitle": "쏜애플 게시물입니덩",
+              "postContent": "휴.. 어렵다 참...",
+              "postCategory": "concertinfo",
+              "bandName":"쏜애플",
               "like": 120,
-              "postTimestamp": "2023.08.13",
+              "postTimestamp": "2023.08.12",
               "postViews":623,
               "postWriter": '지짱',
-              "postImgUrl": null,
+              "postImgUrl": "/img/avatar.png",
               "comment": [{
                 "commentIndex": 1,
                 "commentTimestamp": "2023.08.12",
-                "commentContent": "코멘트 테스트1",
+                "commentContent": "쏜애플 개조와",
                 "postIndex": 3,
                 "userIndex": 1,
                 "commentWriter":"유원석",
@@ -698,45 +359,7 @@ export const postState = atom(
                 {
                 "commentIndex": 2,
                 "commentTimestamp": "2023.08.12",
-                "commentContent": "코멘트 테스트2",
-                "postIndex": 3,
-                "userIndex": 1,
-                "commentWriter":"유원석",
-                "commentImgUrl":"/img/avatar.png",
-                }],
-                "reply": [{
-                    "replyIndex": 1,
-                    "replyTimestamp": "2023.08.12",
-                    "replyContent": "리플 테스트1",
-                    "commentIndex": 1,
-                    "userIndex": 1,
-                    "replyWriter":"지짱",
-                    "replyImgUrl":"/img/avatar.png",
-                }]
-            },
-            {
-              "postIndex": 5,
-              "postTitle": "쏜애플 제목 뭐하지?",
-              "postContent": "이것은 더미데이터",
-              "boardName": "쏜애플",
-              "like": 120,
-              "postTimestamp": "2023.08.14",
-              "postViews":623,
-              "postWriter": '지짱',
-              "postImgUrl": null,
-              "comment": [{
-                "commentIndex": 1,
-                "commentTimestamp": "2023.08.12",
-                "commentContent": "코멘트 테스트1",
-                "postIndex": 3,
-                "userIndex": 1,
-                "commentWriter":"유원석",
-                "commentImgUrl":"/img/avatar.png",
-                },
-                {
-                "commentIndex": 2,
-                "commentTimestamp": "2023.08.12",
-                "commentContent": "코멘트 테스트2",
+                "commentContent": "근데 왜 두번째 코멘트는 안나오지",
                 "postIndex": 3,
                 "userIndex": 1,
                 "commentWriter":"유원석",
@@ -756,13 +379,13 @@ export const postState = atom(
     }
 )
 
-export const userDataState = atom({
-    "key":"userDataState",
-    nickname: "",
-    profileimg:"",
-    password:"",
-    isPasswordConfirm:"",
-});
+// export const userDataState = atom({
+//     "key":"userDataState",
+//     nickname: "",
+//     profileimg:"",
+//     password:"",
+//     isPasswordConfirm:"",
+// });
 
 export const bannerImgState = atom({
     key: 'bannerImgState',
@@ -858,4 +481,9 @@ export const requestState = atom({
             requestpostTimestamp:"2023.10.03",
         },
     ]
+})
+
+export const setLoginState = atom({
+    key:"setLoginState",
+    default:false
 })

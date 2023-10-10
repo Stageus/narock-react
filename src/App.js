@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom"
+import { CookiesProvider } from "react-cookie";
 
 import UserManagement from "./pages/UserManagement"
 import BandRequest from "./pages/BandRequest"
@@ -25,12 +26,12 @@ import Write from "./pages/Write"
 
 const App = () => {
   return(
+    <CookiesProvider>
       <Routes>
         <Route path="/" element={<Main />}/>
         <Route path="/admin/usermanagement" element={<UserManagement />}/>
         <Route path="/admin/BandRequest" element={<BandRequest />}/>
         <Route path="/allband" element={<AllBand />}/>
-        {/* <Route path="/allband/:bandname" element={<AllBandBoard />}/> */}
         <Route path="/allband/:bandname/notice" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/concertInfo" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/gallery" element={<AllBandBoard />}/>
@@ -59,6 +60,7 @@ const App = () => {
         <Route path="/search" element={<Search />}/>
         <Route path="/write" element={<Write />}/>
       </Routes>
+    </CookiesProvider>
   )
 }
 

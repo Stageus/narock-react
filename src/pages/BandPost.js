@@ -13,14 +13,14 @@ const BandPost = () => {
     const { bandname } = useParams();
     const posts = useRecoilValue(postState); // postState 셀렉터로 데이터 가져옴
     const comments = useRecoilValue(commentState); // postState 셀렉터로 데이터 가져옴
-    console.log(posts)
+
     return (
         <div>
             <Header/>
             <BandHeader bandname={bandname}/>
             <Box>
                 <AllBandNav bandname={bandname}/>
-                <PostDetailBox bandname={bandname} bandposts={posts} bandcomments={comments}/>  
+                <PostDetailBox bandname={bandname} post={posts} bandcomments={comments}/>  
             </Box>
         </div>
     );

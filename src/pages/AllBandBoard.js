@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
 
 import Header from "../components/common/Header";
 import AllBandNav from "../components/band/AllBandNav";
@@ -11,14 +10,18 @@ import { Div } from "../styled/ProjectStyle";
 
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from "recoil";
-import { postRowState } from "../recoil/FrontRecoil";
+import { postRowState,bandmenuState } from "../recoil/FrontRecoil";
 import { postState } from "../recoil/BackRecoil";
 
 const AllBandBoard = () => {
     const { bandname } = useParams();
+    const bandmenu = useRecoilValue(bandmenuState)
+    const category = decodeURI(window.location.pathname); 
+    const domainCategory = category.split('/')[3];
+    console.log(domainCategory)
     const postRow = useRecoilValue(postRowState);
     const posts = useRecoilValue(postState);
-    const post = posts.filter(p=>p.boardName === bandname);
+    const noticePost = posts.filter(p=>p.bandName === bandname && p.postCategory === domainCategory);
     
     return (
         <div>
@@ -35,7 +38,8 @@ const AllBandBoard = () => {
                     like={postRow[4].label}
                     
                     /> {/* 제목, 작성자, 작성날짜, 조회수, 좋아요 줄 */}
-                    <PostListBox bandname={bandname} posts={post}/> {/* 게시물 목록 출력 */}
+                    
+                    <PostListBox bandname={bandname} posts={noticePost}/> {/* 게시물 목록 출력 */}
                 </Div>
             </Div>
         </div>

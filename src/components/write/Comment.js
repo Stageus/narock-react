@@ -41,7 +41,7 @@ const Comment = (props) => {
             <div>댓글</div>
                 {posts.map((val,idx)=>{
                     return(
-                        <Div display="block" margin="0" key={val[idx]}>
+                        <Div display="block" margin="0" key={idx}>
                             <Div borderbottom="1px solid #E2E8FF" >
                                 <img src="/img/avatar.png" width="40px" alt="프로필사진"/>
                                 <Div flexdirection="column" alignitems="flex-start">

@@ -10,20 +10,16 @@ import { useNavigate , useParams, useLocation } from "react-router-dom";
 
 const PostDetailBox = (props) => {
     const { postid } = useParams();
-    const location = useLocation();
-    // console.log(location.pathname)
+    const domain = decodeURI(window.location.pathname);
+    const domainSplit = domain.split('/');
+    const domainRemove = domainSplit.pop();
     const { 
         bandname,
         post
         // comment
     } = props;
-    // const post = bandposts.filter(p => p.boardName === bandname && p.postIndex === parseInt(postid));
-    // const comment = bandcomments.filter(p => p.boardName === bandname && p.postId === parseInt(postid));
-    // console.log(post)
-    
-    const posts = post.filter(p => p.postIndex === parseInt(postid));
 
-    // console.log(community)
+    const posts = post.filter(p => p.postIndex === parseInt(postid));
     const [liked,setLiked] = useRecoilState(likedState);
     const [isLiked,setIsLiked] = useRecoilState(isLikedState);
     const navigate = useNavigate();
@@ -36,45 +32,34 @@ const PostDetailBox = (props) => {
         setIsLiked(!isLiked);
 
     }
-
+    const GoToList = () => {
+        if(domain.includes('/allband')){
+            navigate(`/allband/${bandname}/${domainSplit.reverse()[0]}`)
+        }else{
+            navigate(`/${domainSplit.reverse()[0]}`)
+        }
+    }
     return (
         <Div width="100%" margin="0 80px" padding="20px" flexdirection="column">
-            {/* {
-             post.length > 0 && post.map((value,idx)=>{
-                return(
-                <Div key={idx} width="100%" display="block">
-                    <Div padding="20px" border="1px solid #E2E8FF" display="block" margin="0 0 20px 0">
-                        <div>{value.boardName}</div>
-                        <div>{value.postTitle}</div>
-                        <Div display="flex" justifycontent="space-between" borderbottom="1px solid #E2E8FF" margin="0">
-                            <Div display="flex" alignitems="center" margin="0">
-                                <ProfileImg src={value.postImgUrl} alt="프로필 사진"/>
-                                <Div margin="0 10px 0 0">{value.postWriter}</Div>
-                                <Div margin="0 10px 0 0">{value.postViews}</Div>
-                                <Div margin="0 10px 0 0">{value.postTimestamp}</Div>
-                                <Div margin="0 10px 0 0">댓글갯수</Div>
-                            </Div>
-                            <Div display="flex" alignitems="center">
-                                <Button value="수정" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
-                                <Button value="삭제" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
-                                <Button value="목록" type="button" onClick={()=>{navigate(`/allband/${bandname}/notice`)}}/>
-                            </Div>
-                        </Div>
-                        <Div margin="20px 0">{value.content}</Div>
-                        <Div display="flex" alignitems="cetnter" margin="0">
-                            {isLiked ? <Icon src={`${process.env.PUBLIC_URL}/img/like_active.png`} alt="좋아요" onClick={ClickEvent}/> : <Icon src={`${process.env.PUBLIC_URL}/img/like.png`} alt="좋아요" onClick={ClickEvent}/>}
-                            {<Like>{liked}</Like>}
-                        </Div>
-                    </Div>
-                    <Comment comment={value.comment} bandname={bandname} postId={value.postIndex} reply={value.reply} post={post}/>
-                </Div>
-                )
-                })} */}
             {posts.length > 0 &&  posts.map((value,idx)=>{
                 return(
                 <Div key={idx} width="100%" display="block">
                     <Div padding="20px" border="1px solid #E2E8FF" display="block" margin="0 0 20px 0">
-                        <div>{value.boardName}</div>
+                        <div>
+                            {value.postCategory === "notice"
+                            ? "공지사항"
+                            : value.postCategory === "concertinfo"
+                            ? "공연정보"
+                            : value.postCategory === "gallery"
+                            ? "갤러리"
+                            : value.postCategory === "community"
+                            ? "자유 게시판"
+                            : value.postCategory === "news"
+                            ? "새소식"
+                            : value.postCategory === "community"
+                            ? "커뮤니티"
+                            : value.bandName}
+                        </div>
                         <div>{value.postTitle}</div>
                         <Div display="flex" justifycontent="space-between" margin="0">
                             <Div display="flex" alignitems="center" margin="0">
@@ -87,7 +72,7 @@ const PostDetailBox = (props) => {
                             <Div display="flex" alignitems="center">
                                 <Button value="수정" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
                                 <Button value="삭제" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
-                                <Button value="목록" type="button" onClick={()=>{navigate(`/allband/${bandname}/notice`)}}/>
+                                <Button value="목록" type="button" onClick={GoToList}/>
                             </Div>
                         </Div>
                         <Div margin="20px 0">{value.postContent}</Div>

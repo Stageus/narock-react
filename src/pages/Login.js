@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/common/Header";
 import Logo from "../components/Logo";
-
-
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
@@ -12,34 +12,53 @@ const Login = () => {
     const navigate = useNavigate();
     const [uid, setUid] = useState("");
     const [upw, setUpw] = useState("");
+    const [cookie, setCookie] = useCookies(['id']);
+
+
 
     const loginClickEvent = async () => {
 
-        const response = await fetch("https://www.narock.site/account/login",{
-        "method": "POST",
-        "headers": {
-            "Content-Type": "application/json",
-        },
-        "credentials": "include",
-        "body":JSON.stringify({
-            "idValue": uid,
-		    "pwValue": upw
-        })
-    })
-        const result = await response.json()
-        if(result.success){
-            alert("로그인 되었습니다.")
-            navigate('/')
-        }
-        if(uid === "" || upw === ""){
-            alert('아이디 또는 비밀번호를 확인해 주세요.')
-        }
+    //     const response = await fetch("https://www.narock.site/account/login",{
+    //     "method": "POST",
+    //     "headers": {
+    //         "Content-Type": "application/json",
+    //     },
+    //     "credentials": "include",
+    //     "body":JSON.stringify({
+    //         "idValue": uid,
+	// 	    "pwValue": upw
+    //     })
+    // })
+    //     const result = await response.json()
+        
+    //     if(result.success){
+    //         alert("로그인 되었습니다.")
+    //         // navigate('/')
+    //         const token = result.token
+    //         localStorage.setItem("token",result.token);
+    //         console.log(token)
+    //     }
+    //     if(uid === "" || upw === ""){
+    //         alert('아이디 또는 비밀번호를 확인해 주세요.')
+    //     }
         // else{
         //     alert("로그인 정보가 일치하지 않습니다.")
         // }
         // if(정보 없거나 비밀번호 일치하지 않을 시){
         //     alert("가입 된 정보가 없거나 비밀번호가 일치하지 않습니다.")
         // }
+
+        axios.post("https://www.narock.site/account/login", { // 로그인 요청
+                "idValue": uid,
+                "pwValue": upw
+			},
+            { withCredentials: true }
+            )
+			.then((res) => {
+                console.log(res);
+			}).catch(error=>{
+                console.log(error)
+            })
     }
 
 

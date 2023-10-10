@@ -3,10 +3,10 @@ import { atom } from "recoil";
 export const bandmenuState = atom({
     key: 'bandmenuState',
     default: [
-      { label: '밴드 공지사항', id: 'notice' },
-      { label: '공연 정보', id: 'concertinfo' },
-      { label: '갤러리', id: 'gallery' },
-      { label: '자유 게시판', id: 'community' }
+      { label: '밴드 공지사항', id: 'notice', index:0 },
+      { label: '공연 정보', id: 'concertinfo', index:1 },
+      { label: '갤러리', id: 'gallery', index:2 },
+      { label: '자유 게시판', id: 'community', index:3 }
     ]
   });
 

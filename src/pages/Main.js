@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Align } from "../styled/ProjectStyle";
 import Header from "../components/common/Header";
