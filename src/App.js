@@ -36,8 +36,8 @@ const App = () => {
         <Route path="/allband/:bandname/concertInfo" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/gallery" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/community" element={<AllBandBoard />}/>
-        <Route path="/allband/:bandname/notice/:postid" element={<BandPost />}/>
-        <Route path="/allband/:bandname/concertInfo/:postid" element={<BandPost />}/>
+        <Route path="/allband/:bandname/notice/:postid" element={<AllBandBoard />}/>
+        <Route path="/allband/:bandname/concertInfo/:postid" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/gallery/:postid" element={<BandPost />}/>
         <Route path="/allband/:bandname/community/:postid" element={<BandPost />}/>
         <Route path="/allband/:bandname/notice/search?:keyword" element={<BandPostSearch />}/>

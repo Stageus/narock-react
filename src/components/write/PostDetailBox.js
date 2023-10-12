@@ -40,16 +40,16 @@ const PostDetailBox = (props) => {
         }
     }
     return (
-        <Div width="100%" margin="0 80px" padding="20px" flexdirection="column">
+        <Div width="100%" margin="0">
             {posts.length > 0 &&  posts.map((value,idx)=>{
                 return(
-                <Div key={idx} width="100%" display="block">
+                <Div key={idx} width="100%" display="block" margin="0 80px">
                     <Div padding="20px" border="1px solid #E2E8FF" display="block" margin="0 0 20px 0">
                         <div>
                             {value.postCategory === "notice"
                             ? "공지사항"
                             : value.postCategory === "concertinfo"
-                            ? "공연정보"
+                            ? "공연 정보"
                             : value.postCategory === "gallery"
                             ? "갤러리"
                             : value.postCategory === "community"

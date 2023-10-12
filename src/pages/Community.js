@@ -14,8 +14,11 @@ import { postState } from '../recoil/BackRecoil';
 import { postRowState } from '../recoil/FrontRecoil'
 const Community = () => {
     const posts = useRecoilValue(postState);
-    const postRow = useRecoilValue(postRowState)
+    const postRow = useRecoilValue(postRowState);
 
+    const bandnameEncoded = decodeURI(window.location.pathname); 
+    const domainCategory = bandnameEncoded.split('/');
+    const filteredPost = posts.filter(v=>!v.bandName && domainCategory[1] === v.postCategory);
     return (
         <div>
             <Header/>
@@ -27,7 +30,7 @@ const Community = () => {
                 createDate={postRow[2].label}
                 view={postRow[3].label}
                 like={postRow[4].label}/>
-                <PostListBox posts={posts}/>
+                <PostListBox posts={filteredPost}/>
             </Box>  
         </div>
     );

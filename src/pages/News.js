@@ -1,8 +1,7 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
 
 import styled from "styled-components";
-import { Button, Title } from "../styled/ProjectStyle";
+import { Title } from "../styled/ProjectStyle";
 
 import Header from "../components/common/Header";
 import PostRow from "../components/write/PostRow";
@@ -13,11 +12,12 @@ import { postState } from "../recoil/BackRecoil";
 import PostListBox from "../components/write/PostListBox";
 const News = () => {
 
-    const navigate = useNavigate();
     const postRow = useRecoilValue(postRowState)
     const posts = useRecoilValue(postState); // postState 셀렉터로 데이터 가져옴
-    // const comments = useRecoilValue(commentState);
 
+    const bandnameEncoded = decodeURI(window.location.pathname); 
+    const domainCategory = bandnameEncoded.split('/');
+    const filteredPost = posts.filter(v=>!v.bandName && domainCategory[1] === v.postCategory);
     return (
         <div>
             <Header/>
@@ -29,7 +29,7 @@ const News = () => {
                 createDate={postRow[2].label}
                 view={postRow[3].label}
                 like={postRow[4].label}/>
-            <PostListBox posts={posts}/>
+                <PostListBox posts={filteredPost}/>
             </Box>  
         </div>
     );

@@ -8,21 +8,8 @@ import { Button } from "../../styled/ProjectStyle";
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 const PostListBox = (props) => {
-    const { bandname, posts } = props;
-    const params = useParams();
-    console.log("params",params)
-    const location = useLocation();
-    const bandnameEncoded = decodeURI(window.location.pathname); 
-    const domainCategory = bandnameEncoded.split('/');
-
+    const { bandname, posts} = props;
     const sortedPost = [...posts].sort((a,b)=>b.postIndex - a.postIndex)
-    // const post = sortedPost.filter(p => `/allband/${domainCategory[2]}/${domainCategory[3]}` === location.pathname);
-    console.log(sortedPost)
-    const post = sortedPost.filter(p=>params === p.bandName)
-    // console.log(`/${domainCategory[2]}/${domainCategory[3]}`)
-
-    console.log("location pathname 값",location.pathname)
-    console.log("location 인코딩값",bandnameEncoded)
 
     const itemsCountPerPage = 3; // 한 페이지에 표시할 게시물 수
     const [limit, setLimit]= useState(10); 
@@ -36,7 +23,7 @@ const PostListBox = (props) => {
 
     return ( 
         <div>
-            { sortedPost && sortedPost.length > 0 ?
+            { sortedPost.length > 0 ?
               sortedPost.map((v)=>(
                 <Posts
                 key={v}

@@ -47,25 +47,26 @@ const Comment = (props) => {
                                 <Div flexdirection="column" alignitems="flex-start">
                                     <div>{val.comment[idx].commentWriter}</div>
                                     {isComment ?
-                                        <MainComment onChange={(e)=>{commentValue(e)}} defaultValue={val.commentContent}/>
-                                        :<div>{val.comment[idx].commentContent}</div>
+                                        (<MainComment onChange={(e)=>{commentValue(e)}} defaultValue={val.commentContent}/>)
+                                        :(<div>{val.comment[idx].commentContent}</div>)
                                     }
                                     <Date>{val.comment[idx].commentTimestamp}</Date>
                                 </Div>
                                 {isComment ?
-                                    <Div>
+                                    (<Div>
                                         <Button value="취소" backgroundcolor="transparent" color="mainColor" onClick={()=>{setIsComment(!isComment)}}/>
                                         <Button value="완료" backgroundcolor="transparent" color="mainColor" /* onClick={()=>{modifyComment(idx,afterModifyComment)}} *//>
                                     </Div>
-                                        :
+                                    ):(
                                     <Div>
                                         <Button value="답글" backgroundcolor="transparent" color="mainColor" onClick={replyEvent}/>
                                         <Button value="수정" backgroundcolor="transparent" color="mainColor" onClick={modifyEvent}/>
                                         <Button value="삭제" backgroundcolor="transparent" color="mainColor"/>
                                     </Div>
+                                    )
                                 }
                             </Div>
-                                <Div borderbottom="1px solid #E2E8FF" padding="0 0 0 37px">
+                                    <Div borderbottom="1px solid #E2E8FF" padding="0 0 0 37px">
                                     <img src={val.reply[idx].replyImgUrl} width="40px" alt="프로필사진"/>
                                     <Div flexdirection="column" alignitems="flex-start">
                                         <div>{val.reply[idx].replyWriter}</div>

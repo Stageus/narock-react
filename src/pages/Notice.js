@@ -16,13 +16,9 @@ const Notice = () => {
     const postRow = useRecoilValue(postRowState)
     const posts = useRecoilValue(postState);
 
-    // const itemsCountPerPage = 3; // 한 페이지에 표시할 게시물 수
-    // const [limit, setLimit]= useState(10); 
-    // const [page, setPage] = useState(1);
-    // const offset = (page-1)*limit; // 한 페이지에 들어갈 갯수
-    // const displayedPosts = post.slice(
-    //     offset, offset + limit
-    // );
+    const bandnameEncoded = decodeURI(window.location.pathname); 
+    const domainCategory = bandnameEncoded.split('/');
+    const filteredPost = posts.filter(v=>!v.bandName && domainCategory[1] === v.postCategory);
 
     return (
         <div>
@@ -36,7 +32,7 @@ const Notice = () => {
                     view={postRow[3].label}
                     like={postRow[4].label}
                 />
-            <PostListBox posts={posts}/>
+            <PostListBox posts={filteredPost}/>
             </Box>  
         </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, useLocation  } from 'react-router-dom';
+import { useLocation,NavLink  } from 'react-router-dom';
 import { useRecoilValue } from "recoil";
 import { bandmenuState } from "../../recoil/FrontRecoil";
 
@@ -10,9 +10,8 @@ const AllBandNav = (props) => {
     const location = useLocation();
     return ( 
         <MenuBox>
-            {bandmenu.map(menu=>(
-                    <Menu to={`/allband/${encodeURIComponent(bandname)}/${encodeURIComponent(menu.id)}`}
-                    isActive={location.pathname === `/allband/${encodeURIComponent(bandname)}/${encodeURIComponent(menu.id)}`}>
+            {bandmenu.map((menu,idx)=>(
+                    <Menu key={idx} to={`/allband/${encodeURIComponent(bandname)}/${encodeURIComponent(menu.id)}`}>
                         {menu.label}
                     </Menu>
             ))}
@@ -33,10 +32,12 @@ const MenuBox = styled.div`
     align-items:center;
     cursor:pointer;
 `
-const Menu = styled(Link)`
+const Menu = styled(NavLink)`
     margin:10px 0;
     text-decoration: none;
-    font-weight: ${({ isActive }) => (isActive ? 'bold' : 'normal')};
     color:#222A68;
+    &.active {
+        font-weight: bold;
+    }
 `
 export default AllBandNav;
