@@ -7,7 +7,6 @@ import BandRequest from "./pages/BandRequest"
 import AllBand from "./pages/AllBand";
 import AllBandBoard from "./pages/AllBandBoard";
 import AllPost from "./pages/AllPost";
-import BandPost from "./pages/BandPost";
 import BandPostSearch from "./pages/BandPostSearch";
 import Community from "./pages/Community";
 import Edit from "./pages/Edit"
@@ -28,7 +27,7 @@ const App = () => {
   return(
     <CookiesProvider>
       <Routes>
-        <Route path="/" element={<Main />}/>
+        <Route path="/" element={<Main/>}/>
         <Route path="/admin/usermanagement" element={<UserManagement />}/>
         <Route path="/admin/BandRequest" element={<BandRequest />}/>
         <Route path="/allband" element={<AllBand />}/>
@@ -37,11 +36,11 @@ const App = () => {
         <Route path="/allband/:bandname/gallery" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/community" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/notice/:postid" element={<AllBandBoard />}/>
-        <Route path="/allband/:bandname/concertInfo/:postid" element={<AllBandBoard />}/>
-        <Route path="/allband/:bandname/gallery/:postid" element={<BandPost />}/>
-        <Route path="/allband/:bandname/community/:postid" element={<BandPost />}/>
+        <Route path="/allband/:bandname/concertinfo/:postid" element={<AllBandBoard />}/>
+        <Route path="/allband/:bandname/gallery/:postid" element={<AllBandBoard />}/>
+        <Route path="/allband/:bandname/community/:postid" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/notice/search?:keyword" element={<BandPostSearch />}/>
-        <Route path="/allband/:bandname/concertInfo/search?:keyword" element={<BandPostSearch />}/>
+        <Route path="/allband/:bandname/concertinfo/search?:keyword" element={<BandPostSearch />}/>
         <Route path="/allband/:bandname/gallery/search?:keyword" element={<BandPostSearch />}/>
         <Route path="/allband/:bandname/community/search?:keyword" element={<BandPostSearch />}/>
         <Route path="/community" element={<Community />}/>
@@ -52,13 +51,13 @@ const App = () => {
         <Route path="/notice/:postid" element={<AllPost />}/>
         <Route path="/edit" element={<Edit />}/>
         <Route path="/join" element={<Join />}/>
-        <Route path="/login" element={<Login />}/>
-        <Route path="/mypage" element={<Mypage />}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/mypage" element={<Mypage/>}/>
         <Route path="/findaccount" element={<FindAccount />}/>
         <Route path="/resetpassword" element={<ResetPassword />}/>
         <Route path="/totalsearch" element={<TotalSearch />}/>
         <Route path="/search" element={<Search />}/>
-        <Route path="/write" element={<Write />}/>
+        <Route path="/write" element={<Write/>}/>
       </Routes>
     </CookiesProvider>
   )

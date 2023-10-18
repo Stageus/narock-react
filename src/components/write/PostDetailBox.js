@@ -6,24 +6,35 @@ import { useRecoilState } from 'recoil';
 
 import { isLikedState, likedState } from "../../recoil/FrontRecoil";
 import Comment from "./Comment";
-import { useNavigate , useParams, useLocation } from "react-router-dom";
+import { useNavigate , useParams } from "react-router-dom";
 
 const PostDetailBox = (props) => {
     const { postid } = useParams();
     const domain = decodeURI(window.location.pathname);
     const domainSplit = domain.split('/');
-    const domainRemove = domainSplit.pop();
+    const domainRemove = domainSplit.pop(); // domainSplit 맨 마지막 배열 삭제용
+    const keywordsToCheck = ['notice', 'community', 'concertinfo', 'news', 'gallery'];
+    const foundKeywords = keywordsToCheck.filter(keyword => domainSplit.includes(keyword)).join(',');
+    
+    console.log(foundKeywords)
+
     const { 
         bandname,
         post
         // comment
     } = props;
+    
+    //글번호, 카테고리 일치하는 게시물만 불러오기
+    const posts = post.filter(
+        p => p.postIndex === parseInt(postid) && p.postCategory === foundKeywords);
+        
 
-    const posts = post.filter(p => p.postIndex === parseInt(postid));
     const [liked,setLiked] = useRecoilState(likedState);
     const [isLiked,setIsLiked] = useRecoilState(isLikedState);
     const navigate = useNavigate();
-    const ClickEvent = () =>{
+
+    //좋아요 클릭
+    const LikeClickEvent = () =>{
         if(isLiked){
             setLiked(liked - 1);
         }else{
@@ -67,7 +78,7 @@ const PostDetailBox = (props) => {
                                 <Div margin="0 10px 0 0">{value.postWriter}</Div>
                                 <Div margin="0 10px 0 0">{value.postViews}</Div>
                                 <Div margin="0 10px 0 0">{value.postTimestamp}</Div>
-                                <Div margin="0 10px 0 0">댓글갯수</Div>
+                                <Div margin="0 10px 0 0">{value.comment.length+value.reply.length}</Div>
                             </Div>
                             <Div display="flex" alignitems="center">
                                 <Button value="수정" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
@@ -77,7 +88,7 @@ const PostDetailBox = (props) => {
                         </Div>
                         <Div margin="20px 0">{value.postContent}</Div>
                         <Div display="flex" alignitems="cetnter" margin="0">
-                            {isLiked ? <Icon src={`${process.env.PUBLIC_URL}/img/like_active.png`} alt="좋아요" onClick={ClickEvent}/> : <Icon src={`${process.env.PUBLIC_URL}/img/like.png`} alt="좋아요" onClick={ClickEvent}/>}
+                            {isLiked ? <Icon src={`${process.env.PUBLIC_URL}/img/like_active.png`} alt="좋아요" onClick={LikeClickEvent}/> : <Icon src={`${process.env.PUBLIC_URL}/img/like.png`} alt="좋아요" onClick={LikeClickEvent}/>}
                             {<Like>{liked}</Like>}
                         </Div>
                     </Div>
@@ -95,10 +106,12 @@ const ProfileImg = styled.img`
 `
 const Icon = styled.img`
     width:18px;
+    cursor:pointer;
 `
 
 const Like = styled.div`
     margin-left:5px;
     color:#3185FC;
+
 `
 export default PostDetailBox;

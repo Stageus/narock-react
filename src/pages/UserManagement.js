@@ -1,4 +1,4 @@
- import React, { useState } from "react";
+ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Button, Div, Input } from "../styled/ProjectStyle";
 
@@ -10,6 +10,7 @@ import Paging from "../components/Paging"
 import { useRecoilValue } from "recoil";
 import { userState,bandnameState } from "../recoil/BackRecoil";
 import { postRowState } from '../recoil/FrontRecoil'
+import axios from "axios";
 
 
 const UserManagement = () => {
@@ -33,6 +34,41 @@ const UserManagement = () => {
     const [boardSearchList,setBoardSearchList] = useState('');
     const [selectedBoard, setSelectedBoard] = useState(null);
     
+    const [userInfo, setUserInfo] = useState('');
+
+    const getUserInfoList = async () => {
+
+        axios.get("https://www.narock.site/account/all")
+            .then(function (response) {
+               console.log(response)
+            }).catch(function (error) {
+                // 오류발생시 실행
+            }).then(function() {
+                // 항상 실행
+            });
+            
+        // async await 함수를 사용할 때, 
+
+        try {
+            const data = await axios.get("https://www.narock.site/account/all");
+            console.log(data);
+        } catch {
+            // 오류 발생시 실행
+        }
+
+        // const response = await fetch("https://www.narock.site/account/all");
+        // const result = await response.json();
+
+        // if (result.success) {
+        //     setUserInfo((result.data));
+        // } else {
+        //     alert(result.message);
+        // }
+    }
+
+    useEffect(()=>{
+        getUserInfoList()
+    },[])
     const userOnChangeEvent = (e) => {
         setUserSearch(e.target.value);
     }

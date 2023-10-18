@@ -1,23 +1,22 @@
-import React, { useState } from "react";
-import axios from 'axios';
+import React from "react";
+// import axios from 'axios';
 import styled from "styled-components";
 import TermsAndCondition from "../components/auth/TermsAndCondition";
 import JoinInfo from "../components/auth/JoinInfo";
 import Header from "../components/common/Header";
 import Logo from "../components/Logo";
 import { Align, Button } from "../styled/ProjectStyle";
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { registState,errorState } from "../recoil/UserStates";
 
 const Join = () => {
     const regist = useRecoilValue(registState)
-    const isError = useRecoilValue(errorState)
+    const [isError,setIsError] = useRecoilState(errorState)
 
 
     const handleJoinButtonClick = async () => {
         if(regist.id.length * regist.password.length * regist.confirmPassword.length * regist.nickname.length * regist.name.length * regist.email.length * regist.certification.length === 0){
             alert("모든 칸을 입력해 주세요.")
-            // console.log("User Data:",userData)
             return;
         }
         if(!isError.isId){
@@ -40,21 +39,20 @@ const Join = () => {
             alert("이름을 체크해 주세요.")
             return;
         }
-
-
+        if(!isError.isCertification){
+            alert("인증번호를 확인해 주세요.")
+            return;
+        }
         if(!regist.isTermsandcondition){
             alert("이용 약관에 동의해 주세요.")
             return;
         }
 
-        console.log("User Data:", regist);
-        // alert("가입을 축하합니다!");
-
 
         const response = await fetch("https://www.narock.site/account",{
             "method": "POST",
             "headers": {
-                "Content-Type": "application/json" //보내줄 데이터가 json 타입이라고 선언
+                "Content-Type": "application/json"
             },
             "body":JSON.stringify({
                 "idValue": regist.id,
@@ -70,7 +68,7 @@ const Join = () => {
             alert("회원가입 되었습니다.")
             // navigate('/')    
         }else{
-            alert(result.message)
+            console.log(result.message)
         }
     }
 

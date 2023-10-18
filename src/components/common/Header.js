@@ -3,9 +3,14 @@ import styled from "styled-components";
 import {Align, Input} from "../../styled/ProjectStyle";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
+
+import { useRecoilState } from 'recoil';
+import { loginState } from "../../recoil/UserStates";
+
 const Header = () => {
     const navigate = useNavigate();
 
+    const [auth,setAuth] = useRecoilState(loginState);
     const pageNavigate = (page) => {
         navigate(page)
     }
@@ -36,9 +41,18 @@ const Header = () => {
                     </div>
                     {}
                     <NavButton onClick={()=>{pageNavigate('/mypage')}}>마이페이지</NavButton>
-                    <NavButton onClick={()=>{pageNavigate('/login')}}>로그인</NavButton>
+                    {auth ? 
+                    <NavButton onClick={()=>{                            
+                        setAuth(false);
+                        alert('로그아웃 되었습니다.');
+                        pageNavigate('/')}}>로그아웃</NavButton>
+                    :<NavButton
+                        onClick={()=>{
+                        pageNavigate('/login')
+                        }}
+                    >로그인</NavButton>}
+
                     <NavButton onClick={()=>{pageNavigate('/admin/usermanagement')}}>관리자 페이지</NavButton>
-                    
                 </FirstNav>
             </Div>
             <SecondNav>

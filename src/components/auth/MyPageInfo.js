@@ -1,10 +1,19 @@
 import React, { useCallback, useState } from "react";
+import axios from 'axios';
 import { Input, Button } from "../../styled/ProjectStyle";
 import styled from "styled-components";
 import { Align,Error,Div } from "../../styled/ProjectStyle";
 
 const MyPageInfo = () => {
 
+    axios.get("https://www.narock.site/account")
+    .then(function (response) {
+         console.log(response)
+    }).catch(function (error) {
+        // 오류발생시 실행
+    }).then(function() {
+        // 항상 실행
+    });
     const [userData, setUserData] = useState({
         nickname: "",
         profileimg:"",

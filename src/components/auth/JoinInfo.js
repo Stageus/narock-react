@@ -1,19 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Align, Input, Button, Div, Success, Error } from "../../styled/ProjectStyle";
+import { Input, Button, Div, Success, Error } from "../../styled/ProjectStyle";
 import { useRecoilState } from 'recoil';
-import {
-    errorState,
-  isHoverState,registState
-} from '../../recoil/UserStates';
+import { errorState,isHoverState,registState } from '../../recoil/UserStates';
 
 const JoinInfo = () => {
     //인풋 값 확인
   
     //닉네임룰 호버
     const [isHover, setIsHover] = useRecoilState(isHoverState);
-    // const [isCertificate,setIsCertificate] = useState(false);
-    // console.log(isHover)
     const [regist, setRegist] = useRecoilState(registState);
     const [error, setError] = useRecoilState(errorState);
 
@@ -24,7 +19,6 @@ const JoinInfo = () => {
           ...regist,
           [name]: value,
         });
-        // console.log(value)
       };
 
         useEffect(()=>{
@@ -149,11 +143,10 @@ const JoinInfo = () => {
                     isName:false,
                 }))
             }
-
-
         },[regist.id,regist.password,regist.confirmPassword,regist.name,regist.nickname,setError]);
 
-        const certificationEvent = () =>{
+        //인증번호 발송
+        const certificationEvent = async() =>{
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
             if(regist.email === ''){
@@ -162,24 +155,72 @@ const JoinInfo = () => {
                     email:null,
                     isEmail:false,
                 }))
-                alert('유효한 이메일을 작성해 주세요.')
+                alert('유효한 이메일을 입력해 주세요.')
             }else if(emailRegex.test(regist.email)){
                 setError((error)=>({
                     ...error,
                     email:null,
                     isEmail:true,
-                    isCertification:true,
                 }))
-                // setIsCertificate(true);
 
-                alert("인증코드가 발송 되었습니다.")
+            const response = await fetch("https://www.narock.site/auth/email/signup",{
+                "method": "POST",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body":JSON.stringify({
+                    "emailValue":regist.email
+                })
+            })
+            const result = await response.json()
+            if(result.success){
+                alert("인증번호가 발송 되었습니다.")
+                console.log(result)
+            }else{
+                alert("이미 사용중인 이메일입니다.")
+            }
             }
             else if(!emailRegex.test(regist.email)) {
-                alert("유효한 이메일을 작성해 주세요.")
+                alert("유효한 이메일을 입력해 주세요.")
                 return;
             } 
         }
 
+        //인증번호 확인
+        const certificationConfirmEvent = async() => {
+            if(regist.certification === ''){
+                setError((error)=>({
+                    ...error,
+                    certification:null,
+                    iscertification:false,
+                }))
+                alert('인증번호를 입력해 주세요.')
+                return;
+            }
+
+            const response = await fetch("https://www.narock.site/auth/email/signUp/confirm",{
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body":JSON.stringify({
+                        "authCode":regist.certification
+                    })
+                })
+                const result = await response.json()
+                console.log(regist.certification)
+                if(result.success){
+                    alert("인증 되었습니다.")
+                    console.log(result)
+                    setError((error)=>({
+                        ...error,
+                        isCertification:true,
+                    }))   
+                }else{
+                    alert('인증번호가 맞지 않습니다.')
+                }
+                
+        }
 
     return (
         <form onChange={handleChange}> 
@@ -241,15 +282,17 @@ const JoinInfo = () => {
                     <Input name="email" maxLength="50"/>
                     {error.email && <Success>{error.email}</Success>}
                     {!error.isCertification ? <Button value="인증코드 발송" padding="0px 15px" radius="5px" height="32px" onClick={certificationEvent}></Button>:
-                    <Button value="인증코드 발송됨" padding="0px 15px" radius="5px" height="32px" disabled ></Button>
+                    <Button value="인증코드 발송됨" padding="0px 15px" radius="5px" height="32px" disabled backgroundColor="gray"></Button>
                     }
                 </div>
             </div>
             <div>
                 <label htmlFor="certification">인증번호</label>
                 <div margin="0">
-                    <Input name="certification"/>
-                    <Button value="확인" padding="0px 15px" radius="5px" height="32px" disabled ></Button>
+                    <Input name="certification" maxLength="6"/>
+                    {!error.isCertification ? <Button value="확인" padding="0px 15px" radius="5px" height="32px" onClick={certificationConfirmEvent}></Button> 
+                    : <Button value="인증 완료" padding="0px 15px" radius="5px" height="32px" disabled ></Button>}
+                    
                 </div>
             </div>
         </form>

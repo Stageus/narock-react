@@ -41,6 +41,7 @@ const Box = styled.div`
 
 const OverflowDiv = styled(Div)`
     width:20%;
+    height:50px;
     white-space:nowrap;
     overflow:hidden;
     text-overflow: ellipsis;

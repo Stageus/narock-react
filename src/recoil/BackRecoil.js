@@ -269,10 +269,39 @@ export const postState = atom(
                 }]
             },
             {
+              "postIndex": 1,
+              "postTitle": "실리카겔 연말 콘서트",
+              "postContent": "실리카겔 연말 콘서트 11/11 예매 완 ㅋ",
+              "postCategory": "concertinfo",
+              "bandName":"실리카겔",
+              "like": 9999,
+              "postTimestamp": "2023.08.10",
+              "postViews":623,
+              "postWriter": '지짱',
+              "postImgUrl": "/img/avatar.png",
+              "comment": [{
+                "commentIndex": 1,
+                "commentTimestamp": "2023.08.12",
+                "commentContent": "코멘트 테스트 커뮤니티",
+                "postIndex": 1,
+                "userIndex": 1,
+                "commentWriter":"김지현"
+                }],
+                "reply": [{
+                    "replyIndex": 1,
+                    "replyTimestamp": "2023.08.12",
+                    "replyContent": "리플 테스트1",
+                    "commentIndex": 1,
+                    "userIndex": 1,
+                    "replyWriter":"지짱",
+                    "replyImgUrl":"/img/avatar.png",
+                }]
+            },
+            {
               "postIndex": 2,
               "postTitle": "커뮤니티 두번째 게시물",
               "postContent": "두번째 게시물입니다.",
-              "postCategory": "concertinfo",
+              "postCategory": "community",
               "bandName":"92914",
               "like": 120,
               "postTimestamp": "2023.08.11",
@@ -298,10 +327,10 @@ export const postState = atom(
                 }]
             },
             {
-              "postIndex": 3,
-              "postTitle": "공지사항 게시물",
+              "postIndex": 1,
+              "postTitle": "새소식 게시물",
               "postContent": "세번째 게시물입니다.",
-              "postCategory": "notice",
+              "postCategory": "news",
               "bandName":"",
               "like": 120,
               "postTimestamp": "2023.08.12",
@@ -335,7 +364,197 @@ export const postState = atom(
                     "replyWriter":"지짱",
                     "replyImgUrl":"/img/avatar.png",
                 }]
-            },
+            },{
+                "postIndex": 2,
+                "postTitle": "새소식 게시물",
+                "postContent": "세번째 게시물입니다.",
+                "postCategory": "news",
+                "bandName":"",
+                "like": 120,
+                "postTimestamp": "2023.08.12",
+                "postViews":623,
+                "postWriter": '지짱',
+                "postImgUrl": "/img/avatar.png",
+                "comment": [{
+                  "commentIndex": 1,
+                  "commentTimestamp": "2023.08.12",
+                  "commentContent": "코멘트 테스트1",
+                  "postIndex": 3,
+                  "userIndex": 1,
+                  "commentWriter":"유원석",
+                  "commentImgUrl":"/img/avatar.png",
+                  },
+                  {
+                  "commentIndex": 2,
+                  "commentTimestamp": "2023.08.12",
+                  "commentContent": "코멘트 테스트2",
+                  "postIndex": 3,
+                  "userIndex": 1,
+                  "commentWriter":"유원석",
+                  "commentImgUrl":"/img/avatar.png",
+                  }],
+                  "reply": [{
+                      "replyIndex": 1,
+                      "replyTimestamp": "2023.08.12",
+                      "replyContent": "리플 테스트1",
+                      "commentIndex": 1,
+                      "userIndex": 1,
+                      "replyWriter":"지짱",
+                      "replyImgUrl":"/img/avatar.png",
+                  }]
+              },{
+                "postIndex": 3,
+                "postTitle": "새소식 게시물",
+                "postContent": "세번째 게시물입니다.",
+                "postCategory": "news",
+                "bandName":"",
+                "like": 120,
+                "postTimestamp": "2023.08.12",
+                "postViews":623,
+                "postWriter": '지짱',
+                "postImgUrl": "/img/avatar.png",
+                "comment": [{
+                  "commentIndex": 1,
+                  "commentTimestamp": "2023.08.12",
+                  "commentContent": "코멘트 테스트1",
+                  "postIndex": 3,
+                  "userIndex": 1,
+                  "commentWriter":"유원석",
+                  "commentImgUrl":"/img/avatar.png",
+                  },
+                  {
+                  "commentIndex": 2,
+                  "commentTimestamp": "2023.08.12",
+                  "commentContent": "코멘트 테스트2",
+                  "postIndex": 3,
+                  "userIndex": 1,
+                  "commentWriter":"유원석",
+                  "commentImgUrl":"/img/avatar.png",
+                  }],
+                  "reply": [{
+                      "replyIndex": 1,
+                      "replyTimestamp": "2023.08.12",
+                      "replyContent": "리플 테스트1",
+                      "commentIndex": 1,
+                      "userIndex": 1,
+                      "replyWriter":"지짱",
+                      "replyImgUrl":"/img/avatar.png",
+                  }]
+              },{
+                "postIndex": 4,
+                "postTitle": "새소식 게시물",
+                "postContent": "세번째 게시물입니다.",
+                "postCategory": "news",
+                "bandName":"",
+                "like": 120,
+                "postTimestamp": "2023.08.12",
+                "postViews":623,
+                "postWriter": '지짱',
+                "postImgUrl": "/img/avatar.png",
+                "comment": [{
+                  "commentIndex": 1,
+                  "commentTimestamp": "2023.08.12",
+                  "commentContent": "코멘트 테스트1",
+                  "postIndex": 3,
+                  "userIndex": 1,
+                  "commentWriter":"유원석",
+                  "commentImgUrl":"/img/avatar.png",
+                  },
+                  {
+                  "commentIndex": 2,
+                  "commentTimestamp": "2023.08.12",
+                  "commentContent": "코멘트 테스트2",
+                  "postIndex": 3,
+                  "userIndex": 1,
+                  "commentWriter":"유원석",
+                  "commentImgUrl":"/img/avatar.png",
+                  }],
+                  "reply": [{
+                      "replyIndex": 1,
+                      "replyTimestamp": "2023.08.12",
+                      "replyContent": "리플 테스트1",
+                      "commentIndex": 1,
+                      "userIndex": 1,
+                      "replyWriter":"지짱",
+                      "replyImgUrl":"/img/avatar.png",
+                  }]
+              },{
+                "postIndex": 5,
+                "postTitle": "새소식 게시물",
+                "postContent": "세번째 게시물입니다.",
+                "postCategory": "news",
+                "bandName":"",
+                "like": 120,
+                "postTimestamp": "2023.08.12",
+                "postViews":623,
+                "postWriter": '지짱',
+                "postImgUrl": "/img/avatar.png",
+                "comment": [{
+                  "commentIndex": 1,
+                  "commentTimestamp": "2023.08.12",
+                  "commentContent": "코멘트 테스트1",
+                  "postIndex": 3,
+                  "userIndex": 1,
+                  "commentWriter":"유원석",
+                  "commentImgUrl":"/img/avatar.png",
+                  },
+                  {
+                  "commentIndex": 2,
+                  "commentTimestamp": "2023.08.12",
+                  "commentContent": "코멘트 테스트2",
+                  "postIndex": 3,
+                  "userIndex": 1,
+                  "commentWriter":"유원석",
+                  "commentImgUrl":"/img/avatar.png",
+                  }],
+                  "reply": [{
+                      "replyIndex": 1,
+                      "replyTimestamp": "2023.08.12",
+                      "replyContent": "리플 테스트1",
+                      "commentIndex": 1,
+                      "userIndex": 1,
+                      "replyWriter":"지짱",
+                      "replyImgUrl":"/img/avatar.png",
+                  }]
+              },{
+                "postIndex": 6,
+                "postTitle": "새소식 게시물",
+                "postContent": "세번째 게시물입니다.",
+                "postCategory": "news",
+                "bandName":"",
+                "like": 120,
+                "postTimestamp": "2023.08.12",
+                "postViews":623,
+                "postWriter": '지짱',
+                "postImgUrl": "/img/avatar.png",
+                "comment": [{
+                  "commentIndex": 1,
+                  "commentTimestamp": "2023.08.12",
+                  "commentContent": "코멘트 테스트1",
+                  "postIndex": 3,
+                  "userIndex": 1,
+                  "commentWriter":"유원석",
+                  "commentImgUrl":"/img/avatar.png",
+                  },
+                  {
+                  "commentIndex": 2,
+                  "commentTimestamp": "2023.08.12",
+                  "commentContent": "코멘트 테스트2",
+                  "postIndex": 3,
+                  "userIndex": 1,
+                  "commentWriter":"유원석",
+                  "commentImgUrl":"/img/avatar.png",
+                  }],
+                  "reply": [{
+                      "replyIndex": 1,
+                      "replyTimestamp": "2023.08.12",
+                      "replyContent": "리플 테스트1",
+                      "commentIndex": 1,
+                      "userIndex": 1,
+                      "replyWriter":"지짱",
+                      "replyImgUrl":"/img/avatar.png",
+                  }]
+              },
             {
               "postIndex": 4,
               "postTitle": "쏜애플 게시물입니덩",
@@ -378,14 +597,6 @@ export const postState = atom(
         ]
     }
 )
-
-// export const userDataState = atom({
-//     "key":"userDataState",
-//     nickname: "",
-//     profileimg:"",
-//     password:"",
-//     isPasswordConfirm:"",
-// });
 
 export const bannerImgState = atom({
     key: 'bannerImgState',
@@ -487,3 +698,14 @@ export const setLoginState = atom({
     key:"setLoginState",
     default:false
 })
+
+export const writeState = atom({
+    key: 'writeState',
+    default:{
+      postCategory:'',
+      postTitle:'',
+      postContent:'',
+      isFixed:'',
+      bandIndex:''
+    }
+  })
