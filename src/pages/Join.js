@@ -54,6 +54,7 @@ const Join = () => {
             "headers": {
                 "Content-Type": "application/json"
             },
+            "credentials": "include",
             "body":JSON.stringify({
                 "idValue": regist.id,
                 "pwValue": regist.password,

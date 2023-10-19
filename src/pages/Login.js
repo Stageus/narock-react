@@ -18,31 +18,63 @@ const Login = () => {
 
     const [auth, setAuth] = useRecoilState(loginState);
     const [cookie, setCookie] = useCookies(['token']);
+
+
     const loginClickEvent = async () => {
-
-        fetch("https://www.narock.site/account/login",{
-            "method": "POST",
-            "headers": {
-                "Content-Type": "application/json",
-            },
-            "credentials": "include",
-            "body":JSON.stringify({
-                "idValue": uid,
-                "pwValue": upw
-            })
-        })
-        .then(response => response.json())
-        .then(response => {
-            if (response.token) {
-                // 쿠키를 설정하고 sameSite 속성을 설정
-                setCookie('token', response.token, { sameSite: 'None', secure: true });
-                localStorage.setItem('token', response.token);
-            }
-            const storedToken = localStorage.getItem('token');
-            console.log(storedToken)
-        })
+        // fetch("https://www.narock.site/account/login",{
+        //     "method": "POST",
+        //     "headers": {
+        //         "Content-Type": "application/json",
+        //     },
+        //     "credentials": "include", //쿠키가 있는 곳에는 모두 적용
+        //     "body":JSON.stringify({
+        //         "idValue": uid,
+        //         "pwValue": upw
+        //     })
+        // })
+        // .then(response => response.json())
+        // .then(response => {
+        //     if(response.success){
+        //         console.log(response);
+        //         alert('ㅇㅇ')
+        //         console.log(response.headers)
+        //     }
+        //     // if (response.token) {
+        //     //     쿠키를 설정하고 sameSite 속성을 설정
+        //     //     setCookie('token', response.token, { sameSite: 'None', secure: true });
+        //     //     localStorage.setItem('token', response.data.token);
+                
+        //     // }
+        //     const storedToken = localStorage.getItem('token');
+        //     // console.log(storedToken)
+        // })
         
-
+        axios.post("https://www.narock.site/account/login", {
+            "idValue": uid,
+            "pwValue": upw
+        },
+        // {withCredentials: true}
+        )
+        .then(function (response) {
+            if (response.status === 200) {
+                console.log(response)
+                setAuth(true)
+                alert('로그인 성공')
+            }      
+        }).catch(function (error) {
+            console.log(error);
+            alert("로그인 실패")
+        }).then(function() {
+            // 항상 실행
+        });
+        
+    // async await 함수를 사용할 때, 
+    
+    try {
+        const data = await axios.post("https://www.narock.site/account/login");
+    } catch {
+        // 오류 발생시 실행
+    }
     }
 
 

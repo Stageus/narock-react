@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import axios from 'axios';
 import { Input, Button } from "../../styled/ProjectStyle";
 import styled from "styled-components";
@@ -6,28 +6,6 @@ import { Align,Error,Div } from "../../styled/ProjectStyle";
 
 const MyPageInfo = () => {
 
-    axios.get("https://www.narock.site/account")
-    .then(function (response) {
-         console.log(response)
-    }).catch(function (error) {
-        // 오류발생시 실행
-    }).then(function() {
-        // 항상 실행
-    });
-    const [userData, setUserData] = useState({
-        nickname: "",
-        profileimg:"",
-        password:"",
-        isPasswordConfirm:"",
-    });
-
-    const handleUserDataChange = useCallback((field, value) => {
-        setUserData((prevData) => ({
-            ...prevData,
-            [field]: value
-        }));
-    },[]);
-    
     const [img, setImg] = useState('img/avatar.png');
     const [isHover,setIsHover] = useState(false);
 
@@ -42,6 +20,38 @@ const MyPageInfo = () => {
     const [isNickname,setIsNickname] = useState(false);
     const [isPassword,setIsPassword] = useState(false);
     const [isPasswordConfirm,setIsPasswordConfirm] = useState(false);
+
+    const [userInfo,setUserInfo] = useState([]);
+    // console.log(userInfo)
+    useEffect(()=>{
+        axios.get("https://www.narock.site/account",
+        {withCredentials: true}
+        )
+        .then(function (response) {
+             console.log(response)
+             setUserInfo(response.data.data)
+             console.log(userInfo)
+        }).catch(function (error) {
+            // 오류발생시 실행
+        }).then(function() {
+            // 항상 실행
+        });
+    },[])
+    
+    const [userData, setUserData] = useState({
+        nickname: "",
+        profileimg:"",
+        password:"",
+        isPasswordConfirm:"",
+    });
+    const handleUserDataChange = useCallback((field, value) => {
+        setUserData((prevData) => ({
+            ...prevData,
+            [field]: value
+        }));
+    },[]);
+    
+
 
     const HandleLoadFile = (e) => {
         if(e.target.files[0]){
@@ -120,7 +130,8 @@ const MyPageInfo = () => {
         <div>
             <UserInfo>
                 <div>아이디</div>
-                <Space>kjhwlgusdl</Space>
+                <Space>{userInfo.userId}</Space>
+                {/* <Space>아이디 출력부분</Space> */}
                 <div>닉네임</div>
                 <Input margin="5px 0 15px 0" placeholder="유저 닉네임" maxlength="16" onChange={onChangeNickname}/>
                 <Div>
@@ -137,7 +148,8 @@ const MyPageInfo = () => {
 
                 <Space>프로필 사진 (jpg,jpeg,gif,png 2MB 이하)</Space>
                 <ProfileBox>
-                    <Avatar src={img} alt="profile"></Avatar>
+                    <Avatar src={userInfo.userImage} alt="profile"></Avatar>
+                    {/* <Avatar src={userInfo.profileImg} alt="profile"></Avatar> */}
                     <Div>
                         <FileUploadInput type="file" id="file-upload" accept="image/jpg,image/png,image/jpeg,image/gif" onChange={HandleLoadFile}/>
                         <FileUploadLabel htmlFor="file-upload">업로드</FileUploadLabel>
@@ -155,7 +167,8 @@ const MyPageInfo = () => {
                 </ProfileBox>
 
                 <div>이메일</div>
-                <Space>kjhwlgusdl@gmail.com</Space>
+                <Space>{userInfo.userEmail}</Space>
+                {/* <Space>이메일 출력부분</Space> */}
 
                 <div>현재 비밀번호</div>
                 <Input margin="5px 0 15px 0" type="password"/>

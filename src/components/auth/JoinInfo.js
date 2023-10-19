@@ -168,6 +168,7 @@ const JoinInfo = () => {
                 "headers": {
                     "Content-Type": "application/json"
                 },
+                "credentials": "include",
                 "body":JSON.stringify({
                     "emailValue":regist.email
                 })
@@ -217,7 +218,8 @@ const JoinInfo = () => {
                         isCertification:true,
                     }))   
                 }else{
-                    alert('인증번호가 맞지 않습니다.')
+                    // alert('인증번호가 맞지 않습니다.')
+                    alert(result.message)
                 }
                 
         }

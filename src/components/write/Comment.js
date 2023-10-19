@@ -95,13 +95,10 @@ const Comment = (props) => {
                             </Div>
                         )
                     })}
-
-                    {active[idx] === idx && 
-                        <Div>
+                    <Div>   
                         <SubCommentInput></SubCommentInput>
                         <SubmitButton value="등록" />
-                        </Div>
-                    }
+                    </Div>
                 </Div>
   );
 })}
