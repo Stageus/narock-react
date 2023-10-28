@@ -243,7 +243,8 @@ export const postState = atom(
               "postIndex": 1,
               "postTitle": "실리카겔1",
               "postContent": "첫번째 게시물입니다.",
-              "postCategory": "notice",
+              "boardCategory": "notice",
+              "postCategory":4,
               "bandName":"실리카겔",
               "like": 9999,
               "postTimestamp": "2023.08.10",
@@ -272,7 +273,8 @@ export const postState = atom(
               "postIndex": 1,
               "postTitle": "실리카겔 연말 콘서트",
               "postContent": "실리카겔 연말 콘서트 11/11 예매 완 ㅋ",
-              "postCategory": "concertinfo",
+              "boardCategory": "concertinfo",
+              "postCategory":1,
               "bandName":"실리카겔",
               "like": 9999,
               "postTimestamp": "2023.08.10",
@@ -301,7 +303,8 @@ export const postState = atom(
               "postIndex": 2,
               "postTitle": "커뮤니티 두번째 게시물",
               "postContent": "두번째 게시물입니다.",
-              "postCategory": "community",
+              "boardCategory": "community",
+              "postCategory":5,
               "bandName":"92914",
               "like": 120,
               "postTimestamp": "2023.08.11",
@@ -314,7 +317,7 @@ export const postState = atom(
                 "commentContent": "코멘트 테스트~~~~",
                 "postIndex": 2,
                 "userIndex": 1,
-                "commentWriter":"유원석"
+                "commentWriter":"관리자"
                 }],
                 "reply": [{
                     "replyIndex": 1,
@@ -330,7 +333,8 @@ export const postState = atom(
               "postIndex": 1,
               "postTitle": "새소식 게시물",
               "postContent": "세번째 게시물입니다.",
-              "postCategory": "news",
+              "boardCategory": "news",
+              "postCategory":4,
               "bandName":"",
               "like": 120,
               "postTimestamp": "2023.08.12",
@@ -343,7 +347,7 @@ export const postState = atom(
                 "commentContent": "코멘트 테스트1",
                 "postIndex": 3,
                 "userIndex": 1,
-                "commentWriter":"유원석",
+                "commentWriter":"관리자",
                 "commentImgUrl":"/img/avatar.png",
                 },
                 {
@@ -352,7 +356,7 @@ export const postState = atom(
                 "commentContent": "코멘트 테스트2",
                 "postIndex": 3,
                 "userIndex": 1,
-                "commentWriter":"유원석",
+                "commentWriter":"관리자",
                 "commentImgUrl":"/img/avatar.png",
                 }],
                 "reply": [{
@@ -368,7 +372,8 @@ export const postState = atom(
                 "postIndex": 2,
                 "postTitle": "새소식 게시물",
                 "postContent": "세번째 게시물입니다.",
-                "postCategory": "news",
+                "boardCategory": "news",
+                "postCategory":4,
                 "bandName":"",
                 "like": 120,
                 "postTimestamp": "2023.08.12",
@@ -381,7 +386,7 @@ export const postState = atom(
                   "commentContent": "코멘트 테스트1",
                   "postIndex": 3,
                   "userIndex": 1,
-                  "commentWriter":"유원석",
+                  "commentWriter":"관리자",
                   "commentImgUrl":"/img/avatar.png",
                   },
                   {
@@ -390,7 +395,7 @@ export const postState = atom(
                   "commentContent": "코멘트 테스트2",
                   "postIndex": 3,
                   "userIndex": 1,
-                  "commentWriter":"유원석",
+                  "commentWriter":"관리자",
                   "commentImgUrl":"/img/avatar.png",
                   }],
                   "reply": [{
@@ -406,7 +411,8 @@ export const postState = atom(
                 "postIndex": 3,
                 "postTitle": "새소식 게시물",
                 "postContent": "세번째 게시물입니다.",
-                "postCategory": "news",
+                "boardCategory": "community",
+                "postCategory":5,
                 "bandName":"",
                 "like": 120,
                 "postTimestamp": "2023.08.12",
@@ -419,7 +425,7 @@ export const postState = atom(
                   "commentContent": "코멘트 테스트1",
                   "postIndex": 3,
                   "userIndex": 1,
-                  "commentWriter":"유원석",
+                  "commentWriter":"관리자",
                   "commentImgUrl":"/img/avatar.png",
                   },
                   {
@@ -428,7 +434,7 @@ export const postState = atom(
                   "commentContent": "코멘트 테스트2",
                   "postIndex": 3,
                   "userIndex": 1,
-                  "commentWriter":"유원석",
+                  "commentWriter":"관리자",
                   "commentImgUrl":"/img/avatar.png",
                   }],
                   "reply": [{
@@ -444,7 +450,8 @@ export const postState = atom(
                 "postIndex": 4,
                 "postTitle": "새소식 게시물",
                 "postContent": "세번째 게시물입니다.",
-                "postCategory": "news",
+                "boardCategory": "news",
+                "postCategory":4,
                 "bandName":"",
                 "like": 120,
                 "postTimestamp": "2023.08.12",
@@ -457,7 +464,7 @@ export const postState = atom(
                   "commentContent": "코멘트 테스트1",
                   "postIndex": 3,
                   "userIndex": 1,
-                  "commentWriter":"유원석",
+                  "commentWriter":"관리자",
                   "commentImgUrl":"/img/avatar.png",
                   },
                   {
@@ -466,7 +473,7 @@ export const postState = atom(
                   "commentContent": "코멘트 테스트2",
                   "postIndex": 3,
                   "userIndex": 1,
-                  "commentWriter":"유원석",
+                  "commentWriter":"관리자",
                   "commentImgUrl":"/img/avatar.png",
                   }],
                   "reply": [{
@@ -482,7 +489,8 @@ export const postState = atom(
                 "postIndex": 5,
                 "postTitle": "새소식 게시물",
                 "postContent": "세번째 게시물입니다.",
-                "postCategory": "news",
+                "boardCategory": "news",
+                "postCategory":4,
                 "bandName":"",
                 "like": 120,
                 "postTimestamp": "2023.08.12",
@@ -495,7 +503,7 @@ export const postState = atom(
                   "commentContent": "코멘트 테스트1",
                   "postIndex": 3,
                   "userIndex": 1,
-                  "commentWriter":"유원석",
+                  "commentWriter":"관리자",
                   "commentImgUrl":"/img/avatar.png",
                   },
                   {
@@ -504,7 +512,7 @@ export const postState = atom(
                   "commentContent": "코멘트 테스트2",
                   "postIndex": 3,
                   "userIndex": 1,
-                  "commentWriter":"유원석",
+                  "commentWriter":"관리자",
                   "commentImgUrl":"/img/avatar.png",
                   }],
                   "reply": [{
@@ -520,7 +528,8 @@ export const postState = atom(
                 "postIndex": 6,
                 "postTitle": "새소식 게시물",
                 "postContent": "세번째 게시물입니다.",
-                "postCategory": "news",
+                "boardCategory": "news",
+                "postCategory":4,
                 "bandName":"",
                 "like": 120,
                 "postTimestamp": "2023.08.12",
@@ -533,7 +542,7 @@ export const postState = atom(
                   "commentContent": "코멘트 테스트1",
                   "postIndex": 3,
                   "userIndex": 1,
-                  "commentWriter":"유원석",
+                  "commentWriter":"관리자",
                   "commentImgUrl":"/img/avatar.png",
                   },
                   {
@@ -542,7 +551,7 @@ export const postState = atom(
                   "commentContent": "코멘트 테스트2",
                   "postIndex": 3,
                   "userIndex": 1,
-                  "commentWriter":"유원석",
+                  "commentWriter":"관리자",
                   "commentImgUrl":"/img/avatar.png",
                   }],
                   "reply": [{
@@ -559,40 +568,13 @@ export const postState = atom(
               "postIndex": 4,
               "postTitle": "쏜애플 게시물입니덩",
               "postContent": "휴.. 어렵다 참...",
-              "postCategory": "concertinfo",
+              "boardCategory": "concertinfo",
               "bandName":"쏜애플",
               "like": 120,
               "postTimestamp": "2023.08.12",
               "postViews":623,
               "postWriter": '지짱',
               "postImgUrl": "/img/avatar.png",
-              "comment": [{
-                "commentIndex": 1,
-                "commentTimestamp": "2023.08.12",
-                "commentContent": "쏜애플 개조와",
-                "postIndex": 3,
-                "userIndex": 1,
-                "commentWriter":"유원석",
-                "commentImgUrl":"/img/avatar.png",
-                },
-                {
-                "commentIndex": 2,
-                "commentTimestamp": "2023.08.12",
-                "commentContent": "근데 왜 두번째 코멘트는 안나오지",
-                "postIndex": 3,
-                "userIndex": 1,
-                "commentWriter":"유원석",
-                "commentImgUrl":"/img/avatar.png",
-                }],
-                "reply": [{
-                    "replyIndex": 1,
-                    "replyTimestamp": "2023.08.12",
-                    "replyContent": "리플 테스트1",
-                    "commentIndex": 1,
-                    "userIndex": 1,
-                    "replyWriter":"지짱",
-                    "replyImgUrl":"/img/avatar.png",
-                }]
             }
         ]
     }
@@ -649,20 +631,19 @@ export const userState = atom({
 export const commentState = atom({
     key: "commentState",
     default:[
+
         {
-            "postIndex": 5,
-            "boardName": "쏜애플",
-            "postContent": "댓글이다제~",
-            "postTimestamp": "2023.09.15 15:00",
-            "postWriter": '지짱'
-        },
-        {
-            "postIndex": 5,
-            "boardName": "쏜애플",
-            "postContent": "댓글 또있음ㅋ",
-            "postTimestamp": "2023.09.15 15:30",
-            "postWriter": '댓글봇'
-        },
+            "isReply":false,
+            "postOrCommentIndex":1,
+            "commentContent": "우와!"
+        }
+        // {
+        //     "postIndex": 5,
+        //     "boardName": "쏜애플",
+        //     "postContent": "댓글 또있음ㅋ",
+        //     "postTimestamp": "2023.09.15 15:30",
+        //     "postWriter": '댓글봇'
+        // },
     
     ]
 })
@@ -702,7 +683,7 @@ export const setLoginState = atom({
 export const writeState = atom({
     key: 'writeState',
     default:{
-      postCategory:'',
+      boardCategory:'',
       postTitle:'',
       postContent:'',
       isFixed:'',

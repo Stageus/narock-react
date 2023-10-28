@@ -2,11 +2,12 @@ import React from "react";
 import styled from 'styled-components';
 import { Button, Div } from "../../styled/ProjectStyle";
 
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { isLikedState, likedState } from "../../recoil/FrontRecoil";
-import Comment from "./Comment";
+
 import { useNavigate , useParams } from "react-router-dom";
+import CommentBox from "./CommentBox";
 
 const PostDetailBox = (props) => {
     const { postid } = useParams();
@@ -26,11 +27,12 @@ const PostDetailBox = (props) => {
     
     //글번호, 카테고리 일치하는 게시물만 불러오기
     const posts = post.filter(
-        p => p.postIndex === parseInt(postid) && p.postCategory === foundKeywords);
+        p => p.postIndex === parseInt(postid) && p.boardCategory === foundKeywords);
         
 
     const [liked,setLiked] = useRecoilState(likedState);
     const [isLiked,setIsLiked] = useRecoilState(isLikedState);
+
     const navigate = useNavigate();
 
     //좋아요 클릭
@@ -57,17 +59,17 @@ const PostDetailBox = (props) => {
                 <Div key={idx} width="100%" display="block" margin="0 80px">
                     <Div padding="20px" border="1px solid #E2E8FF" display="block" margin="0 0 20px 0">
                         <div>
-                            {value.postCategory === "notice"
+                            {value.postCategory === 0
                             ? "공지사항"
-                            : value.postCategory === "concertinfo"
+                            : value.postCategory === 1
                             ? "공연 정보"
-                            : value.postCategory === "gallery"
+                            : value.postCategory === 2
                             ? "갤러리"
-                            : value.postCategory === "community"
+                            : value.postCategory === 3
                             ? "자유 게시판"
-                            : value.postCategory === "news"
+                            : value.postCategory === 4
                             ? "새소식"
-                            : value.postCategory === "community"
+                            : value.postCategory === 5
                             ? "커뮤니티"
                             : value.bandName}
                         </div>
@@ -78,7 +80,7 @@ const PostDetailBox = (props) => {
                                 <Div margin="0 10px 0 0">{value.postWriter}</Div>
                                 <Div margin="0 10px 0 0">{value.postViews}</Div>
                                 <Div margin="0 10px 0 0">{value.postTimestamp}</Div>
-                                <Div margin="0 10px 0 0">{value.comment.length+value.reply.length}</Div>
+                                <Div margin="0 10px 0 0">댓글 {value.comment.length+value.reply.length}</Div>
                             </Div>
                             <Div display="flex" alignitems="center">
                                 <Button value="수정" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
@@ -92,10 +94,11 @@ const PostDetailBox = (props) => {
                             {<Like>{liked}</Like>}
                         </Div>
                     </Div>
-                    <Comment comment={value.comment} bandname={bandname} postId={value.postIndex} reply={value.reply} post={posts}/>
+                    <CommentBox comment={value.comment} bandname={bandname} postId={value.postIndex} reply={value.reply} post={posts}/>
                 </Div>
                 )
                 })}
+                {/* <Comment bandname={bandname} post={posts}/> */}
         </Div>
     );
 };

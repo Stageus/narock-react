@@ -23,7 +23,7 @@ const AllBandBoard = () => {
 
     const postRow = useRecoilValue(postRowState);
     const posts = useRecoilValue(postState);
-    const post = posts.filter(p=>p.bandName === bandname && p.postCategory === domainCategory);
+    const post = posts.filter(p=>p.bandName === bandname && p.boardCategory === domainCategory);
     // console.log(domainPostIdx)
     return (
         <div>

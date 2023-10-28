@@ -69,8 +69,11 @@ const Join = () => {
             alert("회원가입 되었습니다.")
             // navigate('/')    
         }else{
-            console.log(result.message)
+            console.log(result.message);
+            console.log(result);
         }
+
+        
     }
 
     return (

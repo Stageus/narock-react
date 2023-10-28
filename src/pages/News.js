@@ -17,7 +17,7 @@ const News = () => {
 
     const bandnameEncoded = decodeURI(window.location.pathname); 
     const domainCategory = bandnameEncoded.split('/');
-    const filteredPost = posts.filter(v=>!v.bandName && domainCategory[1] === v.postCategory);
+    const filteredPost = posts.filter(v=>!v.bandName && domainCategory[1] === v.boardCategory);
     return (
         <div>
             <Header/>

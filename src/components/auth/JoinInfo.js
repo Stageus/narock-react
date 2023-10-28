@@ -220,6 +220,7 @@ const JoinInfo = () => {
                 }else{
                     // alert('인증번호가 맞지 않습니다.')
                     alert(result.message)
+                    console.log(result)
                 }
                 
         }
