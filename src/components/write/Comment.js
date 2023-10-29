@@ -49,7 +49,7 @@ const Comment = (props) => {
                             <Button value="완료" backgroundcolor="transparent" color="mainColor" />
                         </Div>
                     </Div>
-                
+                    <Reply val={val} commentIdx={commentIdx}/>
                     <div>   
                         <SubCommentInput></SubCommentInput>
                         <SubmitButton value="등록" />
@@ -57,7 +57,7 @@ const Comment = (props) => {
                 </Div>
                 : activeModify === commentIdx ? 
                     <Div flexdirection="column" alignitems="normal" width="100%" margin="0">
-                        <Div margin="0" justifycontent="space-between">
+                        <Div margin="0" justifycontent="space-between" flexdirection="column">
                             <Div width="100%">
                                 <Div width="100%">
                                     <img src="/img/avatar.png" width="40px" alt="프로필사진" />
@@ -72,6 +72,7 @@ const Comment = (props) => {
                                     <Button value="취소" backgroundcolor="transparent" color="mainColor" onClick={cancelEvent} />
                                     <Button value="완료" backgroundcolor="transparent" color="mainColor" />
                             </Div>
+                            <Reply val={val} commentIdx={commentIdx}/>
                         </Div>
                     </Div>
                 :
@@ -92,7 +93,7 @@ const Comment = (props) => {
                             <Button value="삭제" backgroundcolor="transparent" color="mainColor" />
                         </Div>
                     </Div>
-                        <Reply val={val} activeComment={activeComment}/>
+                        <Reply val={val} commentIdx={commentIdx}/>
                 </Div>
             }
         </Div>

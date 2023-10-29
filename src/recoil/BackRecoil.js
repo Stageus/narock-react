@@ -440,12 +440,21 @@ export const postState = atom(
                   "reply": [{
                       "replyIndex": 1,
                       "replyTimestamp": "2023.08.12",
-                      "replyContent": "리플 테스트1",
+                      "replyContent": "첫번째 대댓",
                       "commentIndex": 1,
                       "userIndex": 1,
                       "replyWriter":"지짱",
                       "replyImgUrl":"/img/avatar.png",
-                  }]
+                  },
+                  {
+                    "replyIndex": 1,
+                    "replyTimestamp": "2023.08.12",
+                    "replyContent": "두번째 대댓이어요ㅕ",
+                    "commentIndex": 2,
+                    "userIndex": 1,
+                    "replyWriter":"지짱",
+                    "replyImgUrl":"/img/avatar.png",
+                }]
               },{
                 "postIndex": 4,
                 "postTitle": "새소식 게시물",
