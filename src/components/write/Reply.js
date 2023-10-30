@@ -14,7 +14,6 @@ const Reply = (props) => {
 
     const commentValue = (e) => {
         const comment = e.target.value;
-        console.log(comment)
         setAfterModifyComment(comment)
     }
 
@@ -27,11 +26,12 @@ const Reply = (props) => {
 
         <Div width="100%" >
         {val.reply.map((reply,replyIdx)=>{
-            if(replyIdx === commentIdx)
+
+            if(replyIdx === commentIdx){
             return(
-                <Div borderbottom="1px solid #E2E8FF" padding="0 0 0 37px" key={replyIdx} width="100%">
+                <Div borderbottom="1px solid #E2E8FF" padding="0 0 0 37px" key={replyIdx} width="100%" margin="0">
                 {activeReply === replyIdx ? 
-                    <Div justifycontent="space-between" width="100%">
+                    <Div justifycontent="space-between" width="100%" margin="0">
                         <Div>
                             <img src={reply.replyImgUrl} width="40px" alt="프로필사진" />
                             <Div flexdirection="column" alignitems="flex-start">
@@ -48,7 +48,7 @@ const Reply = (props) => {
                     </Div>
                     : 
                     <Div>
-                        <Div margin="0" width="100%" justifycontent="space-between">
+                        <Div margin="0" width="100%" margin="0" justifycontent="space-between">
                             <img src={reply.replyImgUrl} width="40px" alt="프로필사진" />
                             <Div flexdirection="column" alignitems="flex-start" justifycontent="space-between">
                                 {reply.replyWriter}
@@ -63,7 +63,8 @@ const Reply = (props) => {
                     </Div>
                 }
                 </Div>
-                )
+                )}
+
         })}
         </Div>
     )

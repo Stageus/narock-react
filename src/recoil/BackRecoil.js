@@ -447,9 +447,9 @@ export const postState = atom(
                       "replyImgUrl":"/img/avatar.png",
                   },
                   {
-                    "replyIndex": 1,
+                    "replyIndex": 2,
                     "replyTimestamp": "2023.08.12",
-                    "replyContent": "두번째 대댓이어요ㅕ",
+                    "replyContent": "두번째 대댓이어요..?",
                     "commentIndex": 2,
                     "userIndex": 1,
                     "replyWriter":"지짱",
@@ -692,7 +692,7 @@ export const setLoginState = atom({
 export const writeState = atom({
     key: 'writeState',
     default:{
-      boardCategory:'',
+      postCategory:'',
       postTitle:'',
       postContent:'',
       isFixed:'',

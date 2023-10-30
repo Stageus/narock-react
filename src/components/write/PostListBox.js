@@ -8,9 +8,10 @@ import { Button } from "../../styled/ProjectStyle";
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 const PostListBox = (props) => {
-    const { bandname, posts} = props;
-    const sortedPost = [...posts].sort((a,b)=>b.postIndex - a.postIndex)
-
+    const { bandname, posts, category } = props;
+    const sortedPost = [...posts].sort((a,b)=>b.postindex - a.postindex)
+    // console.log(sortedPost[0][0])
+    console.log(posts)
     const itemsCountPerPage = 3; // 한 페이지에 표시할 게시물 수
     const [limit, setLimit]= useState(10); 
     const [page, setPage] = useState(1);
@@ -24,20 +25,21 @@ const PostListBox = (props) => {
     return ( 
         <div>
             { sortedPost.length > 0 ?
-              sortedPost.map((v)=>(
+              sortedPost[0].map((v)=>(
                 <Posts
                 key={v}
                 bandname={bandname} 
-                postId={v.postIndex}
-                postTitle={v.postTitle} 
-                writer={v.postWriter}
-                like={v.like}
-                view={v.postViews}
-                date={v.postTimestamp}
-                content={v.postContent}
+                postId={v.postindex}
+                postTitle={v.posttitle} 
+                writer={v.postwriter}
+                like={v.postlikes}
+                view={v.postviews}
+                date={v.posttimestamp}
+                content={v.postcontent}
                 boardName={v.boardName}
                 /> 
-            )) : 
+            )) 
+            : 
             <Text>작성 된 게시물이 없습니다.</Text>}
             <Paging
             activePage={page}
@@ -45,7 +47,11 @@ const PostListBox = (props) => {
             itemsCountPerPage={itemsCountPerPage}
             totalItemsCount={displayedPosts.length}
             />
-            <Button value="글쓰기" onClick={()=>{navigate('/write')}}/>
+            {bandname ? 
+            <Button value="글쓰기" onClick={()=>{navigate(`/write?bandname=${bandname}&category=${category}`)}}/>
+            :    
+            <Button value="글쓰기" onClick={()=>{navigate(`/write?category=${category}`)}}/>
+        }
             <SearchBox/>
         </div>
      );

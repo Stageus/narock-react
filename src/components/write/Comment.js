@@ -31,7 +31,7 @@ const Comment = (props) => {
     }
 
     return(
-        <Div key={commentIdx} borderbottom="1px solid #E2E8FF" justifycontent="space-between" flexdirection="">
+        <Div key={commentIdx} borderbottom="1px solid #E2E8FF" justifycontent="space-between">
             {activeComment === commentIdx ? 
                 // 답글 버튼 눌렀을 때
                 <Div flexdirection="column" alignitems="normal" width="100%" margin="0">
@@ -58,13 +58,13 @@ const Comment = (props) => {
                 : activeModify === commentIdx ? 
                     <Div flexdirection="column" alignitems="normal" width="100%" margin="0">
                         <Div margin="0" justifycontent="space-between" flexdirection="column">
-                            <Div width="100%">
-                                <Div width="100%">
+                            <Div width="100%" margin="0">
+                                <Div width="100%" margin="0">
                                     <img src="/img/avatar.png" width="40px" alt="프로필사진" />
                                     <Div flexdirection="column" alignitems="flex-start">
                                         {comment.commentWriter}
                                         <Div>   
-                                            <MainComment onChange={(e) => commentValue(e[commentIdx])} defaultValue={comment.commentContent} /> 
+                                            <MainComment onChange={(e) => commentValue(e)} defaultValue={comment.commentContent} /> 
                                         </Div>
                                         <Date>{comment.commentTimestamp}</Date>
                                     </Div>
@@ -78,8 +78,8 @@ const Comment = (props) => {
                 :
                 // 기본값
                 <Div flexdirection="column" width="100%">
-                    <Div width="100%">
-                        <Div width="100%">
+                    <Div width="100%" margin="0">
+                        <Div width="100%" margin="0">
                             <img src="/img/avatar.png" width="40px" alt="프로필사진" />
                             <Div flexdirection="column" alignitems="flex-start">
                                 {comment.commentWriter}
@@ -88,7 +88,9 @@ const Comment = (props) => {
                             </Div>
                         </Div>
                         <Div>
-                            <Button value="답글" backgroundcolor="transparent" color="mainColor" onClick={()=>commentEvent(commentIdx)} />
+                            {val.reply.length === 1 &&
+                            <Button value="답글" backgroundcolor="transparent" color="mainColor" onClick={()=>commentEvent(commentIdx)} /> 
+                            }
                             <Button value="수정" backgroundcolor="transparent" color="mainColor" onClick={()=>modifyEvent(commentIdx)} />
                             <Button value="삭제" backgroundcolor="transparent" color="mainColor" />
                         </Div>

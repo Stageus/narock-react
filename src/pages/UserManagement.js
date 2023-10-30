@@ -36,25 +36,26 @@ const UserManagement = () => {
     
     const [userInfo, setUserInfo] = useState('');
 
-    const getUserInfoList = async () => {
+    const [info,setInfo] = useState('');
+    // const getUserInfoList = async () => {
 
-        axios.get("https://www.narock.site/account/all")
-            .then(function (response) {
-               console.log(response)
-            }).catch(function (error) {
-                // 오류발생시 실행
-            }).then(function() {
-                // 항상 실행
-            });
+        // axios.get("https://www.narock.site/account/all")
+        //     .then(function (response) {
+        //        console.log(response)
+        //     }).catch(function (error) {
+        //         // 오류발생시 실행
+        //     }).then(function() {
+        //         // 항상 실행
+        //     });
             
-        // async await 함수를 사용할 때, 
+        // // async await 함수를 사용할 때, 
 
-        try {
-            const data = await axios.get("https://www.narock.site/account/all");
-            console.log(data);
-        } catch {
-            // 오류 발생시 실행
-        }
+        // try {
+        //     const data = await axios.get("https://www.narock.site/account/all");
+        //     console.log(data);
+        // } catch {
+        //     // 오류 발생시 실행
+        // }
 
         // const response = await fetch("https://www.narock.site/account/all");
         // const result = await response.json();
@@ -64,11 +65,26 @@ const UserManagement = () => {
         // } else {
         //     alert(result.message);
         // }
-    }
+    // }
 
+    const getUserInfoList = async () => {
+
+        const response = await fetch("https://www.narock.site/account/all");
+        const result = await response.json();
+
+        if (result.success) {
+            setInfo((result.data));
+            console.log(info)
+        } else {
+            alert(result.message);
+        }
+    };
+
+    
     useEffect(()=>{
         getUserInfoList()
     },[])
+    
     const userOnChangeEvent = (e) => {
         setUserSearch(e.target.value);
     }

@@ -17,17 +17,15 @@ const PostDetailBox = (props) => {
     const keywordsToCheck = ['notice', 'community', 'concertinfo', 'news', 'gallery'];
     const foundKeywords = keywordsToCheck.filter(keyword => domainSplit.includes(keyword)).join(',');
     
-    console.log(foundKeywords)
+    // console.log(foundKeywords)
 
-    const { 
-        bandname,
-        post
-        // comment
-    } = props;
+    const { bandname,post } = props;
+    // console.log(post)
     
     //글번호, 카테고리 일치하는 게시물만 불러오기
     const posts = post.filter(
-        p => p.postIndex === parseInt(postid) && p.boardCategory === foundKeywords);
+        // p => p.postindex === parseInt(postid) && p.boardCategory === foundKeywords);
+        p => p.postindex === parseInt(postid));
         
 
     const [liked,setLiked] = useRecoilState(likedState);
@@ -59,27 +57,27 @@ const PostDetailBox = (props) => {
                 <Div key={idx} width="100%" display="block" margin="0 80px">
                     <Div padding="20px" border="1px solid #E2E8FF" display="block" margin="0 0 20px 0">
                         <div>
-                            {value.postCategory === 0
+                            {value.postcategory === 0
                             ? "공지사항"
-                            : value.postCategory === 1
+                            : value.postcategory === 1
                             ? "공연 정보"
-                            : value.postCategory === 2
+                            : value.postcategory === 2
                             ? "갤러리"
-                            : value.postCategory === 3
+                            : value.postcategory === 3
                             ? "자유 게시판"
-                            : value.postCategory === 4
+                            : value.postcategory === 4
                             ? "새소식"
-                            : value.postCategory === 5
+                            : value.postcategory === 5
                             ? "커뮤니티"
-                            : value.bandName}
+                            : value.bandindex}
                         </div>
-                        <div>{value.postTitle}</div>
+                        <div>{value.posttitle}</div>
                         <Div display="flex" justifycontent="space-between" margin="0">
                             <Div display="flex" alignitems="center" margin="0">
-                                <ProfileImg src={value.postImgUrl} alt="프로필 사진"/>
-                                <Div margin="0 10px 0 0">{value.postWriter}</Div>
-                                <Div margin="0 10px 0 0">{value.postViews}</Div>
-                                <Div margin="0 10px 0 0">{value.postTimestamp}</Div>
+                                <ProfileImg src={value.postimgurl} alt="프로필 사진"/>
+                                <Div margin="0 10px 0 0">{value.postwriter}</Div>
+                                <Div margin="0 10px 0 0">{value.postviews}</Div>
+                                <Div margin="0 10px 0 0">{value.posttimestamp}</Div>
                                 <Div margin="0 10px 0 0">댓글 {value.comment.length+value.reply.length}</Div>
                             </Div>
                             <Div display="flex" alignitems="center">
@@ -98,7 +96,6 @@ const PostDetailBox = (props) => {
                 </Div>
                 )
                 })}
-                {/* <Comment bandname={bandname} post={posts}/> */}
         </Div>
     );
 };

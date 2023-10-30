@@ -30,7 +30,7 @@ const Community = () => {
                 createDate={postRow[2].label}
                 view={postRow[3].label}
                 like={postRow[4].label}/>
-                <PostListBox posts={filteredPost}/>
+                <PostListBox posts={filteredPost} category="커뮤니티"/>
             </Box>  
         </div>
     );

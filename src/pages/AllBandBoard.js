@@ -43,7 +43,7 @@ const AllBandBoard = () => {
                     view={postRow[3].label}
                     like={postRow[4].label}
                     /> 
-                    <PostListBox bandname={bandname} posts={post}/>
+                    <PostListBox bandname={bandname} posts={post} category={domainCategory}/>
                     </React.Fragment>
                 }
                 </Div>
