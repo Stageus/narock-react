@@ -13,7 +13,7 @@ const RecentList = () => {
     <Box>
       <Title>공지 사항</Title>
       {popularPost.map((v,i)=>(
-        <Posts key={i} postTitle={v.postTitle} date={v.date}/>
+        <Posts key={i} postTitle={v.postTitle} date={v.postTimestamp}/>
       ))}
     </Box>
   )

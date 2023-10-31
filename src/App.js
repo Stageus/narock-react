@@ -21,11 +21,18 @@ import ResetPassword from "./pages/ResetPassword";
 import Search from "./pages/Search"
 import TotalSearch from "./pages/TotalSearch"
 import Write from "./pages/Write"
+import { useMediaQuery } from 'react-responsive';
 
 
 const App = () => {
+
+  const isPc = useMediaQuery({
+    query: "(min-width : 1024px)"
+  })
+
   return(
     <CookiesProvider>
+        {isPc &&
       <Routes>
         <Route path="/" element={<Main/>}/>
         <Route path="/admin/usermanagement" element={<UserManagement />}/>
@@ -59,6 +66,7 @@ const App = () => {
         <Route path="/search" element={<Search />}/>
         <Route path="/write" element={<Write/>}/>
       </Routes>
+      }
     </CookiesProvider>
   )
 }

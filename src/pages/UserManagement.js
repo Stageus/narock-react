@@ -16,7 +16,6 @@ import axios from "axios";
 const UserManagement = () => {
     const user = useRecoilValue(userState); //유저 데이터
     const bandname = useRecoilValue(bandnameState);
-    // const bandnameMap = Object.values(bandname).flat().map((item)=>(item.split(',')));
     const bandnameMap = Object.values(bandname).flat();
     // console.log(bandnameMap)
 
@@ -29,14 +28,15 @@ const UserManagement = () => {
     const [isDialog, setIsDialog] = useState(false); // 다이얼로그 활성화 여부
     const [selectedUser, setSelectedUser] = useState(null); //선택된 아이디 정보
 
-    const [boardSearch,setBoardSearch] = useState('');
+    const [searchValue,setSearchValue] = useState('');
+    const [bandSearchResult, setBandSearchResult] = useState('');
     const [boardSearchList,setBoardSearchList] = useState('');
     const [selectedBoard, setSelectedBoard] = useState(null);
     
     const [userInfo, setUserInfo] = useState('');
-
-    const [info,setInfo] = useState('');
-
+    
+    // const [positionCheck, setPositionCheck] = useState(selectedUser.userposition);
+    // console.log(positionCheck)
 
     //get요청
     useEffect(()=>{
@@ -46,7 +46,7 @@ const UserManagement = () => {
             }
         })
         .then(function (response) {
-             console.log(response)
+            //  console.log(response)
              setUserInfo(response.data.data[0])
         }).catch(function (error) {
             // 오류발생시 실행
@@ -55,37 +55,59 @@ const UserManagement = () => {
         });
     },[])
 
-    
+    //유저 검색 인풋
     const userOnChangeEvent = (e) => {
         setUserSearch(e.target.value);
     }
     
+    //유저 검색 버튼
     const userSearchButtonEvent = () => {
         const searchResult = user.filter(info => info.userId.includes(userSearch));
         setUserSearchList(searchResult)
     }
 
+    //권한 설정
     const roleSettingDialog = (e,user) => {
         e.preventDefault();
         setSelectedUser(user);
         setIsDialog(true);
     }
 
+    //다이얼로그 닫기
     const closeDialog = () => {
         setIsDialog(false);
         setSelectedUser(null);
         setBoardSearchList(null)
     }
 
+    // 게시판 이름 인풋
     const boardOnChangeEvent = (e) => {
-        const searchValue = e.target.value;
-        setBoardSearch(searchValue);
+        const result = e.target.value;
+        setSearchValue(result);
     }
 
-    const boardSearchButtonEvent = () => {
-        const searchResult = bandnameMap.filter(board => board === boardSearch);
-        setBoardSearchList(searchResult);
-        console.log(searchResult)
+    //게시판 검색 버튼
+    const boardSearchButtonEvent = async () => {
+        try {
+            console.log(searchValue);
+
+            const response = await axios.get("https://www.narock.site/band", {
+                params: {
+                    "searchKeyword": searchValue,
+                },
+            });
+            console.log(response);
+            setBandSearchResult(response.data);
+            console.log(bandSearchResult);
+        } catch (error) {
+            // 오류 처리
+        }
+
+        // console.log(userInfo)
+        // const searchResult = bandnameMap.filter(board => board === boardSearch);
+        // const searchResult = userInfo.filter(board => board === boardSearch);
+        // setBoardSearchList(searchResult);
+        // console.log(searchResult)
         
     }
 
@@ -127,7 +149,7 @@ const UserManagement = () => {
                                             <List>{v.userid}</List>
                                             <List>{v.usernickname}</List>
                                             <List>{v.usertimestamp}</List>
-                                            <List>{v.userposition}</List>
+                                            <List>{v.userposition === 2 ? "관리자" : v.userposition === 1 ? "게시판 지기" : "일반 회원"}</List>
                                             <List>
                                                 <Button value="권한 설정" margin="0" onClick={(e)=>{roleSettingDialog(e,v)}}/>
                                             </List>
@@ -136,21 +158,9 @@ const UserManagement = () => {
                                     </div>
                                 ) : (
                                     <div>
-                                    {user.map((v, i) => (
-                                        <Div key={v[i]}
-                                        borderbottom="2px solid #e2e8ff"
-                                        justifycontent="center"
-                                        >
-                                            <CheckBox type="checkbox"></CheckBox>
-                                            <List>{v.userid}</List>
-                                            <List>{v.usernickname}</List>
-                                            <List>{v.usertimestamp}</List>
-                                            <List>{v.userposition}</List>
-                                            <List>
-                                                <Button value="권한 설정" margin="0" onClick={(e)=>{roleSettingDialog(e,v)}}/>
-                                            </List>
+                                        <Div borderbottom="2px solid #e2e8ff" justifycontent="center">
+                                            유저 정보가 없습니다.
                                         </Div>
-                                    ))}
                                     </div>
                                 )}
                             </div>
@@ -163,32 +173,32 @@ const UserManagement = () => {
 
 
             {isDialog && (
-                        <Background>
-                            <Modal>
-                                <Div margin="0">
-                                    <UserInfo>아이디</UserInfo> <span>{selectedUser.userid}</span>
-                                    <UserInfo>닉네임</UserInfo> <span> {selectedUser.usernickname}</span>
-                                </Div>
-                                <div>
-                                        <input type="radio" /> 일반 회원
-                                        <input type="radio" /> 게시판 지기
-                                </div>
-                                <div>
-                                    <span>게시판 이름</span>
-                                    <Input onChange={(e)=>{boardOnChangeEvent(e)}}/>
-                                    <Button value="검색" onClick={boardSearchButtonEvent}/>
-                                </div>
-                                <div>
-                                    게시판 검색 결과
-                                    <Div border="1px solid #000" margin="5px 0" padding="10px" onClick={(e)=>{clickedBoard(e,boardSearchList)}}>
-                                        {boardSearchList}
-                                    </Div>
-                                </div>
-                                <p>※ 게시판 지기는 한 게시판 당 한 명만 설정이 가능합니다.</p>
-                                <Button onClick={closeDialog} value="확인"></Button>
-                            </Modal>
-                        </Background>
-                    )}
+                <Background>
+                    <Modal>
+                        <Div margin="0">
+                            <UserInfo>아이디</UserInfo> <span>{selectedUser.userid}</span>
+                            <UserInfo>닉네임</UserInfo> <span> {selectedUser.usernickname}</span>
+                        </Div>
+                        <div>
+                                <input type="radio" /> 일반 회원
+                                <input type="radio"/> 게시판 지기
+                        </div>
+                        <div>
+                            <span>게시판 이름</span>
+                            <Input onChange={(e)=>{boardOnChangeEvent(e)}} margin="15px 5px"/>
+                            <Button value="검색" onClick={boardSearchButtonEvent}/>
+                        </div>
+                        <div>
+                            게시판 검색 결과
+                            <Div border="1px solid #000" margin="5px 0" padding="10px" onClick={(e)=>{clickedBoard(e,bandSearchResult)}}>
+                                검색결과 나오는 곳
+                            </Div>
+                        </div>
+                        <p>※ 게시판 지기는 한 게시판 당 한 명만 설정이 가능합니다.</p>
+                        <Button onClick={closeDialog} value="확인"></Button>
+                    </Modal>
+                </Background>
+            )}
         </div>
     );
 };

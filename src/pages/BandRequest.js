@@ -27,18 +27,17 @@ const BandRequest = () => {
 
     const [boardSearch,setBoardSearch] = useState('');
     const [boardSearchList,setBoardSearchList] = useState('');
-    const [selectedBoard, setSelectedBoard] = useState(null);
 
     const [isChecked, setIsChecked] = useState(false);
     const [isUserRequest,setIsUserRequest] = useState([]);
 
     const arr = Object.values(isUserRequest)
-    
+    console.log(arr)
 
     const [requestInfo, setRequestInfo] = useState([]);
 
 
-    //get 요청
+    //게시판 요청 불러오기
     useEffect(()=>{
         axios.get("https://www.narock.site/postRequest/all",{
             params: {
@@ -46,10 +45,10 @@ const BandRequest = () => {
             }
         })
         .then(function (response) {
-            // console.log(response.data.data)
-            setRequestInfo(response.data.data[0]);
-            const objectArr = requestInfo.map(obj => obj.postname)
-            console.log(objectArr)
+            console.log(response.data.data)
+
+            setRequestInfo(response.data.data);
+            console.log(requestInfo)
         }).catch(function (error) {
             // 오류발생시 실행
         }).then(function() {
@@ -69,16 +68,14 @@ const BandRequest = () => {
         setSelectedUser(null);
         setBoardSearchList(null)
     }
-
-    const clickedBoard = (e,boardSearchList) => {
-        setSelectedBoard(boardSearchList);
-    }
     
-    const hadleCheckboxChange = (e,info) => {
+    const handleCheckboxChange = (e,info) => {
         setIsChecked(e.target.checked)
         setIsUserRequest(info);
         console.log(isUserRequest)
     }
+
+    //요청 삭제
     const handleDeleteRequest  = () => {
 
         console.log(arr);
@@ -96,20 +93,22 @@ const BandRequest = () => {
         })
     }
 
+    //요청 수락
     const handleAcceptRequest = () => {
-        const selectedRequest = requestInfo[0];
+        console.log(arr[0])
         axios.post("https://www.narock.site/postRequest/accept", {
-            // "postCreateRequestIndex": selectedRequest.postcreaterequestIndex,
-		    // "bandNameArray": selectedRequest.boardname,
-		    // "userIndexArray": selectedRequest.userindex,
+            "postCreateRequestIndex": [arr[0]],
+		    "bandNameArray": [arr[2]],
+		    "userIndexArray": [arr[4]],
         })
         .then(function (response) {
             console.log(response)
+            if(response.data.success){
+            alert("요청을 수락했습니다.")
+            }
         }).catch(function (error) {
             // 오류발생시 실행
-        }).then(function() {
-            // 항상 실행
-        });
+        })
     }
     return (
         <div>
@@ -129,31 +128,26 @@ const BandRequest = () => {
                             />
                         </Div>
                         <div>
-
+                            <div>
+                            {requestInfo && requestInfo.length > 0 ?
                                 <div>
-                                {requestInfo && requestInfo.length > 0 ? 
-                                    <div>
-                                        {requestInfo.map((v, i) => (
-                                            
-                                            <Div key={v[i]} borderbottom="2px solid #e2e8ff" justifycontent="center">
-                                                <CheckBox type="checkbox" onChange={(e=>hadleCheckboxChange(e,v))}></CheckBox>
-                                                <List>{v.userindex}</List>
-                                                <List>{v.userindex}</List>
-                                                <List>{v.postname.toUpperCase()}</List>
-                                                <List>{v.postcreaterequesttimestamp}</List>
-                                                <List>
-                                                    <Button value="요청 내용 보기" margin="0" onClick={(e)=>{requestDialog(e,v)}}/>
-                                                </List>
-                                            </Div>
-                                        ))}
-                                    </div>
-                                    :
-                                    <Div borderbottom="2px solid #e2e8ff" justifycontent="center">
-                                        <div>게시판 요청이 없습니다.</div>
-                                    </Div>
-                                }
+                                    {requestInfo.map((v, i) => (                                    
+                                        <Div key={v[i]} borderbottom="2px solid #e2e8ff" justifycontent="center">
+                                            <CheckBox type="checkbox" onChange={(e=>handleCheckboxChange(e,v))}></CheckBox>
+                                            <List>{v.userid}</List>
+                                            <List>{v.usernickname}</List>
+                                            <List>{v.postname.toUpperCase()}</List>
+                                            <List>{v.postcreaterequesttimestamp}</List>
+                                            <List>
+                                                <Button value="요청 내용 보기" margin="0" onClick={(e)=>{requestDialog(e,v)}}/>
+                                            </List>
+                                        </Div>
+                                    ))}
                                 </div>
-
+                                :
+                                <div>게시판 요청이 없습니다.</div>
+                            }
+                            </div>
                         </div>
                     </Div>
                 </Div>
@@ -170,8 +164,8 @@ const BandRequest = () => {
                     <Background>
                         <Modal>
                             <Div margin="0">
-                                <UserInfo>아이디</UserInfo> <span>{selectedUser.userindex}</span>
-                                <UserInfo>닉네임</UserInfo> <span> {selectedUser.nickname}</span>
+                                <UserInfo>아이디</UserInfo> <span>{selectedUser.userid}</span>
+                                <UserInfo>닉네임</UserInfo> <span> {selectedUser.usernickname}</span>
                             </Div>
                             <Div margin="0">
                                 <UserInfo>요청 게시판</UserInfo> <span>{selectedUser.postname}</span>
@@ -179,7 +173,7 @@ const BandRequest = () => {
                             </Div>
                             <div>
                                 요청 내용
-                                <Div border="1px solid #000" margin="5px 0" padding="10px" onClick={(e)=>{clickedBoard(e,boardSearchList)}}>
+                                <Div border="1px solid #000" margin="5px 0" padding="10px">
                                     {selectedUser.requestdetail}
                                 </Div>
                             </div>

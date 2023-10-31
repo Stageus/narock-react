@@ -10,7 +10,7 @@ axios.defaults.baseURL = "https://www.narock.site";
 axios.defaults.withCredentials = true;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  
+
   <BrowserRouter>
     <RecoilRoot>
       <App />
