@@ -70,11 +70,11 @@ const Login = () => {
         
     // async await 함수를 사용할 때, 
     
-    try {
-        const data = await axios.post("https://www.narock.site/account/login");
-    } catch {
-        // 오류 발생시 실행
-    }
+    // try {
+    //     const data = await axios.post("https://www.narock.site/account/login");
+    // } catch {
+    //     // 오류 발생시 실행
+    // }
     }
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Button, Div, Input } from "../styled/ProjectStyle";
 
@@ -10,6 +10,7 @@ import Paging from "../components/Paging"
 import { useRecoilValue } from "recoil";
 import { requestState,bandnameState } from "../recoil/BackRecoil";
 import { postRowState } from '../recoil/FrontRecoil'
+import axios from "axios";
 
 const BandRequest = () => {
     const request = useRecoilValue(requestState); //유저 데이터
@@ -21,16 +22,41 @@ const BandRequest = () => {
     const postRow = useRecoilValue(postRowState)
 
 
-    const [userSearch,setUserSearch] = useState(''); //유저 아이디 검색 인풋값 저장
-    const [userSearchList,setUserSearchList] = useState(''); // 검색 결과
-
     const [isDialog, setIsDialog] = useState(false); // 다이얼로그 활성화 여부
     const [selectedUser, setSelectedUser] = useState(null); //선택된 아이디 정보
 
     const [boardSearch,setBoardSearch] = useState('');
     const [boardSearchList,setBoardSearchList] = useState('');
     const [selectedBoard, setSelectedBoard] = useState(null);
+
+    const [isChecked, setIsChecked] = useState(false);
+    const [isUserRequest,setIsUserRequest] = useState([]);
+
+    const arr = Object.values(isUserRequest)
     
+
+    const [requestInfo, setRequestInfo] = useState([]);
+
+
+    //get 요청
+    useEffect(()=>{
+        axios.get("https://www.narock.site/postRequest/all",{
+            params: {
+                "pages":1,
+            }
+        })
+        .then(function (response) {
+            // console.log(response.data.data)
+            setRequestInfo(response.data.data[0]);
+            const objectArr = requestInfo.map(obj => obj.postname)
+            console.log(objectArr)
+        }).catch(function (error) {
+            // 오류발생시 실행
+        }).then(function() {
+            // 항상 실행
+        });
+    },[])
+
 
     const requestDialog = (e,user) => {
         e.preventDefault();
@@ -44,20 +70,46 @@ const BandRequest = () => {
         setBoardSearchList(null)
     }
 
-    const boardOnChangeEvent = (e) => {
-        const searchValue = e.target.value;
-        setBoardSearch(searchValue);
-    }
-
-    const boardSearchButtonEvent = () => {
-        const searchResult = bandnameMap.filter(board => board === boardSearch);
-        setBoardSearchList(searchResult);
-        console.log(searchResult)
-        
-    }
-
     const clickedBoard = (e,boardSearchList) => {
         setSelectedBoard(boardSearchList);
+    }
+    
+    const hadleCheckboxChange = (e,info) => {
+        setIsChecked(e.target.checked)
+        setIsUserRequest(info);
+        console.log(isUserRequest)
+    }
+    const handleDeleteRequest  = () => {
+
+        console.log(arr);
+        axios.delete('/postRequest',{
+            data:{
+                postCreateRequestIndex:arr
+            }
+        })
+        .then(function (response) {
+            alert("요청이 삭제 되었습니다.")
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+
+    const handleAcceptRequest = () => {
+        const selectedRequest = requestInfo[0];
+        axios.post("https://www.narock.site/postRequest/accept", {
+            // "postCreateRequestIndex": selectedRequest.postcreaterequestIndex,
+		    // "bandNameArray": selectedRequest.boardname,
+		    // "userIndexArray": selectedRequest.userindex,
+        })
+        .then(function (response) {
+            console.log(response)
+        }).catch(function (error) {
+            // 오류발생시 실행
+        }).then(function() {
+            // 항상 실행
+        });
     }
     return (
         <div>
@@ -65,7 +117,7 @@ const BandRequest = () => {
         <Div>
             <UserNav/>
             <Div flexdirection="column" border="1px solid #e2e8ff" margin="30px 80px" width="100%">
-                <Title>유저 관리</Title>
+                <Title>게시판 요청</Title>
                 <Div width="100%" display="block">
                     <Div margin="0 70px" display="block">
                         <Div justifycontent="center" margin="0">
@@ -79,28 +131,37 @@ const BandRequest = () => {
                         <div>
 
                                 <div>
-                                {request.map((v, i) => (
-                                    <Div key={v[i]}
-                                    borderbottom="2px solid #e2e8ff"
-                                    justifycontent="center"
-                                    >
-                                        <CheckBox type="checkbox"></CheckBox>
-                                        <List>{v.userId}</List>
-                                        <List>{v.nickname}</List>
-                                        <List>{v.requestBoard}</List>
-                                        <List>{v.requestDate}</List>
-                                        <List>
-                                            <Button value="요청 내용 보기" margin="0" onClick={(e)=>{requestDialog(e,v)}}/>
-                                        </List>
+                                {requestInfo && requestInfo.length > 0 ? 
+                                    <div>
+                                        {requestInfo.map((v, i) => (
+                                            
+                                            <Div key={v[i]} borderbottom="2px solid #e2e8ff" justifycontent="center">
+                                                <CheckBox type="checkbox" onChange={(e=>hadleCheckboxChange(e,v))}></CheckBox>
+                                                <List>{v.userindex}</List>
+                                                <List>{v.userindex}</List>
+                                                <List>{v.postname.toUpperCase()}</List>
+                                                <List>{v.postcreaterequesttimestamp}</List>
+                                                <List>
+                                                    <Button value="요청 내용 보기" margin="0" onClick={(e)=>{requestDialog(e,v)}}/>
+                                                </List>
+                                            </Div>
+                                        ))}
+                                    </div>
+                                    :
+                                    <Div borderbottom="2px solid #e2e8ff" justifycontent="center">
+                                        <div>게시판 요청이 없습니다.</div>
                                     </Div>
-                                ))}
+                                }
                                 </div>
 
                         </div>
                     </Div>
                 </Div>
                 <Paging/>
-                <Button value="계정 삭제" backgroundcolor="#FC3131" width="127px" padding="7px" borderradius="5px"/>
+                <div>
+                    <Button value="요청 삭제" backgroundcolor="#FC3131" width="127px" padding="7px" borderradius="5px" onClick={handleDeleteRequest }/>
+                    <Button value="요청 수락" width="127px" padding="7px" borderradius="5px" onClick={handleAcceptRequest}/>
+                </div>
             </Div>        
         </Div>
 
@@ -109,13 +170,17 @@ const BandRequest = () => {
                     <Background>
                         <Modal>
                             <Div margin="0">
-                                <UserInfo>아이디</UserInfo> <span>{selectedUser.userId}</span>
+                                <UserInfo>아이디</UserInfo> <span>{selectedUser.userindex}</span>
                                 <UserInfo>닉네임</UserInfo> <span> {selectedUser.nickname}</span>
                             </Div>
+                            <Div margin="0">
+                                <UserInfo>요청 게시판</UserInfo> <span>{selectedUser.postname}</span>
+                                <UserInfo>요청 날짜</UserInfo> <span> {selectedUser.postcreaterequesttimestamp}</span>
+                            </Div>
                             <div>
-                                게시판 검색 결과
+                                요청 내용
                                 <Div border="1px solid #000" margin="5px 0" padding="10px" onClick={(e)=>{clickedBoard(e,boardSearchList)}}>
-                                    {boardSearchList}
+                                    {selectedUser.requestdetail}
                                 </Div>
                             </div>
                             <Button onClick={closeDialog} value="닫기"></Button>

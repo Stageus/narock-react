@@ -15,7 +15,6 @@ import axios from "axios";
 
 const UserManagement = () => {
     const user = useRecoilValue(userState); //유저 데이터
-    console.log(user)
     const bandname = useRecoilValue(bandnameState);
     // const bandnameMap = Object.values(bandname).flat().map((item)=>(item.split(',')));
     const bandnameMap = Object.values(bandname).flat();
@@ -37,53 +36,25 @@ const UserManagement = () => {
     const [userInfo, setUserInfo] = useState('');
 
     const [info,setInfo] = useState('');
-    // const getUserInfoList = async () => {
 
-        // axios.get("https://www.narock.site/account/all")
-        //     .then(function (response) {
-        //        console.log(response)
-        //     }).catch(function (error) {
-        //         // 오류발생시 실행
-        //     }).then(function() {
-        //         // 항상 실행
-        //     });
-            
-        // // async await 함수를 사용할 때, 
 
-        // try {
-        //     const data = await axios.get("https://www.narock.site/account/all");
-        //     console.log(data);
-        // } catch {
-        //     // 오류 발생시 실행
-        // }
-
-        // const response = await fetch("https://www.narock.site/account/all");
-        // const result = await response.json();
-
-        // if (result.success) {
-        //     setUserInfo((result.data));
-        // } else {
-        //     alert(result.message);
-        // }
-    // }
-
-    const getUserInfoList = async () => {
-
-        const response = await fetch("https://www.narock.site/account/all");
-        const result = await response.json();
-
-        if (result.success) {
-            setInfo((result.data));
-            console.log(info)
-        } else {
-            alert(result.message);
-        }
-    };
-
-    
+    //get요청
     useEffect(()=>{
-        getUserInfoList()
+        axios.get("https://www.narock.site/account/all",{
+            params: {
+                "pages":1,
+            }
+        })
+        .then(function (response) {
+             console.log(response)
+             setUserInfo(response.data.data[0])
+        }).catch(function (error) {
+            // 오류발생시 실행
+        }).then(function() {
+            // 항상 실행
+        });
     },[])
+
     
     const userOnChangeEvent = (e) => {
         setUserSearch(e.target.value);
@@ -121,6 +92,7 @@ const UserManagement = () => {
     const clickedBoard = (e,boardSearchList) => {
         setSelectedBoard(boardSearchList);
     }
+    
     return (
         <div>
             <Header/>
@@ -144,18 +116,18 @@ const UserManagement = () => {
                                 />
                             </Div>
                             <div>
-                                {userSearchList.length > 0 ? (
+                                {userInfo.length > 0 ? (
                                     <div>
-                                    {userSearchList.map((v, i) => (
+                                    {userInfo.map((v, i) => (
                                         <Div key={v[i]}
                                         borderbottom="2px solid #e2e8ff"
                                         justifycontent="center"
                                         >
                                             <CheckBox type="checkbox"></CheckBox>
-                                            <List>{v.userId}</List>
-                                            <List>{v.nickname}</List>
-                                            <List>{v.joinpostTimestamp}</List>
-                                            <List>{v.role}</List>
+                                            <List>{v.userid}</List>
+                                            <List>{v.usernickname}</List>
+                                            <List>{v.usertimestamp}</List>
+                                            <List>{v.userposition}</List>
                                             <List>
                                                 <Button value="권한 설정" margin="0" onClick={(e)=>{roleSettingDialog(e,v)}}/>
                                             </List>
@@ -170,10 +142,10 @@ const UserManagement = () => {
                                         justifycontent="center"
                                         >
                                             <CheckBox type="checkbox"></CheckBox>
-                                            <List>{v.userId}</List>
-                                            <List>{v.nickname}</List>
-                                            <List>{v.joinpostTimestamp}</List>
-                                            <List>{v.role}</List>
+                                            <List>{v.userid}</List>
+                                            <List>{v.usernickname}</List>
+                                            <List>{v.usertimestamp}</List>
+                                            <List>{v.userposition}</List>
                                             <List>
                                                 <Button value="권한 설정" margin="0" onClick={(e)=>{roleSettingDialog(e,v)}}/>
                                             </List>
@@ -194,8 +166,8 @@ const UserManagement = () => {
                         <Background>
                             <Modal>
                                 <Div margin="0">
-                                    <UserInfo>아이디</UserInfo> <span>{selectedUser.userId}</span>
-                                    <UserInfo>닉네임</UserInfo> <span> {selectedUser.nickname}</span>
+                                    <UserInfo>아이디</UserInfo> <span>{selectedUser.userid}</span>
+                                    <UserInfo>닉네임</UserInfo> <span> {selectedUser.usernickname}</span>
                                 </Div>
                                 <div>
                                         <input type="radio" /> 일반 회원

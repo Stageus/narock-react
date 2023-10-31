@@ -4,6 +4,7 @@ import { Button, Error, Input, Success } from "../../styled/ProjectStyle";
 
 import { useRecoilState } from "recoil";
 import { bandExistState, inputValueState, requestValueState, userDataState } from "../../recoil/FrontRecoil";
+import axios from "axios";
 
 // import axios from "axios";
 
@@ -34,6 +35,7 @@ const BandRequestDialogBox = (props) => {
 
     const sendRequest = () => {
         
+        
         if(!userData.boardName || !userData.boardRequest){
             alert("모든 칸을 입력 해 주세요.")
             return;
@@ -41,11 +43,32 @@ const BandRequestDialogBox = (props) => {
             alert("이미 존재하는 게시판입니다.")
             return;
         }
-        else{
-            alert("등록이 완료 됐습니다.")
-            console.log(userData)
-        }
+        // else{
+        //     alert("등록이 완료 됐습니다.")
+        //     console.log(userData)
+        // }
+
+        axios.post("https://www.narock.site/postRequest", {
+            "bandName": userData.boardName,
+            "requestMessage": userData.boardRequest
+        },
+        // {withCredentials: true}
+        )
+        .then(function (response) {
+            if (response.status === 200) {
+                console.log(response)
+                alert('게시판 요청이 완료 됐습니다.')
+            }
+        }).catch(function (error) {
+            console.log(error);
+            alert("요청 실패")
+        }).then(function() {
+            // 항상 실행
+        });
     }
+
+
+
 
     return(
         <Background>

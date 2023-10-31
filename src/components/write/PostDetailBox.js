@@ -10,6 +10,8 @@ import { useNavigate , useParams } from "react-router-dom";
 import CommentBox from "./CommentBox";
 
 const PostDetailBox = (props) => {
+    const { bandname,post } = props;
+    
     const { postid } = useParams();
     const domain = decodeURI(window.location.pathname);
     const domainSplit = domain.split('/');
@@ -19,7 +21,6 @@ const PostDetailBox = (props) => {
     
     // console.log(foundKeywords)
 
-    const { bandname,post } = props;
     // console.log(post)
     
     //글번호, 카테고리 일치하는 게시물만 불러오기

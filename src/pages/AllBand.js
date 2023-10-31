@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Button } from "../styled/ProjectStyle";
 import { useRecoilValue } from 'recoil';
@@ -7,9 +7,27 @@ import { bandnameState } from "../recoil/BackRecoil";
 import Header from "../components/common/Header";
 import BandName from "../components/band/BandName";
 import BandRequestDialogBox from "../components/band/BandRequestDialogBox";
+import axios from "axios";
 
 const Allband = () => {
-    const bandname = useRecoilValue(bandnameState);
+    const bandList = useRecoilValue(bandnameState);
+    const [getData, setGetData] = useState([]);
+    console.log(getData)
+    useEffect(()=>{
+        axios.get("https://www.narock.site/band/all",
+        {
+            withCredentials: true,
+        }
+        )
+        .then(function (response) {
+             console.log(response)
+             setGetData(response.data.data[0])
+        }).catch(function (error) {
+            // 오류발생시 실행
+        }).then(function() {
+            // 항상 실행
+        });
+    },[])
     const [dialog,setDialog] = useState(false);
 
     const openDialog = () => {
@@ -22,10 +40,10 @@ const Allband = () => {
     return (
         <div>
             <Header/>
-            <BandName bandname={bandname}/>
+            <BandName bandname={getData} bandlist={bandList}/>
             <RequestButton value="게시판 생성 요청" onClick={openDialog}/>
             {dialog &&
-                <BandRequestDialogBox bandname={bandname} dialog={dialog} setDialog={closeDialog}/>
+                <BandRequestDialogBox bandname={getData} dialog={dialog} setDialog={closeDialog}/>
             }
         </div>
     );
