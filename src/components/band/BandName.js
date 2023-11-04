@@ -4,41 +4,41 @@ import { Align } from "../../styled/ProjectStyle";
 import { useNavigate } from "react-router-dom";
 
 const BandName = (props) => {
-    const { bandname, bandlist } = props;
-    const navigate = useNavigate();
-    const sortedBandname = [...bandname].sort((a, b) => a.bandname.localeCompare(b.bandname));
-    const sortedList = {};
+  const { bandname, bandlist } = props;
+  const navigate = useNavigate();
 
-    sortedBandname.forEach((band) => {
-    //   const initial = band.bandname[0].toUpperCase();
-    const initial = band.bandname[0].toUpperCase();
+  const sortedBandname = [...bandname].sort((a, b) => a.bandname.localeCompare(b.bandname));
+  const sortedList = {};
 
-      if (!sortedList[initial]) {
-        sortedList[initial] = [];
-      }
-      sortedList[initial].push(band);
-    });
+  sortedBandname.forEach((band) => {
+  const initial = band.bandname[0].toUpperCase();
 
-    return (
-      <ListAlign>
-        {Object.keys(bandlist).map((initial) => (
-          <List key={initial}>
-            <NameTag>{initial}</NameTag>
-            {sortedList[initial] &&
-              sortedList[initial].map((band, index) => (
-                <div key={index}>
-                  <Band
-                    onClick={() => navigate(`/allband/${band.bandname}/notice`)}
-                  >
-                    {band.bandname.toUpperCase()}
-                  </Band>
-                </div>
-              ))}
-          </List>
-        ))}
-      </ListAlign>
-    );
-  };
+    if (!sortedList[initial]) {
+      sortedList[initial] = [];
+    }
+    sortedList[initial].push(band);
+  });
+
+  return (
+    <ListAlign>
+      {Object.keys(bandlist).map((initial) => (
+        <List key={initial}>
+          <NameTag>{initial}</NameTag>
+          {sortedList[initial] &&
+            sortedList[initial].map((band, index) => (
+              <div key={index}>
+                <Band
+                  onClick={() => navigate(`/allband/${band.bandname}/notice`)}
+                >
+                  {band.bandname.toUpperCase()}
+                </Band>
+              </div>
+            ))}
+        </List>
+      ))}
+    </ListAlign>
+  );
+};
 
 const ListAlign = styled(Align)`
     margin:0 160px;

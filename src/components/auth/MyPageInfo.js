@@ -133,7 +133,7 @@ const MyPageInfo = () => {
                 <Space>{userInfo.userId}</Space>
                 {/* <Space>아이디 출력부분</Space> */}
                 <div>닉네임</div>
-                <Input margin="5px 0 15px 0" placeholder="유저 닉네임" maxlength="16" onChange={onChangeNickname}/>
+                <Input margin="5px 0 15px 0" placeholder="유저 닉네임" maxLength="16" onChange={onChangeNickname}/>
                 <Div>
                     <RuleIcon  onMouseOver={()=>{setIsHover(true)}} onMouseOut={()=>{setIsHover(false)}}>?</RuleIcon>
                     {isHover &&
@@ -174,7 +174,7 @@ const MyPageInfo = () => {
                 <Input margin="5px 0 15px 0" type="password"/>
                 <div>비밀번호 변경 (영문 대소문자/숫자/특수문자 조합, 8자~16자)</div>
                 <Align position="relative">
-                    <Input onChange={onChangePw} type="password" maxlength="16" marginright="10px"/>
+                    <Input onChange={onChangePw} type="password" maxLength="16" marginright="10px"/>
                     {!isPassword && password.length > 0 && <ErrorMsg right="-270px">{passwordMsg}</ErrorMsg>}
                 </Align>
 

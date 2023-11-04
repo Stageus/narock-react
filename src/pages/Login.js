@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from 'axios';
 import Header from "../components/common/Header";
 import Logo from "../components/Logo";
@@ -13,42 +13,15 @@ import { useCookies } from "react-cookie";
 
 const Login = () => {
     const navigate = useNavigate();
+
     const [uid, setUid] = useState("");
     const [upw, setUpw] = useState("");
 
     const [auth, setAuth] = useRecoilState(loginState);
     const [cookie, setCookie] = useCookies(['token']);
-
+    
 
     const loginClickEvent = async () => {
-        // fetch("https://www.narock.site/account/login",{
-        //     "method": "POST",
-        //     "headers": {
-        //         "Content-Type": "application/json",
-        //     },
-        //     "credentials": "include", //쿠키가 있는 곳에는 모두 적용
-        //     "body":JSON.stringify({
-        //         "idValue": uid,
-        //         "pwValue": upw
-        //     })
-        // })
-        // .then(response => response.json())
-        // .then(response => {
-        //     if(response.success){
-        //         console.log(response);
-        //         alert('ㅇㅇ')
-        //         console.log(response.headers)
-        //     }
-        //     // if (response.token) {
-        //     //     쿠키를 설정하고 sameSite 속성을 설정
-        //     //     setCookie('token', response.token, { sameSite: 'None', secure: true });
-        //     //     localStorage.setItem('token', response.data.token);
-                
-        //     // }
-        //     const storedToken = localStorage.getItem('token');
-        //     // console.log(storedToken)
-        // })
-        
         axios.post("https://www.narock.site/account/login", {
             "idValue": uid,
             "pwValue": upw
@@ -56,10 +29,13 @@ const Login = () => {
         // {withCredentials: true}
         )
         .then(function (response) {
-            if (response.status === 200) {
+            if (response.data.success) {
                 console.log(response)
                 setAuth(true)
-                alert('로그인 성공')
+                navigate(-1);
+            }else{
+                alert("아이디 또는 비밀번호가 일치하지 않습니다.")
+                console.log(response)
             }      
         }).catch(function (error) {
             console.log(error);
@@ -67,14 +43,6 @@ const Login = () => {
         }).then(function() {
             // 항상 실행
         });
-        
-    // async await 함수를 사용할 때, 
-    
-    // try {
-    //     const data = await axios.post("https://www.narock.site/account/login");
-    // } catch {
-    //     // 오류 발생시 실행
-    // }
     }
 
 
@@ -86,8 +54,8 @@ const Login = () => {
                     <Logo/>
                     <Div>
                         <InputBox>
-                            <Input placeholder="아이디" maxlength="20" margin="7px 0"onChange={(e)=>setUid(e.target.value)}/>
-                            <Input  placeholder="비밀번호" type="password" maxlength="16" margin="7px 0" onChange={(e)=>setUpw(e.target.value)}/>
+                            <Input placeholder="아이디" maxLength="20" margin="7px 0"onChange={(e)=>setUid(e.target.value)}/>
+                            <Input  placeholder="비밀번호" type="password" maxLength="16" margin="7px 0" onChange={(e)=>setUpw(e.target.value)}/>
                         </InputBox> 
                         <Button value="로그인" onClick={()=>{loginClickEvent()}} width="80px" height="80px" borderradius="5px" type="button" margin="0" marginleft="10px"/>
                     </Div>

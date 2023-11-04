@@ -14,7 +14,7 @@ import axios from "axios";
 
 
 const UserManagement = () => {
-    const user = useRecoilValue(userState); //유저 데이터
+    // const user = useRecoilValue(userState); //유저 데이터
     const bandname = useRecoilValue(bandnameState);
     const bandnameMap = Object.values(bandname).flat();
     // console.log(bandnameMap)
@@ -34,9 +34,7 @@ const UserManagement = () => {
     const [selectedBoard, setSelectedBoard] = useState(null);
     
     const [userInfo, setUserInfo] = useState('');
-    
-    // const [positionCheck, setPositionCheck] = useState(selectedUser.userposition);
-    // console.log(positionCheck)
+    const [requestUserIndex,setRequestUserIndex] = useState([]);
 
     //get요청
     useEffect(()=>{
@@ -46,8 +44,12 @@ const UserManagement = () => {
             }
         })
         .then(function (response) {
-            //  console.log(response)
-             setUserInfo(response.data.data[0])
+             console.log(response)
+             const updatedData = response.data.data[0].map(item => ({
+                 ...item,
+                 usertimestamp:item.usertimestamp.substring(0,10),
+                }));
+            setUserInfo(updatedData)
         }).catch(function (error) {
             // 오류발생시 실행
         }).then(function() {
@@ -62,28 +64,32 @@ const UserManagement = () => {
     
     //유저 검색 버튼
     const userSearchButtonEvent = () => {
-        const searchResult = user.filter(info => info.userId.includes(userSearch));
+        const searchResult = userInfo.filter(info => info.userid.includes(userSearch));
         setUserSearchList(searchResult)
+        console.log(userSearchList)
     }
 
-    //권한 설정
-    const roleSettingDialog = (e,user) => {
+    //권한 설정 다이얼로그 열기
+    const openDialogEvent = (e,user) => {
+        setIsDialog(true);
         e.preventDefault();
         setSelectedUser(user);
-        setIsDialog(true);
     }
 
     //다이얼로그 닫기
-    const closeDialog = () => {
+    const closeDialogEvent = () => {
         setIsDialog(false);
         setSelectedUser(null);
         setBoardSearchList(null)
+        // setSelectedBoard(null);
+        // setBandSearchResult(null)
+        setSearchValue(null)
     }
 
     // 게시판 이름 인풋
     const boardOnChangeEvent = (e) => {
         const result = e.target.value;
-        setSearchValue(result);
+        setSearchValue(result.toUpperCase());
     }
 
     //게시판 검색 버튼
@@ -91,7 +97,7 @@ const UserManagement = () => {
         try {
             console.log(searchValue);
 
-            const response = await axios.get("https://www.narock.site/band", {
+            const response = await axios.get("/band", {
                 params: {
                     "searchKeyword": searchValue,
                 },
@@ -99,22 +105,70 @@ const UserManagement = () => {
             console.log(response);
             setBandSearchResult(response.data);
             console.log(bandSearchResult);
+            
         } catch (error) {
-            // 오류 처리
+            console.log(error);
         }
-
-        // console.log(userInfo)
-        // const searchResult = bandnameMap.filter(board => board === boardSearch);
-        // const searchResult = userInfo.filter(board => board === boardSearch);
-        // setBoardSearchList(searchResult);
-        // console.log(searchResult)
-        
     }
 
+    //체크 된 유저
+    const handleCheckboxChange = (e,info) => {
+        const checked = e.target.checked;
+        if(checked){
+            setRequestUserIndex(idx => [...idx,info.userindex]);
+            console.log(requestUserIndex)
+        }else{
+            setRequestUserIndex(idx=> idx.filter(item=>item !== info.userindex));
+            console.log(requestUserIndex)
+        }
+    }
+
+    //검색결과 클릭한 게시판
     const clickedBoard = (e,boardSearchList) => {
         setSelectedBoard(boardSearchList);
+        console.log(selectedBoard)
+    }
+
+    //유저 권한 변경
+    const changeMemberPositionEvent = () => {
+        axios.put("/account/position", {
+            "userIndex": selectedUser.userindex,
+            "userPosition": selectedUser.userposition,
+            "bandIndex": selectedBoard.bandIndex,
+        })
+        .then(function (response) {
+            console.log(response)
+            alert("권한이 변경되었습니다.")
+        }).catch(function (error) {
+            // 오류발생시 실행
+        }).then(function() {
+            // 항상 실행
+        });
     }
     
+    // 유저 삭제
+    const userDeleteEvent = () => {
+        if (requestUserIndex.length === 0) {
+            alert("체크 된 요청이 없습니다.");
+        } else {
+            if (window.confirm("계정을 삭제하시겠습니까?")) {
+                axios
+                    .delete('/account', {
+                        data: {
+                            "userIndex":requestUserIndex,
+                        }
+                    })
+                    .then(function (response) {
+                        alert("계정이 삭제 되었습니다.");
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            } else {
+                alert("계정 삭제가 취소되었습니다.");
+            }
+        }
+    }
     return (
         <div>
             <Header/>
@@ -138,36 +192,100 @@ const UserManagement = () => {
                                 />
                             </Div>
                             <div>
-                                {userInfo.length > 0 ? (
+                                {userSearchList.length > 0 ? (
                                     <div>
-                                    {userInfo.map((v, i) => (
-                                        <Div key={v[i]}
+                                    {userSearchList.map((v, i) => (
+                                        <Div
+                                        key={v.userindex}
                                         borderbottom="2px solid #e2e8ff"
                                         justifycontent="center"
+                                        margin="0"
+                                        padding="10px"
                                         >
-                                            <CheckBox type="checkbox"></CheckBox>
-                                            <List>{v.userid}</List>
-                                            <List>{v.usernickname}</List>
-                                            <List>{v.usertimestamp}</List>
-                                            <List>{v.userposition === 2 ? "관리자" : v.userposition === 1 ? "게시판 지기" : "일반 회원"}</List>
-                                            <List>
-                                                <Button value="권한 설정" margin="0" onClick={(e)=>{roleSettingDialog(e,v)}}/>
-                                            </List>
+                                        <CheckBox
+                                            type="checkbox"
+                                            onChange={(e) => {
+                                            handleCheckboxChange(e, v);
+                                            }}
+                                        ></CheckBox>
+                                        <List>{v.userid}</List>
+                                        <List>{v.usernickname}</List>
+                                        <List>{v.usertimestamp}</List>
+                                        <List>
+                                            {v.userposition === 2
+                                            ? "관리자"
+                                            : v.userposition === 1
+                                            ? "게시판 지기"
+                                            : "일반 회원"}
+                                        </List>
+                                        <List>
+                                            <Button
+                                            value="권한 설정"
+                                            margin="0"
+                                            onClick={(e) => {
+                                                openDialogEvent(e, v);
+                                            }}
+                                            />
+                                        </List>
+                                        </Div>
+                                    ))}
+                                    </div>
+                                ) : userInfo.length > 0 ? (
+                                    <div>
+                                    {userInfo.map((v, i) => (
+                                        <Div
+                                        key={v.userindex}
+                                        borderbottom="2px solid #e2e8ff"
+                                        justifycontent="center"
+                                        margin="0"
+                                        padding="10px"
+                                        >
+                                        <CheckBox
+                                            type="checkbox"
+                                            onChange={(e) => {
+                                            handleCheckboxChange(e, v);
+                                            }}
+                                        ></CheckBox>
+                                        <List>{v.userid}</List>
+                                        <List>{v.usernickname}</List>
+                                        <List>{v.usertimestamp}</List>
+                                        <List>
+                                            {v.userposition === 2
+                                            ? "관리자"
+                                            : v.userposition === 1
+                                            ? "게시판 지기"
+                                            : "일반 회원"}
+                                        </List>
+                                        <List>
+                                            <Button
+                                            value="권한 설정"
+                                            margin="0"
+                                            onClick={(e) => {
+                                                openDialogEvent(e, v);
+                                            }}
+                                            />
+                                        </List>
                                         </Div>
                                     ))}
                                     </div>
                                 ) : (
                                     <div>
-                                        <Div borderbottom="2px solid #e2e8ff" justifycontent="center">
-                                            유저 정보가 없습니다.
-                                        </Div>
+                                    <Div
+                                        borderbottom="2px solid #e2e8ff"
+                                        justifycontent="center"
+                                        padding="10px"
+                                        margin="0"
+                                    >
+                                        유저 정보가 없습니다.
+                                    </Div>
                                     </div>
                                 )}
                             </div>
+
                         </Div>
                     </Div>
                     <Paging/>
-                    <Button value="계정 삭제" backgroundcolor="#FC3131" width="127px" padding="7px" borderradius="5px"/>
+                    <Button value="계정 삭제" backgroundcolor="#FC3131" width="127px" padding="7px" borderradius="5px" onClick={userDeleteEvent}/>
                 </Div>        
             </Div>
 
@@ -180,8 +298,14 @@ const UserManagement = () => {
                             <UserInfo>닉네임</UserInfo> <span> {selectedUser.usernickname}</span>
                         </Div>
                         <div>
-                                <input type="radio" /> 일반 회원
-                                <input type="radio"/> 게시판 지기
+                                <input type="radio" value="0" 
+                                checked={selectedUser.userposition === 0}
+                                onChange={() => setSelectedUser({ ...selectedUser, userposition: 0 })}
+                                /> 일반 회원
+                                <input type="radio" value="1" 
+                                checked={selectedUser.userposition === 1}
+                                onChange={() => setSelectedUser({ ...selectedUser, userposition: 1 })}
+                                /> 게시판 지기
                         </div>
                         <div>
                             <span>게시판 이름</span>
@@ -191,11 +315,12 @@ const UserManagement = () => {
                         <div>
                             게시판 검색 결과
                             <Div border="1px solid #000" margin="5px 0" padding="10px" onClick={(e)=>{clickedBoard(e,bandSearchResult)}}>
-                                검색결과 나오는 곳
+                                {bandSearchResult.bandName}
                             </Div>
                         </div>
                         <p>※ 게시판 지기는 한 게시판 당 한 명만 설정이 가능합니다.</p>
-                        <Button onClick={closeDialog} value="확인"></Button>
+                        <Button onClick={changeMemberPositionEvent} value="변경"></Button>
+                        <Button onClick={closeDialogEvent} value="닫기"></Button>
                     </Modal>
                 </Background>
             )}

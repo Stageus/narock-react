@@ -206,7 +206,7 @@ const JoinInfo = () => {
             <div>
                 <div>아이디 (영문소문자/숫자, 6~20자만 가능)</div>
                 <Align>
-                    <Input id="uid" onChange={onChangeId} maxlength="20" marginright="10px"/>
+                    <Input id="uid" onChange={onChangeId} maxLength="20" marginright="10px"/>
                     {isId ? <Success>{idMsg}</Success> : id.length === 0 ? null : <Error>{idMsg}</Error>}
                 </Align>
             </div>
@@ -231,7 +231,7 @@ const JoinInfo = () => {
             <div>
                 <div>닉네임</div>
                 <Align>
-                    <Input id="unickname" OnChange={onChangeNickname} maxlength="16" marginright="10px"/>
+                    <Input id="unickname" OnChange={onChangeNickname} maxLength="16" marginright="10px"/>
                     {nickname.length> 0 &&<Error>{nicknameMsg}</Error>}
                 </Align>
                 <div>
@@ -248,7 +248,7 @@ const JoinInfo = () => {
             <div>
                 <div>이름</div>
                 <Align>
-                    <Input id="uname"onChange={onChangeName} maxlength="20" marginright="10px"/>
+                    <Input id="uname"onChange={onChangeName} maxLength="20" marginright="10px"/>
                     {name.length> 0 &&<Error>{nameMsg}</Error>}
                 </Align>
             </div>
