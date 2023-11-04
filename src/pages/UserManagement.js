@@ -82,7 +82,7 @@ const UserManagement = () => {
         setSelectedUser(null);
         setBoardSearchList(null)
         // setSelectedBoard(null);
-        // setBandSearchResult(null)
+        setBandSearchResult(bandSearchResult.bandName === null)
         setSearchValue(null)
     }
 
@@ -104,7 +104,7 @@ const UserManagement = () => {
             });
             console.log(response);
             setBandSearchResult(response.data);
-            console.log(bandSearchResult);
+            // console.log(bandSearchResult);
             
         } catch (error) {
             console.log(error);

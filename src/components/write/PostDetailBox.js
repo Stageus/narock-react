@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { Button, Div } from "../../styled/ProjectStyle";
 
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilpostData } from 'recoil';
 
 import { isLikedState, likedState } from "../../recoil/FrontRecoil";
 
 import { useNavigate , useParams } from "react-router-dom";
 import CommentBox from "./CommentBox";
+import axios from "axios";
 
 const PostDetailBox = (props) => {
     const { bandname,post } = props;
@@ -18,17 +19,9 @@ const PostDetailBox = (props) => {
     const domainRemove = domainSplit.pop(); // domainSplit 맨 마지막 배열 삭제용
     const keywordsToCheck = ['notice', 'community', 'concertinfo', 'news', 'gallery'];
     const foundKeywords = keywordsToCheck.filter(keyword => domainSplit.includes(keyword)).join(',');
-    
-    // console.log(foundKeywords)
+    const [postData, setPostData] = useState({});
 
-    // console.log(post)
-    
-    //글번호, 카테고리 일치하는 게시물만 불러오기
-    const posts = post.filter(
-        // p => p.postindex === parseInt(postid) && p.boardCategory === foundKeywords);
-        p => p.postindex === parseInt(postid));
-        
-
+    // 좋아요 버튼
     const [liked,setLiked] = useRecoilState(likedState);
     const [isLiked,setIsLiked] = useRecoilState(isLikedState);
 
@@ -51,52 +44,67 @@ const PostDetailBox = (props) => {
             navigate(`/${domainSplit.reverse()[0]}`)
         }
     }
+
+
+
+    useEffect(()=>{
+        axios.get("https://www.narock.site/post",
+        {
+            withCredentials: true,
+            params:{
+                postIndex:postid,
+            }
+        }
+        )
+        .then(function (response) {
+             console.log(response.data)
+             setPostData(response.data)
+        }).catch(function (error) {
+            console.log(error)
+        })
+    },[])
     return (
         <Div width="100%" margin="0">
-            {posts.length > 0 &&  posts.map((value,idx)=>{
-                return(
-                <Div key={idx} width="100%" display="block" margin="0 80px">
-                    <Div padding="20px" border="1px solid #E2E8FF" display="block" margin="0 0 20px 0">
-                        <div>
-                            {value.postcategory === 0
-                            ? "공지사항"
-                            : value.postcategory === 1
-                            ? "공연 정보"
-                            : value.postcategory === 2
-                            ? "갤러리"
-                            : value.postcategory === 3
-                            ? "자유 게시판"
-                            : value.postcategory === 4
-                            ? "새소식"
-                            : value.postcategory === 5
-                            ? "커뮤니티"
-                            : value.bandindex}
-                        </div>
-                        <div>{value.posttitle}</div>
-                        <Div display="flex" justifycontent="space-between" margin="0">
-                            <Div display="flex" alignitems="center" margin="0">
-                                <ProfileImg src={value.postimgurl} alt="프로필 사진"/>
-                                <Div margin="0 10px 0 0">{value.postwriter}</Div>
-                                <Div margin="0 10px 0 0">{value.postviews}</Div>
-                                <Div margin="0 10px 0 0">{value.posttimestamp}</Div>
-                                <Div margin="0 10px 0 0">댓글 {value.comment.length+value.reply.length}</Div>
-                            </Div>
-                            <Div display="flex" alignitems="center">
-                                <Button value="수정" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
-                                <Button value="삭제" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
-                                <Button value="목록" type="button" onClick={GoToList}/>
-                            </Div>
+            <Div width="100%" display="block" margin="0 80px">
+                <Div padding="20px" border="1px solid #E2E8FF" display="block" margin="0 0 20px 0">
+                    <div>
+                        {postData.postCategory === 0
+                        ? "공지사항"
+                        : postData.postCategory === 1
+                        ? "공연 정보"
+                        : postData.postCategory === 2
+                        ? "갤러리"
+                        : postData.postCategory === 3
+                        ? "자유 게시판"
+                        : postData.postCategory === 4
+                        ? "새소식"
+                        : postData.postCategory === 5
+                        ? "커뮤니티"
+                        : postData.bandIndex}
+                    </div>
+                    <div>{postData.postTitle}</div>
+                    <Div display="flex" justifycontent="space-between" margin="0">
+                        <Div display="flex" alignitems="center" margin="0">
+                            <ProfileImg src={postData.postImgUrl} alt="프로필 사진"/>
+                            <Div margin="0 10px 0 0">{postData.postWriter}</Div>
+                            <Div margin="0 10px 0 0">{postData.postViews}</Div>
+                            <Div margin="0 10px 0 0">{postData.postTimestamp}</Div>
+                            {/* <Div margin="0 10px 0 0">댓글 {postData.comment.length+postData.reply.length}</Div> */}
                         </Div>
-                        <Div margin="20px 0">{value.postContent}</Div>
-                        <Div display="flex" alignitems="cetnter" margin="0">
-                            {isLiked ? <Icon src={`${process.env.PUBLIC_URL}/img/like_active.png`} alt="좋아요" onClick={LikeClickEvent}/> : <Icon src={`${process.env.PUBLIC_URL}/img/like.png`} alt="좋아요" onClick={LikeClickEvent}/>}
-                            {<Like>{liked}</Like>}
+                        <Div display="flex" alignitems="center">
+                            <Button value="수정" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
+                            <Button value="삭제" backgroundcolor="white" color="mainColor" border="1px solid #3185FC"/>
+                            <Button value="목록" type="button" onClick={GoToList}/>
                         </Div>
                     </Div>
-                    <CommentBox comment={value.comment} bandname={bandname} postId={value.postIndex} reply={value.reply} post={posts}/>
+                    <Div margin="20px 0">{postData.postContent}</Div>
+                    <Div display="flex" alignitems="cetnter" margin="0">
+                        {isLiked ? <Icon src={`${process.env.PUBLIC_URL}/img/like_active.png`} alt="좋아요" onClick={LikeClickEvent}/> : <Icon src={`${process.env.PUBLIC_URL}/img/like.png`} alt="좋아요" onClick={LikeClickEvent}/>}
+                        {<Like>{liked}</Like>}
+                    </Div>
                 </Div>
-                )
-                })}
+            <CommentBox comment={postData.comment} bandname={bandname} postId={postData.postIndex} reply={postData.reply} post={post}/>
+            </Div>
         </Div>
     );
 };

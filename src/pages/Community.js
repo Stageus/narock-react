@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
 import styled from "styled-components";
@@ -19,6 +19,28 @@ const Community = () => {
     const bandnameEncoded = decodeURI(window.location.pathname); 
     const domainCategory = bandnameEncoded.split('/');
     const filteredPost = posts.filter(v=>!v.bandName && domainCategory[1] === v.boardCategory);
+    const [postData, setPostData] = useState([]);
+    useEffect(()=>{
+        axios.get("https://www.narock.site/post/all",
+        {
+            withCredentials: true,
+            params:{
+                postCategory:5,
+                // bandIndex:1,
+                pages:1
+            }
+        }
+        )
+        .then(function (response) {
+             console.log(response)
+             setPostData(response.data.post)
+             console.log(postData)
+        }).catch(function (error) {
+            // 오류발생시 실행
+        }).then(function() {
+            // 항상 실행
+        });
+    },[])
     return (
         <div>
             <Header/>
@@ -30,7 +52,7 @@ const Community = () => {
                 createDate={postRow[2].label}
                 view={postRow[3].label}
                 like={postRow[4].label}/>
-                <PostListBox posts={filteredPost} category="커뮤니티"/>
+                <PostListBox posts={postData} category="커뮤니티"/>
             </Box>  
         </div>
     );

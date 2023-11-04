@@ -8,7 +8,7 @@ import Header from "../components/common/Header";
 import PostRow from "../components/write/PostRow";
 
 import {useRecoilValue} from 'recoil';
-import { postState } from '../recoil/BackRecoil';
+// import { postState } from '../recoil/BackRecoil';
 import { postRowState } from '../recoil/FrontRecoil'
 import PostListBox from "../components/write/PostListBox";
 import axios from "axios";

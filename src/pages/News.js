@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 import { Title } from "../styled/ProjectStyle";
@@ -10,6 +10,7 @@ import {useRecoilValue} from 'recoil';
 import { postRowState } from '../recoil/FrontRecoil'
 import { postState } from "../recoil/BackRecoil";
 import PostListBox from "../components/write/PostListBox";
+import axios from "axios";
 const News = () => {
 
     const postRow = useRecoilValue(postRowState)
@@ -18,6 +19,29 @@ const News = () => {
     const bandnameEncoded = decodeURI(window.location.pathname); 
     const domainCategory = bandnameEncoded.split('/');
     const filteredPost = posts.filter(v=>!v.bandName && domainCategory[1] === v.boardCategory);
+    const [postData, setPostData] = useState([]);
+
+    useEffect(()=>{
+        axios.get("https://www.narock.site/post/all",
+        {
+            withCredentials: true,
+            params:{
+                postCategory:4,
+                // bandIndex:1,
+                pages:1
+            }
+        }
+        )
+        .then(function (response) {
+             console.log(response)
+             setPostData(response.data.post)
+             console.log(postData)
+        }).catch(function (error) {
+            // 오류발생시 실행
+        }).then(function() {
+            // 항상 실행
+        });
+    },[])
     return (
         <div>
             <Header/>
@@ -29,7 +53,7 @@ const News = () => {
                 createDate={postRow[2].label}
                 view={postRow[3].label}
                 like={postRow[4].label}/>
-                <PostListBox posts={filteredPost} category="새소식"/>
+                <PostListBox posts={postData} category="새소식"/>
             </Box>  
         </div>
     );

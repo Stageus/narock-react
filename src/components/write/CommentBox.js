@@ -25,21 +25,24 @@ const CommentBox = (props) => {
     return(
         <Div padding="20px" margin="0" border="1px solid #e2e8ff" display="block">
             <div>댓글</div>
-            {posts.map((val, idx) => {
+            {/* {posts.map((val, idx) => {
             return (
                 <Div display="block" margin="0" key={idx}>
                     {val.comment.map((comment, commentIdx) => (
                         <Comment comment={comment} commentIdx={commentIdx} val={val}/>
                     ))}
-                    {/* 댓글 입력창 */}
                     <Div>   
                         <SubCommentInput></SubCommentInput>
                         <SubmitButton value="등록" />
                     </Div>
-                </Div>
-  );
-})}
-
+                </Div> */}
+        <Div display="block" margin="0">
+            <Comment comment={post.comment} commentIdx={post.commentIdx} val={val}/>
+            <Div>   
+                <SubCommentInput></SubCommentInput>
+                <SubmitButton value="등록" />
+            </Div>
+            </Div>
         </Div>
     )
 }
