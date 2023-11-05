@@ -33,7 +33,8 @@ const Main = () => {
       <React.Fragment>
         <Header/>
         <Div>
-          <PopularList category={category[0]}/>
+          {/* <PopularList category={category[0]}/> */}
+          <RecentList category={category[0]}/>
           <div>
             <RecentList category={category[1]}/>
             <RecentList category={category[2]}/>

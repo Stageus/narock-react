@@ -33,7 +33,7 @@ const BandRequestDialogBox = (props) => {
         setRequestValue(boardRequest);
     }
 
-    const sendRequest = () => {
+    const sendRequest = async () => {
         
         
         if(!userData.boardName || !userData.boardRequest){

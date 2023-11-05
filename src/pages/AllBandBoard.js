@@ -10,7 +10,7 @@ import PostDetailBox from "../components/write/PostDetailBox";
 import { Div } from "../styled/ProjectStyle";
 
 import { useParams, useNavigate } from 'react-router-dom';
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { postRowState } from "../recoil/FrontRecoil";
 import { postState } from "../recoil/BackRecoil";
 import axios from "axios";
@@ -25,8 +25,9 @@ const AllBandBoard = () => {
 
     const postRow = useRecoilValue(postRowState);
     const posts = useRecoilValue(postState);
-    const post = posts.filter(p=>p.bandName === bandname && p.boardCategory === domainCategory);
-    
+    // const post = posts.filter(p=>p.bandName === bandname && p.boardCategory === domainCategory);
+    const [post,setPost] = useRecoilState(postState)
+
     useEffect(()=>{
         axios.get("https://www.narock.site/post/all",
         {
@@ -40,8 +41,7 @@ const AllBandBoard = () => {
         )
         .then(function (response) {
              console.log(response)
-             setPostData(response.data.post)
-             console.log(postData)
+             setPost(response.data.post)
         }).catch(function (error) {
             // 오류발생시 실행
         }).then(function() {
@@ -57,7 +57,7 @@ const AllBandBoard = () => {
                 <AllBandNav bandname={bandname}/> {/* 내비게이션 메뉴 */}
                 <Div margin="0 80px" width="100%" display="block">
                     {category.includes(domainPostIdx)? 
-                        <PostDetailBox bandname={bandname} post={posts} onClick={()=>{navigate(`${category}`)}}/>
+                        <PostDetailBox bandname={bandname} post={post} onClick={()=>{navigate(`${category}`)}}/>
                     :
                     <React.Fragment>
                     <PostRow
@@ -68,7 +68,7 @@ const AllBandBoard = () => {
                     like={postRow[4].label}
                     /> 
                     {/* <PostListBox bandname={bandname} posts={post} category={domainCategory}/> */}
-                    <PostListBox bandname={bandname} posts={postData} category={domainCategory}/>
+                    <PostListBox bandname={bandname} posts={post} category={domainCategory}/>
                     </React.Fragment>
                 }
                 </Div>

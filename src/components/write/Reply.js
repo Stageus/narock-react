@@ -48,7 +48,7 @@ const Reply = (props) => {
                     </Div>
                     : 
                     <Div>
-                        <Div margin="0" width="100%" margin="0" justifycontent="space-between">
+                        <Div margin="0" width="100%" justifycontent="space-between">
                             <img src={reply.replyImgUrl} width="40px" alt="프로필사진" />
                             <Div flexdirection="column" alignitems="flex-start" justifycontent="space-between">
                                 {reply.replyWriter}

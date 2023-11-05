@@ -11,7 +11,6 @@ const PostListBox = (props) => {
     const { bandname, posts, category } = props;
     const sortedPost = [...posts].sort((a,b)=>b.postindex - a.postindex)
     // console.log(sortedPost[0][0])
-    console.log(posts)
     const itemsCountPerPage = 3; // 한 페이지에 표시할 게시물 수
     const [limit, setLimit]= useState(10); 
     const [page, setPage] = useState(1);
