@@ -55,7 +55,7 @@ const Comment = (props) => {
     const commentDeleteEvent = () => {
         if (window.confirm("댓글을 삭제하시겠습니까?")) {
             axios
-                .delete('/post', {
+                .delete('/comment', {
                     data: {
                         "isReply": false,
                         "commentOrReplyIndex": comment.commentindex,

@@ -41,6 +41,22 @@ const PostDetailBox = (props) => {
         }
         setIsLiked(!isLiked);
 
+        axios.post("https://www.narock.site/post/like", {
+            "postIndex": postid
+        },
+        // {withCredentials: true}
+        )
+        .then(function (response) {
+            if (response.data.success) {
+                console.log(response)
+                console.log(post)
+            }else{
+                console.log(response)
+            }      
+        }).catch(function (error) {
+            console.log(error);
+            // alert("로그인 실패")
+        })
     }
     // 목록 돌아가기
     const GoToList = () => {
@@ -61,7 +77,7 @@ const PostDetailBox = (props) => {
         }
         )
         .then(function (response) {
-            // console.log(response.data)
+            console.log(response.data)
             setPost(response.data)
         }).catch(function (error) {
             console.log(error)

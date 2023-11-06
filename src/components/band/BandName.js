@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 const BandName = (props) => {
   const { bandname, bandlist } = props;
+  console.log(bandname)
   const navigate = useNavigate();
 
+  //밴드이름 정렬
   const sortedBandname = [...bandname].sort((a, b) => a.bandname.localeCompare(b.bandname));
   const sortedList = {};
 

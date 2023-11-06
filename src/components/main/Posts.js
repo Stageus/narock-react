@@ -5,8 +5,7 @@ import { useNavigate,useLocation } from 'react-router-dom';
 
 const Posts = (props) => {
 
-    const {bandname,postTitle,boardName,like,date,view,writer,postId} = props;
-    const postIdx = parseInt(postId)
+    const {bandname,postTitle,boardName,like,date,view,writer,postId, categoryNumber} = props;
     const navigate = useNavigate();
     const location = useLocation();
     useEffect(() => {
@@ -14,9 +13,55 @@ const Posts = (props) => {
       }, [ location ])
     const handlePostClick = () => {
         const domain = location.pathname;
+        console.log(categoryNumber)
         // 클릭한 PostRow의 postId를 사용하여 해당 게시물 페이지로 이동
-        navigate(`${domain}/${postIdx}`);
+        if(categoryNumber){
+            if(categoryNumber === 0) {
+                navigate(`/notice/${postId}`);
+            }
+            if(categoryNumber === 1) {
+                navigate(`/concertinfo/${postId}`);
+            }
+            if(categoryNumber === 2) {
+                navigate(`/gallery/${postId}`);
+            }
+            if(categoryNumber === 3){
+                navigate(`/freeboard/${postId}`);
+            }
+            if(categoryNumber === 4){
+                navigate(`/news/${postId}`);
+            }
+            if(categoryNumber === 5){
+                navigate(`/community/${postId}`);
+            }
+        }else{
+            navigate(`${domain}/${postId}`);
+        }
+
     };
+    // const handlePostClick = () => {
+    //     const domain = location.pathname;
+    //     console.log("도메인",domain)
+    //     // 클릭한 PostRow의 postId를 사용하여 해당 게시물 페이지로 이동
+    //     if(categoryNumber === 0 && domain === '/notice') {
+    //         navigate(`notice/${postId}`);
+    //     }
+    //     if(categoryNumber === 1) {
+    //         navigate(`concertinfo/${postId}`);
+    //     }
+    //     if(categoryNumber === 2) {
+    //         navigate(`gallery/${postId}`);
+    //     }
+    //     if(categoryNumber === 3){
+    //         navigate(`freeboard/${postId}`);
+    //     }
+    //     if(categoryNumber === 4){
+    //         navigate(`news/${postId}`);
+    //     }
+    //     if(categoryNumber === 5){
+    //         navigate(`community/${postId}`);
+    //     }
+    // };
     return(
         <Box>
                 <List borderbottom="2px solid #e2e8ff" margin="0"

@@ -3,17 +3,14 @@ import styled from "styled-components";
 import { Align } from "../../styled/ProjectStyle";
 import Posts from "./Posts"
 
-import {useRecoilValue} from 'recoil';
-import { popularPostState } from '../../recoil/BackRecoil';
-
-const RecentList = (props) => {
-  const { category } = props;
-  const popularPost= useRecoilValue(popularPostState);
+const MainPostList = (props) => {
+  const { category ,post } = props;
+  console.log(post)
   return (
     <Box>
       <Title>{category}</Title>
-      {popularPost.map((v,i)=>(
-        <Posts key={i} postTitle={v.postTitle} date={v.postTimestamp}/>
+      {post && post.map((v,i)=>(
+        <Posts key={i} postTitle={v.postTitle} date={v.postTimestamp} postId={v.postIndex} categoryNumber={v.postCategory}/>
       ))}
     </Box>
   )
@@ -35,4 +32,4 @@ const Title = styled(Align)`
     align-items:center;
 `
 
-export default RecentList
+export default MainPostList

@@ -10,7 +10,7 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 const PostListBox = (props) => {
     const { bandname, posts, category } = props;
     const sortedPost = [...posts].sort((a,b)=>b.postindex - a.postindex)
-    // console.log(sortedPost[0][0])
+    console.log(sortedPost)
     const itemsCountPerPage = 3; // 한 페이지에 표시할 게시물 수
     const [limit, setLimit]= useState(10); 
     const [page, setPage] = useState(1);
@@ -18,7 +18,7 @@ const PostListBox = (props) => {
     const displayedPosts = posts.slice(
         offset, offset + limit
     );
-
+    
     const navigate = useNavigate();
 
     return ( 
@@ -35,7 +35,7 @@ const PostListBox = (props) => {
                 view={v.postviews}
                 date={v.posttimestamp}
                 content={v.postcontent}
-                boardName={v.boardName}
+                categoryNumber={v.postcategory}
                 /> 
             )) 
             : 

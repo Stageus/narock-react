@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Button, Input, Title } from "../../styled/ProjectStyle";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const FindAccountBox = () => {
+    const [email, setEmail] = useState('');
+    const emailSubmitEvent = () => {
+        axios.post("https://www.narock.site/account/email", {
+            "emailValue": email,
+        },
+        // {withCredentials: true}
+        )
+        .then(function (response) {
+            if (response.data.success) {
+                console.log(response)
+                alert("이메일이 발송 되었습니다.")
+            }else{
+
+                console.log(response)
+            }      
+        }).catch(function (error) {
+            console.log(error);
+            // alert("로그인 실패")
+        })
+    }
     return(
         <div>
             <Title>아이디 / 비밀번호 찾기</Title>
@@ -15,11 +37,11 @@ const FindAccountBox = () => {
                     <Email>
                         <div>
                             <EmailLabel>가입한 이메일</EmailLabel>
-                            <Input/>
+                            <Input onChange={e=>setEmail(e.target.value)}/>
                         </div>
                         <ButtonBox>
                             <Button value="취소" width="100%" height="34px" color="#3185FC" backgroundcolor="white" border="1px solid #3185FC" borderradius="5px"/>
-                            <Button value="발송" width="100%" height="34px" borderradius="5px"/>
+                            <Button value="발송" width="100%" height="34px" borderradius="5px" onClick={emailSubmitEvent}/>
                         </ButtonBox>
                     </Email>
                 </div>

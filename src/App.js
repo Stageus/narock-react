@@ -45,11 +45,11 @@ const App = () => {
         <Route path="/allband/:bandname/notice/:postid" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/concertinfo/:postid" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/gallery/:postid" element={<AllBandBoard />}/>
-        <Route path="/allband/:bandname/community/:postid" element={<AllBandBoard />}/>
+        <Route path="/allband/:bandname/freeboard/:postid" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/notice/search?:keyword" element={<BandPostSearch />}/>
         <Route path="/allband/:bandname/concertinfo/search?:keyword" element={<BandPostSearch />}/>
         <Route path="/allband/:bandname/gallery/search?:keyword" element={<BandPostSearch />}/>
-        <Route path="/allband/:bandname/community/search?:keyword" element={<BandPostSearch />}/>
+        <Route path="/allband/:bandname/freeboard/search?:keyword" element={<BandPostSearch />}/>
         <Route path="/community" element={<Community />}/>
         <Route path="/news" element={<News />}/>
         <Route path="/notice" element={<Notice />}/>
