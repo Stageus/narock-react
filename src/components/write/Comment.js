@@ -1,7 +1,6 @@
 import React, { useState }  from "react";
 import styled from "styled-components";
 import { Div,Button } from "../../styled/ProjectStyle";
-import Reply from "./Reply";
 import axios from "axios";
 
 const Comment = (props) => {
@@ -36,8 +35,7 @@ const Comment = (props) => {
         setActiveModify(false);
     }
 
-    const commentModifyEvent = (e) => {
-        console.log(e.target)
+    const commentModifyEvent = () => {
         axios.put("comment", {
             "isReply": false,
 		    "commentOrReplyIndex": comment.commentindex,
@@ -100,14 +98,14 @@ const Comment = (props) => {
         <Div borderbottom="1px solid #E2E8FF" justifycontent="space-between">
             {activeComment === comment.commentindex ? 
                 // 답글 버튼 눌렀을 때
-                <Div flexdirection="column" alignitems="normal" width="100%" margin="0">
-                    <Div margin="0" justifycontent="space-between">
+                <Div flexdirection="column" alignitems="normal" width="100%" >
+                    <Div justifycontent="space-between">
                         <Div>
                             <img src="/img/avatar.png" width="40px" alt="프로필사진" />
-                            <Div flexdirection="column" alignitems="flex-start">
+                            <Div flexdirection="column" alignitems="flex-start" margin="0 0 0 10px">
                                 {comment.usernickname}
                                 <div>{comment.commentcontent}</div>
-                                <Date>{comment.commentiimestamp}</Date>
+                                <Date>{comment.commenttimestamp.substring(0,10)} {comment.commenttimestamp.substring(11,16)}</Date>
                             </Div>
                         </Div>
                         <Div>
@@ -115,7 +113,6 @@ const Comment = (props) => {
                             <Button value="완료" backgroundcolor="transparent" color="mainColor" />
                         </Div>
                     </Div>
-                    {/* <Reply /> */}
                     <div>   
                         <SubCommentInput onChange={e=>setReplyContent(e.target.value)}></SubCommentInput>
                         <SubmitButton value="등록" onClick={replySubmitEvent}/>
@@ -124,33 +121,32 @@ const Comment = (props) => {
                 : 
                 // 수정버튼 눌렀을 때
                 activeModify === comment.commentindex ? 
-                    <Div flexdirection="column" alignitems="normal" width="100%" margin="0">
-                        <Div margin="0" justifycontent="space-between" flexdirection="column">
-                            <Div width="100%" margin="0">
-                                <Div width="100%" margin="0">
+                    <Div flexdirection="column" alignitems="normal" width="100%" >
+                        <Div  justifycontent="space-between" flexdirection="column" margin="0">
+                            <Div width="100%" >
+                                <Div width="100%" >
                                     <img src="/img/avatar.png" width="40px" alt="프로필사진" />
-                                    <Div flexdirection="column" alignitems="flex-start">
+                                    <Div flexdirection="column" alignitems="flex-start" margin="0 0 0 10px">
                                     <div>{comment.usernickname}</div>
                                         <Div>   
                                             <MainComment onChange={(e) => commentValue(e)} defaultValue={comment.commentcontent} /> 
                                         </Div>
-                                        <Date>{comment.commenttimestamp}</Date>
+                                        <Date>{comment.commenttimestamp.substring(0,10)} {comment.commenttimestamp.substring(11,16)}</Date>
                                     </Div>
                                 </Div>
                                     <Button value="취소" backgroundcolor="transparent" color="mainColor" onClick={toggleCancelEvent} />
                                     <Button value="완료" backgroundcolor="transparent" color="mainColor" onClick={commentModifyEvent}/>
                             </Div>
-                            {/* <Reply val={val} commentIdx={commentIdx}/> */}
                         </Div>
                     </Div>
                 :
                 // 기본값
                 <Div flexdirection="column" width="100%">
-                    <Div width="100%" margin="0">
-                        <Div width="100%" margin="0" justifycontent="space-between">
+                    <Div width="100%" >
+                        <Div width="100%" justifycontent="space-between" margin="10px">
                             <Div>
                                 <img src="/img/avatar.png" width="40px" alt="프로필사진" />
-                                <Div flexdirection="column" alignitems="flex-start">
+                                <Div flexdirection="column" alignitems="flex-start" margin="0 0 0 10px">
                                     <div>{comment.usernickname}</div>
                                     <div>{comment.commentcontent}</div>
                                     <Date>{comment.commenttimestamp.substring(0,10)} {comment.commenttimestamp.substring(11,16)}</Date>
@@ -164,15 +160,7 @@ const Comment = (props) => {
                                 <Button value="삭제" backgroundcolor="transparent" color="mainColor" onClick={commentDeleteEvent}/>
                             </Div>
                         </Div>
-                        {/* <Div>
-                            {val.reply.length === 1 &&
-                            <Button value="답글" backgroundcolor="transparent" color="mainColor" onClick={()=>commentEvent(commentIdx)} /> 
-                            }
-                            <Button value="수정" backgroundcolor="transparent" color="mainColor" onClick={()=>modifyEvent(commentIdx)} />
-                            <Button value="삭제" backgroundcolor="transparent" color="mainColor" />
-                        </Div> */}
                     </Div>
-                        {/* <Reply val={val} commentIdx={commentIdx}/> */}
                 </Div>
             }
         </Div>
@@ -184,11 +172,6 @@ const Comment = (props) => {
 const Date = styled.div`
     color:#838383;
     font-size:11px;
-`
-
-const SubmitComment = styled.div`
-    /* margin-left:7%; */
-    border-bottom: 1px solid #E2E8FF;
 `
 const SubCommentInput = styled.textarea`
     width:99%;

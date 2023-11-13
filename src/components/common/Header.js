@@ -9,7 +9,6 @@ import { loginState } from "../../recoil/UserStates";
 
 const Header = () => {
     const navigate = useNavigate();
-
     const [auth,setAuth] = useRecoilState(loginState);
     const pageNavigate = (page) => {
         navigate(page)

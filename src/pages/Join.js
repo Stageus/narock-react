@@ -8,11 +8,11 @@ import Logo from "../components/Logo";
 import { Align, Button } from "../styled/ProjectStyle";
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { registState,errorState } from "../recoil/UserStates";
-
+import { useNavigate } from "react-router-dom";
 const Join = () => {
     const regist = useRecoilValue(registState)
     const [isError,setIsError] = useRecoilState(errorState)
-
+    const navigate = useNavigate();
 
     const handleJoinButtonClick = async () => {
         if(regist.id.length * regist.password.length * regist.confirmPassword.length * regist.nickname.length * regist.name.length * regist.email.length * regist.certification.length === 0){
@@ -67,7 +67,7 @@ const Join = () => {
 
         if(result.success){
             alert("회원가입 되었습니다.")
-            // navigate('/')    
+            navigate('/');
         }else{
             console.log(result.message);
             console.log(result);
@@ -86,7 +86,6 @@ const Join = () => {
             </FieldBox>
             <JoinBtn>           
                 <Button type="submit" value="회원가입" width="260px" height="34px" borderradius="5px" onClick={handleJoinButtonClick}/> 
-                {/* recoil로 값 가져오기 */}
             </JoinBtn> 
         </div>
     );

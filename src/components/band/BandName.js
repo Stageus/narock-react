@@ -11,9 +11,8 @@ const BandName = (props) => {
   //밴드이름 정렬
   const sortedBandname = [...bandname].sort((a, b) => a.bandname.localeCompare(b.bandname));
   const sortedList = {};
-
   sortedBandname.forEach((band) => {
-  const initial = band.bandname[0].toUpperCase();
+    const initial = band.bandname[0].toUpperCase();
 
     if (!sortedList[initial]) {
       sortedList[initial] = [];

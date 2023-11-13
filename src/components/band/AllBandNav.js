@@ -7,7 +7,6 @@ import { bandmenuState } from "../../recoil/FrontRecoil";
 const AllBandNav = (props) => {
     const { bandname } = props;
     const bandmenu = useRecoilValue(bandmenuState)
-    const location = useLocation();
     return ( 
         <MenuBox>
             {bandmenu.map((menu,idx)=>(

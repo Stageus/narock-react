@@ -39,7 +39,7 @@ const App = () => {
         <Route path="/admin/BandRequest" element={<BandRequest />}/>
         <Route path="/allband" element={<AllBand />}/>
         <Route path="/allband/:bandname/notice" element={<AllBandBoard />}/>
-        <Route path="/allband/:bandname/concertInfo" element={<AllBandBoard />}/>
+        <Route path="/allband/:bandname/concertinfo" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/gallery" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/community" element={<AllBandBoard />}/>
         <Route path="/allband/:bandname/notice/:postid" element={<AllBandBoard />}/>

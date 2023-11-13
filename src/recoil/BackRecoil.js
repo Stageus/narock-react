@@ -294,54 +294,6 @@ export const bandnameState = atom({
     }
 })
 
-export const popularPostState = atom(
-    {
-        "key":"popularPost",
-        "default": [
-            {
-              "number": 1,
-              "postTitle": "제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.",
-              "boardName": "실리카겔",
-              "like": 250,
-              "postTimestamp": "2023.08.10",
-              "postViews":623,
-            },
-            {
-              "number": 2,
-              "postTitle": "다른 제목입니다.2",
-              "boardName": "게시판 이름",
-              "like": 120,
-              "postTimestamp": "2023.08.11",
-              "postViews":623
-            },
-            {
-              "number": 3,
-              "postTitle": "다른 제목입니다.3",
-              "boardName": "게시판 이름",
-              "like": 120,
-              "postTimestamp": "2023.08.12",
-              "postViews":623
-            },
-            {
-              "number": 4,
-              "postTitle": "다른 제목입니다.4",
-              "boardName": "게시판 이름",
-              "like": 120,
-              "postTimestamp": "2023.08.13",
-              "postViews":623
-            },
-            {
-              "number": 5,
-              "postTitle": "다른 제목입니다.5",
-              "boardName": "게시판 이름",
-              "like": 120,
-              "postTimestamp": "2023.08.14",
-              "postViews":623
-            }
-        ]
-    }
-)
-
 export const bannerImgState = atom({
     key: 'bannerImgState',
     default:[],
@@ -350,7 +302,7 @@ export const bannerImgState = atom({
 export const combinedPostState = selector({
     key:"combinedPostState",
     get:({get}) => {
-        const bandPost = get(postState);
+        const bandPost = get(postDetailState);
         // const noticePost = get(noticePostState);
         // const newsPost = get(newsPostState);
         // const communityPost = get(communityPostState);
@@ -453,7 +405,11 @@ export const writeState = atom({
     }
 })
 
-export const postState = atom({
-    key:'postState',
+export const postDetailState = atom({
+    key:'postDetailState',
     default:{},
+})
+export const bandDataState = atom({
+    key:'bandDataState',
+    default:[],
 })

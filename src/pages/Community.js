@@ -10,15 +10,14 @@ import PostListBox from "../components/write/PostListBox";
 
 import { useRecoilValue } from 'recoil';
 // import { communityPostState } from '../recoil/BackRecoil';
-import { postState } from '../recoil/BackRecoil';
+import { postDetailState } from '../recoil/BackRecoil';
 import { postRowState } from '../recoil/FrontRecoil'
 const Community = () => {
-    const posts = useRecoilValue(postState);
+    const posts = useRecoilValue(postDetailState);
     const postRow = useRecoilValue(postRowState);
 
     const bandnameEncoded = decodeURI(window.location.pathname); 
     const domainCategory = bandnameEncoded.split('/');
-    const filteredPost = posts.filter(v=>!v.bandName && domainCategory[1] === v.boardCategory);
     const [postData, setPostData] = useState([]);
     useEffect(()=>{
         axios.get("https://www.narock.site/post/all",
@@ -52,7 +51,7 @@ const Community = () => {
                 createDate={postRow[2].label}
                 view={postRow[3].label}
                 like={postRow[4].label}/>
-                <PostListBox posts={postData} category="커뮤니티"/>
+                <PostListBox posts={postData} category={domainCategory[1]}/>
             </Box>  
         </div>
     );

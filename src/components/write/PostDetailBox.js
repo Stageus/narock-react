@@ -10,7 +10,7 @@ import { isLikedState, likedState } from "../../recoil/FrontRecoil";
 import { useNavigate , useParams } from "react-router-dom";
 import CommentBox from "./CommentBox";
 import axios from "axios";
-import { postState } from "../../recoil/BackRecoil";
+import { postDetailState } from "../../recoil/BackRecoil";
 
 const PostDetailBox = (props) => {
     
@@ -24,7 +24,7 @@ const PostDetailBox = (props) => {
     const [commentData, setCommentData] = useState('');
 
 
-    const [post,setPost] = useRecoilState(postState);
+    const [post,setPost] = useRecoilState(postDetailState);
 
     // 좋아요 버튼
     const [liked,setLiked] = useRecoilState(likedState);

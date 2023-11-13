@@ -11,14 +11,30 @@ const WriteBox = () => {
     const [write,setWrite] = useRecoilState(writeState);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [checkValue,setCheckValue] = useState('');
+    const [checkValue,setCheckValue] = useState(false);
 
     console.log(content)
     const location = useLocation();
+    console.log(location)
     const searchParams = new URLSearchParams(location.search);
     const bandname = searchParams.get('bandname');
     const category = searchParams.get('category');
 
+    let categoryIndex = 0;
+
+    if (category === 'notice') {
+        categoryIndex = 0;
+    } else if (category === 'concertinfo') {
+        categoryIndex = 1;
+    } else if (category === 'gallery') {
+        categoryIndex = 2;
+    }else if (category === 'freeboard') {
+        categoryIndex = 3;
+    }else if (category === 'news') {
+        categoryIndex = 4;
+    }else if (category === 'community') {
+        categoryIndex = 5;
+    }
     // const writeOnChange = (e) => {
     //     const {name, value} = e.target;
     //     setCheckValue(e.target.checked)
@@ -56,11 +72,11 @@ const WriteBox = () => {
             },
             "credentials": "include",
             "body":JSON.stringify({
-                "postCategory": 0,
-                "postTitle": title,
-                "postContent": content,
+                "postCategory": 4,
+                "postTitle": "전체 새소식",
+                "postContent": "ㅇㅇㅇ",
                 "isFixed": checkValue,
-                "bandIndex": 1
+                "bandIndex": 1,
             })
         })
         const result = await response.json()

@@ -8,7 +8,7 @@ import { Button } from "../../styled/ProjectStyle";
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 const PostListBox = (props) => {
-    const { bandname, posts, category } = props;
+    const { bandname, posts, category, bandIndex } = props;
     const sortedPost = [...posts].sort((a,b)=>b.postindex - a.postindex)
     console.log(sortedPost)
     const itemsCountPerPage = 3; // 한 페이지에 표시할 게시물 수
@@ -24,11 +24,11 @@ const PostListBox = (props) => {
     return ( 
         <div>
             { sortedPost.length > 0 ?
-              sortedPost[0].map((v)=>(
+              sortedPost[0].map((v,i)=>(
                 <Posts
-                key={v}
+                key={v.postIndex}
                 bandname={bandname} 
-                postId={v.postindex}
+                // postId={v.postindex}
                 postTitle={v.posttitle} 
                 writer={v.postwriter}
                 like={v.postlikes}
@@ -36,6 +36,7 @@ const PostListBox = (props) => {
                 date={v.posttimestamp}
                 content={v.postcontent}
                 categoryNumber={v.postcategory}
+                domain={category}
                 /> 
             )) 
             : 
@@ -47,7 +48,7 @@ const PostListBox = (props) => {
             totalItemsCount={displayedPosts.length}
             />
             {bandname ? 
-            <Button value="글쓰기" onClick={()=>{navigate(`/write?bandname=${bandname}&category=${category}`)}}/>
+            <Button value="글쓰기" onClick={()=>{navigate(`/write?bandname=${bandname}&category=${category}`,{state:bandIndex})}}/>
             :    
             <Button value="글쓰기" onClick={()=>{navigate(`/write?category=${category}`)}}/>
         }

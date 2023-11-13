@@ -17,7 +17,7 @@ const PostRow = (props) => {
      } = props;
     return (
         <SubjectBox>
-            {title && <Post>{title}</Post>}
+            {title && <Title>{title}</Title>}
             {writer && <Post>{writer}</Post>}
             {createDate && <Post>{createDate}</Post>}
             {view && <Post>{view}</Post>}
@@ -36,14 +36,19 @@ const PostRow = (props) => {
 
 
 const SubjectBox = styled.div`
-    display:flex;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(15%, auto));
     border-top:2px solid #3185FC;
     border-bottom:2px solid #3185FC;
     width:100%;
 `
 const Post = styled.div`
-    width:19.5%;
     /* margin-left:1%; */
+    text-align:center;
+`
+
+const Title = styled.div`
+    grid-column: 1 / 3;
     text-align:center;
 `
 

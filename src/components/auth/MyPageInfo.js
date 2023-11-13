@@ -3,25 +3,30 @@ import axios from 'axios';
 import { Input, Button } from "../../styled/ProjectStyle";
 import styled from "styled-components";
 import { Align,Error,Div } from "../../styled/ProjectStyle";
+import { useNavigate } from "react-router-dom";
 
 const MyPageInfo = () => {
 
     const [img, setImg] = useState('img/avatar.png');
     const [isHover,setIsHover] = useState(false);
-
-    const [nickname, setNickname] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirm, setPasswordConfirm] = useState("");
+    const navigate = useNavigate();
+    // const [nickname, setNickname] = useState("");
+    // const [password, setPassword] = useState("");
+    // const [newPassword, setNewPassword] = useState("");
+    // const [passwordConfirm, setPasswordConfirm] = useState("");
 
     const [nicknameMsg,setNicknameMsg] = useState("");
     const [passwordMsg,setPasswordMsg] = useState("");
+    const [newPasswordMsg,setNewPasswordMsg] = useState("");
     const [passwordConfirmMsg,setPasswordConfirmMsg] = useState("");
 
     const [isNickname,setIsNickname] = useState(false);
     const [isPassword,setIsPassword] = useState(false);
+    const [isNewPassword,setIsNewPassword] = useState(false);
     const [isPasswordConfirm,setIsPasswordConfirm] = useState(false);
 
     const [userInfo,setUserInfo] = useState([]);
+
     // console.log(userInfo)
     useEffect(()=>{
         axios.get("https://www.narock.site/account",
@@ -42,8 +47,13 @@ const MyPageInfo = () => {
         nickname: "",
         profileimg:"",
         password:"",
+        newPassword:"",
+        passwordConfirm:"",
         isPasswordConfirm:"",
     });
+
+    console.log(userData)
+
     const handleUserDataChange = useCallback((field, value) => {
         setUserData((prevData) => ({
             ...prevData,
@@ -53,10 +63,9 @@ const MyPageInfo = () => {
     
 
 
-    const HandleLoadFile = (e) => {
+    const HandleProfileLoadFile = (e) => {
         if(e.target.files[0]){
             setImg(e.target.files[0])
-            handleUserDataChange("profileimg",e.target.files[0]);
         }else{
             setImg('img/avatar.png');
             handleUserDataChange("profileimg","");
@@ -75,7 +84,6 @@ const MyPageInfo = () => {
 
     const HandleDeleteFile = () => {
         setImg('img/avatar.png')
-        handleUserDataChange("profileimg","");
     }
 
 
@@ -83,7 +91,7 @@ const MyPageInfo = () => {
     //닉네임 유효성 검사
     const onChangeNickname = useCallback((e)=>{
         const nickNameValue = e.target.value;
-        setNickname(nickNameValue)
+        // setNickname(nickNameValue)
         // if(사용가능한닉네임){
         //     setNicknameMsg("닉네임은 16자");
         // }else if(중복닉네임){
@@ -92,25 +100,44 @@ const MyPageInfo = () => {
         handleUserDataChange("nickname", nickNameValue);
     },[handleUserDataChange])
 
-    //비밀번호 유효성 검사
-    const onChangePw = useCallback((e)=>{
+
+
+        //비밀번호 유효성 검사
+        const onChangePw = useCallback((e)=>{
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/
+            const passwordValue = e.target.value;
+            // setPassword(passwordValue)
+            handleUserDataChange("password", passwordValue)
+            if(!passwordRegex.test(passwordValue)){
+                setPasswordMsg("영문 대소문자/숫자/특수문자 조합 8자~16자로 입력해 주세요.")
+                setIsPassword(false)
+            }else{
+                setPasswordMsg("");
+                setIsPassword(true)
+            }
+        },[handleUserDataChange])
+
+    //새로운 비밀번호 유효성 검사
+    const onChangeNewPw = useCallback((e)=>{
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/
-        const passwordValue = e.target.value;
-        setPassword(passwordValue)
-        if(!passwordRegex.test(passwordValue)){
+        const newPasswordValue = e.target.value;
+        // setPassword(passwordValue)
+        handleUserDataChange("newPassword",newPasswordValue)
+        if(!passwordRegex.test(newPasswordValue)){
             setPasswordMsg("영문 대소문자/숫자/특수문자 조합 8자~16자로 입력해 주세요.")
             setIsPassword(false)
         }else{
             setPasswordMsg("");
             setIsPassword(true)
         }
-    },[])
+    },[handleUserDataChange])
 
     //비밀번호 확인 유효성 검사
     const onChangePwConfirm = useCallback((e)=>{
         const passwordConfirmValue = e.target.value;
-        setPasswordConfirm(passwordConfirmValue)
-        if(password === passwordConfirmValue){
+        // setPasswordConfirm(passwordConfirmValue)
+        handleUserDataChange("passwordConfirm", passwordConfirmValue)
+        if(userData.password === passwordConfirmValue){
             setPasswordConfirmMsg("")
             setIsPasswordConfirm(true)
         }else{
@@ -118,14 +145,54 @@ const MyPageInfo = () => {
             setIsPasswordConfirm(false)
         }
         handleUserDataChange("password", passwordConfirmValue);
-    },[password, handleUserDataChange])
+    },[userData.password, handleUserDataChange])
 
 
 
-    const handleJoinButtonClick = () => {
+    const userInfoModifyEvent = async () => {
         console.log("User Data:", userData);
-    };
 
+        let formData = new FormData();
+        formData.append("uploadFile", img)
+        await axios.put("https://www.narock.site/account", {
+            "newNicknameValue": userData.nickname,
+            "userPasswordValue": userData.password,
+            "newPasswordValue": userData.newPassword,
+            "newPasswordCheck": userData.passwordConfirm,
+            formData
+        })
+        .then(function (response) {
+            console.log(response)
+            if(response.data.success === true){
+                alert('정보가 변경 되었습니다.')
+            }else{
+                alert("비밀번호가 일치하지 않습니다.")
+            }
+            if(userData.password === null){
+                alert("현재 비밀번호를 입력해 주세요.")
+                return false;
+            }
+        }).catch(function (error) {
+            console.log(error)
+        })
+    };
+    const userDeleteEvent = () => {
+            if (window.confirm("계정을 삭제하시겠습니까?")) {
+                axios
+                    .delete('/account')
+                    .then(function (response) {
+                        alert("계정이 삭제 되었습니다.");
+                        navigate('/');
+                        console.log(response)
+                    
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            } else {
+                alert("계정 삭제가 취소되었습니다.");
+            }
+    }
     return (
         <div>
             <UserInfo>
@@ -133,7 +200,7 @@ const MyPageInfo = () => {
                 <Space>{userInfo.userId}</Space>
                 {/* <Space>아이디 출력부분</Space> */}
                 <div>닉네임</div>
-                <Input margin="5px 0 15px 0" placeholder="유저 닉네임" maxLength="16" onChange={onChangeNickname}/>
+                <Input margin="5px 0 15px 0" placeholder={userInfo.userNickname} maxLength="16" onChange={onChangeNickname}/>
                 <Div>
                     <RuleIcon  onMouseOver={()=>{setIsHover(true)}} onMouseOut={()=>{setIsHover(false)}}>?</RuleIcon>
                     {isHover &&
@@ -148,10 +215,10 @@ const MyPageInfo = () => {
 
                 <Space>프로필 사진 (jpg,jpeg,gif,png 2MB 이하)</Space>
                 <ProfileBox>
-                    <Avatar src={userInfo.userImage} alt="profile"></Avatar>
+                    <Avatar src={img} alt="profile"></Avatar>
                     {/* <Avatar src={userInfo.profileImg} alt="profile"></Avatar> */}
                     <Div>
-                        <FileUploadInput type="file" id="file-upload" accept="image/jpg,image/png,image/jpeg,image/gif" onChange={HandleLoadFile}/>
+                        <FileUploadInput type="file" id="file-upload" accept="image/jpg,image/png,image/jpeg,image/gif" onChange={HandleProfileLoadFile}/>
                         <FileUploadLabel htmlFor="file-upload">업로드</FileUploadLabel>
                         <Button
                         value="삭제" 
@@ -168,26 +235,25 @@ const MyPageInfo = () => {
 
                 <div>이메일</div>
                 <Space>{userInfo.userEmail}</Space>
-                {/* <Space>이메일 출력부분</Space> */}
 
                 <div>현재 비밀번호</div>
-                <Input margin="5px 0 15px 0" type="password"/>
+                <Input margin="5px 0 15px 0" type="password" onChange={onChangePw}/>
                 <div>비밀번호 변경 (영문 대소문자/숫자/특수문자 조합, 8자~16자)</div>
                 <Align position="relative">
-                    <Input onChange={onChangePw} type="password" maxLength="16" marginright="10px"/>
-                    {!isPassword && password.length > 0 && <ErrorMsg right="-270px">{passwordMsg}</ErrorMsg>}
+                    <Input onChange={onChangeNewPw} type="password" maxLength="16" marginright="10px"/>
+                    {!isPassword && userData.password.length > 0 && <ErrorMsg right="-270px">{passwordMsg}</ErrorMsg>}
                 </Align>
 
                 <div>비밀번호 확인</div>
                 <Align>
                     <Input onChange={onChangePwConfirm} type="password" marginright="10px"/>
-                    {passwordConfirm.length > 0 && <ErrorMsg> {passwordConfirmMsg}</ErrorMsg>}
+                    {userData.passwordConfirm.length > 0 && <ErrorMsg> {passwordConfirmMsg}</ErrorMsg>}
                 </Align>
             </UserInfo>
             
             <ButtonBox>
-                <Button value="정보 수정" type="button" borderradius="5px" padding="5px" onClick={handleJoinButtonClick}/>
-                <Button value="회원 탈퇴" type="button" borderradius="5px" padding="5px"/>
+                <Button value="정보 수정" type="button" borderradius="5px" padding="5px" onClick={userInfoModifyEvent}/>
+                <Button value="회원 탈퇴" type="button" borderradius="5px" padding="5px" onClick={userDeleteEvent}/>
             </ButtonBox>
         </div>
     );

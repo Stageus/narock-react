@@ -86,13 +86,13 @@ const Title = styled.div`
 const Div = styled.div`
     ${props => {
         return`
-        background-color: ${props.backgroundcolor? props.backgroundcolor: `${CommonStyle("white")}`};
+        // background-color: ${props.backgroundcolor? props.backgroundcolor: `${CommonStyle("white")}`};
         display: ${props.display ? props.display: `${CommonStyle("display")}`};
         align-items: ${props.alignitems ? props.alignitems: `${CommonStyle("alignitems")}`};
         justify-content: ${props.justifycontent ? props.justifycontent: `${CommonStyle("justifyContent")}`};
         position: ${props.position ? props.position: `${CommonStyle("position")}`};
         color: ${props.color ? props.color: `${CommonStyle("fontColor")}`};
-        margin: ${props.margin ? props.margin: `${CommonStyle("margin")}`};
+        margin: ${props.margin ? props.margin: 0};
         padding: ${props.padding ? props.padding: `${CommonStyle("padding")}`};
         flex-direction: ${props.flexdirection ? props.flexdirection: `${CommonStyle("flexDirection")}`};
         border: ${props.border ? props.border: `${CommonStyle("border")}`};

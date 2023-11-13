@@ -21,6 +21,7 @@ const Notice = () => {
     const bandnameEncoded = decodeURI(window.location.pathname); 
     const domainCategory = bandnameEncoded.split('/');
 
+    console.log(domainCategory)
     // const filteredPost = posts.filter(v=>!v.bandName && domainCategory[1] === v.boardCategory);
 
     useEffect(()=>{

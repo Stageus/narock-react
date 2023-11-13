@@ -22,6 +22,7 @@ const Main = () => {
     })
 
 },[])
+
     return (
       <React.Fragment>
         <Header/>

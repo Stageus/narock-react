@@ -1,35 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Comment from "./Comment";
+import Reply from "./Reply";
 import { Button, Div } from "../../styled/ProjectStyle";
 import { useRecoilValue } from 'recoil';
 import { loginState } from "../../recoil/UserStates";
-// import { commentState } from "../../recoil/BackRecoil";
-
-
-
-import Comment from "./Comment";
+import { postDetailState } from "../../recoil/BackRecoil";
 import axios from "axios";
-import { postState } from "../../recoil/BackRecoil";
 const CommentBox = (props) => {
     const { postId } = props;
     const [commentInput, setCommentInput] = useState('');
 
     const auth = useRecoilValue(loginState);
-    const post = useRecoilValue(postState)
-    const comment = post.comment
-    // console.log("댓글데이터",comment)
-    // const posts = post.filter(p=>p.postIndex === parseInt(postId));
-
-    // const modifyComment = (idx,value) => { // 수정 클릭 후 바로 완료 누르면 내용 지워짐.ㅠㅠ
-    //     const updatedComments = [...comments]; //복사
-    //     const updatedComment = {
-    //         ...updatedComments[idx],
-    //         content: value,
-    //       };
-
-    //       updatedComments[idx] = updatedComment;
-    //       setComments(updatedComments)
-    //       setIsComment(!isComment)
+    const post = useRecoilValue(postDetailState)
+    const comment = post.comment;
+    // const commentSort = comment.sort((a,b)=>a.commentindex - b.commentindex)
+    const reply = post.reply;
+    console.log(comment)
+    console.log(reply)
 
     const commentInputChange = (e) => {
         const data = e.target.value;
@@ -76,13 +64,11 @@ const CommentBox = (props) => {
             <div>
                 {
                 comment ? comment.map((arr, i) => (
-                    // <div key={i}>
-                    //     <Comment comment={arr}/>
-                    // </div>
                     <div key={i}>
                         {arr.map((v, j) => (
                             <div key={j}>
                                 <Comment comment={v}/>
+                                <Reply reply={reply[j]} commentIdx={v.commentindex} commentUserIndex={v.userindex}/>
                             </div>
                         ))}
                     </div>

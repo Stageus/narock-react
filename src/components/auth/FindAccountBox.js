@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Button, Input, Title } from "../../styled/ProjectStyle";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const FindAccountBox = () => {
