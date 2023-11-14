@@ -1,3 +1,4 @@
+import axios from "axios";
 import { atom, selector } from "recoil";
 
 export const bandnameState = atom({
@@ -313,81 +314,6 @@ export const combinedPostState = selector({
     }
 })
 
-export const userState = atom({
-    key: "userState",
-    default:[
-        {
-            id:1,
-            userId:"kjhwlgusdl",
-            nickname:"지짱",
-            joinpostTimestamp:"2023-09-17",
-            role:"일반 회원",
-        },
-        {
-            id:2,
-            userId:"60231",
-            nickname:"관리자",
-            joinpostTimestamp:"2023-09-17",
-            role:"게시판 지기",
-            
-        },
-        {
-            id:3,
-            userId:"daiso",
-            nickname:"다이소",
-            joinpostTimestamp:"2023-09-17",
-            role:"일반 회원",
-        }
-    ]
-    
-})
-
-export const commentState = atom({
-    key: "commentState",
-    default:[
-
-        {
-            "isReply":false,
-            "postOrCommentIndex":1,
-            "commentContent": "우와!"
-        }
-        // {
-        //     "postIndex": 5,
-        //     "boardName": "쏜애플",
-        //     "postContent": "댓글 또있음ㅋ",
-        //     "postTimestamp": "2023.09.15 15:30",
-        //     "postWriter": '댓글봇'
-        // },
-    
-    ]
-})
-
-export const requestState = atom({
-    key:"requestState",
-    default:[
-        {
-            id:1,
-            userId:"daiso",
-            nickname: "다이소",
-            requestBoard:"새소년",
-            requestpostTimestamp:"2023.10.01",
-        },
-        {
-            id:2,
-            userId:"kjhwlgusdl",
-            nickname: "지짱",
-            requestBoard:"실리카겔",
-            requestpostTimestamp:"2023.10.02",
-        },
-        {
-            id:3,
-            userId:"60231",
-            nickname: "관리자",
-            requestBoard:"신해경",
-            requestpostTimestamp:"2023.10.03",
-        },
-    ]
-})
 
 export const setLoginState = atom({
     key:"setLoginState",
@@ -411,5 +337,15 @@ export const postDetailState = atom({
 })
 export const bandDataState = atom({
     key:'bandDataState',
+    default:[],
+})
+
+export const commentState = atom({
+    key:"commentState",
+    default:[],
+})
+
+export const replyState = atom({
+    key:"replyState",
     default:[],
 })

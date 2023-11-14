@@ -5,13 +5,13 @@ import axios from "axios";
 
 const Comment = (props) => {
 
-    const { comment } = props;
-    
-    // console.log(comment)
+    const { comment,reply } = props;
+
     const [activeComment,setActiveComment] = useState(false); //답글버튼
     const [activeModify,setActiveModify] = useState(''); //수정버튼
     const [afterModifyComment,setAfterModifyComment] = useState(''); //수정한 댓글
     const [replyContent, setReplyContent] = useState('');    
+    
 
     const toggleCommentEvent = (idx) =>{
         setActiveComment(idx)
@@ -101,7 +101,7 @@ const Comment = (props) => {
                 <Div flexdirection="column" alignitems="normal" width="100%" >
                     <Div justifycontent="space-between">
                         <Div>
-                            <img src="/img/avatar.png" width="40px" alt="프로필사진" />
+                            <img src={comment.userprofileimg} width="40px" alt="프로필사진" />
                             <Div flexdirection="column" alignitems="flex-start" margin="0 0 0 10px">
                                 {comment.usernickname}
                                 <div>{comment.commentcontent}</div>
@@ -125,7 +125,7 @@ const Comment = (props) => {
                         <Div  justifycontent="space-between" flexdirection="column" margin="0">
                             <Div width="100%" >
                                 <Div width="100%" >
-                                    <img src="/img/avatar.png" width="40px" alt="프로필사진" />
+                                    <img src={comment.userprofileimg} width="40px" alt="프로필사진" />
                                     <Div flexdirection="column" alignitems="flex-start" margin="0 0 0 10px">
                                     <div>{comment.usernickname}</div>
                                         <Div>   
@@ -140,12 +140,37 @@ const Comment = (props) => {
                         </Div>
                     </Div>
                 :
+                
+                reply ?
                 // 기본값
                 <Div flexdirection="column" width="100%">
                     <Div width="100%" >
                         <Div width="100%" justifycontent="space-between" margin="10px">
                             <Div>
-                                <img src="/img/avatar.png" width="40px" alt="프로필사진" />
+                                <img src={comment.userprofileimg} width="40px" alt="프로필사진" />
+                                <Div flexdirection="column" alignitems="flex-start" margin="0 0 0 10px">
+                                    <div>{comment.usernickname}</div>
+                                    <div>{comment.commentcontent}</div>
+                                    <Date>{comment.commenttimestamp.substring(0,10)} {comment.commenttimestamp.substring(11,16)}</Date>
+                                    {/* <Date>{comment.commenttimestamp} {comment.commenttimestamp}</Date> */}
+                                </Div>
+                            </Div>
+                            {}
+                            <Div>
+                                {/* <Button value="답글" backgroundcolor="transparent" color="mainColor" onClick={()=>toggleCommentEvent(comment.commentindex)} />  */}
+                                <Button value="수정" backgroundcolor="transparent" color="mainColor" onClick={()=>toggleModifyEvent(comment.commentindex)} />
+                                <Button value="삭제" backgroundcolor="transparent" color="mainColor" onClick={commentDeleteEvent}/>
+                            </Div>
+                        </Div>
+                    </Div>
+                </Div>
+                :
+                // 기본값
+                <Div flexdirection="column" width="100%">
+                    <Div width="100%" >
+                        <Div width="100%" justifycontent="space-between" margin="10px">
+                            <Div>
+                                <img src={comment.userprofileimg} width="40px" alt="프로필사진" />
                                 <Div flexdirection="column" alignitems="flex-start" margin="0 0 0 10px">
                                     <div>{comment.usernickname}</div>
                                     <div>{comment.commentcontent}</div>

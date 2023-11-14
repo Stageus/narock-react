@@ -13,32 +13,34 @@ const Posts = (props) => {
     const [bandData, setBandData] = useState([]);
     const handlePostClick = () => {
         console.log("categorynumber",categoryNumber)
-        navigate(`notice/${postId}`)
-        //  if (bandIndex === 1) {
-        //     if(categoryNumber === 0)
-        //     {navigate(`notice/${postId}`)}
-        //     else if(categoryNumber === 4 ){
-        //         navigate(`news/${postId}`)
-        //     }
-        //     else if(categoryNumber === 5 ){
-        //         navigate(`community/${postId}`)
-        //     }
-        // } 
-        // else {
-        //     if (categoryNumber === 0) {
-        //         navigate(`/allband/${bandName}/notice/${postId}`);
-        //     }else if (categoryNumber === 1) {
-        //         navigate(`/allband/${bandName}/concertinfo/${postId}`);
-        //     } else if (categoryNumber === 2) {
-        //         navigate(`/allband/${bandName}/gallery/${postId}`);
-        //     } else if (categoryNumber === 3) {
-        //         navigate(`/allband/${bandName}/freeboard/${postId}`);
-        //     } else if (categoryNumber === 4) {
-        //         navigate(`/allband/${bandName}/news/${postId}`);
-        //     } else if (categoryNumber === 5) {
-        //         navigate(`/allband/${bandName}/community/${postId}`);
-        //     }
-        // }
+        console.log("밴드인덱스",bandIndex)
+        console.log("밴드이름",bandName)
+        // navigate(`${postId}`)
+         if (!bandIndex || bandIndex === 1) {
+            if(categoryNumber === 0)
+            {navigate(`/notice/${postId}`)}
+            if(categoryNumber === 4 ){
+                navigate(`/news/${postId}`)
+            }
+            if(categoryNumber === 5 ){
+                navigate(`/community/${postId}`)
+            }
+        } 
+        else {
+            if (categoryNumber === 0) {
+                navigate(`/allband/${bandName}/notice/${postId}`);
+            }if (categoryNumber === 1) {
+                navigate(`/allband/${bandName}/concertinfo/${postId}`);
+            }if (categoryNumber === 2) {
+                navigate(`/allband/${bandName}/gallery/${postId}`);
+            }if (categoryNumber === 3) {
+                navigate(`/allband/${bandName}/freeboard/${postId}`);
+            }if (categoryNumber === 4) {
+                navigate(`/allband/${bandName}/news/${postId}`);
+            }if (categoryNumber === 5) {
+                navigate(`/allband/${bandName}/community/${postId}`);
+            }
+        }
     };
     return(
         <Box>

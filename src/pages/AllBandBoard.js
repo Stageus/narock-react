@@ -24,14 +24,14 @@ const AllBandBoard = () => {
     console.log(category,"도메인")
     const domainCategory = category.split('/')[3];
     console.log(domainCategory,"카테고리")
-    console.log(bandData,"밴드데이터")
+    // console.log(bandData,"밴드데이터")
     
     const bandFilter = bandData.filter(data=>data.bandname === bandname)
     const bandIndex = bandFilter.length > 0 ? bandFilter[0].bandindex : null;
     console.log(bandIndex,"밴드인덱스")
 
     const domainPostIdx = category.split('/')[4];
-    console.log(domainPostIdx)
+    console.log("도메인포스트인덱스",domainPostIdx)
     const postRow = useRecoilValue(postRowState);
 
     let categoryIndex = '';
@@ -49,9 +49,6 @@ const AllBandBoard = () => {
     }else if (domainCategory === 'community') {
         categoryIndex = 5;
     }
-
-    
-    console.log(categoryIndex)
     console.log(postData);
 
 
@@ -67,8 +64,8 @@ const AllBandBoard = () => {
         }
         )
         .then(function (response) {
-             console.log(response)
-             setPostData(response.data.post)
+            console.log(response)
+            setPostData(response.data.post)
         }).catch(function (error) {
             // 오류발생시 실행
         }).then(function() {
@@ -84,7 +81,7 @@ const AllBandBoard = () => {
                 <AllBandNav bandname={bandname}/> {/* 내비게이션 메뉴 */}
                 <Div margin="0 80px" width="100%" display="block">
                     {category.includes(domainPostIdx) && bandIndex ? 
-                        <PostDetailBox bandname={bandname} post={postData} onClick={()=>{navigate(`/${category}`)}}/>
+                        <PostDetailBox bandname={bandname} post={postData} />
                     :
                     <React.Fragment>
                         <PostRow

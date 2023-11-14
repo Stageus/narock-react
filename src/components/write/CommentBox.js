@@ -5,17 +5,15 @@ import Reply from "./Reply";
 import { Button, Div } from "../../styled/ProjectStyle";
 import { useRecoilValue } from 'recoil';
 import { loginState } from "../../recoil/UserStates";
-import { postDetailState } from "../../recoil/BackRecoil";
+import { commentState, replyState } from "../../recoil/BackRecoil";
 import axios from "axios";
 const CommentBox = (props) => {
     const { postId } = props;
     const [commentInput, setCommentInput] = useState('');
 
     const auth = useRecoilValue(loginState);
-    const post = useRecoilValue(postDetailState)
-    const comment = post.comment;
-    // const commentSort = comment.sort((a,b)=>a.commentindex - b.commentindex)
-    const reply = post.reply;
+    const comment = useRecoilValue(commentState);
+    const reply = useRecoilValue(replyState);
     console.log(comment)
     console.log(reply)
 
@@ -67,8 +65,10 @@ const CommentBox = (props) => {
                     <div key={i}>
                         {arr.map((v, j) => (
                             <div key={j}>
-                                <Comment comment={v}/>
-                                <Reply reply={reply[j]} commentIdx={v.commentindex} commentUserIndex={v.userindex}/>
+                                <Comment comment={v} reply={reply[j].length}/>
+                                {reply[j].length < 2 &&
+                                    <Reply reply={reply[j]} commentIdx={v.commentindex} commentUserIndex={v.userindex}/>
+                                }
                             </div>
                         ))}
                     </div>

@@ -30,9 +30,10 @@ const Login = () => {
         )
         .then(function (response) {
             if (response.data.success) {
-                console.log(response)
                 setAuth(true)
                 navigate(-1);
+                const setCookieHeader = response.headers.get('Set-Cookie');
+                console.log('백엔드에서 설정한 쿠키:', setCookieHeader);
             }else{
                 alert("아이디 또는 비밀번호가 일치하지 않습니다.")
                 console.log(response)

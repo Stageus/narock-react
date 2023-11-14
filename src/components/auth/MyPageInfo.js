@@ -9,24 +9,14 @@ const MyPageInfo = () => {
 
     const [isHover,setIsHover] = useState(false);
     const navigate = useNavigate();
-    // const [nickname, setNickname] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [newPassword, setNewPassword] = useState("");
-    // const [passwordConfirm, setPasswordConfirm] = useState("");
 
     const [nicknameMsg,setNicknameMsg] = useState("");
     const [passwordMsg,setPasswordMsg] = useState("");
-    const [newPasswordMsg,setNewPasswordMsg] = useState("");
     const [passwordConfirmMsg,setPasswordConfirmMsg] = useState("");
-
-    const [isNickname,setIsNickname] = useState(false);
-    const [isPassword,setIsPassword] = useState(false);
-    const [isNewPassword,setIsNewPassword] = useState(false);
-    const [isPasswordConfirm,setIsPasswordConfirm] = useState(false);
 
     const [userInfo,setUserInfo] = useState([]);
     const [profileImg, setProfileImg] = useState('img/avatar.png');
-
+    // console.log(profileImg)
     // console.log(userInfo)
     useEffect(()=>{
         axios.get("https://www.narock.site/account",
@@ -64,22 +54,23 @@ const MyPageInfo = () => {
 
 
     const HandleProfileLoadFile = async (e) => {
-        setProfileImg(e.target.files[0])
-        // if(e.target.files[0]){
-        //     setProfileImg(e.target.files[0])
-        // }else{
-        //     setProfileImg('img/avatar.png');
-        //     handleUserDataChange("profileimg","");
-        //     return
-        // }
+        const imageFile = e.target.files[0];
 
-        const reader = new FileReader();
-        reader.onload = () =>{
-            if(reader.readyState === 2){
-                setProfileImg(reader.result)
-            }
+        if (imageFile) {
+            setProfileImg(imageFile);
+    
+            const reader = new FileReader();
+            reader.onload = () => {
+                if (reader.readyState === 2) {
+                    setProfileImg(reader.result);
+                }
+            };
+            reader.readAsDataURL(imageFile);
+        } else {
+            setProfileImg('img/avatar.png');
+            handleUserDataChange("profileimg", "");
+            return;
         }
-        reader.readAsDataURL(e.target.files[0]);
     }
 
 
@@ -88,19 +79,11 @@ const MyPageInfo = () => {
     }
 
 
-
     //닉네임 유효성 검사
     const onChangeNickname = useCallback((e)=>{
         const nickNameValue = e.target.value;
-        // setNickname(nickNameValue)
-        // if(사용가능한닉네임){
-        //     setNicknameMsg("닉네임은 16자");
-        // }else if(중복닉네임){
-        //     setNicknameMsg("닉네임은 16자");
-        // }
         handleUserDataChange("nickname", nickNameValue);
     },[handleUserDataChange])
-
 
 
         //비밀번호 유효성 검사
@@ -111,10 +94,8 @@ const MyPageInfo = () => {
             handleUserDataChange("password", passwordValue)
             if(!passwordRegex.test(passwordValue)){
                 setPasswordMsg("영문 대소문자/숫자/특수문자 조합 8자~16자로 입력해 주세요.")
-                setIsPassword(false)
             }else{
                 setPasswordMsg("");
-                setIsPassword(true)
             }
         },[handleUserDataChange])
 
@@ -126,10 +107,8 @@ const MyPageInfo = () => {
         handleUserDataChange("newPassword",newPasswordValue)
         if(!passwordRegex.test(newPasswordValue)){
             setPasswordMsg("영문 대소문자/숫자/특수문자 조합 8자~16자로 입력해 주세요.")
-            setIsPassword(false)
         }else{
             setPasswordMsg("");
-            setIsPassword(true)
         }
     },[handleUserDataChange])
 
@@ -140,10 +119,8 @@ const MyPageInfo = () => {
         handleUserDataChange("passwordConfirm", passwordConfirmValue)
         if(userData.password === passwordConfirmValue){
             setPasswordConfirmMsg("")
-            setIsPasswordConfirm(true)
         }else{
             setPasswordConfirmMsg("비밀번호가 일치하지 않습니다.");
-            setIsPasswordConfirm(false)
         }
         handleUserDataChange("password", passwordConfirmValue);
     },[userData.password, handleUserDataChange])
@@ -152,7 +129,7 @@ const MyPageInfo = () => {
 
     const userInfoModifyEvent = async () => {
         const formdata = new FormData();
-        formdata.append('imageFile', profileImg);  // 이미지 파일 값 할당
+        formdata.append('imageFile', profileImg);
         formdata.append('newNicknameValue', userData.nickname);
         formdata.append('userPasswordValue', userData.password);
         formdata.append('newPasswordValue', userData.newPassword);
@@ -163,19 +140,23 @@ const MyPageInfo = () => {
       
         await axios.put("https://www.narock.site/account", formdata, {
           headers: {
-            'Content-Type': 'multipart/form-data', // 이미지를 전송하는 경우에는 이 헤더가 필요합니다.
+            'Content-Type': 'multipart/form-data', 
           },
         })
         .then(function (response) {
-          console.log(response);
+            console.log(response)
           if (userData.password === null) {
             alert("현재 비밀번호를 입력해 주세요.");
             return false;
           }
           if (response.data.success === true) {
             alert('정보가 변경 되었습니다.');
-          } else {
-            alert("정보 변경 실패");
+          } if(response.data.message === "비밀번호가 일치하지 않습니다.") {
+            setPasswordMsg("비밀번호가 일치하지 않습니다.")
+          } if(response.data.message === "이미 존재하는 닉네임입니다."){
+            setNicknameMsg("이미 사용중인 닉네임입니다.")
+          } if(response.data.message === "새로 입력한 비밀번호가 서로 일치하지 않습니다."){
+            setPasswordConfirmMsg("비밀번호가 일치하지 않습니다.")
           }
         })
         .catch(function (error) {
@@ -207,7 +188,10 @@ const MyPageInfo = () => {
                 <Space>{userInfo.userId}</Space>
                 {/* <Space>아이디 출력부분</Space> */}
                 <div>닉네임</div>
-                <Input margin="5px 0 15px 0" placeholder={userInfo.userNickname} maxLength="16" onChange={onChangeNickname}/>
+                <Div flexdirection="column">
+                    <Input margin="5px 0 15px 0" placeholder={userInfo.userNickname} maxLength="16" onChange={onChangeNickname}/>
+                    <Error>{nicknameMsg}</Error>
+                </Div>
                 <Div margin="10px 0">
                     <RuleIcon  onMouseOver={()=>{setIsHover(true)}} onMouseOut={()=>{setIsHover(false)}}>?</RuleIcon>
                     {isHover &&
@@ -243,18 +227,26 @@ const MyPageInfo = () => {
                 <div>이메일</div>
                 <Space>{userInfo.userEmail}</Space>
 
-                <div>현재 비밀번호</div>
-                <Input margin="5px 0 15px 0" type="password" onChange={onChangePw}/>
+                <div>현재 비밀번호 (정보 변경 시 현재 비밀번호 필수 입력)</div>
+                <Div>
+                    <Input margin="5px 0 15px 0" type="password" onChange={onChangePw}/>
+                </Div>
                 <div>비밀번호 변경 (영문 대소문자/숫자/특수문자 조합, 8자~16자)</div>
-                <Align position="relative">
-                    <Input onChange={onChangeNewPw} type="password" maxLength="16" marginright="10px"/>
-                    {!isPassword && userData.password.length > 0 && <ErrorMsg right="-270px">{passwordMsg}</ErrorMsg>}
+                <Align>
+                    <Div flexdirection="column">
+                        <Input onChange={onChangeNewPw} type="password" maxLength="16" marginright="10px"/>
+                        {userData.newPassword.length > 0 && <Error>{passwordMsg}</Error>}
+                        
+                    </Div>
                 </Align>
 
                 <div>비밀번호 확인</div>
                 <Align>
+                    <Div flexdirection="column">
                     <Input onChange={onChangePwConfirm} type="password" marginright="10px"/>
-                    {userData.passwordConfirm.length > 0 && <ErrorMsg> {passwordConfirmMsg}</ErrorMsg>}
+                    {/* {userData.passwordConfirm.length > 0 && <Error> {passwordConfirmMsg}</Error>} */}
+                    {userData.newPassword !== userData.passwordConfirm && <Error> {passwordConfirmMsg}</Error>}
+                    </Div>
                 </Align>
             </UserInfo>
             
@@ -322,7 +314,7 @@ const RuleIcon = styled.div`
     height:14px;
     justify-content:center;
     align-items:center;
-    top: -48px;
+    top: -58px;
     left:110px;
     cursor:help;
 `

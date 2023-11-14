@@ -26,7 +26,7 @@ const News = () => {
             withCredentials: true,
             params:{
                 postCategory:4,
-                // bandIndex:1,
+                bandIndex:1,
                 pages:1
             }
         }

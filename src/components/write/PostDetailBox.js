@@ -10,7 +10,7 @@ import { isLikedState, likedState } from "../../recoil/FrontRecoil";
 import { useNavigate , useParams } from "react-router-dom";
 import CommentBox from "./CommentBox";
 import axios from "axios";
-import { postDetailState } from "../../recoil/BackRecoil";
+import { commentState, postDetailState, replyState } from "../../recoil/BackRecoil";
 
 const PostDetailBox = (props) => {
     
@@ -19,16 +19,14 @@ const PostDetailBox = (props) => {
     const domain = decodeURI(window.location.pathname);
     const domainSplit = domain.split('/');
     const domainRemove = domainSplit.pop(); // domainSplit 맨 마지막 배열 삭제용
-    const keywordsToCheck = ['notice', 'community', 'concertinfo', 'news', 'gallery'];
-    const foundKeywords = keywordsToCheck.filter(keyword => domainSplit.includes(keyword)).join(',');
-    const [commentData, setCommentData] = useState('');
-
 
     const [post,setPost] = useRecoilState(postDetailState);
 
     // 좋아요 버튼
     const [liked,setLiked] = useRecoilState(likedState);
     const [isLiked,setIsLiked] = useRecoilState(isLikedState);
+    const [comment,setComment] = useRecoilState(commentState);
+    const [reply,setReply] = useRecoilState(replyState);
 
     const navigate = useNavigate();
 
@@ -55,7 +53,6 @@ const PostDetailBox = (props) => {
             }      
         }).catch(function (error) {
             console.log(error);
-            // alert("로그인 실패")
         })
     }
     // 목록 돌아가기
@@ -70,7 +67,7 @@ const PostDetailBox = (props) => {
     useEffect(()=>{
         axios.get("https://www.narock.site/post",
         {
-            withCredentials: true,
+            // withCredentials: true,
             params:{
                 postIndex:postid,
             }
@@ -78,11 +75,13 @@ const PostDetailBox = (props) => {
         )
         .then(function (response) {
             console.log(response.data)
-            setPost(response.data)
+            setPost(response.data);
+            setComment(response.data.comment);
+            setReply(response.data.reply)
         }).catch(function (error) {
             console.log(error)
         })
-    },[setPost])
+    },[])
 
     const postDeleteEvent = () => {
             if (window.confirm("게시물을 삭제하시겠습니까?")) {
@@ -126,7 +125,7 @@ const PostDetailBox = (props) => {
                     <div>{post.postTitle}</div>
                     <Div display="flex" justifycontent="space-between" margin="0">
                         <Div display="flex" alignitems="center" margin="0">
-                            <ProfileImg src={post.postImgUrl} alt="프로필 사진"/>
+                            <ProfileImg src={post.userProfileImg} alt="프로필 사진"/>
                             <Div margin="0 10px 0 0">{post.postWriter}</Div>
                             <Div margin="0 10px 0 0">{post.postViews}</Div>
                             <Div margin="0 10px 0 0">{post.postTimestamp}</Div>
@@ -140,11 +139,11 @@ const PostDetailBox = (props) => {
                     </Div>
                     <Div margin="20px 0">{post.postContent}</Div>
                     <Div display="flex" alignitems="cetnter" margin="0">
-                        {isLiked ? <Icon src={`${process.env.PUBLIC_URL}/img/like_active.png`} alt="좋아요" onClick={LikeClickEvent}/> : <Icon src={`${process.env.PUBLIC_URL}/img/like.png`} alt="좋아요" onClick={LikeClickEvent}/>}
-                        {<Like>{liked}</Like>}
+                        {post.postLikes === "1" ? <Icon src={`${process.env.PUBLIC_URL}/img/like_active.png`} alt="좋아요" onClick={LikeClickEvent}/> : <Icon src={`${process.env.PUBLIC_URL}/img/like.png`} alt="좋아요" onClick={LikeClickEvent}/>}
+                        {<Like>{post.postLikes}</Like>}
                     </Div>
                 </Div>
-            <CommentBox postId={postid} comment={post.comment}/>
+            <CommentBox postId={postid}/>
             </Div>
         </Div>
     );

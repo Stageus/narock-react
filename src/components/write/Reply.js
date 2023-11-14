@@ -5,27 +5,20 @@ import { Button, Div } from "../../styled/ProjectStyle";
 
 const Reply = (props) => {
     const { reply,commentUserIndex } = props;
-    console.log("코멘트인덱스",commentUserIndex)
-
-    const [activeReply,setActiveReply] = useState(false); //대댓
+    // const [activeReply,setActiveReply] = useState(false); //대댓
     const [afterModifyComment,setAfterModifyComment] = useState('');
     const [activeModify,setActiveModify] = useState(false); //수정버튼
 
-    console.log(activeModify)
     const toggleModifyEvent = (idx) => {
         setActiveModify(idx);
-        setActiveReply(false)
-        console.log("대댓인덱스",idx)
     }
 
     const commentValue = (e) => {
         const comment = e.target.value;
         setAfterModifyComment(comment)
-        setActiveReply(false)
     }
 
     const cancelEvent = () => {
-        setActiveReply(false)
         setActiveModify(false);
     }
     const commentModifyEvent = (idx) => {

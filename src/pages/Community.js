@@ -25,7 +25,7 @@ const Community = () => {
             withCredentials: true,
             params:{
                 postCategory:5,
-                // bandIndex:1,
+                bandIndex:1,
                 pages:1
             }
         }

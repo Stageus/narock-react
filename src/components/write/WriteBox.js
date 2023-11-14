@@ -19,6 +19,7 @@ const WriteBox = () => {
     const searchParams = new URLSearchParams(location.search);
     const bandname = searchParams.get('bandname');
     const category = searchParams.get('category');
+    const bandIndex = searchParams.get('bandindex');
 
     let categoryIndex = 0;
 
@@ -72,8 +73,8 @@ const WriteBox = () => {
             },
             "credentials": "include",
             "body":JSON.stringify({
-                "postCategory": 4,
-                "postTitle": "전체 새소식",
+                "postCategory": categoryIndex,
+                "postTitle": "공지사항1234125",
                 "postContent": "ㅇㅇㅇ",
                 "isFixed": checkValue,
                 "bandIndex": 1,
@@ -83,6 +84,7 @@ const WriteBox = () => {
     
         if(result.success){
             alert("게시글이 등록 되었습니다.")
+            console.log(result)
             // navigate('/')    
         }else{
             console.log(result.message);

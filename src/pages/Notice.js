@@ -18,6 +18,8 @@ const Notice = () => {
     // const posts = useRecoilValue(postState);
 
     const [postData, setPostData] = useState([]);
+    const [totalPages, setTotalPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const bandnameEncoded = decodeURI(window.location.pathname); 
     const domainCategory = bandnameEncoded.split('/');
 
@@ -31,7 +33,7 @@ const Notice = () => {
             params:{
                 postCategory:0,
                 bandIndex:1,
-                pages:1
+                pages:currentPage
             }
         }
         )
@@ -44,7 +46,7 @@ const Notice = () => {
         }).then(function() {
             // 항상 실행
         });
-    },[])
+    },[currentPage])
 
     return (
         <div>
@@ -60,6 +62,11 @@ const Notice = () => {
                 />
             {/* <PostListBox posts={filteredPost} category={domainCategory[1]}/> */}
             <PostListBox posts={postData} category={domainCategory[1]} />
+            <div>
+            <Pagination onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>◀</Pagination>
+                <span>{currentPage}</span>
+            <Pagination onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>▶</Pagination>
+            </div>
             </Box>  
         </div>
     );
@@ -67,6 +74,12 @@ const Notice = () => {
 
 const Box = styled.div`
     margin:30px 160px;
+`
+
+const Pagination = styled.button`
+    border:none;
+    background-color:transparent;
+    cursor:pointer;
 `
 
 export default Notice;
