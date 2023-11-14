@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const MyPageInfo = () => {
 
-    const [img, setImg] = useState('img/avatar.png');
     const [isHover,setIsHover] = useState(false);
     const navigate = useNavigate();
     // const [nickname, setNickname] = useState("");
@@ -26,6 +25,7 @@ const MyPageInfo = () => {
     const [isPasswordConfirm,setIsPasswordConfirm] = useState(false);
 
     const [userInfo,setUserInfo] = useState([]);
+    const [profileImg, setProfileImg] = useState('img/avatar.png');
 
     // console.log(userInfo)
     useEffect(()=>{
@@ -52,7 +52,7 @@ const MyPageInfo = () => {
         isPasswordConfirm:"",
     });
 
-    console.log(userData)
+    // console.log(userData)
 
     const handleUserDataChange = useCallback((field, value) => {
         setUserData((prevData) => ({
@@ -63,19 +63,20 @@ const MyPageInfo = () => {
     
 
 
-    const HandleProfileLoadFile = (e) => {
-        if(e.target.files[0]){
-            setImg(e.target.files[0])
-        }else{
-            setImg('img/avatar.png');
-            handleUserDataChange("profileimg","");
-            return
-        }
+    const HandleProfileLoadFile = async (e) => {
+        setProfileImg(e.target.files[0])
+        // if(e.target.files[0]){
+        //     setProfileImg(e.target.files[0])
+        // }else{
+        //     setProfileImg('img/avatar.png');
+        //     handleUserDataChange("profileimg","");
+        //     return
+        // }
 
         const reader = new FileReader();
         reader.onload = () =>{
             if(reader.readyState === 2){
-                setImg(reader.result)
+                setProfileImg(reader.result)
             }
         }
         reader.readAsDataURL(e.target.files[0]);
@@ -83,7 +84,7 @@ const MyPageInfo = () => {
 
 
     const HandleDeleteFile = () => {
-        setImg('img/avatar.png')
+        setProfileImg('img/avatar.png')
     }
 
 
@@ -150,32 +151,38 @@ const MyPageInfo = () => {
 
 
     const userInfoModifyEvent = async () => {
+        const formdata = new FormData();
+        formdata.append('imageFile', profileImg);  // 이미지 파일 값 할당
+        formdata.append('newNicknameValue', userData.nickname);
+        formdata.append('userPasswordValue', userData.password);
+        formdata.append('newPasswordValue', userData.newPassword);
+        formdata.append('newPasswordCheck', userData.passwordConfirm);
+      
         console.log("User Data:", userData);
-
-        let formData = new FormData();
-        formData.append("uploadFile", img)
-        await axios.put("https://www.narock.site/account", {
-            "newNicknameValue": userData.nickname,
-            "userPasswordValue": userData.password,
-            "newPasswordValue": userData.newPassword,
-            "newPasswordCheck": userData.passwordConfirm,
-            formData
+        console.log(...formdata);
+      
+        await axios.put("https://www.narock.site/account", formdata, {
+          headers: {
+            'Content-Type': 'multipart/form-data', // 이미지를 전송하는 경우에는 이 헤더가 필요합니다.
+          },
         })
         .then(function (response) {
-            console.log(response)
-            if(response.data.success === true){
-                alert('정보가 변경 되었습니다.')
-            }else{
-                alert("비밀번호가 일치하지 않습니다.")
-            }
-            if(userData.password === null){
-                alert("현재 비밀번호를 입력해 주세요.")
-                return false;
-            }
-        }).catch(function (error) {
-            console.log(error)
+          console.log(response);
+          if (userData.password === null) {
+            alert("현재 비밀번호를 입력해 주세요.");
+            return false;
+          }
+          if (response.data.success === true) {
+            alert('정보가 변경 되었습니다.');
+          } else {
+            alert("정보 변경 실패");
+          }
         })
-    };
+        .catch(function (error) {
+          console.log(error);
+        });
+      };
+      
     const userDeleteEvent = () => {
             if (window.confirm("계정을 삭제하시겠습니까?")) {
                 axios
@@ -201,7 +208,7 @@ const MyPageInfo = () => {
                 {/* <Space>아이디 출력부분</Space> */}
                 <div>닉네임</div>
                 <Input margin="5px 0 15px 0" placeholder={userInfo.userNickname} maxLength="16" onChange={onChangeNickname}/>
-                <Div>
+                <Div margin="10px 0">
                     <RuleIcon  onMouseOver={()=>{setIsHover(true)}} onMouseOut={()=>{setIsHover(false)}}>?</RuleIcon>
                     {isHover &&
                     <Rule >16자까지, 닉네임 앞뒤로 공백 불가, 단어 사이 공백 1회 <br/>
@@ -215,7 +222,7 @@ const MyPageInfo = () => {
 
                 <Space>프로필 사진 (jpg,jpeg,gif,png 2MB 이하)</Space>
                 <ProfileBox>
-                    <Avatar src={img} alt="profile"></Avatar>
+                    <Avatar src={profileImg} alt="profile"></Avatar>
                     {/* <Avatar src={userInfo.profileImg} alt="profile"></Avatar> */}
                     <Div>
                         <FileUploadInput type="file" id="file-upload" accept="image/jpg,image/png,image/jpeg,image/gif" onChange={HandleProfileLoadFile}/>
