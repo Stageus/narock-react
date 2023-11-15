@@ -5,21 +5,49 @@ import { useNavigate } from "react-router-dom";
 
 const BandName = (props) => {
   const { bandname, bandlist } = props;
-  console.log(bandname)
+  // console.log(bandname)
   const navigate = useNavigate();
 
   //밴드이름 정렬
   const sortedBandname = [...bandname].sort((a, b) => a.bandname.localeCompare(b.bandname));
   const sortedList = {};
+  // const hangeul = /^[가-힣0-9]+$/;
+
+
+  const choseong = (str) => {
+    let cho = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+    let result = "";
+    for(let i=0;i<str.length;i++) {
+      const code = str.charCodeAt(i)-44032;
+      if(code>-1 && code<11172) result += cho[Math.floor(code/588)];
+    }
+    return result;
+  }
+
+
   sortedBandname.forEach((band) => {
     const initial = band.bandname[0].toUpperCase();
-
-    if (!sortedList[initial]) {
-      sortedList[initial] = [];
+    const hangeul = choseong(band.bandname[0]);
+    const number = /^[0-9]+$/;
+    // Determine category
+    let category;
+    if (number.test(initial)) {
+      category = '기타';
+    } else {
+      category = initial;
     }
-    sortedList[initial].push(band);
-  });
+    if (!sortedList[category]) {
+      sortedList[category] = [];
+    }
+    sortedList[category].push(band);
 
+    if (!sortedList[hangeul]) {
+      sortedList[hangeul] = [];
+    }
+    sortedList[hangeul].push(band);
+
+  });
+  
   return (
     <ListAlign>
       {Object.keys(bandlist).map((initial) => (
@@ -44,7 +72,7 @@ const BandName = (props) => {
 const ListAlign = styled(Align)`
     margin:0 160px;
     display:grid;
-    grid-template-columns: repeat(10,1fr)
+    grid-template-columns: repeat(10,1fr);
 `
 
 const List = styled.div`

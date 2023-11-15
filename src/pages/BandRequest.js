@@ -53,10 +53,16 @@ const BandRequest = () => {
             setRequestPostIndex(idx => [...idx,info.postcreaterequestindex]);
             setBandNameArr(idx=>[...idx,info.postname]);
             setUserIndexArr(idx=>[...idx,info.userindex]);
+
+            console.log(info)
+            console.log(bandNameArr)
+            console.log(userIndexArr)
         }else{
             setRequestPostIndex(idx=> idx.filter(item=>item !== info.postcreaterequestindex));
             setBandNameArr(idx=> idx.filter(item=>item !== info.postname));
             setUserIndexArr(idx=> idx.filter(item=>item !== info.userindex));
+            console.log(bandNameArr)
+            console.log(userIndexArr)
         }
     }
 
@@ -100,20 +106,20 @@ const BandRequest = () => {
 
     //요청 수락
     const handleAcceptRequest = () => {
+        console.log(requestPostIndex, "포스트인덱스")
         if (requestPostIndex.length === 0) {
             alert("체크 된 요청이 없습니다.");
         } else {
             if (window.confirm("요청을 수락하시겠습니까?")) {
                 axios
-                    .delete('/accept', {
-                        data: {
-                            "postCreateRequestIndex": requestPostIndex,
-                            "bandNameArray": bandNameArr,
-                            "userIndexArray": userIndexArr,
-                        }
+                    .post('/postRequest/accept', {
+                        postCreateRequestIndex: requestPostIndex,
+                        bandNameArray: bandNameArr,
+                        userIndexArray: userIndexArr,
                     })
                     .then(function (response) {
                         alert("요청이 수락 되었습니다.");
+                        console.log(response)
                     })
                     .catch(function (error) {
                         console.log(error);

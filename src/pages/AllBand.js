@@ -12,7 +12,7 @@ import axios from "axios";
 const Allband = () => {
     const bandList = useRecoilValue(bandnameState);
     const [bandData, setBandData] = useRecoilState(bandDataState)
-    // console.log(getData)
+    console.log(bandData)
     useEffect(()=>{
         axios.get("https://www.narock.site/band/all",
         {

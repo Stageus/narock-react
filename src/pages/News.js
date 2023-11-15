@@ -15,7 +15,8 @@ const News = () => {
 
     const postRow = useRecoilValue(postRowState)
     const posts = useRecoilValue(postDetailState); // postState 셀렉터로 데이터 가져옴
-
+    const [totalPost, setTotalPost] = useState('');
+    
     const bandnameEncoded = decodeURI(window.location.pathname); 
     const domainCategory = bandnameEncoded.split('/');
     const [postData, setPostData] = useState([]);
@@ -34,7 +35,7 @@ const News = () => {
         .then(function (response) {
              console.log(response)
              setPostData(response.data.post)
-             console.log(postData)
+             setTotalPost(response.data.postCount)
         }).catch(function (error) {
             // 오류발생시 실행
         }).then(function() {
@@ -52,7 +53,7 @@ const News = () => {
                 createDate={postRow[2].label}
                 view={postRow[3].label}
                 like={postRow[4].label}/>
-                <PostListBox posts={postData} category={domainCategory[1]}/>
+                <PostListBox posts={postData} category={domainCategory[1]} totalItemsCount={totalPost}/>
             </Box>  
         </div>
     );

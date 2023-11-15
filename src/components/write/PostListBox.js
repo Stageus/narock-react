@@ -7,7 +7,7 @@ import { Button, Div } from "../../styled/ProjectStyle";
 import { useNavigate } from 'react-router-dom';
 
 const PostListBox = (props) => {
-    const { bandname, posts, category, bandIndex, currentPage, setCurrentPage, totalPages} = props;
+    const { bandname, posts, category, bandIndex, currentPage, setCurrentPage, totalPages,totalItemsCount} = props;
     const sortedPost = [...posts].sort((a,b)=>b.postindex - a.postindex)
     console.log(sortedPost)
     const navigate = useNavigate();

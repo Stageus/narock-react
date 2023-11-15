@@ -20,10 +20,12 @@ const Notice = () => {
     const [postData, setPostData] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
+    const [totalPost, setTotalPost] = useState('');
     const bandnameEncoded = decodeURI(window.location.pathname); 
     const domainCategory = bandnameEncoded.split('/');
 
     console.log(domainCategory)
+    console.log(postData)
     // const filteredPost = posts.filter(v=>!v.bandName && domainCategory[1] === v.boardCategory);
 
     useEffect(()=>{
@@ -40,7 +42,7 @@ const Notice = () => {
         .then(function (response) {
              console.log(response)
              setPostData(response.data.post)
-             console.log(postData)
+             setTotalPost(response.data.postCount)
         }).catch(function (error) {
             // 오류발생시 실행
         }).then(function() {
@@ -62,11 +64,11 @@ const Notice = () => {
                 />
             {/* <PostListBox posts={filteredPost} category={domainCategory[1]}/> */}
             <PostListBox posts={postData} category={domainCategory[1]} />
-            <div>
-            <Pagination onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>◀</Pagination>
-                <span>{currentPage}</span>
-            <Pagination onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>▶</Pagination>
-            </div>
+                <div>
+                <Pagination onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>◀</Pagination>
+                    <span>{currentPage}</span>
+                <Pagination onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>▶</Pagination>
+                </div>
             </Box>  
         </div>
     );

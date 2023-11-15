@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {Align, Input} from "../../styled/ProjectStyle";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { useRecoilState } from 'recoil';
 import { loginState } from "../../recoil/UserStates";
+import axios from "axios";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -28,6 +29,32 @@ const Header = () => {
             navigate(`/totalsearch?query=${keyword}`)
         }
     }
+    // const logoutEvent = async () => {
+    //     try {
+    //     await axios.get('https://www.narock.site/account/logout');
+    //         console.log("로그아웃")
+    //     } catch (error) {
+    //     console.error('Error logging out:', error);
+    //     }
+    // }
+
+    const logoutEvent = () => {
+        axios.get("https://www.narock.site/account/logout",
+        {
+            withCredentials: true,
+        }
+        )
+        .then(function (response) {
+             console.log(response)
+             alert('로그아웃 되었습니다.')
+             pageNavigate('/')
+             setAuth(false)
+        }).catch(function (error) {
+            // 오류발생시 실행
+        }).then(function() {
+            // 항상 실행
+        });
+    }
     return ( 
         <nav>
             <Div>
@@ -41,10 +68,7 @@ const Header = () => {
                     {}
                     <NavButton onClick={()=>{pageNavigate('/mypage')}}>마이페이지</NavButton>
                     {auth ? 
-                    <NavButton onClick={()=>{                            
-                        setAuth(false);
-                        alert('로그아웃 되었습니다.');
-                        pageNavigate('/')}}>로그아웃</NavButton>
+                    <NavButton onClick={logoutEvent}>로그아웃</NavButton>
                     :<NavButton
                         onClick={()=>{
                         pageNavigate('/login')
