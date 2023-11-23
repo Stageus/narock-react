@@ -24,7 +24,7 @@ const Login = () => {
     const loginClickEvent = async () => {
         axios.post("https://www.narock.site/account/login", {
             "idValue": uid,
-            "pwValue": upw
+            "pwValue": upw,
         },
         // {withCredentials: true}
         )
@@ -32,8 +32,7 @@ const Login = () => {
             if (response.data.success) {
                 setAuth(true)
                 navigate(-1);
-                const setCookieHeader = response.headers.get('Set-Cookie');
-                console.log('백엔드에서 설정한 쿠키:', setCookieHeader);
+
             }else{
                 alert("아이디 또는 비밀번호가 일치하지 않습니다.")
                 console.log(response)
@@ -64,7 +63,6 @@ const Login = () => {
                         <div onClick={()=>{navigate('/findAccount')}}>아이디 / 비밀번호 찾기</div>
                         <div onClick={()=>{navigate('/join')}}>회원가입</div>
                     </SubButtonBox>
-                    <SnsLogin src="/img/kakaoLogin.png" alt="kakao"></SnsLogin>
                 </ContainerBox>
             </Div>
         </React.Fragment>

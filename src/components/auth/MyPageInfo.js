@@ -4,6 +4,8 @@ import { Input, Button } from "../../styled/ProjectStyle";
 import styled from "styled-components";
 import { Align,Error,Div } from "../../styled/ProjectStyle";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { userDataState } from "../../recoil/BackRecoil";
 
 const MyPageInfo = () => {
 
@@ -14,18 +16,20 @@ const MyPageInfo = () => {
     const [passwordMsg,setPasswordMsg] = useState("");
     const [passwordConfirmMsg,setPasswordConfirmMsg] = useState("");
 
-    const [userInfo,setUserInfo] = useState([]);
+    const [userData, setUserData] = useRecoilState(userDataState)
+    const [userInfo,setUserInfo] = useState([]); //api 데이터
+
     const [profileImg, setProfileImg] = useState('img/avatar.png');
-    // console.log(profileImg)
-    // console.log(userInfo)
+    
+    //유저 데이터 불러오기
     useEffect(()=>{
         axios.get("https://www.narock.site/account",
         {withCredentials: true}
         )
         .then(function (response) {
              console.log(response)
-             setUserInfo(response.data.data)
-             console.log(userInfo)
+             setUserInfo(response.data.data);
+             setProfileImg(response.data.data.userProfileImg)
         }).catch(function (error) {
             // 오류발생시 실행
         }).then(function() {
@@ -33,17 +37,10 @@ const MyPageInfo = () => {
         });
     },[])
     
-    const [userData, setUserData] = useState({
-        nickname: "",
-        profileimg:"",
-        password:"",
-        newPassword:"",
-        passwordConfirm:"",
-        isPasswordConfirm:"",
-    });
 
-    // console.log(userData)
+    console.log(userData)
 
+    // 유저 데이터 변경 State
     const handleUserDataChange = useCallback((field, value) => {
         setUserData((prevData) => ({
             ...prevData,
@@ -55,26 +52,23 @@ const MyPageInfo = () => {
 
     const HandleProfileLoadFile = async (e) => {
         const imageFile = e.target.files[0];
-
+        const imgUrl = URL.createObjectURL(imageFile)
+        console.log(imgUrl)
         if (imageFile) {
-            setProfileImg(imageFile);
-    
             const reader = new FileReader();
             reader.onload = () => {
                 if (reader.readyState === 2) {
-                    setProfileImg(reader.result);
+                    handleUserDataChange("profileimg", imageFile)
+                    setProfileImg(imgUrl);
                 }
             };
             reader.readAsDataURL(imageFile);
-        } else {
-            setProfileImg('img/avatar.png');
-            handleUserDataChange("profileimg", "");
-            return;
-        }
+        } 
     }
 
 
     const HandleDeleteFile = () => {
+        handleUserDataChange("profileimg","img/avatar.png");
         setProfileImg('img/avatar.png')
     }
 
@@ -129,7 +123,7 @@ const MyPageInfo = () => {
 
     const userInfoModifyEvent = async () => {
         const formdata = new FormData();
-        formdata.append('imageFile', profileImg);
+        formdata.append('imageFile', userData.profileimg);
         formdata.append('newNicknameValue', userData.nickname);
         formdata.append('userPasswordValue', userData.password);
         formdata.append('newPasswordValue', userData.newPassword);
@@ -257,10 +251,6 @@ const MyPageInfo = () => {
         </div>
     );
 };
-const ErrorMsg = styled(Error)`
-    position:absolute;
-    margin:0;
-`
 
 const UserInfo = styled.div`
     /* margin:30px 0 0 0; */

@@ -45,13 +45,15 @@ const Community = () => {
             <Header/>
             <Box>
                 <Title>커뮤니티</Title>
-                <PostRow                
-                title={postRow[0].label}
-                writer={postRow[1].label}
-                createDate={postRow[2].label}
-                view={postRow[3].label}
-                like={postRow[4].label}/>
-                <PostListBox posts={postData} category={domainCategory[1]}/>
+                <TableBox>
+                    <PostRow                
+                    title={postRow[0].label}
+                    writer={postRow[1].label}
+                    createDate={postRow[2].label}
+                    view={postRow[3].label}
+                    like={postRow[4].label}/>
+                </TableBox>
+                    <PostListBox posts={postData} category={domainCategory[1]}/>
             </Box>  
         </div>
     );
@@ -60,4 +62,13 @@ const Community = () => {
 const Box = styled.div`
     margin:30px 160px;
 `
+
+const TableBox = styled.table`
+    padding:0 70px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+`
+
 export default Community;

@@ -14,6 +14,7 @@ import { useRecoilValue } from "recoil";
 import { postRowState } from "../recoil/FrontRecoil";
 import axios from "axios";
 import { bandDataState } from "../recoil/BackRecoil";
+import styled from "styled-components";
 
 const AllBandBoard = () => {
     const { bandname } = useParams();
@@ -21,17 +22,16 @@ const AllBandBoard = () => {
     const [postData, setPostData] = useState([]);
     const navigate = useNavigate();
     const category = decodeURI(window.location.pathname); 
-    console.log(category,"도메인")
+    // console.log(category,"도메인")
     const domainCategory = category.split('/')[3];
-    console.log(domainCategory,"카테고리")
+    // console.log(domainCategory,"카테고리")
     // console.log(bandData,"밴드데이터")
     
-    const bandFilter = bandData.filter(data=>data.bandname === bandname)
+    const bandFilter = bandData.filter(data=>data.bandname === bandname) //밴드 이름으로 필터링
     const bandIndex = bandFilter.length > 0 ? bandFilter[0].bandindex : null;
-    console.log(bandIndex,"밴드인덱스")
 
-    const domainPostIdx = category.split('/')[4];
-    console.log("도메인포스트인덱스",domainPostIdx)
+    const domainPostIdx = postData.postindex
+    // console.log("bandData",postData)
     const postRow = useRecoilValue(postRowState);
 
     let categoryIndex = '';
@@ -80,10 +80,11 @@ const AllBandBoard = () => {
             <Div margin="30px 0 0 0" alignitems="baseline">
                 <AllBandNav bandname={bandname}/> {/* 내비게이션 메뉴 */}
                 <Div margin="0 80px" width="100%" display="block">
+                    {/* 카테고리(notice, concertinfo...)에 포스트인덱스와 밴드인덱스가 있으면 글 상세내용 바로 출력 */}
                     {category.includes(domainPostIdx) && bandIndex ? 
                         <PostDetailBox bandname={bandname} post={postData} />
                     :
-                    <React.Fragment>
+                    <TableBox>
                         <PostRow
                         title={postRow[0].label}
                         writer={postRow[1].label}
@@ -91,15 +92,23 @@ const AllBandBoard = () => {
                         view={postRow[3].label}
                         like={postRow[4].label}
                         /> 
+
+                        {/* 글목록 */}
                         <PostListBox bandname={bandname} posts={postData} category={domainCategory} bandIndex={bandIndex} categoryIndex={categoryIndex}/>
-                        {/* <PostListBox bandname={bandname} posts={postData} category={domainCategory} categoryIndex={categoryIndex}/> */}
-                    
-                    </React.Fragment>
-                }
+                    </TableBox>
+                    } 
                 </Div>
             </Div>
         </div>
     );
 };
+
+const TableBox = styled.table`
+    padding:0 70px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+`
 
 export default AllBandBoard;

@@ -5,17 +5,14 @@ import { useNavigate,useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Posts = (props) => {
-    const {postTitle,boardName,like,date,view,writer,postId, categoryNumber, bandName, bandIndex,domain} = props;
+    const {postTitle,boardName,like,date,view,writer,postId, categoryNumber, bandIndex, bandName} = props;
     // const { bandname } = useParams();
     // console.log("밴드이름",bandname)
-    // console.log(bandName,bandIndex)
+    console.log(bandName,bandIndex)
+    // console.log(ban)
     const navigate = useNavigate();
     const [bandData, setBandData] = useState([]);
     const handlePostClick = () => {
-        console.log("categorynumber",categoryNumber)
-        console.log("밴드인덱스",bandIndex)
-        console.log("밴드이름",bandName)
-        // navigate(`${postId}`)
          if (!bandIndex || bandIndex === 1) {
             if(categoryNumber === 0)
             {navigate(`/notice/${postId}`)}
@@ -50,7 +47,7 @@ const Posts = (props) => {
                     {/* {postId && <GridItem>{postId}</GridItem>} */}
                     {postTitle && <Title>{postTitle}</Title>}
                     {boardName && <GridItem>{boardName}</GridItem>}
-                    {writer && <GridItem>{writer}</GridItem>}
+                    {writer && <Writer>{writer}</Writer>}
                     {date && <GridItem>{date.substring(0,10)}</GridItem>}
                     {view && <GridItem>{view}</GridItem>}
                     {like && <GridItem>{like}</GridItem>}
@@ -63,31 +60,37 @@ const Box = styled.div`
     width:100%;
 `
 
-const List = styled.div`
+const List = styled.tr`
     cursor:pointer;
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(10%, auto));
-    /* grid-template-rows:minmax(100px, auto); */
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     font-size:14px;
+    padding:5px;
     &:hover {
         background-color:#E0E6FF;
     }
 `
 
-const GridItem = styled.div`
+const GridItem = styled.td`
     white-space:nowrap;
     /* overflow:hidden; */
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis; */
     margin:10px;
     padding:0;
+    /* width:10%; */
     text-align:center;
-    grid-column:auto;
+    flex:1;
+    width:fit-content;
+    /* grid-column:auto; */
 `
 
 
-const Title = styled(GridItem)`
-    grid-column : 1/span 2;
-    text-align:left;
+const Title = styled.td`
+    width:60%;
+    /* font-size:14px; */
 `
-
+const Writer = styled.td`
+    width:15%;
+`
 export default Posts

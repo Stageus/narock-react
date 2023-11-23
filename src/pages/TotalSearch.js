@@ -5,9 +5,11 @@ import { useSearchParams } from 'react-router-dom'
 
 import SearchResult from "../components/common/SearchResult";
 import { Div } from "../styled/ProjectStyle";
+import axios from "axios";
 const Search = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
+
     return (
         <div>
             <Header/>

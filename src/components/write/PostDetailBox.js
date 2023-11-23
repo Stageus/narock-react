@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { Button, Div } from "../../styled/ProjectStyle";
 
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 
 import { isLikedState, likedState } from "../../recoil/FrontRecoil";
@@ -11,11 +11,13 @@ import { useNavigate , useParams } from "react-router-dom";
 import CommentBox from "./CommentBox";
 import axios from "axios";
 import { commentState, postDetailState, replyState } from "../../recoil/BackRecoil";
+import LikeButton from "./LikeButton";
 
 const PostDetailBox = (props) => {
     
     const { bandname } = props;
     const { postid } = useParams();
+    console.log(postid)
     const domain = decodeURI(window.location.pathname);
     const domainSplit = domain.split('/');
     const domainRemove = domainSplit.pop(); // domainSplit 맨 마지막 배열 삭제용
@@ -23,38 +25,11 @@ const PostDetailBox = (props) => {
     const [post,setPost] = useRecoilState(postDetailState);
 
     // 좋아요 버튼
-    const [liked,setLiked] = useRecoilState(likedState);
-    const [isLiked,setIsLiked] = useRecoilState(isLikedState);
-    const [comment,setComment] = useRecoilState(commentState);
-    const [reply,setReply] = useRecoilState(replyState);
+    const setComment = useSetRecoilState(commentState);
+    const setReply = useSetRecoilState(replyState);
 
     const navigate = useNavigate();
 
-    //좋아요 클릭
-    const LikeClickEvent = () =>{
-        if(isLiked){
-            setLiked(liked - 1);
-        }else{
-            setLiked(liked + 1);
-        }
-        setIsLiked(!isLiked);
-
-        axios.post("https://www.narock.site/post/like", {
-            "postIndex": postid
-        },
-        // {withCredentials: true}
-        )
-        .then(function (response) {
-            if (response.data.success) {
-                console.log(response)
-                console.log(post)
-            }else{
-                console.log(response)
-            }      
-        }).catch(function (error) {
-            console.log(error);
-        })
-    }
     // 목록 돌아가기
     const GoToList = () => {
         if(domain.includes('/allband')){
@@ -82,6 +57,7 @@ const PostDetailBox = (props) => {
             console.log(error)
         })
     },[])
+
 
     const postDeleteEvent = () => {
             if (window.confirm("게시물을 삭제하시겠습니까?")) {
@@ -138,10 +114,7 @@ const PostDetailBox = (props) => {
                         </Div>
                     </Div>
                     <Div margin="20px 0">{post.postContent}</Div>
-                    <Div display="flex" alignitems="cetnter" margin="0">
-                        {post.postLikes === "1" ? <Icon src={`${process.env.PUBLIC_URL}/img/like_active.png`} alt="좋아요" onClick={LikeClickEvent}/> : <Icon src={`${process.env.PUBLIC_URL}/img/like.png`} alt="좋아요" onClick={LikeClickEvent}/>}
-                        {<Like>{post.postLikes}</Like>}
-                    </Div>
+                    <LikeButton postid={postid}/>
                 </Div>
             <CommentBox postId={postid}/>
             </Div>
@@ -150,17 +123,12 @@ const PostDetailBox = (props) => {
 };
 
 const ProfileImg = styled.img`
+    border-radius: 30px;
     width:40px;
+    height:40px;
     margin-right:10px;
 `
-const Icon = styled.img`
-    width:18px;
-    cursor:pointer;
-`
 
-const Like = styled.div`
-    margin-left:5px;
-    color:#3185FC;
 
-`
+
 export default PostDetailBox;

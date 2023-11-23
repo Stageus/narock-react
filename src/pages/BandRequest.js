@@ -23,7 +23,7 @@ const BandRequest = () => {
     const [requestPostIndex, setRequestPostIndex] = useState([]); //요청 게시판 인덱스
     const [bandNameArr, setBandNameArr] = useState([]);
     const [userIndexArr, setUserIndexArr] = useState([]);
-
+    const [checked, setChecked] = useState('');
     //게시판 요청 불러오기
     useEffect(()=>{
         axios.get("https://www.narock.site/postRequest/all",{
@@ -48,7 +48,7 @@ const BandRequest = () => {
 
     //요청 체크박스
     const handleCheckboxChange = (e,info) => {
-        const checked = e.target.checked;
+        setChecked(e.target.checked);
         if(checked){
             setRequestPostIndex(idx => [...idx,info.postcreaterequestindex]);
             setBandNameArr(idx=>[...idx,info.postname]);
@@ -66,6 +66,26 @@ const BandRequest = () => {
         }
     }
 
+    const handleCheckboxAllChange = () => {
+        const allChecked = !checked;
+    
+        setChecked(allChecked);
+        
+        if (allChecked) {
+            const allPostIndexes = requestInfo.map((item) => item.postcreaterequestindex);
+            const allBandNames = requestInfo.map((item) => item.postname);
+            const allUserIndexes = requestInfo.map((item) => item.userindex);
+    
+            console.log(allPostIndexes)
+            setRequestPostIndex(allPostIndexes);
+            setBandNameArr(allBandNames);
+            setUserIndexArr(allUserIndexes);
+        } else {
+            setRequestPostIndex([]);
+            setBandNameArr([]);
+            setUserIndexArr([]);
+        }
+    };
     //다이얼로그 열기
     const requestDialog = (e,user) => {
         e.preventDefault();
@@ -136,45 +156,44 @@ const BandRequest = () => {
             <UserNav/>
             <Div flexdirection="column" border="1px solid #e2e8ff" margin="30px 80px" width="100%">
                 <Title>게시판 요청</Title>
-                <Div width="100%" display="block">
-                    <Div margin="0 70px" display="block">
-                        <Div justifycontent="center" margin="0">
+                <TableBox>
                             <PostRow
                                 userId={postRow[5].label}
                                 nickname={postRow[6].label}
                                 requestBoard={postRow[11].label}
                                 requestDate={postRow[12].label}  
                             />
-                        </Div>
-                        <div>
-                            <div>
+                            <Request>
                             {requestInfo && requestInfo.length > 0 ?
-                                <div>
+                                <Div>
                                     {requestInfo.map((v, i) => (                                    
-                                        <Div key={v[i]} borderbottom="2px solid #e2e8ff" justifycontent="center" margin="0" padding="10px">
-                                            <CheckBox type="checkbox" onChange={(e=>handleCheckboxChange(e,v))}></CheckBox>
-                                            <List>{v.userid}</List>
-                                            <List>{v.usernickname}</List>
-                                            <List>{v.postname}</List>
-                                            <List>{v.postcreaterequesttimestamp}</List>
-                                            <List>
+                                        <Tr key={v[i]}>
+                                            <CheckBox type="checkbox" onChange={(e=>handleCheckboxChange(e,v))} checked={requestPostIndex.includes(v.postcreaterequestindex)}/>
+                                            <IdBox>{v.userid}</IdBox>
+                                            <NincknameBox>{v.usernickname}</NincknameBox>
+                                            <IdBox>{v.postname}</IdBox>
+                                            <IdBox>{v.postcreaterequesttimestamp}</IdBox>
+                                            <IdBox>
                                                 <Button value="요청 내용 보기" margin="0" onClick={(e)=>{requestDialog(e,v)}}/>
-                                            </List>
-                                        </Div>
+                                            </IdBox>
+                                        </Tr>
                                     ))}
-                                </div>
+                                </Div>
                                 :
                                 <Div justifycontent="center">게시판 요청이 없습니다.</Div>
                             }
-                            </div>
-                        </div>
-                    </Div>
-                </Div>
+                            </Request>
+                            <Div margin="10px">
+                                <CheckBox type="checkbox" onChange={(handleCheckboxAllChange)}/>
+                                <div>전체선택</div>
+                            </Div>
+                </TableBox>
                 <Paging/>
-                <div>
+                <Div>
+
                     <Button value="요청 삭제" backgroundcolor="#FC3131" width="127px" padding="7px" borderradius="5px" onClick={handleDeleteRequest }/>
                     <Button value="요청 수락" width="127px" padding="7px" borderradius="5px" onClick={handleAcceptRequest}/>
-                </div>
+                </Div>
             </Div>        
         </Div>
 
@@ -214,14 +233,34 @@ const Title = styled.div`
     color:#3185FC;
 `
 
-const List = styled.div`
-    width:20%;
-    margin-left:1%;
-    text-align:center;
+const TableBox = styled.table`
+    padding:0 70px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+`
+const Request = styled.tbody`
+    border-bottom:2px solid #e2e8ff;
+    padding:10px;
+    width:100%;
+`
+
+const Tr = styled.tr`
+    display:flex;
+    align-items:center;
+    width:100%;
+    justify-content:space-between;
+`
+const IdBox = styled.td`
+    flex-basis:100px;
+`
+const NincknameBox = styled.td`
+    /* width:100px; */
 `
 const CheckBox = styled.input`
-    position:absolute;
-    left:0;
+    /* position:absolute; */
+    /* left:0; */
 `
 
 const Background = styled.div`
@@ -253,4 +292,6 @@ const UserInfo = styled.p`
 const Text = styled.p`
     margin-right:5px;
 `
+
+
 export default BandRequest;

@@ -12,10 +12,11 @@ const WriteBox = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [checkValue,setCheckValue] = useState(false);
+    const location = useLocation();
 
     console.log(content)
-    const location = useLocation();
-    console.log(location)
+
+ 
     const searchParams = new URLSearchParams(location.search);
     const bandname = searchParams.get('bandname');
     const category = searchParams.get('category');
@@ -36,19 +37,20 @@ const WriteBox = () => {
     }else if (category === 'community') {
         categoryIndex = 5;
     }
-    // const writeOnChange = (e) => {
-    //     const {name, value} = e.target;
-    //     setCheckValue(e.target.checked)
-    //     e.preventDefault();
-    //     // setWrite({
-    //     //     ...write,
-    //     //     [name]: value,
-    //     //     isFixed:checkValue,
-    //     //     postContent: content,
-
-    //     // });
-    //     console.log(write)
-    // }
+    const writeOnChange = (e) => {
+        // const {name, value, checked} = e.target;
+        // setCheckValue(e.target.checked)
+        // e.preventDefault();
+        setWrite({
+            ...write,
+            // [name]: value,
+            postTitle:title,
+            postCategory: categoryIndex,
+            isFixed:checkValue,
+            postContent: content,
+        });
+        // console.log(write)
+    }
     const modules = {
         toolbar: {
             container: [
@@ -73,11 +75,11 @@ const WriteBox = () => {
             },
             "credentials": "include",
             "body":JSON.stringify({
-                "postCategory": categoryIndex,
-                "postTitle": "공지사항1234125",
-                "postContent": "ㅇㅇㅇ",
-                "isFixed": checkValue,
-                "bandIndex": 1,
+                "postCategory": write.postCategory,
+                "postTitle": write.postTitle,
+                "postContent": write.postContent,
+                "isFixed": write.isFixed,
+                "bandIndex": 0,
             })
         })
         const result = await response.json()
@@ -100,7 +102,7 @@ const WriteBox = () => {
                 <Input name="postTitle" border="none" placeholder="제목을 입력해 주세요." width="90%" fontSize="20px" onChange={e=>setTitle(e.target.value)}/>
                 <input type="checkbox" onClick={e=>setCheckValue(e.target.checked)}/> 공지글 설정
             </Div>
-            <Quill modules={modules} onChange={setContent} value={content}/>
+            <Quill modules={modules} onChange={writeOnChange} value={content}/>
             <SubmitButton value="등록" onClick={PostSubmitEvent}/>
         </Div>
     )

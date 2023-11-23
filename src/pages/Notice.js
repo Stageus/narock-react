@@ -55,6 +55,7 @@ const Notice = () => {
             <Header/>
             <Box>
             <Title>공지사항</Title>
+            <TableBox>
                 <PostRow                
                     title={postRow[0].label}
                     writer={postRow[1].label}
@@ -62,13 +63,13 @@ const Notice = () => {
                     view={postRow[3].label}
                     like={postRow[4].label}
                 />
-            {/* <PostListBox posts={filteredPost} category={domainCategory[1]}/> */}
-            <PostListBox posts={postData} category={domainCategory[1]} />
-                <div>
-                <Pagination onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>◀</Pagination>
-                    <span>{currentPage}</span>
-                <Pagination onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>▶</Pagination>
-                </div>
+                <PostListBox posts={postData} category={domainCategory[1]} />
+                    <div>
+                        <Pagination onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>◀</Pagination>
+                            <span>{currentPage}</span>
+                        <Pagination onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>▶</Pagination>
+                    </div>
+            </TableBox>
             </Box>  
         </div>
     );
@@ -77,7 +78,13 @@ const Notice = () => {
 const Box = styled.div`
     margin:30px 160px;
 `
-
+const TableBox = styled.table`
+    padding:0 70px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+`
 const Pagination = styled.button`
     border:none;
     background-color:transparent;

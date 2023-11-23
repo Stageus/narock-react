@@ -8,16 +8,18 @@ import { useNavigate } from 'react-router-dom';
 
 const PostListBox = (props) => {
     const { bandname, posts, category, bandIndex, currentPage, setCurrentPage, totalPages,totalItemsCount} = props;
-    const sortedPost = [...posts].sort((a,b)=>b.postindex - a.postindex)
-    console.log(sortedPost)
+    const sortedPost = [...posts].sort((a,b)=>b.postindex - a.postindex);
+
+    // console.log(sortedPost)
     const navigate = useNavigate();
     return ( 
-        <div>
+        <Div width="100%" flexdirection="column">
+            <Tbody>
             { sortedPost.length > 0 ?
               sortedPost[0].map((v,i)=>(
                 <Posts
                 key={v.postindex}
-                bandname={bandname} 
+                bandName={bandname} 
                 postId={v.postindex}
                 postTitle={v.posttitle} 
                 writer={v.postwriter}
@@ -27,11 +29,13 @@ const PostListBox = (props) => {
                 content={v.postcontent}
                 categoryNumber={v.postcategory}
                 domain={category}
-                
+                bandIndex={v.bandindex}
                 /> 
             )) 
             : 
             <Text>작성 된 게시물이 없습니다.</Text>}
+            </Tbody>
+
             {/* <Paging
                 itemsCountPerPage={itemsCountPerPage}
                 totalItemsCount={sortedPost.length}
@@ -44,12 +48,17 @@ const PostListBox = (props) => {
             <Button value="글쓰기" onClick={()=>{navigate(`/write?category=${category}`)}}/>
         }
             <SearchBox/>
-        </div>
+        </Div>
      );
 }
 
 const Text = styled.div`
     text-align:center;
     margin:10px 0px;
+`
+
+const Tbody = styled.tbody`
+    padding:10px;
+    width:100%;
 `
 export default PostListBox;

@@ -29,14 +29,6 @@ const Header = () => {
             navigate(`/totalsearch?query=${keyword}`)
         }
     }
-    // const logoutEvent = async () => {
-    //     try {
-    //     await axios.get('https://www.narock.site/account/logout');
-    //         console.log("로그아웃")
-    //     } catch (error) {
-    //     console.error('Error logging out:', error);
-    //     }
-    // }
 
     const logoutEvent = () => {
         axios.get("https://www.narock.site/account/logout",

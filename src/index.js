@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from "recoil";
 
 axios.defaults.baseURL = "https://www.narock.site";
+// axios.defaults.baseURL = "http://localhost:3000/";
 axios.defaults.withCredentials = true;
 
 ReactDOM.createRoot(document.getElementById("root")).render(

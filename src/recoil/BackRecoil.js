@@ -300,21 +300,6 @@ export const bannerImgState = atom({
     default:[],
 })
 
-export const combinedPostState = selector({
-    key:"combinedPostState",
-    get:({get}) => {
-        const bandPost = get(postDetailState);
-        // const noticePost = get(noticePostState);
-        // const newsPost = get(newsPostState);
-        // const communityPost = get(communityPostState);
-
-        const combinedPost = [...bandPost/* , ...noticePost, ...newsPost, ...communityPost */]
-        
-        return combinedPost;
-    }
-})
-
-
 export const setLoginState = atom({
     key:"setLoginState",
     default:false
@@ -328,6 +313,18 @@ export const writeState = atom({
       postContent:'',
       isFixed:'',
       bandIndex:''
+    }
+})
+
+export const userDataState = atom({
+    key:'userDataState',
+    default:{
+        nickname: "",
+        profileimg:"img/avatar.png",
+        password:"",
+        newPassword:"",
+        passwordConfirm:"",
+        isPasswordConfirm:"",
     }
 })
 
@@ -348,4 +345,18 @@ export const commentState = atom({
 export const replyState = atom({
     key:"replyState",
     default:[],
+})
+export const replyContentState = atom({
+    key:"replyContentState",
+    default:[],
+})
+
+export const afterModifyCommentState = atom({
+    key:"afterModifyCommentState",
+    default:'',
+})
+
+export const replyIndexState = atom({
+    key:"replyIndexState",
+    default:'',
 })
