@@ -32,7 +32,7 @@ const Community = () => {
         )
         .then(function (response) {
              console.log(response)
-             setPostData(response.data.post)
+             setPostData(response.data.post[0])
              console.log(postData)
         }).catch(function (error) {
             // 오류발생시 실행

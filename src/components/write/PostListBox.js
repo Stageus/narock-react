@@ -8,15 +8,15 @@ import { useNavigate } from 'react-router-dom';
 
 const PostListBox = (props) => {
     const { bandname, posts, category, bandIndex, currentPage, setCurrentPage, totalPages,totalItemsCount} = props;
-    const sortedPost = [...posts].sort((a,b)=>b.postindex - a.postindex);
+    // const sortedPost = [...posts].sort((a,b)=>b.postindex - a.postindex);
 
-    // console.log(sortedPost)
+    console.log(posts)
     const navigate = useNavigate();
     return ( 
         <Div width="100%" flexdirection="column">
             <Tbody>
-            { sortedPost.length > 0 ?
-              sortedPost[0].map((v,i)=>(
+            {/* { post.length > 0 ? */}
+              {posts ? posts.map((v,i)=>(
                 <Posts
                 key={v.postindex}
                 bandName={bandname} 

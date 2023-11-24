@@ -8,7 +8,7 @@ const Posts = (props) => {
     const {postTitle,boardName,like,date,view,writer,postId, categoryNumber, bandIndex, bandName} = props;
     // const { bandname } = useParams();
     // console.log("밴드이름",bandname)
-    console.log(bandName,bandIndex)
+    console.log(categoryNumber)
     // console.log(ban)
     const navigate = useNavigate();
     const [bandData, setBandData] = useState([]);

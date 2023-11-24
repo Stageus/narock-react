@@ -34,7 +34,7 @@ const News = () => {
         )
         .then(function (response) {
              console.log(response)
-             setPostData(response.data.post)
+             setPostData(response.data.post[0])
              setTotalPost(response.data.postCount)
         }).catch(function (error) {
             // 오류발생시 실행
