@@ -3,14 +3,28 @@ import {  Div } from "../../styled/ProjectStyle";
 import styled from 'styled-components';
 import { useRecoilState } from "recoil";
 import { bannerImgState } from "../../recoil/BackRecoil";
+import axios from "axios";
 
 const BandHeader = (props) => {
     const { bandname } = props;
     const [bannerImg,setBannerImg] = useRecoilState(bannerImgState);
     const HandleLoadFile = (e) => {
+        const formdata = new FormData();
+        formdata.append('imageFile', bannerImg);
         if(e.target.files[0]){
             if(window.confirm("이 이미지로 설정하시겠습니까?") === true){
                 setBannerImg(e.target.files[0])
+                axios.post("https://www.narock.site/post/banner", {
+
+                },
+                )
+                .then(function (response) {
+                    if (response.data.success) {
+                        console.log(response)
+                    }else{
+                        console.log(response)
+                    }      
+                })
             }else{
                 return;
             }
@@ -28,6 +42,8 @@ const BandHeader = (props) => {
             }
         }
         reader.readAsDataURL(e.target.files[0]);
+
+
     }
 
 
@@ -81,6 +97,7 @@ const BannerImg = styled.img`
     object-fit: cover;
     display:flex;
     justify-content:center;
+    align-items:center;
     height:191px;
     font-size:60px;
 

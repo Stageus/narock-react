@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const PostListBox = (props) => {
     const { bandname, posts, category, bandIndex, currentPage, setCurrentPage, totalPages,totalItemsCount} = props;
     // const sortedPost = [...posts].sort((a,b)=>b.postindex - a.postindex);
-
+    console.log(bandIndex,"밴드인덱스")
     console.log(posts)
     const navigate = useNavigate();
     return ( 

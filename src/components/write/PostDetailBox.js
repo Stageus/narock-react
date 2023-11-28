@@ -32,7 +32,7 @@ const PostDetailBox = (props) => {
 
     // 목록 돌아가기
     const GoToList = () => {
-        if(domain.includes('/allband')){
+        if(domain.includes('allband')){
             navigate(`/allband/${bandname}/${domainSplit.reverse()[0]}`)
         }else{
             navigate(`/${domainSplit.reverse()[0]}`)

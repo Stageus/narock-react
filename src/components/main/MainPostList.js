@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Align, Div } from "../../styled/ProjectStyle";
 import Posts from "./Posts"
+import axios from "axios";
 
 const MainPostList = (props) => {
   const { category ,post } = props;
   console.log("메인포스트 출력",post)
-  
+  const postCategory = post?.map(post=>post.postCategory)
+//   useEffect(()=>{
+//     axios.get("https://www.narock.site/post",
+//     {
+//         // withCredentials: true,
+//         params:{
+//             postIndex:postid,
+//         }
+//     }
+//     )
+//     .then(function (response) {
+//         console.log(response.data)
+//         setPost(response.data);
+//         setComment(response.data.comment);
+//         setReply(response.data.reply)
+//     }).catch(function (error) {
+//         console.log(error)
+//     })
+// },[])
+
   return (
     <Box>
       <Title>{category}</Title>

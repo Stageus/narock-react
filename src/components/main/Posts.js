@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { styled } from "styled-components";
-import { Div } from '../../styled/ProjectStyle';
-import { useNavigate,useLocation, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Posts = (props) => {
     const {postTitle,boardName,like,date,view,writer,postId, categoryNumber, bandIndex, bandName} = props;
-    // const { bandname } = useParams();
-    // console.log("밴드이름",bandname)
     console.log(categoryNumber)
-    // console.log(ban)
     const navigate = useNavigate();
-    const [bandData, setBandData] = useState([]);
+    console.log(bandIndex)
     const handlePostClick = () => {
          if (!bandIndex || bandIndex === 1) {
             if(categoryNumber === 0)
@@ -23,7 +18,7 @@ const Posts = (props) => {
                 navigate(`/community/${postId}`)
             }
         } 
-        else {
+        else if(bandIndex > 2) {
             if (categoryNumber === 0) {
                 navigate(`/allband/${bandName}/notice/${postId}`);
             }if (categoryNumber === 1) {
@@ -51,6 +46,7 @@ const Posts = (props) => {
                     {date && <GridItem>{date.substring(0,10)}</GridItem>}
                     {view && <GridItem>{view}</GridItem>}
                     {like && <GridItem>{like}</GridItem>}
+                    {bandName && <GridItem>{bandName}</GridItem>}
                 </List>
         </Box>
     )

@@ -21,7 +21,7 @@ const WriteBox = () => {
     const bandname = searchParams.get('bandname');
     const category = searchParams.get('category');
     const bandIndex = searchParams.get('bandindex');
-
+    console.log(bandIndex)
     let categoryIndex = 0;
 
     if (category === 'notice') {
@@ -79,7 +79,7 @@ const WriteBox = () => {
                 "postTitle": write.postTitle,
                 "postContent": write.postContent,
                 "isFixed": write.isFixed,
-                "bandIndex": 0,
+                "bandIndex": bandIndex,
             })
         })
         const result = await response.json()
