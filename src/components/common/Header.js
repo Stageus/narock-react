@@ -52,11 +52,11 @@ const Header = () => {
             <Div>
                 <H1><Img src={`${process.env.PUBLIC_URL}/img/Header_logo.png`} alt="logo"onClick={()=>{pageNavigate('/')}}></Img>락·밴·드·커·뮤·니·티</H1>
                 <FirstNav>
-                    <div>
+                    {/* <div>
                         <img src={`${process.env.PUBLIC_URL}/img/search_icon.png`} alt="검색"></img>
                         <NavButton onClick={searchInputEvent}>통합 검색</NavButton>
                         {inputVisible && <ClickInput type="text" placeholder="검색" onChange={(e)=>{setKeyword(e.target.value)}} onKeyDown={searchEnterEvent}></ClickInput>}
-                    </div>
+                    </div> */}
                     {}
                     <NavButton onClick={()=>{pageNavigate('/mypage')}}>마이페이지</NavButton>
                     {auth ? 

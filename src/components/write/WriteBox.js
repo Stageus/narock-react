@@ -76,10 +76,10 @@ const WriteBox = () => {
             "credentials": "include",
             "body":JSON.stringify({
                 "postCategory": write.postCategory,
-                "postTitle": write.postTitle,
+                "postTitle": "공지사항입니다.",
                 "postContent": write.postContent,
                 "isFixed": write.isFixed,
-                "bandIndex": bandIndex,
+                "bandIndex": 0,
             })
         })
         const result = await response.json()

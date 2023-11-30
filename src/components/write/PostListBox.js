@@ -42,12 +42,15 @@ const PostListBox = (props) => {
                 currentPage={currentPage}
                 onPageChange={handlePageChange}
             /> */}
-            {bandname ? 
-            <Button value="글쓰기" onClick={()=>{navigate(`/write?bandname=${bandname}&category=${category}&bandindex=${bandIndex}`)}}/>
-            :    
-            <Button value="글쓰기" onClick={()=>{navigate(`/write?category=${category}`)}}/>
-        }
-            <SearchBox/>
+
+            <Div>
+                {bandname ? 
+                    <Button value="글쓰기" onClick={()=>{navigate(`/write?bandname=${bandname}&category=${category}&bandindex=${bandIndex}`)}}/>
+                    :    
+                    <Button value="글쓰기" onClick={()=>{navigate(`/write?category=${category}`)}}/>
+                }
+                <SearchBox/>
+            </Div>
         </Div>
      );
 }
